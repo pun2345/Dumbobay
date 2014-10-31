@@ -1,0 +1,128 @@
+From 7ba013c639c6dfc8537e51ff7712a1f4d4049665 Mon Sep 17 00:00:00 2001
+From: Nutchaya <pookkistaa@gmail.com>
+Date: Mon, 27 Oct 2014 23:53:27 +0700
+Subject: [PATCH] no message
+
+---
+ application/views/index.html | 87 +++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 85 insertions(+), 2 deletions(-)
+
+diff --git a/application/views/index.html b/application/views/index.html
+index 361b8b9..90f4aa0 100644
+--- a/application/views/index.html
++++ b/application/views/index.html
+@@ -41,7 +41,7 @@
+         <div class="navbar-collapse collapse">
+           <ul class="nav navbar-nav navbar-right">
+             <li class="active"><a href="index.html">HOME</a></li>
+-            <li><a data-toggle="modal" data-target="#myModal" href="#myModal">SIGN IN</a></li>
++            <li><a data-toggle="modal" data-target="#myModal" href="#myModal" class="signin">SIGN IN</a></li>
+             <li><a href="services.html">SIGN UP</a></li>
+             <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li>
+           </ul>
+@@ -55,12 +55,62 @@
+ 				<div class="col-lg-8 col-lg-offset-2">
+ 				<h1>Just let me <b>Shop</b> and no one gets hurt.</h1>
+ 				<h2>- DumboBay -</h2>
+-				<h2><a href="products.html" class=""><b>> Products <</b></a></h2>
++				<h3><a href="#" class="link-product"><b>> Products <</b></a></h3>
+ 				</div>
+ 			</div><!-- row -->
+ 		</div><!-- container -->
+ 	</div><!-- headerwrap -->
+ 
++	<!--PRODUCT-->
++	<div class="product" >
++	<div class="container w">
++		<div class="container">
++			<div class="row centered">
++				<img src="assets/img/products.png" id="back" style="cursor:pointer">
++				<div class="col-lg-8 col-lg-offset-2">
++				<h2>- Products -</h2>
++				</div>
++			</div><!-- row -->
++		</div><!-- container -->
++	</div>
++	<div class="container desc">
++		<div class="row">
++			<div class="col-lg-6 centered">
++				<h1>Direct Sale</h1>
++			</div><!-- col-lg-6 -->
++			<div class="col-lg-6 centered">
++				<h1>Auction</h1>
++			</div>
++			<br><br>
++			<!--search -->
++
++			<br><br><!-- end search -->
++			<div class="col-lg-6 centered" style="height:450px;overflow:auto">
++				<div><img src="assets/img/frappe_logo-small.gif">Macbook Air | 40,500฿</div>
++				<div><img src="assets/img/frappe_logo-small.gif">Macbook Air | 40,500฿</div>
++				<div><img src="assets/img/frappe_logo-small.gif">Macbook Air | 40,500฿</div>
++				<div><img src="assets/img/frappe_logo-small.gif">Macbook Air | 40,500฿</div>
++				<div><img src="assets/img/frappe_logo-small.gif">Macbook Air | 40,500฿</div>
++			</div><!-- col-lg-6 -->
++			<div class="col-lg-6" style="height:450px;overflow:auto">
++				<h4>CLIENT NAME</h4>
++				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
++				<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
++				<p>
++					<i class="fa fa-circle-o"></i> Mobile Design<br/>
++					<i class="fa fa-circle-o"></i> Web Design<br/>
++					<i class="fa fa-circle-o"></i> Development<br/>
++					<i class="fa fa-link"></i> <a href="#">BlackTie.co</a>
++				</p>
++				<h4>CLIENT NAME</h4>
++				<h4>CLIENT NAME</h4>
++				<h4>CLIENT NAME</h4>
++				<h4>CLIENT NAME</h4>
++			</div>
++		</div><!-- row -->
++	</div><!-- container -->
++	</div>
++	<!--end PRODUCT-->
+ 
+ 	<div class="container w">
+ 		<div class="row centered">
+@@ -232,5 +282,38 @@
+     <!-- Placed at the end of the document so the pages load faster -->
+     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+     <script src="assets/js/bootstrap.min.js"></script>
++    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
++    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
++
++    <script>
++
++        //DOM loaded 
++        $(document).ready(function() {
++        	$('.product').hide();
++
++            //attach click event to buttons
++            $('.link-product').click(function(){
++                /**
++                 * when show button is clicked we call the show plugin
++                 * which scales the box to default size
++                 * You can try other effects from here: http://jqueryui.com/effect/
++                 */
++                $("#headerwrap").delay("fast").fadeOut(); 
++                $('.product').fadeIn();
++            });
++            $('#back').click(function(){
++                /**
++                 * when show button is clicked we call the show plugin
++                 * which scales the box to default size
++                 * You can try other effects from here: http://jqueryui.com/effect/
++                 */
++                 $('.product').delay("fast").fadeOut(); 
++                $("#headerwrap").fadeIn();
++            });
++        });
++
++       
++
++    </script>
+   </body>
+ </html>
+-- 
+1.8.4.2
+
