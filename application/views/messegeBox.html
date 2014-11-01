@@ -1,0 +1,306 @@
+<!doctype html>
+<htlm lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+    <title>DUMBOBAY - shopping area</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- msg nav-->
+    <style>
+      #msg_txt {
+          background-color:black;
+          text-align:center;
+          padding:5px;
+      }
+      ul#menu {
+          padding: 10px;
+      }
+
+      ul#menu li {
+          display: inline;
+      }
+
+      ul#menu li a {
+          background-color: black;
+          color: white;
+          padding: 10px 20px;
+          text-decoration: none;
+          border-radius: 4px 4px 0 0;
+      }
+
+      ul#menu li a:hover {
+          background-color: #ff7878;
+      }
+
+      table, th, td {
+        border: 3px solid grey;
+        border-collapse: collapse;
+      }
+</style>
+    </style>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">DUMB<i class="fa fa-circle"></i>BAY</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="index.html">HOME</a></li>
+            <li><a data-toggle="modal" data-target="#myModal" href="#myModal" class="signin">SIGN IN</a></li>
+            <li><a href="services.html">SIGN UP</a></li>
+            <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+      <!-- inbox text-->
+      <div id="msg_txt">
+          <div class="container">
+              <H2 style = "text-align:center"><b>Inb<i class="fa fa-circle"></i>x</H2></b>
+          </div>
+      </div>
+    </div>
+
+    <!-- msg part-->
+    <!-- msg nav bar-->
+    <div id="msg_nav">
+      <div class="container">
+          <h1 style="padding:7px">YOU</h1>          
+          <ul id="menu">
+           <li><b><a data-toggle="modal" data-target="#msgModel" href="#msgModel" class="newmsg">NEW MESSEGE</a></li></b>
+           <li><b><a data-toggle="modal" data-target="#replyModel" href="#replyModel" class="replymsg">REPLY</a></li></b>
+           <li><b><a href="#">DELETE</a></li></b>
+           <li><b><a href="#">SEE FULL MESSEGE</a></li></b>
+          </ul>  
+      </div><!-- /container-->
+    </div><!-- /msg_nav-->
+
+    <!-- Modal for new msg-->
+    <div class="modal fade" id="msgModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="msgModelLabel">DumboBay</h4>
+          </div>
+          <!-- Log in form -->
+          <form class="form-horizontal">
+            <div class="modal-body">
+              <div class="row centered">
+              <fieldset>
+                <b><legend>New Messege</legend></b>
+                <div align="center">
+                <div class="form-group">
+                  <label for="inputEmail" class="col-lg-2 control-label">Send to :</label>
+                  <div class="col-lg-10">
+                    <input style="width:50%" type="text" class="form-control" id="inputEmail" placeholder="Enter username here." >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputTopic" class="col-lg-2 control-label">Topic :</label>
+                  <div class="col-lg-10">
+                    <input style="width:50%" type="text" class="form-control" id="inputMsg" placeholder="Messege's topic.">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputMsg" class="col-lg-2 control-label">Messege :</label>
+                  <div class="col-lg-10">
+                    <input style="width:100%" type="text" class="form-control" id="inputMsg" placeholder="type your messege here.">
+                  </div>
+                </div>
+                </div>
+              </fieldset>
+              </div>
+            </div>
+          <div class="modal-footer">
+            <a href="messegeBox.html"><button type="button" class="btn btn-danger">Send</button></a>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+          </form>
+          <!-- /msg form -->
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Modal for reply msg-->
+    <div class="modal fade" id="replyModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="replyModelLabel">DumboBay</h4>
+          </div>
+          <!-- Log in form -->
+          <form class="form-horizontal">
+            <div class="modal-body">
+              <div class="row centered">
+              <fieldset>
+                <b><legend>Reply Messege</legend></b>
+                <div align="center">
+                <div class="form-group">
+                  <label for="inputEmail" class="col-lg-2 control-label">Send to :</label>
+                  <div class="col-lg-10">
+                    <input style="width:50%" type="text" class="form-control" id="inputEmail" placeholder="SAME ADDRESS AH!!!!" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputTopic" class="col-lg-2 control-label">Topic :</label>
+                  <div class="col-lg-10">
+                    <input style="width:50%" type="text" class="form-control" id="inputMsg" placeholder="Reply: the same topic">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputMsg" class="col-lg-2 control-label">Messege :</label>
+                  <div class="col-lg-10">
+                    <input style="width:100%" type="text" class="form-control" id="inputMsg" placeholder="type your messege here.">
+                  </div>
+                </div>
+                </div>
+              </fieldset>
+              </div>
+            </div>
+          <div class="modal-footer">
+            <a href="messegeBox.html"><button type="button" class="btn btn-danger">Send</button></a>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+          </form>
+          <!-- /reply form -->
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- msg list-->
+    <div class="container">
+       <table style="width:100%">
+          <tr>
+            <h2><td style="witdh:20%">Received time</td></h2>
+            <h2><td style="witdh:30%">From</td></h2>
+            <h2><td style="witdh:50%">Topic</td></h2>
+          </tr>
+          <tr>
+            <h3><td style="witdh:20%">1 Nov 2014 at 7:03 AM</td></h3>
+            <h3><td style="witdh:30%">Frank_BlackTie@BumboBay.com</td></h3>
+            <h3><td style="witdh:50%">Fuck off asshole!!!</td></h3>
+          </tr>
+        </table>
+    </div>
+   
+
+    <!-- Modal to sign in-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">DumboBay</h4>
+          </div>
+          <!-- Log in form -->
+          <form class="form-horizontal">
+            <div class="modal-body">
+              <div class="row centered">
+              <fieldset>
+                <legend>SIGN IN</legend>
+                <div align="center">
+                <div class="form-group">
+                  <label style="left:20%" for="inputEmail" class="col-lg-2 control-label">Username</label>
+                  <div class="col-lg-10">
+                    <input style="width:50%" type="text" class="form-control" id="inputEmail" placeholder="Put your username in here." >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label style="left:20%" for="inputPassword" class="col-lg-2 control-label">Password</label>
+                  <div class="col-lg-10">
+                    <input style="width:50%" type="password" class="form-control" id="inputPassword" placeholder="********">
+                  </div>
+                </div>
+                </div>
+              </fieldset>
+              </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <a href="buyer_home.html"><button type="button" class="btn btn-danger">Sign In</button></a>
+            <a href="buyer_home.html"><button type="button" class="btn btn-danger">Sign In:Buyer</button></a>
+            <a href="seller_home.html"><button type="button" class="btn btn-danger">Sign In:Seller</button></a>
+            <a href="admin_home.html"><button type="button" class="btn btn-danger" >Sign In:Admin</button></a>
+          </div>
+          </form>
+          <!-- /Log in form -->
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+		<div class="container w">
+		<div class="row centered">
+			<br><br>
+			<div class="col-lg-4">
+				<i class="fa fa-heart"></i>
+				<h4>DESIGN</h4>
+				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+			</div><!-- col-lg-4 -->
+
+			<div class="col-lg-4">
+				<!-- <i class="fa fa-laptop"></i> -->
+				<img src="assets/img/frappe_logo-small.gif">
+				<h4>Frappe & Co,.</h4>
+				<!-- <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p> -->
+			</div><!-- col-lg-4 -->
+
+			<div class="col-lg-4">
+				<i class="fa fa-trophy"></i>
+				<h4>SUPPORT</h4>
+				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+			</div><!-- col-lg-4 -->
+		</div><!-- row -->
+		<br>
+		<br>
+	</div><!-- container -->
+
+	<!-- FOOTER -->
+	<div id="f">
+		<div class="container">
+			<div class="row centered">
+				<a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-dribbble"></i></a>
+		
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- Footer -->
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+	</body>
+</html>
