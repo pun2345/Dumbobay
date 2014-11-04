@@ -1,0 +1,15 @@
+.productwrapper {
+	width:500px;
+	height:100px;
+
+}
+.productimage{
+	width:200px;
+	height:100px;
+
+
+	float:left
+}
+.productinfo{
+	float:left;
+}
