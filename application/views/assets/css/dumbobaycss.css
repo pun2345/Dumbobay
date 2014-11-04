@@ -1,15 +1,25 @@
-.productwrapper {
-	width:500px;
+
+.productimg img{
+	width:170px;
 	height:100px;
-
 }
-.productimage{
-	width:200px;
-	height:100px;
-
-
-	float:left
+.productbutton {
+	position:relative;
+	height:96px;
 }
-.productinfo{
-	float:left;
+.productbutton button{
+	width:100px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-top:-14px;
+	margin-left:-50px
+}
+.auctionbutton button{
+	margin-top: -25px;
+}
+.auctionbutton p{
+	padding-top: 10px;
+}
+
 }

@@ -160,7 +160,7 @@ a:after {
 
     background-attachment: relative;
     background-position: center center;
-    min-height: 500px;
+    min-height: 180px;
     width: 100%;
     
     -webkit-background-size: 100%;
@@ -172,6 +172,14 @@ a:after {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+#myheaderwrap h2 {
+    margin-top: 60px;
+    color: white;
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: 2px;
 }
 
 #headerwrap h1 {
