@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/dumbobaycss.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -19,6 +20,12 @@
 
     <!-- msg nav-->
     <style>
+      .op{
+        padding-top:28px;
+      }
+      .mf{
+        margin-bottom: 5px;
+      }
       #msg_txt {
           background-color:black;
           text-align:center;
@@ -61,7 +68,6 @@
 
   <body>
 
-    <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -74,34 +80,126 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="index.html">HOME</a></li>
-            <li><a data-toggle="modal" data-target="#myModal" href="#myModal" class="signin">SIGN IN</a></li>
-            <li><a href="services.html">SIGN UP</a></li>
-            <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li>
+
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">PRODUCT</a></li>
+            <li><a href="#">MY CART</a></li>
+            <li ><a href="#">WATCH LIST</a></li>
+            <li><a href="#">ORDER</a></li>
+            <li class="active"><a href="#">MSG BOX</a></li>
+            <li><a href="#">HISTORY</a></li>
+            <!-- <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li> -->
+            <li><a href="index.html">SIGN OUT</a></li>
+            <li><a href="#">| Pookpik |</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
-      <!-- inbox text-->
-      <div id="msg_txt">
-          <div class="container">
-              <H2 style = "text-align:center"><b>Inb<i class="fa fa-circle"></i>x</H2></b>
-          </div>
-      </div>
     </div>
-
+    <div>
+      <div class="container w ">
+        <div class="container">
+          <div class="row">
+            <!--<img src="assets/img/products.png" id="back" style="cursor:pointer">-->
+            <div class="col-lg-6 col-lg-push-4">
+              <img src="assets/img/message-icon.svg" style="width:120px;height:120px">
+            </div>
+            <div class="col-lg-6" style="margin-top:20px;margin-left:-5%">
+              <h1>Message Box</h1>
+            </div>
+          </div><!-- row -->
+        </div><!-- container -->
+      </div>
+      
+        <div class="container">
+          <div class="row">
+            <!--<img src="assets/img/products.png" id="back" style="cursor:pointer">-->
+            <div class="col-lg-6">
+              <button type="submit" class="btn btn-default" style="margin-top:-30px;margin-bottom:20px">NEW Messege</button>
+            </div>
+            <div class="col-lg-6">
+        
+            </div>
+          </div><!-- row -->
+ 
+      </div>
+      <div class="container border-shadow border-radius" style="background-color:white">
+          <!-- header message table -->
+          <div class="row centered">
+            <div class="col-sm-1 op">
+              Remove
+            </div>
+            <div class="col-sm-1 op">
+              Reply
+            </div>
+            <div class="col-sm-3">
+              <h2>Sender name</h2>
+            </div>
+            <div class="col-sm-4">
+              <h2>Subject</h2>
+            </div>
+            <div class="col-sm-3">
+              <h2>Received date</h2>
+            </div>
+          </div>
+          <!-- end of header message table -->
+          <hr>
+          <!-- body message table -->
+          <div class="row mf">
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/del-icon.png"></a>
+            </div>
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/reply-icon.jpg"></a>
+            </div>
+            <div class="col-sm-3">
+              <h4>Natchez@dumbobay.com</h4>
+            </div>
+            <div class="col-sm-4">
+              <h4>You have got iPhone 6 !!</h4>
+            </div>
+            <div class="col-sm-3">
+              <h4>1 Nov 2014 at 7:03 AM</h4>
+            </div>
+          </div>
+          <div class="row mf">
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/del-icon.png"></a>
+            </div>
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/reply-icon.jpg"></a>
+            </div>
+            <div class="col-sm-3">
+              <h4>Boombi@dumbobay.com</h4>
+            </div>
+            <div class="col-sm-4">
+              <h4>Can I have your phone number?</h4>
+            </div>
+            <div class="col-sm-3">
+              <h4>5 Nov 2014 at 10:03 AM</h4>
+            </div>
+          </div>
+          <div class="row mf">
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/del-icon.png"></a>
+            </div>
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/reply-icon.jpg"></a>
+            </div>
+            <div class="col-sm-3">
+              <h4>Putty@superdupergood.com</h4>
+            </div>
+            <div class="col-sm-4">
+              <h4>I'm gonna die!</h4>
+            </div>
+            <div class="col-sm-3">
+              <h4>6 Nov 2014 at 2:12 PM</h4>
+            </div>
+          </div>
+          
+          <!-- end of body message table -->
+      </div><!-- container -->
+    </div>
     <!-- msg part-->
-    <!-- msg nav bar-->
-    <div id="msg_nav">
-      <div class="container">
-          <h1 style="padding:7px">YOU</h1>          
-          <ul id="menu">
-           <li><b><a data-toggle="modal" data-target="#msgModel" href="#msgModel" class="newmsg">NEW MESSEGE</a></li></b>
-           <li><b><a data-toggle="modal" data-target="#replyModel" href="#replyModel" class="replymsg">REPLY</a></li></b>
-           <li><b><a href="#">DELETE</a></li></b>
-           <li><b><a href="#">SEE FULL MESSEGE</a></li></b>
-          </ul>  
-      </div><!-- /container-->
-    </div><!-- /msg_nav-->
 
     <!-- Modal for new msg-->
     <div class="modal fade" id="msgModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -196,32 +294,6 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
-    <!-- msg list-->
-    <div class="container">
-       <table style="width:100%">
-          <tr>
-            <td style="witdh:20%"><h4 style="text-align:center"><b>Received time</b></h4></td>
-            <td style="witdh:30%"><h4 style="text-align:center"><b>From</b></h4></td>
-            <td style="witdh:50%"><h4 style="text-align:center"><b>Topic</b></h4></td>
-          </tr>
-          <tr>
-            <h3><td style="witdh:20%">1 Nov 2014 at 7:03 AM</td></h3>
-            <h3><td style="witdh:30%">Frank_BlackTie@BumboBay.com</td></h3>
-            <h3><td style="witdh:50%">Re:thank you for solving the problem</td></h3>
-          </tr>
-          <tr>
-            <h3><td style="witdh:20%">29 Oct 2014 at 5:49 PM</td></h3>
-            <h3><td style="witdh:30%">Frank_BlackTie@BumboBay.com</td></h3>
-            <h3><td style="witdh:50%">Fuck off asshole!!!</td></h3>
-          </tr>
-          <tr>
-            <h3><td style="witdh:20%">20 Oct 2014 at 5:47 AM</td></h3>
-            <h3><td style="witdh:30%">Chucha@BumboBay.com</td></h3>
-            <h3><td style="witdh:50%">Re:Asking for the product details</td></h3>
-          </tr>
-        </table>
-    </div>
    
 
     <!-- Modal to sign in-->
@@ -268,41 +340,19 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-		<div class="container w">
-		<div class="row centered">
-			<br><br>
-			<div class="col-lg-4">
-				<i class="fa fa-heart"></i>
-				<h4>DESIGN</h4>
-				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
-			</div><!-- col-lg-4 -->
-
-			<div class="col-lg-4">
-				<!-- <i class="fa fa-laptop"></i> -->
-				<img src="assets/img/frappe_logo-small.gif">
-				<h4>Frappe & Co,.</h4>
-				<!-- <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p> -->
-			</div><!-- col-lg-4 -->
-
-			<div class="col-lg-4">
-				<i class="fa fa-trophy"></i>
-				<h4>SUPPORT</h4>
-				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
-			</div><!-- col-lg-4 -->
-		</div><!-- row -->
-		<br>
-		<br>
-	</div><!-- container -->
-
-	<!-- FOOTER -->
-	<div id="f">
-		<div class="container">
-			<div class="row centered">
-				<a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-dribbble"></i></a>
-		
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- Footer -->
+		<!-- FOOTER -->
+    <div id="f" style="margin-top:50px">
+      <div class="container">
+        <div class="row">
+        <div class="col-md-6 col-md-push-2">
+          <img src="assets/img/DumboBay-Logo-b.png">
+        </div>
+        <div class="col-md-6 col-md-push-2">
+          <img src="assets/img/Frappe-Logo-bg-sm.png">
+        </div>
+        </div><!-- row -->
+      </div><!-- container -->
+    </div><!-- Footer -->
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
