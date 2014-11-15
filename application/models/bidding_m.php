@@ -1,5 +1,5 @@
 <?php
-Class message_m extends CI_Model
+Class bidding_m extends CI_Model
 {
 		function check()
 		{

@@ -18,79 +18,59 @@ class message_c extends CI_Controller {
   {
       $session_data = $this->session->userdata(logged_in);
       $senderID=$session_data['userID'];
-      $this->form_validation->set_rules('subject', 'subject', 'require|css_clean|max_length[30]');
-      $this->form_validation->set_rules('receiver', 'receiver', 'require|css_clean');
-      $this->form_validation->set_rules('text', 'text', 'max_length[200]');
+      $this->load->view('newMessage.html');
+      $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
+      $this->form_validation->set_rules('msgReceiver', 'msgReceiver', 'require|css_clean');
+      $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
-          $this->load->view(-------);
+          $this->load->view('newMessage.html');
       }
       else // passed validation proceed to post success logic
       {
-          $form_data = array( 'subject' => set_value('subject'),
-                              'text' => set_value('text'),
-                             'receiver' => set_value('receiver'));
+          $form_data = array( 'msgSubject' => set_value('msgSubject'),
+                              'msgText' => set_value('msgText'),
+                             'msgReceiver' => set_value('msgReceiver'));
+      }
       // run insert model to write data to db
-      if ($this->message_m->createMessage($senderID,$form_data['text'],$receiverID) == TRUE) // the information has therefore been successfully saved in the db
-      {
-          redirect('message_c/success');   // or whatever logic needs to occur
+      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$form_data['msgReceiver']) == TRUE) // the information has therefore been successfully saved in the db
+      {             
+          $this->session->set_flashdata("message","Message sent!");
+          redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
       }
       else
       {
           $this->session->set_flashdata("message","Sending error");
-          redirect('home_c');
+          redirect('message_c/manageMessageBox');
       }
   }
 
-  function sendMessageTo($receiverID,$subject)
+  function sendMessageTo($receiverID)
   {
       $session_data = $this->session->userdata(logged_in);
       $senderID=$session_data['userID'];
-      if(!isset($subject)){
-          $this->form_validation->set_rules('text', 'text', 'max_length[200]');
-          $this->form_validation->set_rules('subject', 'subject', 'require|css_clean|max_length[30]');
-          if ($this->form_validation->run() == FALSE) // validation hasn't been passed
-          {
-              $this->load->view(-------);
-          }
-          else // passed validation proceed to post success logic
-          {
-              $form_data = array('text' => set_value('text'),
-                                'subject' => set_value('subject'));
-          }
-              // run insert model to write data to db
-          if(strlen($subject)>26) $subject = substr($subject,0,25);
-          if ($this->message_m->createMessage($senderID,$form_data['subject'],$form_data['text'],$receiverID) == TRUE) // the information has therefore been successfully saved in the db
-          {
-              redirect('message_c/success');   // or whatever logic needs to occur
-          }
-          else
-          {
-              $this->session->set_flashdata("message","Sending error");
-              redirect('home_c');
-          }
-
+      $this->load->view('newMessage.html');
+      $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
+      $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
+      if ($this->form_validation->run() == FALSE) // validation hasn't been passed
+      {
+          $this->load->view('newMessage.html');
       }
-      else{
-          $this->form_validation->set_rules('text', 'text', 'max_length[200]');
-          if ($this->form_validation->run() == FALSE) // validation hasn't been passed
-          {
-              $this->load->view(-------);
-          }
-          else // passed validation proceed to post success logic
-          {
-              $form_data = array('text' => set_value('text'));
-          }
-          if(strlen($subject)>26) $subject = substr($subject,0,23) . '..';
-          if ($this->message_m->createMessage($senderID,'RE: '.$subject,$form_data['text'],$receiverID) == TRUE) // the information has therefore been successfully saved in the db
-          {
-              redirect('message_c/success');   // or whatever logic needs to occur
-          }
-          else
-          {
-              $this->session->set_flashdata("message","Sending error");
-              redirect('home_c');
-          }
+      else // passed validation proceed to post success logic
+      {
+          $form_data = array( 'msgSubject' => set_value('msgSubject'),
+                              'msgText' => set_value('msgText'));
+      }
+      // run insert model to write data to db
+      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiverID) == TRUE) // the information has therefore been successfully saved in the db
+      {             
+          $this->session->set_flashdata("message","Message sent!");
+          redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
+      }
+      else
+      {
+          $this->session->set_flashdata("message","Sending error");
+          redirect('message_c/manageMessageBox');
       }
   }
 
@@ -113,16 +93,37 @@ class message_c extends CI_Controller {
       $session_data = $this->session->userdata(logged_in);
       $data['userID']=$session_data['userID'];
       $data['message'] = $this->message_m->getMessage($messageID);
-      $this->load->view('messageDetail.html/',$data);
+      $this->load->view('viewMessage.html/',$data);
   }
 
   function reply($messageID)
   {
       $session_data = $this->session->userdata(logged_in);
       $data['userID']=$session_data['userID'];
-      $senderID = $this->message_m->getSender($messageID);
-      $subject = $this->message_m->getSubject($messageID);
-      redirect('message_c/sendMessageTo/'.$senderID.'/'.$subject);
+      $data['receiverID'] = $this->message_m->getSender($messageID);
+      $data['subject'] = $this->message_m->getSubject($messageID);
+      if(strlen($data['subject'])>26) $data['subject'] = substr($data['subject'],0,23) . "..";
+      $this->load->view('replyMessage.html/',$data);
+      $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
+      if ($this->form_validation->run() == FALSE) // validation hasn't been passed
+      {
+          $this->load->view('replyMessage.html/',$data);
+      }
+      else // passed validation proceed to post success logic
+      {
+          $form_data = array('msgText' => set_value('msgText'));
+      }
+              // run insert model to write data to db
+      if ($this->message_m->createMessage($userID,$data['subject'],$form_data['msgText'],$data['receiverID']) == TRUE) // the information has therefore been successfully saved in the db
+      {
+          $this->session->set_flashdata("message","Message sent!");
+          redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
+      }
+      else
+      {
+          $this->session->set_flashdata("message","Sending error");
+          redirect('message_c/manageMessageBox');
+      }
   }
 
   function delete($messageID)
