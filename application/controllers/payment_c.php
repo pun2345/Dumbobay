@@ -22,10 +22,36 @@ class Payment_c extends CI_Controller {
     $transaction_ids[] = 3;
     //
     //$data['products'] = $this->get_flashdata("cart2");
-    $product = array('name'->'testProduct',
-                      'price'->50
+    $product1 = array('name'=>'testProduct',
+                      'price'=>50
+      );
+    $product2 = array('name'=>'testProduct2',
+                      'price'=>150
       );
     $products[]=$product;
+    $products[]=$product2;
+    $data['products'] = $products;
+    $this->load->view('paymentForm.html',$data);
+  }
+
+  function pay($price)
+  {
+    //This method will have the credentials validation
+    $data['price']=$price;
+    //$transaction_ids = $this->get_flashdata("cart");
+    $transaction_ids[] = 1;
+    $transaction_ids[] = 2;
+    $transaction_ids[] = 3;
+    //
+    //$data['products'] = $this->get_flashdata("cart2");
+    $product1 = array('name'=>'testProduct',
+                      'price'=>50
+      );
+    $product2 = array('name'=>'testProduct2',
+                      'price'=>150
+      );
+    $products[]=$product;
+    $products[]=$product2;
     $data['products'] = $products;
     $this->load->view('paymentForm.html',$data);
     $this->load->library('form_validation');
@@ -50,7 +76,6 @@ class Payment_c extends CI_Controller {
     //$this->load->view('payment_view',$data);
 
   }
-
   
   function isLogin(){
     if($this->session->userdata('logged_in')){
