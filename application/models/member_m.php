@@ -29,7 +29,18 @@ Class member_m extends CI_Model
 		return "false";
 
 	}
+	function checkUserType($user_id){
+		$query = $this->db->query("select Type from User where User_ID=$user_id");
+		if($query->num_rows() == 1)
+		{
+			foreach ($query->result() as $row)
+			{
+				return $row->Type;
+			}
+		}
+		return null;
 
+	}
 	function createMember($username, $password, $firstname, $lastname, $type, $address, $telephone, $email){
 		$data1 = array(
 		   	'Username' => $username,
@@ -93,7 +104,7 @@ Class member_m extends CI_Model
    		$this->db->update('member',$data1);
    		if ($this->db->affected_rows() <= 0) return "false";
    	  	$this->db->trans_complete();
-   	  	return true;
+   	  	return "true";
 	}
 	function getMemberDetail($user_id){
 		return $this->db->query("select * from Member where User_ID=$user_id");
