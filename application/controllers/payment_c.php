@@ -22,11 +22,12 @@ class Payment_c extends CI_Controller {
     $transaction_ids[] = 3;
     //
     //$data['products'] = $this->get_flashdata("cart2");
-    $product['name'] = 'testProduct';
-    $product['price'] = 50;
+    $product = array('name'->'testProduct',
+                      'price'->50
+      );
     $products[]=$product;
     $data['products'] = $products;
-    $this->load->view('payment_view',$data);
+    $this->load->view('paymentForm.html',$data);
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('visano', 'visano', 'trim|required|xss_clean');
@@ -36,7 +37,7 @@ class Payment_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       //Field validation failed.  User redirected to login page
-      $this->load->view('payment_view',$data);
+      $this->load->view('paymentForm.html',$data);
     }
     else
     {
@@ -46,7 +47,7 @@ class Payment_c extends CI_Controller {
       }
       redirect('cart/deleteAll');
     }
-    $this->load->view('payment_view',$data);
+    //$this->load->view('payment_view',$data);
 
   }
 
