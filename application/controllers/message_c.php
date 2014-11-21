@@ -17,7 +17,7 @@ class message_c extends CI_Controller {
   function sendMessage()
   {
       $session_data = $this->session->userdata(logged_in);
-      $senderID=$session_data['userID'];
+      $senderID=$session_data['user_id'];
       $this->load->view('newMessage.html');
       $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
       $this->form_validation->set_rules('msgReceiver', 'msgReceiver', 'require|css_clean');
@@ -45,10 +45,10 @@ class message_c extends CI_Controller {
       }
   }
 
-  function sendMessageTo($receiverID)
+  function sendMessageTo($receiver_id)
   {
       $session_data = $this->session->userdata(logged_in);
-      $senderID=$session_data['userID'];
+      $senderID=$session_data['user_id'];
       $this->load->view('newMessage.html');
       $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
@@ -62,7 +62,7 @@ class message_c extends CI_Controller {
                               'msgText' => set_value('msgText'));
       }
       // run insert model to write data to db
-      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiverID) == TRUE) // the information has therefore been successfully saved in the db
+      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiver_id) == TRUE) // the information has therefore been successfully saved in the db
       {             
           $this->session->set_flashdata("message","Message sent!");
           redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
@@ -83,25 +83,26 @@ class message_c extends CI_Controller {
   function manageMessageBox()
   {
       $session_data = $this->session->userdata(logged_in);
-      $data['userID']=$session_data['userID'];
-      $data['messages'] = $this->message_m->getUserMessage($data['userID']);
+      $data['user_id']=$session_data['user_id'];
+      $data['messages'] = $this->message_m->getUserMessage($data['user_id
+']);
       $this->load->view('messageBox.html/',$data);
   }
 
-  function messageDetail($messageID)
+  function messageDetail($message_id)
   {
       $session_data = $this->session->userdata(logged_in);
-      $data['userID']=$session_data['userID'];
-      $data['message'] = $this->message_m->getMessage($messageID);
+      $data['user_id']=$session_data['user_id'];
+      $data['message'] = $this->message_m->getMessage($message_id);
       $this->load->view('viewMessage.html/',$data);
   }
 
-  function reply($messageID)
+  function reply($message_id)
   {
       $session_data = $this->session->userdata(logged_in);
-      $data['userID']=$session_data['userID'];
-      $data['receiverID'] = $this->message_m->getSender($messageID);
-      $data['subject'] = $this->message_m->getSubject($messageID);
+      $data['user_id']=$session_data['user_id'];
+      $data['receiver_id'] = $this->message_m->getSender($message_id);
+      $data['subject'] = $this->message_m->getSubject($message_id);
       if(strlen($data['subject'])>26) $data['subject'] = substr($data['subject'],0,23) . "..";
       $this->load->view('replyMessage.html/',$data);
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
@@ -114,7 +115,7 @@ class message_c extends CI_Controller {
           $form_data = array('msgText' => set_value('msgText'));
       }
               // run insert model to write data to db
-      if ($this->message_m->createMessage($userID,$data['subject'],$form_data['msgText'],$data['receiverID']) == TRUE) // the information has therefore been successfully saved in the db
+      if ($this->message_m->createMessage($user_id,$data['subject'],$form_data['msgText'],$data['receiver_id']) == TRUE) // the information has therefore been successfully saved in the db
       {
           $this->session->set_flashdata("message","Message sent!");
           redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
@@ -126,10 +127,10 @@ class message_c extends CI_Controller {
       }
   }
 
-  function delete($messageID)
+  function delete($message_id)
   {
       $session_data = $this->session->userdata(logged_in);
-      $this->message_m->deleteMessage($messageID);
+      $this->message_m->deleteMessage($message_id);
       redirect('message_c/manageMessageBox/');
       // refresh view duay na 
   }

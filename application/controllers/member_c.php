@@ -13,6 +13,10 @@
 		}
 
 		function createMember(){
+<<<<<<< HEAD
+=======
+			$this->load->view('registration_form.html');
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
 			//$this->load->view('registration_form.html');
 			$this->load->library('form_validation');
 	        $this->form_validation->set_rules('username', 'username', 'require|css_clean|max_length[20]');
@@ -29,6 +33,19 @@
 		    }
       	    else // passed validation proceed to post success logic
 	        {
+<<<<<<< HEAD
+=======
+		        $form_data = array( 'username' => set_value('username'),
+		        					'password' => set_value('password'),
+		                            'firstname' => set_value('firstname'),
+		                            'lastname' => set_value('lastname'),
+		                            'address' => set_value('address'),
+		                            'telephone' => set_value('telephone'),
+		                            'password' => set_value('password'),
+		                            'email' => set_value('email'),
+		                            'type' => set_value('type'));
+=======
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
 		        $form_data = array( 'username' => $this->input->post('username'),
 		        					'password' => $this->input->post('password'),
 		                            'firstname' => $this->input->post('firstname'),
@@ -38,6 +55,10 @@
 		                            'password' => $this->input->post('password'),
 		                            'email' => $this->input->post('email'),
 		                            'type' => $this->input->post('type'));
+<<<<<<< HEAD
+=======
+>>>>>>> 4f243f98d6343d8e6b082ade48d6457f29cc0270
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
 			}
 		    if ($this->member_m->checkMember($form_data['username'],$form_data['email'])) == TRUE) // the information has therefore been successfully saved in the db
 		    {             
@@ -52,12 +73,12 @@
 		    }
 		}
 
-		function confirmMember($userID){
+		function confirmMember($user_id){
 
 		}
 
-		function editProfile($userID){
-			$data['member'] = $this->member_m->getMemberDetail($userID);
+		function editProfile($user_id){
+			$data['member'] = $this->member_m->getMemberDetail($user_id);
 			$member = $data['member']
     		$this->load->library('form_validation');
 			$this->load->view('edit_profile_form.html/',$data);
@@ -73,6 +94,7 @@
 		    }
       	    else // passed validation proceed to post success logic
 	        {
+<<<<<<< HEAD
 		        $form_data = array( 'password' => $this->input->post('password'),
 		                            'firstname' => $this->input->post('firstname'),
 		                            'lastname' => $this->input->post('lastname'),
@@ -80,6 +102,15 @@
 		                            'telephone' => $this->input->post('telephone'),
 		                            'password' => $this->input->post('password'),
 		                            'email' => $this->input->post('email'));
+=======
+		        $form_data = array( 'password' => set_value('password'),
+		                            'firstname' => set_value('firstname'),
+		                            'lastname' => set_value('lastname'),
+		                            'address' => set_value('address'),
+		                            'telephone' => set_value('telephone'),
+		                            'password' => set_value('password'),
+		                            'email' => set_value('email'));
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
 			    $member['password'] = $form_data['password'];
 			    $member['firstname'] = $form_data['$firstname'];
 			    $member['lastname'] = $form_data['$lastname'];
@@ -101,8 +132,8 @@
 		    }
 		}
 
-		function memberDetail($userID){
-			$data['member'] = $this->member_m->getMemberDetail($userID);
+		function memberDetail($user_id){
+			$data['member'] = $this->member_m->getMemberDetail($user_id);
 			$this->load->view('member_detail.html',$data);
 		}
 

@@ -7,7 +7,11 @@ class Payment_c extends CI_Controller {
     parent::__construct();
     $this->load->library('form_validation');
     $this->load->helper('html');
+<<<<<<< HEAD
     // $this->load->database();
+=======
+    $this->load->database();
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
     $this->load->helper('form');
     // $this->load->model('transaction_m');
   }
@@ -16,6 +20,7 @@ class Payment_c extends CI_Controller {
   {
     //This method will have the credentials validation
     $data['price']=$price;
+<<<<<<< HEAD
     //$transaction_ids = $this->get_flashdata("cart");
     $transaction_ids[] = 1;
     $transaction_ids[] = 2;
@@ -31,6 +36,13 @@ class Payment_c extends CI_Controller {
     $products[]=$product1;
     $products[]=$product2;
     $data['products'] = $products;
+=======
+    $transaction_ids = $this->get_flashdata("cart");
+    $this->keep_flashdata("cart")
+    //
+    $data['products'] = $this->get_flashdata("cart2");
+    $this->keep_flashdata("cart2")
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
     $this->load->view('paymentForm.html',$data);
   }
 
@@ -50,7 +62,11 @@ class Payment_c extends CI_Controller {
     $product2 = array('name'=>'testProduct2',
                       'price'=>150
       );
+<<<<<<< HEAD
     $products[]=$product1;
+=======
+    $products[]=$product;
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
     $products[]=$product2;
     $data['products'] = $products;
     $this->load->view('paymentForm.html',$data);

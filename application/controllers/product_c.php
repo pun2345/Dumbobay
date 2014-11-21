@@ -7,7 +7,11 @@ class Product_c extends CI_Controller {
     parent::__construct();
     $this->load->library('form_validation');    
     $this->load->helper('html');
+<<<<<<< HEAD
     // $this->load->database();
+=======
+    $this->load->database();
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
     $this->load->helper('form');
     // $this->load->model('product_m');
   }
@@ -22,6 +26,7 @@ class Product_c extends CI_Controller {
                       'price'=> 50,
                       'amount'=> 5,
                       'type' => 1,
+<<<<<<< HEAD
                       'image' => 'assets/img/macbook.png'
                       );
     $product2 = array('id' => 2,
@@ -36,6 +41,20 @@ class Product_c extends CI_Controller {
     $products[]= $product1;
     $products[]= $product2;
     $data['products']=$products;
+=======
+                      'image' =>
+                      );
+    $product2 = array('id' => 2,
+                      'name'=> 'product1',
+                      'price'=> 150,
+                      'amount'=> 15,
+                      'type' => 2,
+                      'image' =>
+                      );
+    $products[]= $product1;
+    $products[]= $product2;
+    $data['product']=$products;
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
     $this->load->view('product.html',$data);
     $this->load->view('footer.html');
   }
@@ -54,6 +73,7 @@ class Product_c extends CI_Controller {
     $this->load->view('footer.html');
   }
   function viewProductDetail($product_id){
+<<<<<<< HEAD
     $product1 = array('id' => 1,
                       'name'=> 'product1',
                       'price'=> 50,
@@ -63,6 +83,10 @@ class Product_c extends CI_Controller {
                       );
     $data['product'] = $product1;
     $this->load->view('productDesc.html',$data);
+=======
+    $data['product'] = $this->product_m->viewProductDetail($product_id);
+    $this->load->view('product_detail.html',$data);
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
     $this->load->view('footer.html');
   }
   function newProduct(){

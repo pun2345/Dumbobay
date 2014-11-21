@@ -43,9 +43,12 @@ class Login_c extends CI_Controller {
     print_r($result);
     if($result)
     {
+<<<<<<< HEAD
       //if($result->activated){ 
+=======
+      if($result->activated=="true"){ 
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
         print_r("true");
-        $sess_array = array();
         $sess_array = array(
             'user_id' => $result->user_id,
             'username' => $result->username,
