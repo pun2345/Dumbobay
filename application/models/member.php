@@ -40,6 +40,7 @@ Class Member extends CI_Model
 		);
 		$this->db->insert('member',$data2);
    	  	$this->db->trans_complete();
+   	  	return true;
 	}
 }
 ?>
