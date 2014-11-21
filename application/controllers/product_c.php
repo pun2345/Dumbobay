@@ -16,7 +16,24 @@ class Product_c extends CI_Controller {
   {
     //This method will have the credentials validation
     $page_num=1;
-    $data['products'] = $this->product_m->allProduct($page_num);
+    //$data['products'] = $this->product_m->allProduct($page_num);
+    $product1 = array('id' => 1,
+                      'name'=> 'product1',
+                      'price'=> 50,
+                      'amount'=> 5,
+                      'type' => 1,
+                      'image' =>
+                      );
+    $product2 = array('id' => 2,
+                      'name'=> 'product1',
+                      'price'=> 150,
+                      'amount'=> 15,
+                      'type' => 2,
+                      'image' =>
+                      );
+    $products[]= $product1;
+    $products[]= $product2;
+    $data['product']=$products;
     $this->load->view('product.html',$data);
     $this->load->view('footer.html');
   }
