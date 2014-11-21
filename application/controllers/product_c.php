@@ -5,7 +5,8 @@ class Product_c extends CI_Controller {
   function __construct()
   {
     parent::__construct();
-    $this->load->library('form_validation');
+    $this->load->library('form_validation');    
+    $this->load->helper('html');
     $this->load->database();
     $this->load->helper('form');
     $this->load->model('product_m');
@@ -64,30 +65,30 @@ class Product_c extends CI_Controller {
     }
     else
     {
-      $type = set_value('type');
-      $name = set_value('name');      
-      $image = set_value('image');
-      $brand = set_value('brand');      
-      $model = set_value('model');
-      $price = set_value('price');      
-      $additional_info = set_value('additional_info');
-      $capacity = set_value('capacity');      
-      $size = set_value('size');
-      $property = set_value('property');      
-      $defect = set_value('defect');
-      $quality = set_value('quality');      
-      $payment = set_value('payment');
-      $return_product = set_value('return_product');
-      $return_fee = set_value('return_fee');      
-      $packaging = set_value('packaging');
-      $delevery_fee = set_value('delivery_fee');      
-      $delivry_confirmation = set_value('delivry_confirmation');
-      $tax = set_value('tax');
+      $type = $this->input->post('type');
+      $name = $this->input->post('name');      
+      $image = $this->input->post('image');
+      $brand = $this->input->post('brand');      
+      $model = $this->input->post('model');
+      $price = $this->input->post('price');      
+      $additional_info = $this->input->post('additional_info');
+      $capacity = $this->input->post('capacity');      
+      $size = $this->input->post('size');
+      $property = $this->input->post('property');      
+      $defect = $this->input->post('defect');
+      $quality = $this->input->post('quality');      
+      $payment = $this->input->post('payment');
+      $return_product = $this->input->post('return_product');
+      $return_fee = $this->input->post('return_fee');      
+      $packaging = $this->input->post('packaging');
+      $delevery_fee = $this->input->post('delivery_fee');      
+      $delivry_confirmation = $this->input->post('delivry_confirmation');
+      $tax = $this->input->post('tax');
       if($type == 1){ // direct product
-        $quantity = set_value('quantity');
+        $quantity = $this->input->post('quantity');
       }
       if($type == 2){ // bidding
-        $end_datetime = set_value('end_datetime');
+        $end_datetime = $this->input->post('end_datetime');
         $status = "auction start";
         $current_price = $price;
         $current_max_bid = 0;
@@ -159,26 +160,26 @@ class Product_c extends CI_Controller {
     {
       
       $newProduct = array(
-        'type' = set_value('type'),
-        'name' = set_value('name'),      
-        'image' = set_value('image'),
-        'brand' = set_value('brand'),      
-        'model' = set_value('model'),
-        'price' = set_value('price'),      
-        'additional_info' = set_value('additional_info'),
-        'capacity' = set_value('capacity'),      
-        'size' = set_value('size'),
-        'property' = set_value('property'),      
-        'defect' = set_value('defect'),
-        'quality' = set_value('quality'),      
-        'payment' = set_value('payment'),
-        'return_product' = set_value('return_product'),
-        'return_fee' = set_value('return_fee'),      
-        'packaging' = set_value('packaging'),
-        'delevery_fee' = set_value('delivery_fee'),      
-        'delivry_confirmation' = set_value('delivry_confirmation'),
-        'tax' = set_value('tax'),
-        'quantity' = set_value('quantity')
+        'type' => $this->input->post('type'),
+        'name' => $this->input->post('name'),      
+        'image' => $this->input->post('image'),
+        'brand' => $this->input->post('brand'),      
+        'model' => $this->input->post('model'),
+        'price' => $this->input->post('price'),      
+        'additional_info' => $this->input->post('additional_info'),
+        'capacity' => $this->input->post('capacity'),      
+        'size' => $this->input->post('size'),
+        'property' => $this->input->post('property'),      
+        'defect' => $this->input->post('defect'),
+        'quality' => $this->input->post('quality'),      
+        'payment' => $this->input->post('payment'),
+        'return_product' => $this->input->post('return_product'),
+        'return_fee' => $this->input->post('return_fee'),      
+        'packaging' => $this->input->post('packaging'),
+        'delevery_fee' => $this->input->post('delivery_fee'),      
+        'delivry_confirmation' => $this->input->post('delivry_confirmation'),
+        'tax' => $this->input->post('tax'),
+        'quantity' => $this->input->post('quantity')
       );
 
       // run insert model to write data to db
@@ -238,32 +239,32 @@ class Product_c extends CI_Controller {
     else
     {
       $newProduct = array(
-        'type' = set_value('type'),
-        'name' = set_value('name'),      
-        'image' = set_value('image'),
-        'brand' = set_value('brand'),      
-        'model' = set_value('model'),
-        'price' = set_value('price'),      
-        'additional_info' = set_value('additional_info'),
-        'capacity' = set_value('capacity'),      
-        'size' = set_value('size'),
-        'property' = set_value('property'),      
-        'defect' = set_value('defect'),
-        'quality' = set_value('quality'),      
-        'payment' = set_value('payment'),
-        'return_product' = set_value('return_product'),
-        'return_fee' = set_value('return_fee'),      
-        'packaging' = set_value('packaging'),
-        'delevery_fee' = set_value('delivery_fee'),      
-        'delivry_confirmation' = set_value('delivry_confirmation'),
-        'tax' = set_value('tax'),
-        'end_datetime' = set_value($data['product']->end_datetime),
-        'status' = set_value($data['product']->status),
-        'current_price' = set_value($data['product']->current_price),
-        'current_max_bid' = set_value($data['product']->current_max_bid),
-        'current_win_cust_id' = set_value($data['product']->current_win_cust_id,
-        'bit_increment' = set_value($data['product']->bit_increment)
-      )
+        'type' => $this->input->post('type'),
+        'name' => $this->input->post('name'),      
+        'image' => $this->input->post('image'),
+        'brand' => $this->input->post('brand'),      
+        'model' => $this->input->post('model'),
+        'price' => $this->input->post('price'),      
+        'additional_info' => $this->input->post('additional_info'),
+        'capacity' => $this->input->post('capacity'),      
+        'size' => $this->input->post('size'),
+        'property' => $this->input->post('property'),      
+        'defect' => $this->input->post('defect'),
+        'quality' => $this->input->post('quality'),      
+        'payment' => $this->input->post('payment'),
+        'return_product' => $this->input->post('return_product'),
+        'return_fee' => $this->input->post('return_fee'),      
+        'packaging' => $this->input->post('packaging'),
+        'delevery_fee' => $this->input->post('delivery_fee'),      
+        'delivry_confirmation' => $this->input->post('delivry_confirmation'),
+        'tax' => $this->input->post('tax'),
+        'end_datetime' => $this->input->post($data['product']->end_datetime),
+        'status' => $this->input->post($data['product']->status),
+        'current_price' => $this->input->post($data['product']->current_price),
+        'current_max_bid' => $this->input->post($data['product']->current_max_bid),
+        'current_win_cust_id' => $this->input->post($data['product']->current_win_cust_id),
+        'bit_increment' => $this->input->post($data['product']->bit_increment)
+      );
       
 
       // run insert model to write data to db
@@ -286,8 +287,8 @@ class Product_c extends CI_Controller {
   }
   function deleteProduct($product_id){
     $session_data = $this->session->userdata('logged_in');
-    $temp = $this->product_m->deleteProduct($session_data['user_id'],$product_id);
-    if($temp){
+    $temp = $this->product_m->deleteProduct($product_id);
+    if($temp="true"){
       $this->session->set_flashdata("message","Product was deleted");
     }else{
       $this->session->set_flashdata("message","Deleted fail!");
