@@ -18,7 +18,8 @@ class Cart_c extends CI_Controller {
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
     $data['products'] = $this->cart_m->getProductInCart($session_data['user_id']);
-    $this->load->view('cart_view',$data);
+    $this->load->view('cart.html',$data);
+        $this->load->view('footer.html');
   }
   function addToCart($product_id,$amount){
     $this->isLogin();
