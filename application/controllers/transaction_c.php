@@ -8,8 +8,8 @@ class Transaction_c extends CI_Controller {
     $this->load->library('form_validation');
     $this->load->database();
     $this->load->helper('form');
-    $this->load->model('transaction_model');
-    $this->load->model('product_model');
+    $this->load->model('transaction_m');
+    $this->load->model('product_m');
   }
 
   function index()

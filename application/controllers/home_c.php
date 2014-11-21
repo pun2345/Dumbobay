@@ -8,7 +8,7 @@ class Home_c extends CI_Controller {
     parent::__construct();
     $this->load->helper("html");
     $this->load->database();
-    $this->load->model('member_model');
+    $this->load->model('member_m');
   }
 
   function index()
@@ -29,7 +29,7 @@ class Home_c extends CI_Controller {
     else
     {
       //If no session, redirect to login page
-      $this->load->view('index.html');
+      $this->load->view('index');
     }
   }
   function product(){
