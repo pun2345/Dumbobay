@@ -11,12 +11,12 @@
     <title>DUMBOBAY - shopping area</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
-
+    <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,15 +42,14 @@
           <ul class="nav navbar-nav navbar-right">
 
             <li class="active"><a href="index.html">HOME</a></li>
-            <li><a href="#">PRODUCT</a></li>
-            <li><a href="#">MY CART</a></li>
-            <li><a href="#">WATCH LIST</a></li>
-            <li><a href="#">ORDER</a></li>
-            <li><a href="#">MSG BOX</a></li>
-            <li><a href="#">HISTORY</a></li>
+            <li><a href="home_c/product">PRODUCT</a></li>
+            <li><a href="home_c/cart">MY CART</a></li>
+            <li><a href="home_c/watchlist">WATCH LIST</a></li>
+            <li><a href="home_c/message">MSG BOX</a></li>
+            <li><a href="home_c/history">HISTORY</a></li>
             <!-- <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li> -->
-          	<li><a href="index.html">SIGN OUT</a></li>
-          	<li><a href="#">| Pookpick |</a></li>
+          	<li><a href="home_c/logout">SIGN OUT</a></li>
+          	<li><a href="home_c/memberDetail">| $username |</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -61,12 +60,11 @@
 			<div class="row centered">
 				<div class="col-lg-8 col-lg-offset-2">
 				<h4>- Buyer -</h4>
-				<h3><a href="#" class=""><b>> Product <</b></a></h3>
-				<h3><a href="#" class=""><b>> My Cart <</b></a></h3>
-				<h3><a href="#" class=""><b>> Watch List <</b></a></h3>
-				<h3><a href="#" class=""><b>> Order <</b></a></h3>
-				<h3><a href="#" class=""><b>> Messages Box <</b></a></h3>
-				<h3><a href="#" class=""><b>> History <</b></a></h3>
+				<h3><a href="home_c/product_c" class=""><b>> Product <</b></a></h3>
+				<h3><a href="home_c/cart" class=""><b>> My Cart <</b></a></h3>
+				<h3><a href="home_c/watchlist" class=""><b>> Watch List <</b></a></h3>
+				<h3><a href="home_c/message" class=""><b>> Messages Box <</b></a></h3>
+				<h3><a href="home_c/history" class=""><b>> History <</b></a></h3>
 				</div>
 			</div><!-- row -->
 		</div><!-- container -->
@@ -98,20 +96,13 @@
 		<br>
 	</div><!-- container -->
 	
-	<!-- FOOTER -->
-	<div id="f">
-		<div class="container">
-			<div class="row centered">
-				<a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-dribbble"></i></a>
-		
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- Footer -->
+	
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+   <script src=<?echo base_url("?>assets/js/bootstrap.min.js");?>></script>
+  
   </body>
 </html>
