@@ -9,7 +9,7 @@
 
 		function index(){
 		    $session_data = $this->session->userdata(logged_in);
-		    $senderID = $session_data['userID'];
+		    $senderID = $session_data['user_id'];
 			$this->load->view('problem_report_form.html');
 			$this->load->library('form_validation');
 	        $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
