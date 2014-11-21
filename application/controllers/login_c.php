@@ -8,7 +8,7 @@ class Login_c extends CI_Controller {
 
     $this->load->database();
 
-    $this->load->model('member_model');
+    $this->load->model('member_m');
   }
 
   function index()
