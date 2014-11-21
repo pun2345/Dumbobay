@@ -43,7 +43,11 @@ class Login_c extends CI_Controller {
     print_r($result);
     if($result)
     {
+<<<<<<< HEAD
+      //if($result->activated){ 
+=======
       if($result->activated=="true"){ 
+>>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
         print_r("true");
         $sess_array = array(
             'user_id' => $result->user_id,
@@ -52,10 +56,10 @@ class Login_c extends CI_Controller {
           $this->session->set_userdata('logged_in', $sess_array);
         
         return TRUE;
-      }else{
-        $this->form_validation->set_message('check_database', 'Please Activate your account first.');
-        return false;
-      }
+      //}else{
+        //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
+        //return false;
+      //}
     }
     else
     {
