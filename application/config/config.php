@@ -357,6 +357,10 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+$config['protocol'] = 'smtp';  // ไม่ต้องเปลี่ยนก็ได้ เพราะ host ส่วนใหญ่จะให้ smtp นี่แหล่ะ
+$config['smtp_host'] = 'localhost'; //  อันนี้เปลี่ยนตาม host ที่ใช้งานจริงน่ะครับ *** ถ้า host เช่า ก็ดูเอกสารที่เค้าให้มา มีบอกไว้
+$config['smtp_user'] = 'username';  //  อันนี้เปลี่ยนตาม host ที่ใช้งานจริงน่ะครับ *** ถ้า host เช่า ก็ดูเอกสารที่เค้าให้มา มีบอกไว้
+$config['smtp_pass'] = 'password';  //  อันนี้เปลี่ยนตาม host ที่ใช้งานจริงน่ะครับ *** ถ้า host เช่า ก็ดูเอกสารที่เค้าให้มา มีบอกไว้
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -21,5 +21,25 @@ Class Member extends CI_Model
 		}
 
 	}
+	function createMember($username, $password, $firstname, $Lastname, $type, $address, $telephone, $email){
+		$data1 = array(
+		   	'Username' => $username ,
+	   		'Password' => $password,
+	   		'Firstname' => $firstname,
+	   		'Lastname' => $lastname,
+	   		'Type' => $type
+		);
+		 $this->db->trans_start();
+   		 $this->db->insert('user',$data1);
+   		 $insert_id = $this->db->insert_id();
+   		 $data2 = array(
+		   	'User_ID' => $insert_id
+		   	'Address' => $address,
+	   		'Telephone' => $telephone,
+	   		'E-mail' => $email	   		
+		);
+		$this->db->insert('member',$data2);
+   	  	$this->db->trans_complete();
+	}
 }
 ?>
