@@ -38,7 +38,7 @@ class Login_c extends CI_Controller {
     $username = $this->input->post('username');
     
     //query the database
-    $result = $this->member_model->checkLogin($username, $password);
+    $result = $this->member_m->checkLogin($username, $password);
     print_r($result);
     if($result)
     {
@@ -52,7 +52,7 @@ class Login_c extends CI_Controller {
           $this->session->set_userdata('logged_in', $sess_array);
         
         return TRUE;
-      }else
+      }else{
         $this->form_validation->set_message('check_database', 'Please Activate your account first.');
         return false;
       }
