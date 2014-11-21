@@ -17,7 +17,7 @@ class Home_c extends CI_Controller {
     {
       $session_data = $this->session->userdata('logged_in');
       $data['username'] = $session_data['username'];
-      $user_type = $this->member_model->checkUserType($session_data['user_id']);
+      $user_type = $this->member_m->checkUserType($session_data['user_id']);
       if($user_type == 1){
         $this->load->view('admin_home.html',$data);
       }elseif($user_type == 2){
@@ -29,7 +29,7 @@ class Home_c extends CI_Controller {
     else
     {
       //If no session, redirect to login page
-      $this->load->view('index');
+      $this->load->view('index.html');
     }
   }
   function product(){
@@ -60,7 +60,12 @@ class Home_c extends CI_Controller {
     $session_data = $this->session->userdata('logged_in');
     $user_id = $session_data['user_id'];
     redirect('transaction_c/history/'.$user_id);
-    
+  }
+  function watchlist(){
+    $this->isLogin();
+    $session_data = $this->session->userdata('logged_in');
+    $user_id = $session_data['user_id'];
+    redirect('watchlist_c');
   }
   function memberDetail(){
     $this->isLogin();
@@ -72,6 +77,10 @@ class Home_c extends CI_Controller {
     $this->isLogin();
     redirect('message_c/sendMessage');
     
+  }
+  function message(){
+    $this->isLogin();
+    redirect('message_c/manageMessageBox');
   }
   
   function logout()

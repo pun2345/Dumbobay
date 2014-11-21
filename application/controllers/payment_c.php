@@ -31,7 +31,7 @@ class Payment_c extends CI_Controller {
       //Go to private area
       $transaction_ids = $this->get_flashdata("cart");
       foreach ($transaction_ids as $transaction_id) {
-        $this->transaction_model->updateStatus($transaction_id,"already Paid","");
+        $this->transaction_m->updateStatus($transaction_id,"already Paid","");
       }
       redirect('cart/deleteAll');
     }

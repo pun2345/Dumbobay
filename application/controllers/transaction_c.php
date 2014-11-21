@@ -20,12 +20,12 @@ class Transaction_c extends CI_Controller {
 
   function history($user_id){
     $this->isLogin();
-    $data['transactions'] = $this->transaction_model->getTransaction($user_id);
+    $data['transactions'] = $this->transaction_m->getTransaction($user_id);
     $this->load->view('history',$data);
   }
   function feedback($transactionID){
     //$this->isLogin();
-    $data['transaction'] = $this->transaction_model->getTransactionDetail($transaction_id);
+    $data['transaction'] = $this->transaction_m->getTransactionDetail($transaction_id);
     $session_data = $this->session->userdata('logged_in');
     $data['user_id']= $session_data['user_id'];
     $this->load->library('form_validation');
@@ -45,7 +45,7 @@ class Transaction_c extends CI_Controller {
       $score = set_value('score');
       $feedback = set_value('feedback');
       // run insert model to write data to db
-      if ($this->transaction_model->saveFeedback($transactionID,$user_id,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
+      if ($this->transaction_m->saveFeedback($transactionID,$user_id,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
       {
         $this->session->set_flashdata("message","Feedback saved!");
         redirect('transaction/history/'.$user_id); 
@@ -58,8 +58,8 @@ class Transaction_c extends CI_Controller {
     }
   }
   function updateStatus($transaction_id){
-    $transaction = $this->transaction_model->getTransactionDetail($transaction_id);
-    $product = $this->product_model->getDetail($transaction->product_id);
+    $transaction = $this->transaction_m->getTransactionDetail($transaction_id);
+    $product = $this->product_m->getDetail($transaction->product_id);
     $data['productName']=$product->name;
     $this->load->library('form_validation');
     $this->form_validation->set_rules('status', 'Status', 'required|max_length[30]|xss_clean');      
@@ -76,7 +76,7 @@ class Transaction_c extends CI_Controller {
       // $points = set_value('points');
       // $comment = set_value('comment');
       // run insert model to write data to db
-      $temp=$this->transaction_model->updateStatus($transaction_id,$status,$status_detail);
+      $temp=$this->transaction_m->updateStatus($transaction_id,$status,$status_detail);
       if ($temp == true) // the information has therefore been successfully saved in the db
       {
         $this->session->set_flashdata("message","Status updated!");
@@ -91,8 +91,8 @@ class Transaction_c extends CI_Controller {
   }
   function viewTransactionDetail($transaction_id){
     $session_data = $this->session->userdata('logged_in');
-    $data['transaction'] = $this->transaction_model->getTransactionDetail($transaction_id);
-    $data['product'] = $this->product_model->getDetail($data['transaction']->product_id);
+    $data['transaction'] = $this->transaction_m->getTransactionDetail($transaction_id);
+    $data['product'] = $this->product_m->getDetail($data['transaction']->product_id);
     $this->load->view('transaction_detail',$data);
   }
   function isLogin(){

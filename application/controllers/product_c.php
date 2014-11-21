@@ -14,7 +14,7 @@ class Product_c extends CI_Controller {
   function index()
   {
     //This method will have the credentials validation
-    $data['products'] = $this->product_model->allProduct();
+    $data['products'] = $this->product_m->allProduct();
     $this->load->view('product.html',$data);
   }
   function register()
@@ -22,11 +22,11 @@ class Product_c extends CI_Controller {
     redirect('member_c/createMember');
   }
   function search($searchWord){
-    $data['products'] = $this->product_model->search($searchWord);
+    $data['products'] = $this->product_m->search($searchWord);
     $this->load->view('product.html',$data);
   }
   function viewProductDetail($product_id){
-    $data['product'] = $this->product_model->viewProductDetail($product_id);
+    $data['product'] = $this->product_m->viewProductDetail($product_id);
     $this->load->view('product_detail.html',$data);
   }
   function newProduct(){
@@ -97,13 +97,13 @@ class Product_c extends CI_Controller {
 
       // run insert model to write data to db
       if($type == 1){ // direct product
-        $product_id=$this->product_model->newDirectProduct($name,$image,$brand,
+        $product_id=$this->product_m->newDirectProduct($name,$image,$brand,
           $model,$price,$additional_info,$capacity,$size,$property,
           $defect,$quality,$payment,$return_product,$return_fee,
           $packaging,$delevery_fee,$delivry_confirmation,$tax,$quantity,$data['user_id']);
       }
       if($type == 2){ // bidding
-        $product_id=$this->product_model->newBiddingProduct($name,$image,$brand,
+        $product_id=$this->product_m->newBiddingProduct($name,$image,$brand,
           $model,$price,$additional_info,$capacity,$size,$property,
           $defect,$quality,$payment,$return_product,$return_fee,
           $packaging,$delevery_fee,$delivry_confirmation,$tax,$end_datetime,
@@ -150,7 +150,7 @@ class Product_c extends CI_Controller {
     $this->form_validation->set_rules('quantity', 'quantity', 'trim');
 
     $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
-    $data['product'] = $this->product_model->getDetail($product_id);
+    $data['product'] = $this->product_m->getDetail($product_id);
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('editDirectProduct_form.html',$data);
@@ -182,7 +182,7 @@ class Product_c extends CI_Controller {
       );
 
       // run insert model to write data to db
-        $result=$this->product_model->editDirectProduct($newProduct);
+        $result=$this->product_m->editDirectProduct($newProduct);
       
       if ($result!= null) // the information has therefore been successfully saved in the db
       {
@@ -229,7 +229,7 @@ class Product_c extends CI_Controller {
     $this->form_validation->set_rules('bit_increment','bit_increment','');
 
     $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
-    $data['product'] = $this->product_model->getDetail($product_id);
+    $data['product'] = $this->product_m->getDetail($product_id);
 
     if($this->form_validation->run() == FALSE)
     {
@@ -267,7 +267,7 @@ class Product_c extends CI_Controller {
       
 
       // run insert model to write data to db
-        $product_id=$this->product_model->newBiddingProduct($newProduct);
+        $product_id=$this->product_m->newBiddingProduct($newProduct);
       
       if ($product_id!= null) // the information has therefore been successfully saved in the db
       {
@@ -286,7 +286,7 @@ class Product_c extends CI_Controller {
   }
   function deleteProduct($product_id){
     $session_data = $this->session->userdata('logged_in');
-    $temp = $this->product_model->deleteProduct($session_data['user_id'],$product_id);
+    $temp = $this->product_m->deleteProduct($session_data['user_id'],$product_id);
     if($temp){
       $this->session->set_flashdata("message","Product was deleted");
     }else{
