@@ -22,6 +22,7 @@ class Transaction_c extends CI_Controller {
     $this->isLogin();
     $data['transactions'] = $this->transaction_m->getTransaction($user_id);
     $this->load->view('history',$data);
+        $this->loac->view('footer.html');
   }
   function feedback($transactionID){
     //$this->isLogin();
@@ -39,6 +40,7 @@ class Transaction_c extends CI_Controller {
 
       $data['transactionID']= $transactionID;
       $this->load->view('feedback_form',$data);
+        $this->loac->view('footer.html');
     }
     else
     {
@@ -70,6 +72,7 @@ class Transaction_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('update_status_form',$data);
+        $this->loac->view('footer.html');
     }
     else
     {
@@ -81,6 +84,7 @@ class Transaction_c extends CI_Controller {
       {
         $this->session->set_flashdata("message","Status updated!");
         redirect('transaction/viewTransactionDetail/'.$transaction_id); 
+        $this->loac->view('footer.html');
       }
       else
       {
@@ -94,6 +98,7 @@ class Transaction_c extends CI_Controller {
     $data['transaction'] = $this->transaction_m->getTransactionDetail($transaction_id);
     $data['product'] = $this->product_m->getDetail($data['transaction']->product_id);
     $this->load->view('transaction_detail',$data);
+        $this->loac->view('footer.html');
   }
   function isLogin(){
     if($this->session->userdata('logged_in')){
