@@ -12,12 +12,13 @@
 	<title>DUMBOBAY - shopping area</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="assets/css/bootstrap.css" rel="stylesheet">
-	<link href="assets/css/dumbobaycss.css" rel="stylesheet">
-	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
-	<!-- Custom styles for this template -->
-	<link href="assets/css/main.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
+
 
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,13 +39,13 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><img src="assets/img/dumbobay-logo-sm.png"></a>
+				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png");?></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="index.html">HOME</a></li>
-					<li><a href="signin.html">SIGN IN</a></li>
-					<li><a href="signup.html">SIGN UP</a></li>
+					<li><a href="home_c">HOME</a></li>
+					<li><a href="home_c/login">SIGN IN</a></li>
+					<li><a href="home_c/register">SIGN UP</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -67,7 +68,7 @@
 					<div class="row">
 						<!--<img src="assets/img/products.png" id="back" style="cursor:pointer">-->
 						<div class="col-lg-6 col-lg-push-4">
-							<img src="assets/img/price-tag-icon.png">
+							<?php img("assets/img/price-tag-icon.png");?>
 						</div>
 						<div class="col-lg-6" style="margin-top:20px;margin-left:-5%">
 							<h1>Products</h1>
@@ -93,82 +94,25 @@
 						<!-- END OF SEARCH DIRECT SALE-->
 						<br>
 						<div class="productcontainer">
-							<hr>
-							<div class="row">
-								<div class="col-lg-4 centered productimg"> 
-									<img src="assets/img/macbook.png">
-								</div>
-								<div class="col-lg-4"> 
-									<b>Macbook Air</b><br>
-									Price: 10,000 Baht<br>
-									Amount: 1 ea<br>
-									<a href="#">More info..</a>
-								</div>
-								<div class="col-lg-4 productbutton">
-									<a data-toggle="modal" data-target="#amountform" href="#amountform"><button type="button" class="btn btn-default">Add to Cart</button></a>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-lg-4 centered productimg"> 
-									<img src="assets/img/macbook.png">
-								</div>
-								<div class="col-lg-4"> 
-									<b>Macbook Air</b><br>
-									Price: 10,000 Baht<br>
-									Amount: 1 ea<br>
-									<a href="#">More info..</a>
-								</div>
-								<div class="col-lg-4 productbutton">
-									<a data-toggle="modal" data-target="#amountform" href="#amountform"><button type="button" class="btn btn-default">Add to Cart</button></a>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-lg-4 centered productimg"> 
-									<img src="assets/img/macbook.png">
-								</div>
-								<div class="col-lg-4"> 
-									<b>Macbook Air</b><br>
-									Price: 10,000 Baht<br>
-									Amount: 1 ea<br>
-									<a href="#">More info..</a>
-								</div>
-								<div class="col-lg-4 productbutton">
-									<a data-toggle="modal" data-target="#amountform" href="#amountform"><button type="button" class="btn btn-default">Add to Cart</button></a>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-lg-4 centered productimg"> 
-									<img src="assets/img/macbook.png">
-								</div>
-								<div class="col-lg-4"> 
-									<b>Macbook Air</b><br>
-									Price: 10,000 Baht<br>
-									Amount: 1 ea<br>
-									<a href="#">More info..</a>
-								</div>
-								<div class="col-lg-4 productbutton">
-									<a data-toggle="modal" data-target="#amountform" href="#amountform"><button type="button" class="btn btn-default">Add to Cart</button></a>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-lg-4 centered productimg"> 
-									<img src="assets/img/macbook.png">
-								</div>
-								<div class="col-lg-4"> 
-									<b>Macbook Air</b><br>
-									Price: 10,000 Baht<br>
-									Amount: 1 ea<br>
-									<a href="#">More info..</a>
-								</div>
-								<div class="col-lg-4 productbutton">
-									<a data-toggle="modal" data-target="#amountform" href="#amountform"><button type="button" class="btn btn-default">Add to Cart</button></a>
-								</div>
-							</div>
-							<hr>
+							<?php 
+								foreach($product){
+								echo "<hr>";
+								echo "<div class=\"row\">";
+									echo "<div class=\"col-lg-4 centered productimg\">";
+										img("assets/img/macbook.png");
+									echo "</div>";
+									echo "<div class=\"col-lg-4\">";
+										echo "<b>".$product=>$name."</b><br>";
+										echo "Price: ".$product=>$price." Baht<br>";
+										echo "Amount: ".$product=>$amount." ea<br>"
+										echo "<a href= \"product_c/viewProductDetail/".$product=>$id."\" >More info..</a>";
+									echo "</div>";
+									echo "<div class=\"col-lg-4 productbutton\">"
+										echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$product=>$id."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
+									echo "</div>";
+								echo "</div>";
+								}					
+							?>
 						</div>
 					</div><!-- col-lg-6 -->
 					<!-- END OF DIRECT SALE ================================================ -->
@@ -189,55 +133,25 @@
 						<!-- END OF SEARCH AUCTION-->
 						<br>
 						<div class="productcontainer">
-							<hr>
-							<div class="row">
-								<div class="col-lg-4 centered productimg"> 
-									<img src="assets/img/macbook.png">
-								</div>
-								<div class="col-lg-4"> 
-									<b>Macbook Air</b><br>
-									Max bid: 12,500 Baht<br>
-									Due date: 12 Dec 2014<br>
-									<a href="#">More info..</a>
-								</div>
-								<div class="col-lg-4 centered auctionbutton">
-									<p>time left: 0:02:07</p>
-									<a data-toggle="modal" data-target="#bidform" href="#bidform"><button type="button" class="btn btn-default">Add to Watch List</button></a>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-lg-4 centered productimg"> 
-									<img src="assets/img/macbook.png">
-								</div>
-								<div class="col-lg-4"> 
-									<b>Macbook Air</b><br>
-									Max bid: 3,500 Baht<br>
-									Due date: 12 Dec 2014<br>
-									<a href="#">More info..</a>
-								</div>
-								<div class="col-lg-4 centered auctionbutton">
-									<p>time left: 0:12:42</p>
-									<button type="button" class="btn btn-default">Add to Watch List</button>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-lg-4 centered productimg"> 
-									<img src="assets/img/macbook.png">
-								</div>
-								<div class="col-lg-4"> 
-									<b>Macbook Air</b><br>
-									Max bid: 4,500 Baht<br>
-									Due date: 12 Dec 2014<br>
-									<a href="#">More info..</a>
-								</div>
-								<div class="col-lg-4 centered auctionbutton">
-									<p>time left: 1:01:17</p>
-									<button type="button" class="btn btn-default">Add to Watch List</button>
-								</div>
-							</div>
-							<hr>
+							<?php
+							echo "<hr>";
+							echo"<div class=\"row\">";
+								echo "<div class=\"col-lg-4 centered productimg\">"; 
+									img("assets/img/macbook.png");
+								echo "</div>"
+								echo "<div class=\"col-lg-4\">";
+									echo "<b>".$product=>$name."</b><br>";
+									echo "Current bid: ".$product=>$current_price."Baht<br>";
+									echo "Due date: ".$product=>$end_Date."<br>";
+									echo "<a href=\"product_c/ciewProductDetail/".$product=>$id."\">More info..</a>\"";
+								echo "</div>";
+								echo "<div class=\"col-lg-4 centered auctionbutton\">";
+									echo "<p>time left: "."TIME LEFT"."</p>";									
+									echo"<a data-toggle=\"modal\" data-target=\"#bidform\" href=\"#bidform\"><button type=\"button\" class=\"btn btn-default\">Add to Watch List</button></a>";
+								echo "</div>";
+							echo "</div>";
+							?>
+							
 						</div>
 					</div>
 					<!-- END OF AUCTION ================================================ -->
@@ -391,8 +305,8 @@
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src=<?echo base_url("?>assets/js/bootstrap.min.js");?>></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 </body>
