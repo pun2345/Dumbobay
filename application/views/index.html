@@ -11,12 +11,12 @@
 	<title>DUMBOBAY - shopping area</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="assets/css/bootstrap.css" rel="stylesheet">
-	<link href="assets/css/dumbobaycss.css" rel="stylesheet">
-	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+	<link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+	<link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-	<link href="assets/css/main.css" rel="stylesheet">
+	<link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
 
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,7 +37,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><img src="assets/img/dumbobay-logo-sm.png"></a>
+				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png"); ?></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -73,10 +73,10 @@
 		<div class="container">
 			<div class="row">
 			<div class="col-md-6 col-md-push-2">
-				<img src="assets/img/DumboBay-Logo-b.png">
+				<?php echo img("assets/img/DumboBay-Logo-b.png");//<img src="assets/img/DumboBay-Logo-b.png">?>
 			</div>
 			<div class="col-md-6 col-md-push-2">
-				<img src="assets/img/Frappe-Logo-bg-sm.png">
+				<?php echo img("assets/img/Frappe-Logo-bg-sm.png");//<img src="assets/img/Frappe-Logo-bg-sm.png">?>
 			</div>
 			</div><!-- row -->
 		</div><!-- container -->
@@ -130,7 +130,7 @@
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src=<?echo base_url("?>assets/js/bootstrap.min.js");?>></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
