@@ -31,11 +31,11 @@
 		        $form_data = array( 'username' => set_value('username'),
 		        					'password' => set_value('password'),
 		                            'firstname' => set_value('firstname'),
-		                            'lastname' => set_value('lastname')
-		                            'address' => set_value('address')
-		                            'telephone' => set_value('telephone')
-		                            'password' => set_value('password')
-		                            'email' => set_value('email')
+		                            'lastname' => set_value('lastname'),
+		                            'address' => set_value('address'),
+		                            'telephone' => set_value('telephone'),
+		                            'password' => set_value('password'),
+		                            'email' => set_value('email'),
 		                            'type' => set_value('type'));
 			}
 		    if ($this->member_m->checkMember($form_data['username'],$form_data['email'])) == TRUE) // the information has therefore been successfully saved in the db
@@ -51,12 +51,12 @@
 		    }
 		}
 
-		function confirmMember($userID){
+		function confirmMember($user_id){
 
 		}
 
-		function editProfile($userID){
-			$data['member'] = $this->member_m->getMemberDetail($userID);
+		function editProfile($user_id){
+			$data['member'] = $this->member_m->getMemberDetail($user_id);
 			$member = $data['member']
     		$this->load->library('form_validation');
 			$this->load->view('edit_profile_form.html/',$data);
@@ -74,10 +74,10 @@
 	        {
 		        $form_data = array( 'password' => set_value('password'),
 		                            'firstname' => set_value('firstname'),
-		                            'lastname' => set_value('lastname')
-		                            'address' => set_value('address')
-		                            'telephone' => set_value('telephone')
-		                            'password' => set_value('password')
+		                            'lastname' => set_value('lastname'),
+		                            'address' => set_value('address'),
+		                            'telephone' => set_value('telephone'),
+		                            'password' => set_value('password'),
 		                            'email' => set_value('email'));
 			    $member['password'] = $form_data['password'];
 			    $member['firstname'] = $form_data['$firstname'];
@@ -100,8 +100,8 @@
 		    }
 		}
 
-		function memberDetail($userID){
-			$data['member'] = $this->member_m->getMemberDetail($userID);
+		function memberDetail($user_id){
+			$data['member'] = $this->member_m->getMemberDetail($user_id);
 			$this->load->view('member_detail.html',$data);
 		}
 
