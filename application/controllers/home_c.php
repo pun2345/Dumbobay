@@ -7,6 +7,7 @@ class Home_c extends CI_Controller {
   {
     parent::__construct();
     $this->load->helper("html");
+    $this->load->helper('html');
     $this->load->database();
     $this->load->model('member_m');
   }

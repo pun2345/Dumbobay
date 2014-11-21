@@ -7,6 +7,7 @@ class Transaction_c extends CI_Controller {
     parent::__construct();
     $this->load->library('form_validation');
     $this->load->database();
+    $this->load->helper('html');
     $this->load->helper('form');
     $this->load->model('transaction_m');
     $this->load->model('product_m');
@@ -44,8 +45,8 @@ class Transaction_c extends CI_Controller {
     }
     else
     {
-      $score = set_value('score');
-      $feedback = set_value('feedback');
+      $score = $this->input->post('score');
+      $feedback = $this->input->post('feedback');
       // run insert model to write data to db
       if ($this->transaction_m->saveFeedback($transactionID,$user_id,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
       {
@@ -76,11 +77,12 @@ class Transaction_c extends CI_Controller {
     }
     else
     {
-      // $points = set_value('points');
-      // $comment = set_value('comment');
+      
+      // $points = $this->input->post('points');
+      // $comment = $this->input->post('comment');
       // run insert model to write data to db
       $temp=$this->transaction_m->updateStatus($transaction_id,$status,$status_detail);
-      if ($temp == true) // the information has therefore been successfully saved in the db
+      if ($temp == "true") // the information has therefore been successfully saved in the db
       {
         $this->session->set_flashdata("message","Status updated!");
         redirect('transaction/viewTransactionDetail/'.$transaction_id); 

@@ -15,6 +15,7 @@ Class message_m extends CI_Model
 		);
 		 $this->db->trans_start();
    		 $this->db->insert('message',$data);
+   		 $this->db->trans_complete();
    		 return $this->db->insert_id();
 		}
 
@@ -25,13 +26,13 @@ Class message_m extends CI_Model
 			return $this->db->query("select * from Message where Message_ID = $message_id");
 		}
 		function deleteMessage($message_id){
+			$this->db->trans_start();
 			$this->db->delete('Message', array('Message_ID'=>$message_id));
-			echo $this->db->affected_rows();
+			$this->db->trans_complete();
+			// echo $this->db->affected_rows();
 			if ($this->db->affected_rows() > 0){
-				echo "== true";
             	return "true";
             }else{
-            	echo "== false";
         		return "false";
         	}
 		}
