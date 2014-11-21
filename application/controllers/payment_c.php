@@ -15,22 +15,32 @@ class Payment_c extends CI_Controller {
   function index($price)
   {
     //This method will have the credentials validation
-    $data['amount']=$price;
+    $data['price']=$price;
+    //$transaction_ids = $this->get_flashdata("cart");
+    $transaction_ids[] = 1;
+    $transaction_ids[] = 2;
+    $transaction_ids[] = 3;
+    //
+    //$data['products'] = $this->get_flashdata("cart2");
+    $product['name'] = 'testProduct';
+    $product['price'] = 50;
+    $products[]=$product;
+    $data['products'] = $products;
+    $this->load->view('payment_view',$data);
     $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('credit', 'credit', 'trim|required|xss_clean');
-    $this->form_validation->set_rules('password', 'password', 'trim|required|xss_clean');
-  
+    $this->form_validation->set_rules('visano', 'visano', 'trim|required|xss_clean');
+    $this->form_validation->set_rules('visapw', 'visapw', 'trim|required|xss_clean');
+    $this->form_validation->set_rules('sendaddress', 'sendaddress', 'trim|required|xss_clean');  
+
     if($this->form_validation->run() == FALSE)
     {
       //Field validation failed.  User redirected to login page
-      $this->session->keep_flashdata("cart"); /////check again
       $this->load->view('payment_view',$data);
     }
     else
     {
       //Go to private area
-      $transaction_ids = $this->get_flashdata("cart");
       foreach ($transaction_ids as $transaction_id) {
         $this->transaction_m->updateStatus($transaction_id,"already Paid","");
       }
