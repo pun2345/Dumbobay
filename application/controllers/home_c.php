@@ -7,6 +7,7 @@ class Home_c extends CI_Controller {
   {
     parent::__construct();
     $this->load->helper("html");
+    $this->load->helper('html');
     $this->load->database();
     $this->load->model('member_m');
   }
@@ -20,20 +21,20 @@ class Home_c extends CI_Controller {
       $user_type = $this->member_m->checkUserType($session_data['user_id']);
       if($user_type == 1){
         $this->load->view('admin_home.html',$data);
-        $this->loac->view('footer.html');
+        $this->load->view('footer.html');
       }elseif($user_type == 2){
         $this->load->view('buyer_home.html',$data);
-        $this->loac->view('footer.html');
+        $this->load->view('footer.html');
       }elseif($user_type == 3){
         $this->load->view('seller_home.html',$data);
-        $this->loac->view('footer.html');
+        $this->load->view('footer.html');
       }
     }
     else
     {
       //If no session, redirect to login page
       $this->load->view('index.html');
-      $this->loac->view('footer.html');
+      $this->load->view('footer.html');
     }
   }
   function product(){

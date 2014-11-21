@@ -12,6 +12,7 @@ class View_test extends CI_Controller {
 
   function index()
   {
-    $this->load->view('ใส่ชื่อไฟล์.html');
+    $this->load->view('signin.html');
   }
+}
 ?>
