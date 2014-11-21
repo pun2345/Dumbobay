@@ -3,6 +3,7 @@
 
 		function __construct(){
   		    parent::__construct();
+    $this->load->helper('html');
 			$this->load->database();
 			$this->load->model('member_m');
 		}
@@ -13,6 +14,7 @@
 
 		function createMember(){
 			$this->load->view('registration_form.html');
+			//$this->load->view('registration_form.html');
 			$this->load->library('form_validation');
 	        $this->form_validation->set_rules('username', 'username', 'require|css_clean|max_length[20]');
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
@@ -37,6 +39,17 @@
 		                            'password' => set_value('password'),
 		                            'email' => set_value('email'),
 		                            'type' => set_value('type'));
+=======
+		        $form_data = array( 'username' => $this->input->post('username'),
+		        					'password' => $this->input->post('password'),
+		                            'firstname' => $this->input->post('firstname'),
+		                            'lastname' => $this->input->post('lastname'),
+		                            'address' => $this->input->post('address'),
+		                            'telephone' => $this->input->post('telephone'),
+		                            'password' => $this->input->post('password'),
+		                            'email' => $this->input->post('email'),
+		                            'type' => $this->input->post('type'));
+>>>>>>> 4f243f98d6343d8e6b082ade48d6457f29cc0270
 			}
 		    if ($this->member_m->checkMember($form_data['username'],$form_data['email'])) == TRUE) // the information has therefore been successfully saved in the db
 		    {             

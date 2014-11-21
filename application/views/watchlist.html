@@ -11,13 +11,12 @@
     <title>DUMBOBAY - shopping area</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/dumbobaycss.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+  <link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+  <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+  <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
-
+  <!-- Custom styles for this template -->
+  <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -44,7 +43,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><img src="assets/img/dumbobay-logo-sm.png"></a>
+          <a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png"); ?></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -89,11 +88,13 @@
           </div>
 				</div>
         
-        <div class="col-md-10 col-md-offset-1 border-shadow border-radius" style="background-color:white">
+        <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
           <ol style="list-style-type:none; padding-left: 0px">
             <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
               <div class="row">
-                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-danger">Auto</button>
+                </div>
                 <div class="col-md-5">
                   <input type="text" class="form-control" id="inputDirectSaleSearch" placeholder="Search...">
                 </div>
@@ -116,7 +117,51 @@
                 <div class="col-md-5">
                   <div class="row" style="padding-top:10px">
                     <div class="col-md-12">
-                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr
+                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>-
+                    </div>
+                  </div>
+                  <div class="row">
+                    <br>
+                    <div class="col-md-2">
+                      <button type="button" class="btn btn-default">Bid</button>
+                    </div>
+                    <div class="col-md-10">
+                      
+                      <div class="row">
+                        <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
+
+                        <div class="form-group col-md-7" style="left:0%; padding-right:0px">
+                          <div class="input-group">
+                
+                            <input type="text" class="form-control"  placeholder="Enter max bid">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Bid</button>
+                            </span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
+              <div class="row">
+                <div class="col-md-3">
+                  <img src="assets/img/iphone6.jpg" width="185" height="104">
+                </div>
+                <div class="col-md-4">
+                  <h3>iPhone 6</h3>
+                  <strong>Due date: </strong>12 Dec 14<br>
+                  <a href="#">more info...</a>
+                </div>
+                <div class="col-md-5">
+                  <div class="row" style="padding-top:10px">
+                    <div class="col-md-12">
+                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>auto<br><strong>your max bid: </strong>200 bath
                     </div>
                   </div>
                   <div class="row">
@@ -127,12 +172,17 @@
                     <div class="col-md-10">
                       <div class="row">
                         <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
-                        <div class="col-md-5" style="left:0%; padding-right:0px">
-                          <input style="width:100%;padding-right:20px" type="text" class="form-control" id="inputEmail" placeholder="Enter max bid" >
+
+                        <div class="form-group col-md-7" style="left:0%; padding-right:0px">
+                          <div class="input-group">
+                
+                            <input type="text" class="form-control"  placeholder="Enter max bid">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Bid</button>
+                            </span>
+                          </div>
                         </div>
-                        <div style="float:left">
-                          <button type="button" class="btn btn-default">Bid</button>
-                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -153,7 +203,7 @@
                 <div class="col-md-5">
                   <div class="row" style="padding-top:10px">
                     <div class="col-md-12">
-                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr
+                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>-
                     </div>
                   </div>
                   <div class="row">
@@ -162,15 +212,22 @@
                       <button type="button" class="btn btn-default">Bid</button>
                     </div>
                     <div class="col-md-10">
+                      
                       <div class="row">
                         <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
-                        <div class="col-md-5" style="left:0%; padding-right:0px">
-                          <input style="width:100%;padding-right:20px" type="text" class="form-control" id="inputEmail" placeholder="Enter max bid" >
+
+                        <div class="form-group col-md-7" style="left:0%; padding-right:0px">
+                          <div class="input-group">
+                
+                            <input type="text" class="form-control"  placeholder="Enter max bid">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Bid</button>
+                            </span>
+                          </div>
                         </div>
-                        <div style="float:left">
-                          <button type="button" class="btn btn-default">Bid</button>
-                        </div>
+
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -190,7 +247,7 @@
                 <div class="col-md-5">
                   <div class="row" style="padding-top:10px">
                     <div class="col-md-12">
-                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr
+                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>-
                     </div>
                   </div>
                   <div class="row">
@@ -199,51 +256,20 @@
                       <button type="button" class="btn btn-default">Bid</button>
                     </div>
                     <div class="col-md-10">
+                      
                       <div class="row">
                         <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
-                        <div class="col-md-5" style="left:0%; padding-right:0px">
-                          <input style="width:100%;padding-right:20px" type="text" class="form-control" id="inputEmail" placeholder="Enter max bid" >
-                        </div>
-                        <div style="float:left">
-                          <button type="button" class="btn btn-default">Bid</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
 
-            <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
-              <div class="row">
-                <div class="col-md-3">
-                  <img src="assets/img/iphone6.jpg" width="185" height="104">
-                </div>
-                <div class="col-md-4">
-                  <h3>iPhone 6</h3>
-                  <strong>Due date: </strong>12 Dec 14<br>
-                  <a href="#">more info...</a>
-                </div>
-                <div class="col-md-5">
-                  <div class="row" style="padding-top:10px">
-                    <div class="col-md-12">
-                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr
-                    </div>
-                  </div>
-                  <div class="row">
-                    <br>
-                    <div class="col-md-2">
-                      <button type="button" class="btn btn-default">Bid</button>
-                    </div>
-                    <div class="col-md-10">
-                      <div class="row">
-                        <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
-                        <div class="col-md-5" style="left:0%; padding-right:0px">
-                          <input style="width:100%;padding-right:20px" type="text" class="form-control" id="inputEmail" placeholder="Enter max bid" >
+                        <div class="form-group col-md-7" style="left:0%; padding-right:0px">
+                          <div class="input-group">
+                
+                            <input type="text" class="form-control"  placeholder="Enter max bid">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Bid</button>
+                            </span>
+                          </div>
                         </div>
-                        <div style="float:left">
-                          <button type="button" class="btn btn-default">Bid</button>
-                        </div>
+
                       </div>
                       
                     </div>

@@ -11,12 +11,12 @@
 	<title>DUMBOBAY - shopping area</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="assets/css/bootstrap.css" rel="stylesheet">
-	<link href="assets/css/dumbobaycss.css" rel="stylesheet">
-	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+	<link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+	<link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-	<link href="assets/css/main.css" rel="stylesheet">
+	<link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
 	<style type="text/css">
 		.signin{
 			width: 70%;
@@ -50,8 +50,8 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="index.html">HOME</a></li>
-					<li class="active"><a href="signin.html">SIGN IN</a></li>
-					<li><a href="services.html">SIGN UP</a></li>
+					<li><a href="signin.html">SIGN IN</a></li>
+					<li class="active"><a href="signup.html">SIGN UP</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -66,32 +66,96 @@
 	</div><!-- headerwrap -->
 	<!-- ======================================================================= -->
 	<!-- Log in form -->
-	<div class="signin">
+	
+	<div class="container">
 		<form class="form-horizontal" >
-			<div class="row centered">
+			<div>
 				<fieldset>
-					<legend><h1>SIGN UP</h1></legend>
-					<div align="center">
+					<legend align="center" style="padding-top:10px"><h1>SIGN UP</h1></legend>
+					<div class="col-md-10 col-md-offset-1 border-radius" style="padding-top:20px;margin-bottom:25px">
+
 						<div class="form-group">
-							<label style="left:20%" for="inputEmail" class="col-sm-2 control-label">Username</label>
-							<div class="col-sm-10">
-								<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" placeholder="Put your username in here." >
+							<label class="col-md-3 control-label" align="right">Username</label>
+							<div class="col-md-9">
+								<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" placeholder="Put your username here." >
 							</div>
 						</div>
 						<div class="form-group">
-							<label style="left:20%" for="inputPassword" class="col-sm-2 control-label">Password</label>
-							<div class="col-sm-10">
+							<label class="col-md-3 control-label" align="right">Password</label>
+							<div class="col-md-9">
 								<input style="width:50%" type="password" class="form-control" size="20" id="password" name="password" placeholder="********">
 							</div>
 						</div>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						<a href="#"><button type="submit" value="login" class="btn btn-danger">Sign In</button></a>
+						<div class="form-group">
+							<label class="col-md-3 control-label" align="right">Re-password</label>
+							<div class="col-md-9">
+								<input style="width:50%" type="password" class="form-control" size="20" id="password" name="password" placeholder="********">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" align="right">Name</label>
+							<div class="col-md-9">
+								<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" placeholder="Put your name here." >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" align="right">Surname</label>
+							<div class="col-md-9">
+								<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" placeholder="Put your surname here." >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" align="right">Address</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" size="20" id="username" name="username" placeholder="Put your address here." >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" align="right">E-mail</label>
+							<div class="col-md-9">
+								<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" placeholder="Put your e-mail here." >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" align="right">Tel.</label>
+							<div class="col-md-9">
+								<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" placeholder="Put your telephone number here." >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" align="right">User Type</label>
+							<div class="col-md-9">
+								<div class="radio">
+									<label>
+										<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+										Buyer
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										Seller
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+
+							</div>
+							<div class="col-md-9">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+								<a href="#"><button type="submit" value="login" class="btn btn-warning">Submit</button></a>
+							</div>
+						</div>
+						
 					</div>
 
 				</fieldset>
 			</div>
 		</form>
 	</div>
+
 	<!-- FOOTER -->
 	<div id="f">
 		<div class="container">
