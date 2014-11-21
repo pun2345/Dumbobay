@@ -6,6 +6,7 @@ class Payment_c extends CI_Controller {
   {
     parent::__construct();
     $this->load->library('form_validation');
+    $this->load->helper('html');
     $this->load->database();
     $this->load->helper('form');
     $this->load->model('transaction_m');

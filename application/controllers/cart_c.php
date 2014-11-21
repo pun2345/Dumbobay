@@ -7,6 +7,7 @@ class Cart_c extends CI_Controller {
     parent::__construct();
     $this->load->library('form_validation');
     $this->load->database();
+    $this->load->helper('html');
     $this->load->helper('form');
     $this->load->model('cart_m');
     $this->load->model('transaction_m');
@@ -25,7 +26,7 @@ class Cart_c extends CI_Controller {
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
     $temp = $this->cart_m->saveToCart($session_data['user_id'],$product_id,$amount);
-    if($temp){
+    if($temp=="true"){
       $this->session->set_flashdata("message","Product was added");
     }else{
     $this->session->set_flashdata("message","Added fail!");
@@ -36,7 +37,7 @@ class Cart_c extends CI_Controller {
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
     $temp = $this->cart_m->deleteFormCart($session_data['user_id'],$product_id);
-    if($temp){
+    if($temp=="true"){
       $this->session->set_flashdata("message","Product was deleted");
     }else{
     $this->session->set_flashdata("message","Deleted fail!");
@@ -47,7 +48,7 @@ class Cart_c extends CI_Controller {
      $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
     $temp = $this->cart_m->editAmount($session_data['user_id'],$product_id,$amount);
-    if($temp){
+    if($temp=="true"){
       $this->session->set_flashdata("message","Amount was changed");
     }else{
     $this->session->set_flashdata("message","Changing Amount fail!");

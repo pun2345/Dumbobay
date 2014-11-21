@@ -5,6 +5,7 @@ class Login_c extends CI_Controller {
   function __construct()
   {
     parent::__construct();
+    $this->load->helper('html');
 
     $this->load->database();
 
@@ -42,7 +43,7 @@ class Login_c extends CI_Controller {
     print_r($result);
     if($result)
     {
-      if($result->activated){ 
+      //if($result->activated){ 
         print_r("true");
         $sess_array = array();
         $sess_array = array(
@@ -52,10 +53,10 @@ class Login_c extends CI_Controller {
           $this->session->set_userdata('logged_in', $sess_array);
         
         return TRUE;
-      }else{
-        $this->form_validation->set_message('check_database', 'Please Activate your account first.');
-        return false;
-      }
+      //}else{
+        //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
+        //return false;
+      //}
     }
     else
     {
