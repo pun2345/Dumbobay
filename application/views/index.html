@@ -11,12 +11,12 @@
 	<title>DUMBOBAY - shopping area</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="assets/css/bootstrap.css" rel="stylesheet">
-	<link href="assets/css/dumbobaycss.css" rel="stylesheet">
-	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+	<link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+	<link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-	<link href="assets/css/main.css" rel="stylesheet">
+	<link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
 
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,14 +37,14 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><img src="assets/img/dumbobay-logo-sm.png"></a>
+				<a class="navbar-brand" href="home_c" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png"); ?></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="index.html">HOME</a></li>
+					<li class="active"><a href="home_c">HOME</a></li>
 					<!--<li><a data-toggle="modal" data-target="#myModal" href="#myModal" class="signin">SIGN IN</a></li>-->
-					<li><a href="signin.html">SIGN IN</a></li>
-					<li><a href="services.html">SIGN UP</a></li>
+					<li><a href="home_c/login">SIGN IN</a></li>
+					<li><a href="home_c/register">SIGN UP</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -56,32 +56,20 @@
 				<div class="col-lg-8 col-lg-offset-2">
 					<h1>Just let me <b>Shop</b> <br>and no one gets hurt.</h1>
 					<h2>- DumboBay -</h2>
-					<h2><a href="product.html" class="link-product"><b>> Products <</b></a></h2>
+					<h2><a href="home_c/product" class="link-product"><b>> Products <</b></a></h2>
 				</div>
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- headerwrap -->
 	<!-- ======================================================================= -->
+<<<<<<< HEAD
+
+=======
 <!-- 	<div class="container w">
 		<div class="row centered">
 			<img src="assets/img/DumboBay-Logo-b.png">
 		</div>row 
-	</div>container -->
-
-	<!-- FOOTER -->
-	<div id="f">
-		<div class="container">
-			<div class="row">
-			<div class="col-md-6 col-md-push-2">
-				<img src="assets/img/DumboBay-Logo-b.png">
-			</div>
-			<div class="col-md-6 col-md-push-2">
-				<img src="assets/img/Frappe-Logo-bg-sm.png">
-			</div>
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- Footer -->
-
+	</div>container --
 
 	<!-- MODAL FOR CONTACT 
 
@@ -130,7 +118,7 @@
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src=<?echo base_url("?>assets/js/bootstrap.min.js");?>></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
