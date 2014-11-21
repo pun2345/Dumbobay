@@ -12,15 +12,9 @@
 	<title>DUMBOBAY - shopping area</title>
 
 	<!-- Bootstrap core CSS -->
-<<<<<<< HEAD
 	<link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
     <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
     <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
-=======
-	<link href="/assets/css/bootstrap.css" rel="stylesheet">
-	<link href="assets/css/dumbobaycss.css" rel="stylesheet">
-	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
->>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
 
     <!-- Custom styles for this template -->
     <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
@@ -44,11 +38,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-<<<<<<< HEAD
 				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png"); ?></a>
-=======
-				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png");?></a>
->>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -109,7 +99,7 @@
 						<br>
 						<div class="productcontainer">
 							<?php 
-<<<<<<< HEAD
+
 								foreach($products as $product=>$row){
 								if($row['type']==1){
 									echo "<hr>";
@@ -131,26 +121,6 @@
 								}					
 							?>
 							<hr>
-=======
-								foreach($product){
-								echo "<hr>";
-								echo "<div class=\"row\">";
-									echo "<div class=\"col-lg-4 centered productimg\">";
-										img("assets/img/macbook.png");
-									echo "</div>";
-									echo "<div class=\"col-lg-4\">";
-										echo "<b>".$product=>$name."</b><br>";
-										echo "Price: ".$product=>$price." Baht<br>";
-										echo "Amount: ".$product=>$amount." ea<br>"
-										echo "<a href= \"product_c/viewProductDetail/".$product=>$id."\" >More info..</a>";
-									echo "</div>";
-									echo "<div class=\"col-lg-4 productbutton\">"
-										echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$product=>$id."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
-									echo "</div>";
-								echo "</div>";
-								}					
-							?>
->>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
 						</div>
 					</div><!-- col-lg-6 -->
 					<!-- END OF DIRECT SALE ================================================ -->
@@ -171,7 +141,6 @@
 						<!-- END OF SEARCH AUCTION-->
 						<br>
 						<div class="productcontainer">
-<<<<<<< HEAD
 							<?php 
 
 								foreach($products as $product=>$row){
@@ -196,27 +165,6 @@
 								}					
 							?>
 							<hr>
-=======
-							<?php
-							echo "<hr>";
-							echo"<div class=\"row\">";
-								echo "<div class=\"col-lg-4 centered productimg\">"; 
-									img("assets/img/macbook.png");
-								echo "</div>"
-								echo "<div class=\"col-lg-4\">";
-									echo "<b>".$product=>$name."</b><br>";
-									echo "Current bid: ".$product=>$current_price."Baht<br>";
-									echo "Due date: ".$product=>$end_Date."<br>";
-									echo "<a href=\"product_c/ciewProductDetail/".$product=>$id."\">More info..</a>\"";
-								echo "</div>";
-								echo "<div class=\"col-lg-4 centered auctionbutton\">";
-									echo "<p>time left: "."TIME LEFT"."</p>";									
-									echo"<a data-toggle=\"modal\" data-target=\"#bidform\" href=\"#bidform\"><button type=\"button\" class=\"btn btn-default\">Add to Watch List</button></a>";
-								echo "</div>";
-							echo "</div>";
-							?>
-							
->>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
 						</div>
 					</div>
 					<!-- END OF AUCTION ================================================ -->
