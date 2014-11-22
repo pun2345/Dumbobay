@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -11,12 +12,13 @@
 	<title>DUMBOBAY - shopping area</title>
 
 	<!-- Bootstrap core CSS -->
-  <link href="assets/css/bootstrap.css" rel="stylesheet">
-  <link href="assets/css/dumbobaycss.css" rel="stylesheet">
-  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="assets/css/main.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
+
 	<style type="text/css">
 		.control-label{
 			padding-top: 4px;
@@ -42,7 +44,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><img src="assets/img/dumbobay-logo-sm.png"></a>
+				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png"); ?></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -77,68 +79,74 @@
 						<h1>Payment</h1>
 					</legend>
 				</div>
-				
+				<!-- item list -->
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px;">
-						<div class="row">
-							<div class="col-md-9">
-								iPhone 6
-							</div>
-							<div class="col-md-3">
-								25,000 Baht
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-9">
-								Macbook Air
-							</div>
-							<div class="col-md-3">
-								95,000 Baht
-							</div>
-						</div>
+						<?php 
+						foreach ($products as $product=>$row){
+							echo '<div class="row">';
+							echo '<div class="col-md-9">';
+							echo $row['name'];
+							echo '</div>';
+							echo '<div class="col-md-3">';
+							echo $row['price'].'Baht';
+							echo '</div>';
+							echo '</div>';
+						}
+						?>
+
 						<hr>
 						<div class="row" style="margin-top:-20px">
 							<div class="col-md-9">
 								<h3>TOTAL</h3>
 							</div>
 							<div class="col-md-3">
-								<h3>120,000 Baht</h3>
+								<h3><?php echo $price; ?> Baht</h3>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px">
-						<div class="row form-group">
-							<label class="col-md-3 control-label" align="right">VISA No.</label>
-							<div class="col-md-9">
-								<input type="text" class="form-control" id="name" autofocus>
+				<?php echo validation_errors(); ?>
+				<?php echo form_open('payment_c/index/'.$price); ?>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px">
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">VISA No.</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="visano" name="visano" autofocus>
+								</div>
 							</div>
-						</div>
-						<div class="row form-group">
-							<label class="col-md-3 control-label" align="right">Password</label>
-							<div class="col-md-9">
-								<input type="password" class="form-control" id="surname" >
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">Password</label>
+								<div class="col-md-9">
+									<input type="password" class="form-control" id="visapw" name="visapw">
+								</div>
 							</div>
-						</div>
-						<div class="row form-group">
-							<label class="col-md-3 control-label" align="right">Send Address</label>
-							<div class="col-md-9">
-								<input type="text" class="form-control" id="address">
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">Send Address</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="sendaddress" name="sendaddress">
+								</div>
 							</div>
-						</div>
-						<div class="row form-group">
-							<div class="col-md-3" align="right">
-							
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">Expired Date</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="expireddate" name="expireddate">
+								</div>
 							</div>
-							<div class="col-md-9">
-								<a href="profile.html"><button type="submit" class="btn btn-default" >Cancel</button></a>
-								<button type="submit" class="btn btn-success" >Submit</button>
+							<div class="row form-group">
+								<div class="col-md-3" align="right">
+								
+								</div>
+								<div class="col-md-9">
+									<a href="cart.html"><button type="button" class="btn btn-default" >Cancel</button></a>
+									<button type="submit" value="Submit" class="btn btn-success" >Submit</button>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
+
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- headerwrap -->

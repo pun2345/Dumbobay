@@ -15,25 +15,65 @@ class Product_c extends CI_Controller {
   function index()
   {
     //This method will have the credentials validation
-    $data['products'] = $this->product_m->allProduct();
+    $page_num=1;
+    $data['products'] = $this->product_m->allProduct($page_num);
+    $data['type'] = 0;
+    if($this->session->userdata('logged_in'))
+    {
+      $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
+
+        $this->load->view('product.html',$data);
+        $this->load->view('footer.html');
+    }
+    else
+    {
+      //If no session, redirect to login page
+      $this->load->view('product.html',$data);
+      $this->load->view('footer.html');
+    }
+  }
+  function nextpage($page_num){
+     $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
+    $data['products'] = $this->product_m->allProduct($page_num);
     $this->load->view('product.html',$data);
+    $this->load->view('footer.html');
   }
   function register()
   {
     redirect('member_c/createMember');
   }
   function search($searchWord){
+
+     $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
     $data['products'] = $this->product_m->search($searchWord);
     $this->load->view('product.html',$data);
+    $this->load->view('footer.html');
   }
   function viewProductDetail($product_id){
-    $data['product'] = $this->product_m->viewProductDetail($product_id);
-    $this->load->view('product_detail.html',$data);
+
+     $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
+    $data['product'] = $this->product_m->getDetail($product_id);
+    $this->load->view('productDesc.html',$data);
+    $this->load->view('footer.html');
   }
   function newProduct(){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
-    $data['user_id']= $session_data['user_id'];
+    $data['user_id'] = $session_data['user_id'];
+    $data['username'] = $session_data['username'];
+    $data['type'] = $session_data['type'];
     $this->load->library('form_validation');
     $this->form_validation->set_rules('type', 'type', 'required');
     $this->form_validation->set_rules('name', 'name', 'trim|required|max_length[30]');      
@@ -62,6 +102,7 @@ class Product_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('newProduct_form.html',$data);
+    $this->load->view('footer.html');
     }
     else
     {
@@ -128,7 +169,9 @@ class Product_c extends CI_Controller {
   }
   function editDirectProduct($product_id){
     $session_data = $this->session->userdata('logged_in');
-    $data['user_id']= $session_data['user_id'];
+    $data['user_id'] = $session_data['user_id'];
+    $data['username'] = $session_data['username'];
+    $data['type'] = $session_data['type'];
     $this->load->library('form_validation');
     $this->form_validation->set_rules('name', 'name', 'trim|required|max_length[30]');      
     $this->form_validation->set_rules('image', 'image', 'trim|required|max_length[70]');
@@ -155,6 +198,7 @@ class Product_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('editDirectProduct_form.html',$data);
+    $this->load->view('footer.html');
     }
     else
     {
@@ -202,7 +246,9 @@ class Product_c extends CI_Controller {
   }
   function editBiddingProduct($product_id){
     $session_data = $this->session->userdata('logged_in');
-    $data['user_id']= $session_data['user_id'];
+    $data['user_id'] = $session_data['user_id'];
+    $data['username'] = $session_data['username'];
+    $data['type'] = $session_data['type'];
     $this->load->library('form_validation');
     $this->form_validation->set_rules('name', 'name', 'trim|required|max_length[30]');      
     $this->form_validation->set_rules('image', 'image', 'trim|required|max_length[70]');
@@ -235,6 +281,7 @@ class Product_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('editProduct_form.html',$data);
+    $this->load->view('footer.html');
     }
     else
     {
@@ -295,6 +342,21 @@ class Product_c extends CI_Controller {
     }
     redirect('home_c');
   }
+  function maxBiddingForm(){
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('maxbid', 'maxbid', 'trim|required');
+
+  }
+
+  function joinMaxBidding($product_id){
+
+  } 
+  function joinStepBidding($product_id){
+    redirect("bidding_c/initializeStepBidding/".$product_id);
+  }
+  
+  // redirect("bidding_c/initializeMaxBidding/"$product_id)
+  
   function isLogin(){
     if($this->session->userdata('logged_in')){
       return true;

@@ -11,13 +11,12 @@
     <title>DUMBOBAY - shopping area</title>
 
     <!-- Bootstrap core CSS -->
-  <link href="assets/css/bootstrap.css" rel="stylesheet">
-  <link href="assets/css/dumbobaycss.css" rel="stylesheet">
-  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
+    <!-- Custom styles for this template -->
+    <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -44,7 +43,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><img src="assets/img/dumbobay-logo-sm.png"></a>
+          <a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png"); ?></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -90,6 +89,7 @@
         <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white; padding-bottom: 20px">
           <ol style="list-style-type:none; padding-left: 0px ;padding-bottom: 0px">
 
+<<<<<<< HEAD
             <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
               <div class="row">
                 <div class="col-md-3">
@@ -241,6 +241,54 @@
                 </div>
               </div>
             </li>
+=======
+          <?php foreach($products->result() as $row)
+                {
+                  echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">';
+                    echo '<div class="row">';
+                      echo '<div class="col-md-3">';
+                        echo '<img src="'.$row->Image.'" width="185" height="104">';
+                      echo '</div>';
+                      echo '<div class="col-md-9" style="padding-bottom: 0px; padding-right:0px">';
+                        echo '<div>';
+                          echo '<div class="row col-md-12" style="padding-bottom: 0px; padding-right:0px">';
+                            echo '<div class="col-md-6">';
+                              echo '<h3>'.$row->Name.'</h3>';
+                            echo '</div>';
+                            echo '<div class="col-md-2" style="font-size: 13px; padding-top:27px">';
+                              echo $row->Price.' baht';
+                            echo '</div>';
+                            echo '<div class="col-md-1" style="padding-top:15px; padding-left:0px; padding-right:0px">';
+                            echo'<form name="form" action = "" method="get">';
+                              echo '<input style="width:100%; font-size: 12px; padding-right: 10px" type="text" class="form-control" name="'.$row->Product_ID.'"
+                              id="'.$row->Product_ID.'" placeholder="'.$row->Quantity.'" >';
+                              echo'</form>';
+                              echo'<a href="cart_c/editAmount/'.$row->Product_ID.
+                              '/'.$_GET[$row->Product_ID].'"><button type="button" class="btn btn-default"> Edit Amount </button></a>';
+                            echo '</div>';
+                            echo '<div class="col-md-3" style="font-size: 13px; padding-top:27px; padding-right:0px; padding-left:70px">';
+                              echo '2,000,000 bath';
+                            echo '</div>';
+                          echo '</div>';
+                          echo '<div class="row">';
+                            echo '<div class="row col-md-1">';
+                            echo '</div>';
+                            echo '<div class="row col-md-2">';
+                              echo '<a href="product_c/viewProductDetail/'.$row->Product_ID.'"">More info...</a>';
+                            echo '</div>';
+                            echo '<div class="row col-md-9">';
+                            echo '</div>';
+                            echo '<div class="row col-md-1" style="padding-right:0px;padding-left:0px">';
+                              echo '<a href="cart_c/deleteProduct/'.$row->Product_ID.'">remove</a>';
+                            echo '</div>';
+                          echo '</div>';
+                        echo '</div>';
+                      echo '</div>';
+                    echo '</div>';
+                  echo '</li>';
+                }
+              ?>
+>>>>>>> 9b9b99b7e67e5bc022c381bd5ee9f8a9dfe06572
             
           </ol>
           <div class="row" style="padding-bottom:0px">
@@ -251,32 +299,13 @@
             <div class="row col-md-9">
             </div>
             <div class="row col-md-1" style="padding-left:50px">
-              <button type="button" class="btn btn-default"> Check out </button>
+              <a href="cart_c/checkOut"><button type="button" class="btn btn-default"> Check out </button></a>
           </div>
           </div>
         </div>
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- headerwrap -->
-
-
-	<!-- FOOTER -->
-    <div id="f" style="margin-top:50px">
-      <div class="container">
-        <div class="row">
-        <div class="col-md-6 col-md-push-2">
-          <img src="assets/img/DumboBay-Logo-b.png">
-        </div>
-        <div class="col-md-6 col-md-push-2">
-          <img src="assets/img/Frappe-Logo-bg-sm.png">
-        </div>
-        </div><!-- row -->
-      </div><!-- container -->
-    </div><!-- Footer -->
-
-
-	
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

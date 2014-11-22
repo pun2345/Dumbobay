@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	class memeber_c extends CI_Controller {
+	class member_c extends CI_Controller {
 
 		function __construct(){
   		    parent::__construct();
     $this->load->helper('html');
-			$this->load->database();
+			// $this->load->database();
 			$this->load->model('member_m');
 		}
 
@@ -13,7 +13,7 @@
 		}
 
 		function createMember(){
-			//$this->load->view('registration_form.html');
+			$this->load->view('signup.html');
 			$this->load->library('form_validation');
 	        $this->form_validation->set_rules('username', 'username', 'require|css_clean|max_length[20]');
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
@@ -25,7 +25,7 @@
 	        $this->form_validation->set_rules('type','type','require');
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
-		        $this->load->view('edit_profile_form.html/',$data);
+		        $this->load->view('signup.html');
 		    }
       	    else // passed validation proceed to post success logic
 	        {
@@ -39,28 +39,27 @@
 		                            'email' => $this->input->post('email'),
 		                            'type' => $this->input->post('type'));
 			}
-		    if ($this->member_m->checkMember($form_data['username'],$form_data['email'])) == TRUE) // the information has therefore been successfully saved in the db
+		    if ($this->member_m->checkMember($form_data['username'],$form_data['email']) == 'true') // the information has therefore been successfully saved in the db
 		    {             
 		    	$this->member_m->createMember($formdata);
 		        $this->session->set_flashdata("message","Registration Completed");
-		        redirect('member_c/createMember');   // or whatever logic needs to occur
+		        redirect('home_c');   // or whatever logic needs to occur
 		    }
 		    else
 		    {
-		        $this->session->set_flashdata("message","Registration Failed");
-		        redirect('member_c/createMember');
+		        $this->session->set_flashdata("message","Registration Failed, Try Again");
+		        redirect(current_url());
 		    }
 		}
 
-		function confirmMember($userID){
-
+		function confirmMember($user_id){
+			$this->member_m->activateMember($user_id);
 		}
 
-		function editProfile($userID){
-			$data['member'] = $this->member_m->getMemberDetail($userID);
-			$member = $data['member']
+		function editProfile($user_id){
+			$data['member'] = $this->member_m->getMemberDetail($user_id);
+			$member = $data['member'];
     		$this->load->library('form_validation');
-			$this->load->view('edit_profile_form.html/',$data);
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
 	        $this->form_validation->set_rules('firstname', 'firstname', 'require|css_clean|max_length[20]');
 	        $this->form_validation->set_rules('lastname', 'lastname', 'require|css_clean|max_length[20]');
@@ -69,7 +68,7 @@
 	        $this->form_validation->set_rules('email', 'email', 'require|css_clean|max_length[25]');
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
-		        $this->load->view('edit_profile_form.html/',$data);
+		        $this->load->view('edit_profile_form.html');
 		    }
       	    else // passed validation proceed to post success logic
 	        {
@@ -89,21 +88,21 @@
 			    $member['email'] = $form_data['$email'];
 
 			}
-		    if ($this->member_m->editMemberDetail($member)) == TRUE) // the information has therefore been successfully saved in the db
+		    if ($this->member_m->editMemberDetail($member) == 'true') // the information has therefore been successfully saved in the db
 		    {             
 		        $this->session->set_flashdata("message","Profile edited");
-		        redirect('member_c/editProfile');   // or whatever logic needs to occur
+		        redirect(current_url());   // or whatever logic needs to occur
 		    }
 		    else
 		    {
 		        $this->session->set_flashdata("message","Error to edit profile");
-		        redirect('member_c/editProfile');
+		        redirect(curent_url());
 		    }
 		}
 
-		function memberDetail($userID){
-			$data['member'] = $this->member_m->getMemberDetail($userID);
-			$this->load->view('member_detail.html',$data);
+		function memberDetail($user_id){
+			$data['member'] = $this->member_m->getMemberDetail($user_id);
+			$this->load->view('member_detail.html/',$data);
 		}
 
 	}

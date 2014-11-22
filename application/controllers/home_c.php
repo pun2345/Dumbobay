@@ -1,3 +1,4 @@
+
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start(); //we need to call PHP's session object to access it through CI
 class Home_c extends CI_Controller {
@@ -14,18 +15,25 @@ class Home_c extends CI_Controller {
 
   function index()
   {
+    $data['type']=0;
     if($this->session->userdata('logged_in'))
     {
       $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
-      $user_type = $this->member_m->checkUserType($session_data['user_id']);
-      if($user_type == 1){
+
+      //$user_type = $session_data['type'];
+      $data['type'] = $session_data['type'];
+
+      //print_r($data);
+      if($data['type'] == 1)
+      {
         $this->load->view('admin_home.html',$data);
         $this->load->view('footer.html');
-      }elseif($user_type == 2){
+      }elseif($data['type'] == 2){
         $this->load->view('buyer_home.html',$data);
         $this->load->view('footer.html');
-      }elseif($user_type == 3){
+      }elseif($data['type'] == 3){
         $this->load->view('seller_home.html',$data);
         $this->load->view('footer.html');
       }
@@ -64,7 +72,7 @@ class Home_c extends CI_Controller {
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
     $user_id = $session_data['user_id'];
-    redirect('transaction_c/history/'.$user_id);
+    redirect('transaction_c/history');
   }
   function watchlist(){
     $this->isLogin();

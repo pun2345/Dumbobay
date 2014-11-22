@@ -11,16 +11,20 @@ class Cart_c extends CI_Controller {
     $this->load->helper('form');
     $this->load->model('cart_m');
     $this->load->model('transaction_m');
+    $this->load->model('product_m');
   }
 
   function index()
   {
-    //This method will have the credentials validation
+    // This method will have the credentials validation
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
     $data['products'] = $this->cart_m->getProductInCart($session_data['user_id']);
     $this->load->view('cart.html',$data);
-        $this->load->view('footer.html');
+    $this->load->view('footer.html');
   }
   function addToCart($product_id,$amount){
     $this->isLogin();
@@ -31,7 +35,8 @@ class Cart_c extends CI_Controller {
     }else{
     $this->session->set_flashdata("message","Added fail!");
     }
-    redirect(current_url());
+    redirect("product_c");
+    // redirect(current_url());
   } 
   function deleteProduct($product_id){
     $this->isLogin();
@@ -42,10 +47,10 @@ class Cart_c extends CI_Controller {
     }else{
     $this->session->set_flashdata("message","Deleted fail!");
     }
-    redirect(current_url());
+    redirect("cart_c");
   }
   function editAmount($product_id,$amount){
-     $this->isLogin();
+    $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
     $temp = $this->cart_m->editAmount($session_data['user_id'],$product_id,$amount);
     if($temp=="true"){
@@ -53,38 +58,43 @@ class Cart_c extends CI_Controller {
     }else{
     $this->session->set_flashdata("message","Changing Amount fail!");
     }
-    redirect(current_url());
+    redirect("cart_c");
   }
   function checkOut(){
     $this->load->helper('date');
     $session_data = $this->session->userdata('logged_in');
     $products = $this->cart_m->getProductInCart($session_data['user_id']);
     $sumamount = 0;
-    foreach ($products as $product) {
-      $amount = $product->amount;
-      $price = $product->price;
-      $sumamount = $sumamount+$amount*$price;
-      $transaction = array( 'datetime' = date('Y-m-d H:i:s'),
-                            'status' = 'waiting for payment',
-                            'status_detail' = '',
-                            'price'=$price,
-                            'quantity'=$amount,
-                            'seller_score' = null,
-                            'seller_feedback' = null,
-                            'buyer_score' = null,
-                            'buyer_feedback' = null,
-                            'buyer_id' = $session_data['user_id']
-                            'product_id'=$product->product_id);
+    foreach ($products->result() as $row) {
+      $amount = $row->Quantity;
+      $product_id= $row->Product_ID;
+      $price = $row->Price;
+      $sumamount = $sumamount+($amount*$price);
+      $transaction = array( 'datetime' => date('Y-m-d H:i:s'),
+                            'status' => 'waiting for payment',
+                            'status_detail' => '',
+                            'price'=>$price,
+                            'quantity'=>$amount,
+                            'seller_score' => null,
+                            'seller_feedback' => null,
+                            'buyer_score' => null,
+                            'buyer_feedback' => null,
+                            // 'buyer_id' => 1,
+                            'buyer_id' => $session_data['user_id'],
+                            'product_id'=>$product_id);
+
       $transaction_ids[] = $this->transaction_m->newTransaction($transaction);
     }
     $this->session->set_flashdata("cart",$transaction_ids);
-    redirect('payment_c/'.$sumamount);
+    $this->session->set_flashdata("cart2",$products);
+    redirect('payment_c/index/'.$sumamount);
   }
   function afterPaid(){
     $session_data = $this->session->userdata('logged_in');
     $products = $this->cart_m->getProductInCart($session_data['user_id']);
-    foreach ($products as $product) {
-      $temp = $this->cart_m->deleteFormCart($session_data['user_id'],$product->product_id);
+    $products= $this->session->get_flashdata('cart');
+    foreach ($products as $product=>$row) {
+      $temp = $this->cart_m->deleteFormCart($session_data['user_id'],$row->Product_ID);
     }
     $this->session->set_flashdata("message","Checkout Sucessfuly!");
     redirect('home_c','refresh');

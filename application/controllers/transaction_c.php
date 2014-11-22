@@ -19,9 +19,13 @@ class Transaction_c extends CI_Controller {
     
   }
 
-  function history($user_id){
+  function history(){
     $this->isLogin();
-    $data['transactions'] = $this->transaction_m->getTransaction($user_id);
+    $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
+    $data['transactions'] = $this->transaction_m->getTransaction($data['user_id']);
     $this->load->view('history',$data);
         $this->load->view('footer.html');
   }
@@ -29,7 +33,9 @@ class Transaction_c extends CI_Controller {
     //$this->isLogin();
     $data['transaction'] = $this->transaction_m->getTransactionDetail($transaction_id);
     $session_data = $this->session->userdata('logged_in');
-    $data['user_id']= $session_data['user_id'];
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
     $this->load->library('form_validation');
     $this->form_validation->set_rules('score', 'score', 'required|xss_clean');      
     $this->form_validation->set_rules('feedback', 'feedback', 'trim|max_length[200]');
@@ -61,6 +67,10 @@ class Transaction_c extends CI_Controller {
     }
   }
   function updateStatus($transaction_id){
+    $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
     $transaction = $this->transaction_m->getTransactionDetail($transaction_id);
     $product = $this->product_m->getDetail($transaction->product_id);
     $data['productName']=$product->name;
@@ -91,12 +101,15 @@ class Transaction_c extends CI_Controller {
       else
       {
         $this->session->set_flashdata("message","Updating Status Failed! Try Again.");
-        redirect(current_url());
+        redirect("transacion_c/viewTransactionDetail/".$transaction_id);
       }
     }
   }
   function viewTransactionDetail($transaction_id){
     $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
     $data['transaction'] = $this->transaction_m->getTransactionDetail($transaction_id);
     $data['product'] = $this->product_m->getDetail($data['transaction']->product_id);
     $this->load->view('transaction_detail',$data);
