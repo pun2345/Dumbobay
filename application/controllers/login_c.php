@@ -44,25 +44,26 @@ class Login_c extends CI_Controller {
     //query the database
     //$result  = array();
     $result = $this->member_m->checkLogin($username, $password);
-    //print_r($result);
+    print_r($result);
     //echo $result->User_ID." use ";
     //echo $result['User_ID'];
-    if($result['User_ID'] != 0)
+    if($result)
     {
         //echo $result->User_ID."";
         //echo $result->username."";
+      if($result['Activated']==1)
+      { 
         $sess_array = array(
             'user_id' => $result['User_ID'],
             'username' => $result['username'],
             'type' => $result['Type']
           );
-        $this->session->set_userdata('logged_in', $sess_array);
-      
-      return TRUE;
-      //}else{
-        //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
-        //return false;
-      //}
+        $this->session->set_userdata('logged_in', $sess_array);      
+        return TRUE;
+      }else{
+        $this->form_validation->set_message('check_database', 'Please Activate your account first.');
+        return false;
+      }
     }
     else
     {

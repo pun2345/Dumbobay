@@ -20,7 +20,7 @@ class Home_c extends CI_Controller {
       $session_data = $this->session->userdata('logged_in');
       $data['username'] = $session_data['username'];
       $user_type = $session_data['type'];
-
+      $data['type'] = $user_type;
       if($user_type == 1){
         $this->load->view('admin_home.html',$data);
         $this->load->view('footer.html');
