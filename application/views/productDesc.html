@@ -87,15 +87,15 @@
             <img src="assets/img/iphone6.jpg" width="350px" height="300" style="margin:20px 20px">
           </div>
           <div class="row" style="margin-left:40px;margin-right:40px;margin-bottom:40px">
-            <h1><?php echo $product['name']; ?></h1><!-- detail of each type (2 type)-->
+            <h1><?php echo $product->Name; ?></h1><!-- detail of each type (2 type)-->
             <?php
-              if($product['type']==1){
-                echo '<p>Price: '.$product['price'].' Baht';
+              if($product->Type==1){
+                echo '<p>Price: '.$product->Price.' Baht';
                 echo '<br>Seller: ';
                 echo '<p>Details: '.'</p>';
             } else {
-                echo '<p>Current Max Bid: '.$product['current_max_bid'].' Baht';
-                echo '<br>Time left: '.$product['n_datetime'];
+                echo '<p>Current Max Bid: '.$product->Current_Max_Bid.' Baht';
+                echo '<br>Time left: '.$product->End_datetime;
                 echo '<br>Seller: ';
                 echo '<p>Details: '.'</p>';
             }
