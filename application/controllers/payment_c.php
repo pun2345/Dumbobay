@@ -16,12 +16,16 @@ class Payment_c extends CI_Controller {
   {
     //This method will have the credentials validation
     $data['price']=$price;
+    $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
     $transaction_ids = $this->session->get_flashdata("cart");
     $this->session->keep_flashdata("cart");
     //
     $data['products'] = $this->session->get_flashdata("cart2");
     $this->session->keep_flashdata("cart2");
-    $this->load->view('paymentForm.html',$data);
+    $this->load->payment_view('paymentForm.html',$data);
   }
 
   function pay($price)
@@ -29,7 +33,10 @@ class Payment_c extends CI_Controller {
     //This method will have the credentials validation
     $data['price']=$price;
     $transaction_ids = $this->session->flashdata("cart");
-    //
+    $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
     $data['products'] = $this->session->flashdata("cart2");
 
     $this->load->view('paymentForm.html',$data);

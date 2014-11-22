@@ -6,17 +6,33 @@ Class member_m extends CI_Model
 		$this->db->select('user_id, username, password, type');
 		$this->db->from('user');
 		$this->db->where('username = ' . "'" . $username . "'"); 
-		$this->db->where('password = ' . "'" . md5($password) . "'"); 
+		$this->db->where('password = ' . "'" . MD5($password) . "'"); 
 		$this->db->limit(1);
 
 		$query = $this->db->get();
 		$row = $query ->row();
-		$userData = array(
-			'User_ID' => $row->$User_ID,
-			'username' => $row->username,
-			'Type' => $row->type
-		);
+		if($query->num_rows() == 1)
+		{
+			$userData = array(
+				'User_ID' => $row->user_id,
+				'Username' => $row->username,
+				'Type' => $row->type
+			);
+		}else{
+			$userData = array(
+				'User_ID' => 0,
+				'Username' => "",
+				'Type' => 0
+			);
+		}
+	
 		return $userData;
+	}
+	function checkActivated($user_id){
+		$this->db->select('Activated');
+		$query = $this->db->get_where('Member',array('User_ID'=> $user_id));
+		$row = $query->row();
+		return $row->Activated;
 	}
 	function checkUserType($user_id){
 		$query = $this->db->query("select Type from User where User_ID = $user_id");
@@ -97,7 +113,7 @@ Class member_m extends CI_Model
    	  	return "true";
 	}
 	function getMemberDetail($user_id){
-		return $this->db->query("select * from Member where User_ID=$user_id");
+		return $this->db->query("select * from Member where User_ID=$user_id")->row();
 	}
 	function getFeedbackScore($user_id){
 		$this->db->where('User_ID', $user_id);

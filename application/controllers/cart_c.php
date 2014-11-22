@@ -19,6 +19,9 @@ class Cart_c extends CI_Controller {
     // This method will have the credentials validation
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
     $data['products'] = $this->cart_m->getProductInCart($session_data['user_id']);
     $this->load->view('cart.html',$data);
     $this->load->view('footer.html');
@@ -32,7 +35,8 @@ class Cart_c extends CI_Controller {
     }else{
     $this->session->set_flashdata("message","Added fail!");
     }
-    redirect(current_url());
+    redirect("product_c");
+    // redirect(current_url());
   } 
   function deleteProduct($product_id){
     $this->isLogin();
@@ -45,7 +49,7 @@ class Cart_c extends CI_Controller {
     }
     redirect("cart_c");
   }
-  function editAmount($product_id){
+  function editAmount($product_id,$amount){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
     $temp = $this->cart_m->editAmount($session_data['user_id'],$product_id,$amount);
@@ -59,14 +63,12 @@ class Cart_c extends CI_Controller {
   function checkOut(){
     $this->load->helper('date');
     $session_data = $this->session->userdata('logged_in');
-    $carts = $this->cart_m->getProductInCart($session_data['user_id']);
+    $products = $this->cart_m->getProductInCart($session_data['user_id']);
     $sumamount = 0;
-    foreach ($carts->result() as $row) {
+    foreach ($products->result() as $row) {
       $amount = $row->Quantity;
       $product_id= $row->Product_ID;
-      $product = $this->product_m->getDetail($product_id);
-      $rowP = $product->row();
-      $price = $rowP->Price;
+      $price = $row->Price;
       $sumamount = $sumamount+($amount*$price);
       $transaction = array( 'datetime' => date('Y-m-d H:i:s'),
                             'status' => 'waiting for payment',
@@ -80,8 +82,7 @@ class Cart_c extends CI_Controller {
                             // 'buyer_id' => 1,
                             'buyer_id' => $session_data['user_id'],
                             'product_id'=>$product_id);
-      
-      $products[] = $product;
+
       $transaction_ids[] = $this->transaction_m->newTransaction($transaction);
     }
     $this->session->set_flashdata("cart",$transaction_ids);

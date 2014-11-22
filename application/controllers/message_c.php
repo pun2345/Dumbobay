@@ -6,7 +6,6 @@ class message_c extends CI_Controller {
     parent::__construct();
     $this->load->database();
     $this->load->model('message_m');
-    $this->load->model('member_m');
     $this->load->library('form_validation');
   }
 
