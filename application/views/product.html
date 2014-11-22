@@ -82,20 +82,20 @@
 							<?php 
 
 								foreach($products as $product=>$row){
-								if($row['type']==1){
+								if($row->Type==1){
 									echo "<hr>";
 									echo "<div class=\"row\">";
 										echo "<div class=\"col-lg-4 centered productimg\">";
-										echo '<img src="'.$row['image'].'">';
+										echo '<img src="'.$row->Image.'">';
 										echo "</div>";
 										echo "<div class=\"col-lg-4\">";
-											echo "<b>".$row['name']."</b><br>";
-											echo "Price: ".$row['price']." Baht<br>";
-											echo "Amount: ".$row['amount']." ea<br>";
+											echo "<b>".$row->Name."</b><br>";
+											echo "Price: ".$row->Price." Baht<br>";
+											echo "Amount: ".$row->Amount." ea<br>";
 											echo "<a href= \"product_c/viewProductDetail/".$row['id']."\" >More info..</a>";
 										echo "</div>";
 										echo "<div class=\"col-lg-4 productbutton\">";
-											echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$row['id']."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
+											echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
 										echo "</div>";
 									echo "</div>";
 									}
