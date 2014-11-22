@@ -8,9 +8,7 @@ class Login_c extends CI_Controller {
     parent::__construct();
     $this->load->helper('html');
     $this->load->helper('array');
-
     $this->load->database();
-
     $this->load->model('member_m');
   }
 
@@ -47,22 +45,24 @@ class Login_c extends CI_Controller {
     //print_r($result);
     //echo $result->User_ID." use ";
     //echo $result['User_ID'];
-    if($result['User_ID'] != 0)
+    if($result['User_ID']!=0)
     {
         //echo $result->User_ID."";
-        //echo $result->username."";
+        //echo $result->Username."";
+      //echo $this->member_m->checkActivated($result['User_ID']);
+      if($this->member_m->checkActivated($result['User_ID'])==1)
+      { 
         $sess_array = array(
             'user_id' => $result['User_ID'],
-            'username' => $result['username'],
+            'username' => $result['Username'],
             'type' => $result['Type']
           );
-        $this->session->set_userdata('logged_in', $sess_array);
-      
-      return TRUE;
-      //}else{
-        //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
-        //return false;
-      //}
+        $this->session->set_userdata('logged_in', $sess_array);      
+        return TRUE;
+      }else{
+       $this->form_validation->set_message('check_database', 'Please Activate your account first.');
+       return false;
+      }
     }
     else
     {
