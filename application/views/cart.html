@@ -89,24 +89,24 @@
         <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white; padding-bottom: 20px">
           <ol style="list-style-type:none; padding-left: 0px ;padding-bottom: 0px">
 
-          <?php foreach($products as $product => $row)
+          <?php foreach($products->result() as $row)
                 {
                   echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">';
                     echo '<div class="row">';
                       echo '<div class="col-md-3">';
-                        echo '<img src="'.$row['image'].'" width="185" height="104">';
+                        echo '<img src="'.$row->image.'" width="185" height="104">';
                       echo '</div>';
                       echo '<div class="col-md-9" style="padding-bottom: 0px; padding-right:0px">';
                         echo '<div>';
                           echo '<div class="row col-md-12" style="padding-bottom: 0px; padding-right:0px">';
                             echo '<div class="col-md-6">';
-                              echo '<h3>'.$row['name'].'</h3>';
+                              echo '<h3>'.$row->name.'</h3>';
                             echo '</div>';
                             echo '<div class="col-md-2" style="font-size: 13px; padding-top:27px">';
-                              echo $row['price'].' baht';
+                              echo $row->price.' baht';
                             echo '</div>';
                             echo '<div class="col-md-1" style="padding-top:15px; padding-left:0px; padding-right:0px">';
-                              echo '<input style="width:100%; font-size: 12px; padding-right: 10px" type="text" class="form-control" id="'.$row['product_id'].'" placeholder="'.$row['amount'].'" >';
+                              echo '<input style="width:100%; font-size: 12px; padding-right: 10px" type="text" class="form-control" id="'.$row->product_id.'" placeholder="'.$row->amount.'" >';
                             echo '</div>';
                             echo '<div class="col-md-3" style="font-size: 13px; padding-top:27px; padding-right:0px; padding-left:70px">';
                               echo '2,000,000 bath';
@@ -116,12 +116,12 @@
                             echo '<div class="row col-md-1">';
                             echo '</div>';
                             echo '<div class="row col-md-2">';
-                              echo '<a href="product_c/viewProductDetail/'.$row['product_id'].'"">More info...</a>';
+                              echo '<a href="product_c/viewProductDetail/'.$row->product_id.'"">More info...</a>';
                             echo '</div>';
                             echo '<div class="row col-md-9">';
                             echo '</div>';
                             echo '<div class="row col-md-1" style="padding-right:0px;padding-left:0px">';
-                              echo '<a href="cart_c/deleteProduct/'.$row['product_id'].'">remove</a>';
+                              echo '<a href="cart_c/deleteProduct/'.$row->product_id.'">remove</a>';
                             echo '</div>';
                           echo '</div>';
                         echo '</div>';
