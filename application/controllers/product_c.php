@@ -331,6 +331,9 @@ class Product_c extends CI_Controller {
     }
     redirect('home_c');
   }
+  // function 
+  // redirect("bidding_c/initializeStepBidding/".$product_id)
+  // redirect("bidding_c/initializeMaxBidding/"$product_id)
   
   function isLogin(){
     if($this->session->userdata('logged_in')){
