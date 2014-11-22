@@ -8,6 +8,7 @@
 <?php
     include 'HTMLHeader.html';
   ?>
+
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -67,32 +68,76 @@
           <!-- end of header message table -->
           <hr>
           <!-- body message table -->
-          <?php foreach ($messages->result() as $row){
-            echo '<div class="row mf">';
-            echo '<div class="col-sm-1 centered">';
-              echo '<a href="message_c/delete/'.$row->Message_ID.'"><img src="assets/img/del-icon.png"></a>';
-            echo '</div>';
-            echo '<div class="col-sm-1 centered">';
-              echo '<a href="message_c/reply/'.$row->Message_ID.'"><img src="assets/img/reply-icon.jpg"></a>';
-            echo '</div>';
-            echo '<div class="col-sm-3">';
-              echo '<h4>'.$row->Sender_Name.'</h4>';
-            echo '</div>';
-            echo '<div class="col-sm-4">';
-              echo '<a href="message_c/messageDetail/'.$row->Message_ID.'" ><h4>I need small ears</h4>';
-            echo '</div>';
-            echo '<div class="col-sm-3">';
-              echo '<h4>'.$row->Datetime.'</h4>';
-            echo '</div>';
-          echo '</div>';
-          }
-          
-          ?>
+          <div class="row mf">
+            <div class="col-sm-1 centered">
+              <a href="message_c/delete/msgid"><img src="assets/img/del-icon.png"></a>
+            </div>
+            <div class="col-sm-1 centered">
+              <a href="message_c/reply/msgid"><img src="assets/img/reply-icon.jpg"></a>
+            </div>
+            <div class="col-sm-3">
+              <h4>Natchez@dumbobay.com</h4>
+            </div>
+            <div class="col-sm-4">
+              <a href="message_c/messageDetail/msgid" ><h4>I need small ears</h4>
+            </div>
+            <div class="col-sm-3">
+              <h4>1 Nov 2014 at 7:03 AM</h4>
+            </div>
+          </div>
+          <div class="row mf">
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/del-icon.png"></a>
+            </div>
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/reply-icon.jpg"></a>
+            </div>
+            <div class="col-sm-3">
+              <h4>Boombi@dumbobay.com</h4>
+            </div>
+            <div class="col-sm-4">
+              <h4>Can I have your phone number?</h4>
+            </div>
+            <div class="col-sm-3">
+              <h4>5 Nov 2014 at 10:03 AM</h4>
+            </div>
+          </div>
+          <div class="row mf">
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/del-icon.png"></a>
+            </div>
+            <div class="col-sm-1 centered">
+              <a href="#"><img src="assets/img/reply-icon.jpg"></a>
+            </div>
+            <div class="col-sm-3">
+              <h4>Putty@superdupergood.com</h4>
+            </div>
+            <div class="col-sm-4">
+              <h4>I'm gonna die!</h4>
+            </div>
+            <div class="col-sm-3">
+              <h4>6 Nov 2014 at 2:12 PM</h4>
+            </div>
+          </div>
           
           <!-- end of body message table -->
         </div><!-- container -->
       </div>
       <!-- msg part-->
+
+      <!-- FOOTER -->
+      <div id="f" style="margin-top:50px">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-md-push-2">
+              <img src="assets/img/DumboBay-Logo-b.png">
+            </div>
+            <div class="col-md-6 col-md-push-2">
+              <img src="assets/img/Frappe-Logo-bg-sm.png">
+            </div>
+          </div><!-- row -->
+        </div><!-- container -->
+      </div><!-- Footer -->
 
 	<!-- Bootstrap core JavaScript
   ================================================== -->
