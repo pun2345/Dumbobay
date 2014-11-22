@@ -25,7 +25,7 @@ class Payment_c extends CI_Controller {
     //
     $data['products'] = $this->session->get_flashdata("cart2");
     $this->session->keep_flashdata("cart2");
-    $this->load->view('paymentForm.html',$data);
+    $this->load->payment_view('paymentForm.html',$data);
   }
 
   function pay($price)
