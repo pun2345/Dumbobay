@@ -57,7 +57,7 @@ Class member_m extends CI_Model
    		 $insert_id = $this->db->insert_id();
 
    		 $data2 = array(
-		   	// 'User_ID' => $insert_id,
+		   	'User_ID' => $insert_id,
 		   	'Address' => $address,
 	   		'Telephone' => $telephone,
 	   		'E-mail' => $email	   		
