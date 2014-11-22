@@ -12,12 +12,12 @@
 	<title>DUMBOBAY - shopping area</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="/assets/css/bootstrap.css" rel="stylesheet">
-	<link href="assets/css/dumbobaycss.css" rel="stylesheet">
-	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
-	<!-- Custom styles for this template -->
-	<link href="assets/css/main.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
 
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,7 +38,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png");?></a>
+				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png"); ?></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -76,6 +76,11 @@
 				</div><!-- container -->
 			</div>
 			<div class="container desc">
+				<div class="border-radius" style="background-color:white">
+				<div class="row">
+					<h2 class="col-lg-6" align="center">Direct Sale</h2>
+					<h2 class="col-lg-6" align="center">Auction</h2>
+				</div>
 				<div class="row">
 					<!-- DIRECT SALE ================================================ -->
 					<div class="col-lg-6 border-left-radius" style="background-color:white">
@@ -94,24 +99,28 @@
 						<br>
 						<div class="productcontainer">
 							<?php 
-								foreach($product){
-								echo "<hr>";
-								echo "<div class=\"row\">";
-									echo "<div class=\"col-lg-4 centered productimg\">";
-										img("assets/img/macbook.png");
+
+								foreach($products as $product=>$row){
+								if($row['type']==1){
+									echo "<hr>";
+									echo "<div class=\"row\">";
+										echo "<div class=\"col-lg-4 centered productimg\">";
+										echo '<img src="'.$row['image'].'">';
+										echo "</div>";
+										echo "<div class=\"col-lg-4\">";
+											echo "<b>".$row['name']."</b><br>";
+											echo "Price: ".$row['price']." Baht<br>";
+											echo "Amount: ".$row['amount']." ea<br>";
+											echo "<a href= \"product_c/viewProductDetail/".$row['id']."\" >More info..</a>";
+										echo "</div>";
+										echo "<div class=\"col-lg-4 productbutton\">";
+											echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$row['id']."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
+										echo "</div>";
 									echo "</div>";
-									echo "<div class=\"col-lg-4\">";
-										echo "<b>".$product=>$name."</b><br>";
-										echo "Price: ".$product=>$price." Baht<br>";
-										echo "Amount: ".$product=>$amount." ea<br>"
-										echo "<a href= \"product_c/viewProductDetail/".$product=>$id."\" >More info..</a>";
-									echo "</div>";
-									echo "<div class=\"col-lg-4 productbutton\">"
-										echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$product=>$id."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
-									echo "</div>";
-								echo "</div>";
+									}
 								}					
 							?>
+							<hr>
 						</div>
 					</div><!-- col-lg-6 -->
 					<!-- END OF DIRECT SALE ================================================ -->
@@ -123,34 +132,39 @@
 						<!-- SEARCH AUCTION-->
 						<div class="row">
 							<div class="col-lg-9">
-								<input type="text" class="form-control" id="inputAuctionSearch" placeholder="Auction search">
+								
 							</div>
 							<div class="col-lg-3">
-								<button type="button" class="btn btn-default">Search</button>
+								
 							</div>
 						</div>
 						<!-- END OF SEARCH AUCTION-->
 						<br>
 						<div class="productcontainer">
-							<?php
-							echo "<hr>";
-							echo"<div class=\"row\">";
-								echo "<div class=\"col-lg-4 centered productimg\">"; 
-									img("assets/img/macbook.png");
-								echo "</div>"
-								echo "<div class=\"col-lg-4\">";
-									echo "<b>".$product=>$name."</b><br>";
-									echo "Current bid: ".$product=>$current_price."Baht<br>";
-									echo "Due date: ".$product=>$end_Date."<br>";
-									echo "<a href=\"product_c/ciewProductDetail/".$product=>$id."\">More info..</a>\"";
-								echo "</div>";
-								echo "<div class=\"col-lg-4 centered auctionbutton\">";
-									echo "<p>time left: "."TIME LEFT"."</p>";									
-									echo"<a data-toggle=\"modal\" data-target=\"#bidform\" href=\"#bidform\"><button type=\"button\" class=\"btn btn-default\">Add to Watch List</button></a>";
-								echo "</div>";
-							echo "</div>";
+							<?php 
+
+								foreach($products as $product=>$row){
+								if($row['type']==2){
+									echo "<hr>";
+									echo "<div class=\"row\">";
+										echo "<div class=\"col-lg-4 centered productimg\">";
+										echo '<img src="'.$row['image'].'">';
+										echo "</div>";
+										echo "<div class=\"col-lg-4\">";
+											echo "<b>".$row['name']."</b><br>";
+											echo "Max bid: ".$row['current_max_bid']." Baht<br>";
+											echo "Due date: ".$row['n_datetime']." ea<br>";
+											echo "<a href= \"product_c/viewProductDetail/".$row['id']."\" >More info..</a>";
+										echo "</div>";
+										echo "<div class=\"col-lg-4 centered auctionbutton\">";
+											echo "<p>Time left: 0:02:07</p>";
+											echo "<a data-toggle=\"modal\" data-target=\"#bidform\" href=\"#bidform".$row['id']."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Watch List</button></a>";
+										echo "</div>";
+									echo "</div>";
+									}
+								}					
 							?>
-							
+							<hr>
 						</div>
 					</div>
 					<!-- END OF AUCTION ================================================ -->
@@ -159,24 +173,11 @@
 
 
 				</div><!-- row -->
+				</div>
 			</div><!-- container -->
 		</div>
 		<!--end PRODUCT-->
 		<!-- =======================================================================-->
-
-		<!-- FOOTER -->
-		<div id="f" style="margin-top:50px">
-			<div class="container">
-				<div class="row">
-				<div class="col-md-6 col-md-push-2">
-					<img src="assets/img/DumboBay-Logo-b.png">
-				</div>
-				<div class="col-md-6 col-md-push-2">
-					<img src="assets/img/Frappe-Logo-bg-sm.png">
-				</div>
-				</div><!-- row -->
-			</div><!-- container -->
-		</div><!-- Footer -->
 
 
 		<!-- MODAL FOR CONTACT -->
