@@ -2,23 +2,9 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="shortcut icon" href="assets/ico/favicon.png">
-
-	<title>DUMBOBAY - shopping area</title>
-
-	<!-- Bootstrap core CSS -->
-	<link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
-    <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
-    <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
-
+<?php
+    include 'HTMLHeader.html';
+  ?>
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -30,25 +16,20 @@
 <body>
 
 	<!-- Fixed navbar -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><?php echo img("assets/img/dumbobay-logo-sm.png"); ?></a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="home_c">HOME</a></li>
-					<li><a href="home_c/login">SIGN IN</a></li>
-					<li><a href="home_c/register">SIGN UP</a></li>
-				</ul>
-			</div><!--/.nav-collapse -->
-		</div>
-	</div>
+	<?php
+			if($type==0){
+				include 'guest_menu.html';
+			}
+			else if($type==1){
+				include 'admin_menu.html';	
+			}            
+			else if($type==2){
+				include 'buyer_menu.html';	
+			}
+			else if($type==3){
+				include 'seller_menu.html';	
+			}
+    ?>
 	<!-- =======================================================================-->
 	<div id="myheaderwrap">
 		<div class="container">
@@ -67,7 +48,7 @@
 					<div class="row">
 						<!--<img src="assets/img/products.png" id="back" style="cursor:pointer">-->
 						<div class="col-lg-6 col-lg-push-4">
-							<?php img("assets/img/price-tag-icon.png");?>
+							<?php echo img("assets/img/price-tag-icon.png");?>
 						</div>
 						<div class="col-lg-6" style="margin-top:20px;margin-left:-5%">
 							<h1>Products</h1>
@@ -87,34 +68,36 @@
 						<h2 align="center">Direct Sale</h2>
 						<br>
 						<!-- SEARCH DIRECT SALE-->
-						<div class="row">
-							<div class="col-lg-9">
-								<input type="text" class="form-control" id="inputDirectSaleSearch" placeholder="Direct sale search">
+						<form class="form-horizontal" id="search-form" name="search-form" onsubmit="return validateForm()">
+							<div class="row">
+								<div class="col-lg-9">
+									<input type="text" class="form-control" id="inputDirectSaleSearch" name"inputDirectSaleSearch">
+								</div>
+								<div class="col-lg-3">
+									<button type="submit" value="submit" class="btn btn-default">Search</button>
+								</div>
 							</div>
-							<div class="col-lg-3">
-								<button type="button" class="btn btn-default">Search</button>
-							</div>
-						</div>
+						</form>
 						<!-- END OF SEARCH DIRECT SALE-->
 						<br>
 						<div class="productcontainer">
 							<?php 
 
-								foreach($products as $product=>$row){
-								if($row['type']==1){
+								foreach($products->result() as $row){
+								if($row->Type==1){
 									echo "<hr>";
 									echo "<div class=\"row\">";
 										echo "<div class=\"col-lg-4 centered productimg\">";
-										echo '<img src="'.$row['image'].'">';
+										echo '<img src="'.$row->Image.'">';
 										echo "</div>";
 										echo "<div class=\"col-lg-4\">";
-											echo "<b>".$row['name']."</b><br>";
-											echo "Price: ".$row['price']." Baht<br>";
-											echo "Amount: ".$row['amount']." ea<br>";
-											echo "<a href= \"product_c/viewProductDetail/".$row['id']."\" >More info..</a>";
+											echo "<b>".$row->Name."</b><br>";
+											echo "Price: ".$row->Price." Baht<br>";
+											echo "Amount: ".$row->Amount." ea<br>";
+											echo "<a href= \"product_c/viewProductDetail/".$row->Product_ID."\" >More info..</a>";
 										echo "</div>";
 										echo "<div class=\"col-lg-4 productbutton\">";
-											echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$row['id']."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
+											echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
 										echo "</div>";
 									echo "</div>";
 									}
@@ -143,22 +126,22 @@
 						<div class="productcontainer">
 							<?php 
 
-								foreach($products as $product=>$row){
-								if($row['type']==2){
+								foreach($products->result() as $row){
+								if($row->Type==2){
 									echo "<hr>";
 									echo "<div class=\"row\">";
 										echo "<div class=\"col-lg-4 centered productimg\">";
-										echo '<img src="'.$row['image'].'">';
+										echo '<img src="'.$row->Image.'">';
 										echo "</div>";
 										echo "<div class=\"col-lg-4\">";
-											echo "<b>".$row['name']."</b><br>";
-											echo "Max bid: ".$row['current_max_bid']." Baht<br>";
-											echo "Due date: ".$row['n_datetime']." ea<br>";
-											echo "<a href= \"product_c/viewProductDetail/".$row['id']."\" >More info..</a>";
+											echo "<b>".$row->Name."</b><br>";
+											echo "Max bid: ".$row->Current_Max_Bid." Baht<br>";
+											echo "Due date: ".$row->N_Datetime." ea<br>";
+											echo "<a href= \"product_c/viewProductDetail/".$row->Product_ID."\" >More info..</a>";
 										echo "</div>";
 										echo "<div class=\"col-lg-4 centered auctionbutton\">";
 											echo "<p>Time left: 0:02:07</p>";
-											echo "<a data-toggle=\"modal\" data-target=\"#bidform\" href=\"#bidform".$row['id']."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Watch List</button></a>";
+											echo "<a data-toggle=\"modal\" data-target=\"#bidform\" href=\"#bidform".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Watch List</button></a>";
 										echo "</div>";
 									echo "</div>";
 									}
@@ -178,86 +161,6 @@
 		</div>
 		<!--end PRODUCT-->
 		<!-- =======================================================================-->
-
-
-		<!-- MODAL FOR CONTACT -->
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">DumboBay</h4>
-					</div>
-					<!-- Log in form -->
-					<form class="form-horizontal">
-						<div class="modal-body">
-							<div class="row centered">
-								<fieldset>
-									<legend>SIGN IN</legend>
-									<div align="center">
-										<div class="form-group">
-											<label style="left:20%" for="inputEmail" class="col-lg-2 control-label">Username</label>
-											<div class="col-lg-10">
-												<input style="width:50%" type="text" class="form-control" id="inputEmail" placeholder="Put your username in here." >
-											</div>
-										</div>
-										<div class="form-group">
-											<label style="left:20%" for="inputPassword" class="col-lg-2 control-label">Password</label>
-											<div class="col-lg-10">
-												<input style="width:50%" type="password" class="form-control" id="inputPassword" placeholder="********">
-											</div>
-										</div>
-									</div>
-								</fieldset>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<a href="buyer_home.html"><button type="button" class="btn btn-danger">Sign In</button></a>
-							<a href="buyer_home.html"><button type="button" class="btn btn-danger">Sign In:Buyer</button></a>
-							<a href="seller_home.html"><button type="button" class="btn btn-danger">Sign In:Seller</button></a>
-							<a href="admin_home.html"><button type="button" class="btn btn-danger" >Sign In:Admin</button></a>
-						</div>
-					</form>
-					<!-- /Log in form -->
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-
-		<!-- MODAL FOR ADD to CART -->
-		<!-- Modal -->
-		<div class="modal fade" id="amountform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">DumboBay</h4>
-					</div>
-					<form class="form-horizontal">
-						<div class="modal-body">
-							<div class="row centered">
-								<fieldset>
-									<legend>Add to Cart</legend>
-									<div align="center">
-										<div class="form-group" style="padding-left:40px;padding-right:40px">
-											<label for="inputMaxBid" class="col-lg-3 control-label">Amount: </label>
-											<div class="col-lg-9">
-												<input type="text" class="form-control" id="inputAmount" placeholder="Enter amount">
-											</div>
-										</div>
-									</div>
-								</fieldset>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<a href="#"><button type="button" class="btn btn-submit">Submit</button></a>
-						</div>
-					</form>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
 
 		<!-- MODAL FOR WATCHLIST -->
 		<!-- Modal -->
@@ -301,6 +204,22 @@
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 
+	<script>
+	function validateForm() {
+	    var search = document.forms["search-form"]["inputDirectSaleSearch"].value;
+
+	    if (search==null || search=="" ) {
+	    	alert("Please put a keyword in the search area.");
+	    	return false;
+	    }
+	    if (!validateSearch(search)){
+	    	alert("Result doesn't exist.");
+	    	return false;
+	    }
+	}
+	
+	</script>
+
 <!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -308,7 +227,7 @@
 	<script src=<?echo base_url("?>assets/js/bootstrap.min.js");?>></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-
+	<script src=<?echo base_url("assets/js/validation_function.js");?>></script>
 </body>
 
 </html>
