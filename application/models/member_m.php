@@ -6,16 +6,26 @@ Class member_m extends CI_Model
 		$this->db->select('user_id, username, password, type');
 		$this->db->from('user');
 		$this->db->where('username = ' . "'" . $username . "'"); 
-		$this->db->where('password = ' . "'" . md5($password) . "'"); 
+		$this->db->where('password = ' . "'" . $password . "'"); 
 		$this->db->limit(1);
 
 		$query = $this->db->get();
 		$row = $query ->row();
-		$userData = array(
-			'User_ID' => $row->$User_ID,
-			'username' => $row->username,
-			'Type' => $row->type
-		);
+		if($query->num_rows() == 1)
+		{
+			$userData = array(
+				'User_ID' => $row->user_id,
+				'Username' => $row->username,
+				'Type' => $row->type
+			);
+		}else{
+			$userData = array(
+				'User_ID' => 0,
+				'Username' => "",
+				'Type' => 0
+			);
+		}
+	
 		return $userData;
 	}
 	function checkUserType($user_id){
