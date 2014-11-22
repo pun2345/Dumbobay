@@ -81,7 +81,7 @@
 	    }
 	}
 	function validateSubject(word){
-		if(!(word.length <=50)) {
+		if(!(word.length <=30)) {
 	        return false;
 	    } else {
 	    	return true;
