@@ -28,12 +28,12 @@ class message_c extends CI_Controller {
       }
       else // passed validation proceed to post success logic
       {
-          $form_data = array( 'msgSubject' => set_value('msgSubject'),
-                              'msgText' => set_value('msgText'),
-                             'msgReceiver' => set_value('msgReceiver'));
+          $form_data = array( 'msgSubject' => $this->input->post('msgSubject'),
+                              'msgText' => $this->input->post('msgText'),
+                             'msgReceiver' => $this->input->post('msgReceiver'));
       }
       // run insert model to write data to db
-      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$form_data['msgReceiver']) == TRUE) // the information has therefore been successfully saved in the db
+      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$form_data['msgReceiver']) == 'true') // the information has therefore been successfully saved in the db
       {             
           $this->session->set_flashdata("message","Message sent!");
           redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
@@ -49,7 +49,6 @@ class message_c extends CI_Controller {
   {
       $session_data = $this->session->userdata(logged_in);
       $senderID=$session_data['user_id'];
-      $this->load->view('newMessage.html');
       $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
@@ -58,11 +57,11 @@ class message_c extends CI_Controller {
       }
       else // passed validation proceed to post success logic
       {
-          $form_data = array( 'msgSubject' => set_value('msgSubject'),
-                              'msgText' => set_value('msgText'));
+          $form_data = array( 'msgSubject' => $this->input->post('msgSubject'),
+                              'msgText' => $this->input->post('msgText'));
       }
       // run insert model to write data to db
-      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiver_id) == TRUE) // the information has therefore been successfully saved in the db
+      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiver_id) == 'true') // the information has therefore been successfully saved in the db
       {             
           $this->session->set_flashdata("message","Message sent!");
           redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
@@ -70,7 +69,7 @@ class message_c extends CI_Controller {
       else
       {
           $this->session->set_flashdata("message","Sending error");
-          redirect('message_c/manageMessageBox');
+          redirect(current_url());
       }
   }
 
@@ -112,10 +111,10 @@ class message_c extends CI_Controller {
       }
       else // passed validation proceed to post success logic
       {
-          $form_data = array('msgText' => set_value('msgText'));
+          $form_data = array('msgText' => $this->input->post('msgText'));
       }
               // run insert model to write data to db
-      if ($this->message_m->createMessage($user_id,$data['subject'],$form_data['msgText'],$data['receiver_id']) == TRUE) // the information has therefore been successfully saved in the db
+      if ($this->message_m->createMessage($user_id,$data['subject'],$form_data['msgText'],$data['receiver_id']) == 'true') // the information has therefore been successfully saved in the db
       {
           $this->session->set_flashdata("message","Message sent!");
           redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
@@ -123,7 +122,7 @@ class message_c extends CI_Controller {
       else
       {
           $this->session->set_flashdata("message","Sending error");
-          redirect('message_c/manageMessageBox');
+          redirect(current_url());
       }
   }
 

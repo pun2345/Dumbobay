@@ -22,8 +22,12 @@
 			$this->load->view('watchlistdetail.html/,',$data);
 		}
 
-		function incrementalBid($product_id){
-			
+		function maxBidding($product_id){
+			redirect('bidding_c/maxBidding/',$product_id);
+		}
+
+		function stepBidding($product_id){
+			redirect('bidding_c/stepBidding/',$product_id);
 		}
 
 		function payment($product_id){
