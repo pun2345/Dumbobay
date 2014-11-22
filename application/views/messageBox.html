@@ -71,16 +71,16 @@
           <?php foreach ($messages->result() as $row){
              echo '<div class="row mf">';
             echo '<div class="col-sm-1 centered">';
-              echo '<a href="message_c/delete/'.$row->Message_ID.'"><img src="assets/img/del-icon.png"></a>';
+              echo '<a href="'.site_url('message_c/delete/'.$row->Message_ID).'"><img src="assets/img/del-icon.png"></a>';
             echo '</div>';
             echo '<div class="col-sm-1 centered">';
-              echo '<a href="message_c/reply/'.$row->Message_ID.'"><img src="assets/img/reply-icon.jpg"></a>';
+              echo '<a href="'.site_url('message_c/reply/'.$row->Message_ID).'"><img src="assets/img/reply-icon.jpg"></a>';
             echo '</div>';
             echo '<div class="col-sm-3">';
               echo '<h4>'.$row->Sender_Name.'</h4>';
             echo '</div>';
             echo '<div class="col-sm-4">';
-              echo '<a href="message_c/messageDetail/'.$row->Message_ID.'" ><h4>'.$row->Subject.'</h4>';
+              echo '<a href="'.site_url('message_c/messageDetail/'.$row->Message_ID).'" ><h4>'.$row->Subject.'</h4>';
             echo '</div>';
             echo '<div class="col-sm-3">';
               echo '<h4>'.$row->Datetime.'</h4>';
