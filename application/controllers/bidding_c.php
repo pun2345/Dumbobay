@@ -14,8 +14,6 @@
 
 
 		function bidding($user_id, $product_id, $price, $bidding_type) { 
-			saveBiddingLog(User_ID, Product_ID, price, bidding_type);
-			$joinbid = $this->bidding_m->findJoinBidding($user_id,$product_id);
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
 			$current_maxbid = $this->bidding_m->getCurrentMaxBid($product_id);
 			$bid_increment = $this->bidding_m->getBidIncrement($product_id);
@@ -25,8 +23,10 @@
 					if($maxbid > $current_price + $bid_increment){
 						$this->bidding_m->setCurrentPrice($user_id,$product_id,$current_price+$bit_increment);
 						$this->bidding_m->setCurrentMaxBid($product_id,$maxbid);
-						$this->bidding_m->setJoinBiddingType($this->bidding_m->getCurrentWinCust($product_id),$product_id,'manual');
-						$this->bidding_m->setJoinBiddingStatus($this->bidding_m->getCurrentWinCust($product_id),$product_id,0);
+						$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
+						$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
+						$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
+						$this->notifyBidLosingEmail($oldWinner,$product_id);
 						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 						$this->bidding_m->setJoinBiddingType($this->bidding_m->getCurrentWinCust($product_id),$product_id,'auto');
 						$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
@@ -44,8 +44,10 @@
 					}
 					$this->bidding_m->setCurrentPrice($user_id,$product_id,$newprice);
 					$this->bidding_m->setCurrentMaxBid($product_id,$maxbid);
-					$this->bidding_m->setJoinBiddingType($this->bidding_m->getCurrentWinCust($product_id),$product_id,'manual');
-					$this->bidding_m->setJoinBiddingStatus($this->bidding_m->getCurrentWinCust($product_id),$product_id,0);
+					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
+					$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
+					$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
+					$this->notifyBidLosingEmail($oldWinner,$product_id);
 					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 					$this->bidding_m->setJoinBiddingType($this->bidding_m->getCurrentWinCust($product_id),$product_id,'auto');
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
@@ -59,6 +61,7 @@
 					}
 					$this->bidding_m->setCurrentPrice($user_id,$product_id,$newprice);
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,0);
+					$this->notifyBidLosingEmail($user_id,$product_id);
 				}
 			}
 
@@ -78,8 +81,10 @@
 				else{
 					$this->bidding_m->setCurrentPrice($user_id,$product_id,$price);
 					$this->bidding_m->setCurrentMaxBid($product_id,0);
-					$this->bidding_m->setJoinBiddingType($this->bidding_c->getCurrentWinCust($product_id),$product_id,'manual');
-					$this->bidding_m->setJoinBiddingStatus($this->bidding_c->getCurrentWinCust($product_id),$product_id,0);
+					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
+					$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
+					$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
+					$this->notifyBidLosingEmail($oldWinner,$product_id);
 					$this->bidding_m->setJoinBiddingType($user_id,$product_id,'manual');
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
 					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
@@ -98,9 +103,8 @@
 		    }
       	    else // passed validation proceed to post success logic
 	        {
-		        $form_data = array( 'maxbid' => set_value('maxbid'));
+		        $form_data = array( 'maxbid' => $this->input->post('maxbid'));
 			    $maxbid = $form_data['$maxbid'];
-
 			}
 		    if ($this->bidding($session_data['user_id'],$product_id,$maxbid,'auto') == TRUE) // the information has therefore been successfully saved in the db
 		    {             
@@ -140,6 +144,10 @@
 			foreach($participant in $participants){
 				$this->bidding_m->setJoinBiddingStatus($participant,$product_id,2);
 			}
+		}
+
+		function notifyBidLosingEmail($user_id,$product_id){
+
 		}
 
 	}
