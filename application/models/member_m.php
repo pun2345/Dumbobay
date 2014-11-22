@@ -28,6 +28,12 @@ Class member_m extends CI_Model
 	
 		return $userData;
 	}
+	function checkActivated($user_id){
+		$this->db->select('Activated');
+		$query = $this->db->get_where('Member',array('User_ID'=> $user_id));
+		$row = $query->row();
+		echo $row->Activated;
+	}
 	function checkUserType($user_id){
 		$query = $this->db->query("select Type from User where User_ID = $user_id");
 		if($query->num_rows() == 1)
