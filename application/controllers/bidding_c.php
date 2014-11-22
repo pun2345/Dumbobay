@@ -74,7 +74,7 @@
 						$newprice = $price + $bit_increment;
 					}
 					else{
-						$newprice = $current_price
+						$newprice = $current_price;
 					}
 					$this->bidding_m->setCurrentPrice($user_id,$product_id,$newprice);
 				}
@@ -131,7 +131,7 @@
 		function getBiddingParticipants($product_id){
 			$joinbids = $this->bidding_m->getJoinBidding($user_id,$product_id);
 			$winner_id = $this->bidding_m->getCurrentWinCust($product_id);
-			foreach($joinbid in $joinbids){
+			foreach($joinbids as $joinbid){
 				$list[] = $joinbid->user_id;
 			}
 			return $list;
@@ -141,7 +141,7 @@
 			$this->bidding_m->setProductStatus($product_id,1);
 			$this->bidding_m->setJoinBiddingStatus($this->bidding_m->getCurrentWinCust($product_id),$product_id,3);
 			$participants = $getBiddingParticipants($product_id);
-			foreach($participant in $participants){
+			foreach($participants as $participant){
 				$this->bidding_m->setJoinBiddingStatus($participant,$product_id,2);
 			}
 		}
