@@ -6,7 +6,7 @@ Class member_m extends CI_Model
 		$this->db->select('user_id, username, password');
 		$this->db->from('user');
 		$this->db->where('username = ' . "'" . $username . "'"); 
-		$this->db->where('password = ' . "'" . MD5($password) . "'"); 
+		$this->db->where('password = ' . "'" . $password . "'"); 
 		$this->db->limit(1);
 
 		$query = $this->db->get();
@@ -16,7 +16,11 @@ Class member_m extends CI_Model
 			foreach ($query->result() as $row)
 				{	
 					// print_r($row);
-					$id = $row->user_id;
+					$id = $row->user_id; 
+					$userData = array(
+							'User_ID' => $id,
+							'userame' => $row->username
+					);
 				}
 			$this->db->select('Activated');
 			$query2 = $this->db->get_where('Member',array('User_ID' => $id));
@@ -25,11 +29,16 @@ Class member_m extends CI_Model
 				{
 					// print_r($row);
 					if( $row->Activated== 1) 
-						return "true";
+						// print_r($userData);
+						return $userData;
 				}
 			}	
 		}
-		return "false";
+		$userData = array(
+			'User_ID' => 0,
+			'userame' => "null"
+		);
+		return $userData;
 
 	}
 	function checkUserType($user_id){
