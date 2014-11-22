@@ -35,7 +35,8 @@ class Cart_c extends CI_Controller {
     }else{
     $this->session->set_flashdata("message","Added fail!");
     }
-    redirect(current_url());
+    redirect("product_c");
+    // redirect(current_url());
   } 
   function deleteProduct($product_id){
     $this->isLogin();
