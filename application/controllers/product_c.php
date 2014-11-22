@@ -17,8 +17,32 @@ class Product_c extends CI_Controller {
     //This method will have the credentials validation
     $page_num=1;
     $data['products'] = $this->product_m->allProduct($page_num);
-    $this->load->view('product.html',$data);
-    $this->load->view('footer.html');
+    $data['type'] = 0;
+    
+    if($this->session->userdata('logged_in'))
+    {
+      $session_data = $this->session->userdata('logged_in');
+      $data['username'] = $session_data['username'];
+      $user_type = $session_data['type'];
+      $data['type'] = $user_type;
+
+      if($user_type == 1){
+        $this->load->view('product.html',$data);
+        $this->load->view('footer.html');
+      }elseif($user_type == 2){
+        $this->load->view('product.html',$data);
+        $this->load->view('footer.html');
+      }elseif($user_type == 3){
+        $this->load->view('product.html',$data);
+        $this->load->view('footer.html');
+      }
+    }
+    else
+    {
+      //If no session, redirect to login page
+      $this->load->view('product.html',$data);
+      $this->load->view('footer.html');
+    }
   }
   function nextpage($page_num){
     $data['products'] = $this->product_m->allProduct($page_num);

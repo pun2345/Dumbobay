@@ -3,10 +3,10 @@ Class member_m extends CI_Model
 {
 
 	function checkLogin($username, $password){
-		$this->db->select('user_id, username, password');
+		$this->db->select('user_id, username, password, type');
 		$this->db->from('user');
 		$this->db->where('username = ' . "'" . $username . "'"); 
-		$this->db->where('password = ' . "'" . MD5($password) . "'"); 
+		$this->db->where('password = ' . "'" . md5($password) . "'"); 
 		$this->db->limit(1);
 
 		$query = $this->db->get();
@@ -15,25 +15,42 @@ Class member_m extends CI_Model
 		{	
 			foreach ($query->result() as $row)
 				{	
-					// print_r($row);
-					$id = $row->user_id;
+					//print_r($row);
+					$id = $row->user_id; 
+					//echo "id = ".$row->user_id;
+					$userData = array(
+							'User_ID' => $id,
+							'username' => $row->username,
+							'Type' => $row->type
+					);
 				}
-			$this->db->select('Activated');
-			$query2 = $this->db->get_where('Member',array('User_ID' => $id));
-			if($query->num_rows() == 1){
-				foreach ($query2->result() as $row)
-				{
-					// print_r($row);
-					if( $row->Activated== 1) 
-						return "true";
-				}
-			}	
+			if($row->type != 1)
+			{	$this->db->select('Activated');
+				$query2 = $this->db->get_where('Member',array('User_ID' => $id));
+				if($query->num_rows() == 1){
+					foreach ($query2->result() as $row)
+					{
+						// print_r($row);
+						if( $row->Activated== 1) 
+							// print_r($userData);
+							return $userData;
+					}
+				}	
+			}
+			else{
+				return $userData;
+			}
 		}
-		return "false";
+		$userData = array(
+			'User_ID' => 0,
+			'username' => "null",
+			'Type' => 0
+		);
+		return $userData;
 
 	}
 	function checkUserType($user_id){
-		$query = $this->db->query("select Type from User where User_ID=$user_id");
+		$query = $this->db->query("select Type from User where User_ID = $user_id");
 		if($query->num_rows() == 1)
 		{
 			foreach ($query->result() as $row)
@@ -57,7 +74,7 @@ Class member_m extends CI_Model
    		 $insert_id = $this->db->insert_id();
 
    		 $data2 = array(
-		   	// 'User_ID' => $insert_id,
+		   	'User_ID' => $insert_id,
 		   	'Address' => $address,
 	   		'Telephone' => $telephone,
 	   		'E-mail' => $email	   		

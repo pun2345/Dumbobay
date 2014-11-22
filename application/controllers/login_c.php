@@ -6,6 +6,7 @@ class Login_c extends CI_Controller {
   {
     parent::__construct();
     $this->load->helper('html');
+    $this->load->helper('array');
 
     $this->load->database();
 
@@ -37,25 +38,26 @@ class Login_c extends CI_Controller {
   {
     //Field validation succeeded.  Validate against database
     $username = $this->input->post('username');
-    
+    //echo $username." ";
+    //echo $password." ";
     //query the database
+    //$result  = array();
     $result = $this->member_m->checkLogin($username, $password);
-    print_r($result);
-    if($result)
+    //print_r($result);
+    //echo $result->User_ID." use ";
+    //echo $result['User_ID'];
+    if($result['User_ID'] != 0)
     {
-<<<<<<< HEAD
-      //if($result->activated){ 
-=======
-      if($result->activated=="true"){ 
->>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
-        print_r("true");
+        //echo $result->User_ID."";
+        //echo $result->username."";
         $sess_array = array(
-            'user_id' => $result->user_id,
-            'username' => $result->username,
+            'user_id' => $result['User_ID'],
+            'username' => $result['username'],
+            'type' => $result['Type']
           );
-          $this->session->set_userdata('logged_in', $sess_array);
-        
-        return TRUE;
+        $this->session->set_userdata('logged_in', $sess_array);
+      
+      return TRUE;
       //}else{
         //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
         //return false;
@@ -63,10 +65,10 @@ class Login_c extends CI_Controller {
     }
     else
     {
-      // $this->session->set_flashdata("message",'Invalid username or password');
-      $this->form_validation->set_message('check_database', 'Invalid username or password');
-      return false;
-    }
+        // $this->session->set_flashdata("message",'Invalid username or password');
+        $this->form_validation->set_message('check_database', 'Invalid username or password');
+        return false;
+    }    
   }
 }
 ?>
