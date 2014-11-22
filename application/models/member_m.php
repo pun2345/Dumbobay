@@ -19,7 +19,7 @@ Class member_m extends CI_Model
 					$id = $row->user_id; 
 					$userData = array(
 							'User_ID' => $id,
-							'userame' => $row->username
+							'username' => $row->username
 					);
 				}
 			$this->db->select('Activated');
@@ -36,7 +36,7 @@ Class member_m extends CI_Model
 		}
 		$userData = array(
 			'User_ID' => 0,
-			'userame' => "null"
+			'username' => "null"
 		);
 		return $userData;
 
