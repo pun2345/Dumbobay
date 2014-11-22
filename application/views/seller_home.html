@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
-
-    <title>DUMBOBAY - shopping area</title>
-
-    <!-- Bootstrap core CSS -->
-  <link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
-  <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
-  <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
-
+<?php
+    include 'HTMLHeader.html';
+  ?>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,15 +27,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-
-            <li class="active"><a href="home_c">HOME</a></li>
-            <li><a href="home_c/product">PRODUCT</a></li>
-            <li><a href="home_c/watchlist">WATCH LIST</a></li>
-            <li><a href="home_c/message">MSG BOX</a></li>
-            <li><a href="home_c/history">HISTORY</a></li>
-            <!-- <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li> -->
-          	<li><a href="home_c/logout">SIGN OUT</a></li>
-          	<li><a href="home_c/memberdetail">| $username |</a></li>
+          <?php
+            include 'seller_menu.html'
+          ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
