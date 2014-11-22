@@ -24,6 +24,8 @@ class Home_c extends CI_Controller {
 
       //$user_type = $session_data['type'];
       $data['type'] = $session_data['type'];
+
+      //print_r($data);
       if($data['type'] == 1)
       {
         $this->load->view('admin_home.html',$data);
