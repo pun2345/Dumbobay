@@ -44,10 +44,10 @@ class Login_c extends CI_Controller {
     //query the database
     //$result  = array();
     $result = $this->member_m->checkLogin($username, $password);
-    print_r($result);
+    //print_r($result);
     //echo $result->User_ID." use ";
     //echo $result['User_ID'];
-    if($result)
+    if($result['User_ID']!=0)
     {
         //echo $result->User_ID."";
         //echo $result->username."";
