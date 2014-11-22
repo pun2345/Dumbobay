@@ -60,14 +60,15 @@ class Login_c extends CI_Controller {
         $this->session->set_userdata('logged_in', $sess_array);      
         return TRUE;
       }else{
-       $this->form_validation->set_message('check_database', 'Please Activate your account first.');
+       $this->session->set_flashdata("message",'Please Activate your account first.');
+       //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
        return false;
       }
     }
     else
     {
-        // $this->session->set_flashdata("message",'Invalid username or password');
-        $this->form_validation->set_message('check_database', 'Invalid username or password');
+        $this->session->set_flashdata("message",'Invalid username or password');
+        //$this->form_validation->set_message('check_database', 'Invalid username or password');
         return false;
     }    
   }
