@@ -26,7 +26,7 @@ class Report_c extends CI_Controller {
     //   print_r($row);
     //   // print_r($row['seller_id']);
     // }
-    // $this->load->view("topTenSeller.html",$data);
+    $this->load->view("topTenSeller.html",$data);
   }
   function blacklist(){
     $data['users'] = $this->transaction_m->getBlacklist();
