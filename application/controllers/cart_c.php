@@ -112,18 +112,7 @@ class Cart_c extends CI_Controller {
   function afterPaid(){
     // $session_data = $this->session->userdata('logged_in');
     // $products = $this->cart_m->getProductInCart($session_data['user_id']);
-    $product1=array("product_id"=>1,
-                    "name" => "product1",
-                    "image" => ,
-                    "price" => 50,
-                    "amount" => 1);
-    $product1=array("product_id"=>2,
-                    "name" => "product2",
-                    "image" => ,
-                    "price" => 150,
-                    "amount" => 1);
-    $products[] = $product1;
-    $products[] = $product2;
+    $products= $this->get_flashdata('cart');
     foreach ($products as $product) {
       // $temp = $this->cart_m->deleteFormCart($session_data['user_id'],$product->product_id);
     }
