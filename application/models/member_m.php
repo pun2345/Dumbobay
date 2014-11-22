@@ -12,16 +12,19 @@ Class member_m extends CI_Model
 		$query = $this->db->get();
 
 		if($query->num_rows() == 1)
-		{
+		{	
 			foreach ($query->result() as $row)
-			{
-				$id = $row->Message_ID;
-			}
-			$query2 = $this->db->query("select Activated from Member where $User_ID = $id");
+				{	
+					// print_r($row);
+					$id = $row->user_id;
+				}
+			$this->db->select('Activated');
+			$query2 = $this->db->get_where('Member',array('User_ID' => $id));
 			if($query->num_rows() == 1){
-				foreach ($query->result() as $row)
+				foreach ($query2->result() as $row)
 				{
-					if($row->Activated == 1) 
+					// print_r($row);
+					if( $row->Activated== 1) 
 						return "true";
 				}
 			}	
@@ -54,7 +57,7 @@ Class member_m extends CI_Model
    		 $insert_id = $this->db->insert_id();
 
    		 $data2 = array(
-		   	'User_ID' => $insert_id,
+		   	// 'User_ID' => $insert_id,
 		   	'Address' => $address,
 	   		'Telephone' => $telephone,
 	   		'E-mail' => $email	   		
@@ -75,11 +78,11 @@ Class member_m extends CI_Model
 		return $this->db->query("select * from Member where Blacklist_score >=3");
 	}
 	function checkMember($username,$email){
-		$query1= $this->db->query("select User_ID from User where Username = $username");
-		if($query1 -> num_rows()> 0) return true;
-		$query2= $this->db->query("select User_ID from Member where E-mail = $email");
-		if($query2 -> num_rows()> 0) return true;
-		return false;
+		$query1=$this->db->get_where('User',array('Username'=>$username));
+		if($query1 -> num_rows()> 0) return "true";
+		$query2= $this->db->get_where('Member',array('E-mail' => $email));
+		if($query2 -> num_rows()> 0) return "true";
+		return "false";
 	}
 	function editMemberDetail($user_id,$username, $password, $firstname, $lastname, $type, $address, $telephone, $email){
 		$data1 = array(
@@ -101,7 +104,8 @@ Class member_m extends CI_Model
 	   		'E-mail' => $email	   		
 		);
 		$this->db->where('User_ID',$user_id);
-   		$this->db->update('member',$data1);
+   		$this->db->update('member',$data2);
+   		echo $this->db->affected_rows() ."<br>";
    		if ($this->db->affected_rows() <= 0) return "false";
    	  	$this->db->trans_complete();
    	  	return "true";

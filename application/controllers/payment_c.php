@@ -16,21 +16,11 @@ class Payment_c extends CI_Controller {
   {
     //This method will have the credentials validation
     $data['price']=$price;
-    //$transaction_ids = $this->get_flashdata("cart");
-    $transaction_ids[] = 1;
-    $transaction_ids[] = 2;
-    $transaction_ids[] = 3;
+    $transaction_ids = $this->get_flashdata("cart");
+    $this->keep_flashdata("cart")
     //
-    //$data['products'] = $this->get_flashdata("cart2");
-    $product1 = array('name'=>'testProduct',
-                      'price'=>50
-      );
-    $product2 = array('name'=>'testProduct2',
-                      'price'=>150
-      );
-    $products[]=$product;
-    $products[]=$product2;
-    $data['products'] = $products;
+    $data['products'] = $this->get_flashdata("cart2");
+    $this->keep_flashdata("cart2")
     $this->load->view('paymentForm.html',$data);
   }
 
@@ -38,21 +28,9 @@ class Payment_c extends CI_Controller {
   {
     //This method will have the credentials validation
     $data['price']=$price;
-    //$transaction_ids = $this->get_flashdata("cart");
-    $transaction_ids[] = 1;
-    $transaction_ids[] = 2;
-    $transaction_ids[] = 3;
+    $transaction_ids = $this->get_flashdata("cart");
     //
-    //$data['products'] = $this->get_flashdata("cart2");
-    $product1 = array('name'=>'testProduct',
-                      'price'=>50
-      );
-    $product2 = array('name'=>'testProduct2',
-                      'price'=>150
-      );
-    $products[]=$product;
-    $products[]=$product2;
-    $data['products'] = $products;
+    $data['products'] = $this->get_flashdata("cart2");
     $this->load->view('paymentForm.html',$data);
     $this->load->library('form_validation');
 
@@ -71,7 +49,8 @@ class Payment_c extends CI_Controller {
       foreach ($transaction_ids as $transaction_id) {
         $this->transaction_m->updateStatus($transaction_id,"already Paid","");
       }
-      redirect('cart/deleteAll');
+      $this->set_flashdata('cart2',$data['products']);
+      redirect('cart/afterPaid');
     }
     //$this->load->view('payment_view',$data);
 

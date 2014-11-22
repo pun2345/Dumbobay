@@ -15,8 +15,15 @@ class Product_c extends CI_Controller {
   function index()
   {
     //This method will have the credentials validation
-    $data['products'] = $this->product_m->allProduct();
+    $page_num=1;
+    $data['products'] = $this->product_m->allProduct($page_num);
     $this->load->view('product.html',$data);
+    $this->load->view('footer.html');
+  }
+  function nextpage($page_num){
+    $data['products'] = $this->product_m->allProduct($page_num);
+    $this->load->view('product.html',$data);
+    $this->load->view('footer.html');
   }
   function register()
   {
@@ -25,10 +32,12 @@ class Product_c extends CI_Controller {
   function search($searchWord){
     $data['products'] = $this->product_m->search($searchWord);
     $this->load->view('product.html',$data);
+    $this->load->view('footer.html');
   }
   function viewProductDetail($product_id){
     $data['product'] = $this->product_m->viewProductDetail($product_id);
-    $this->load->view('product_detail.html',$data);
+    $this->load->view('productDesc.html',$data);
+    $this->load->view('footer.html');
   }
   function newProduct(){
     $this->isLogin();
@@ -62,6 +71,7 @@ class Product_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('newProduct_form.html',$data);
+    $this->load->view('footer.html');
     }
     else
     {
@@ -155,6 +165,7 @@ class Product_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('editDirectProduct_form.html',$data);
+    $this->load->view('footer.html');
     }
     else
     {
@@ -235,6 +246,7 @@ class Product_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('editProduct_form.html',$data);
+    $this->load->view('footer.html');
     }
     else
     {
@@ -295,6 +307,7 @@ class Product_c extends CI_Controller {
     }
     redirect('home_c');
   }
+  
   function isLogin(){
     if($this->session->userdata('logged_in')){
       return true;
