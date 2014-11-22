@@ -4,13 +4,12 @@
 		function __construct(){
   		    parent::__construct();
 			$this->load->database();
-			$this->load->model('problem_m');
+			$this->load->model('message_m');
 		}
 
 		function index(){
 		    $session_data = $this->session->userdata(logged_in);
 		    $senderID = $session_data['user_id'];
-			$this->load->view('problem_report_form.html');
 			$this->load->library('form_validation');
 	        $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
 	        $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
@@ -20,11 +19,11 @@
 	        }
 	        else // passed validation proceed to post success logic
 	        {
-	            $form_data = array( 'msgSubject' => set_value('msgSubject'),
-	                              'msgText' => set_value('msgText'));
+	            $form_data = array( 'msgSubject' => $this->post->input('msgSubject'),
+	                              'msgText' => $this->post->input('msgText'));
 	        }
 	        // run insert model to write data to db
-	        if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],0) == TRUE) // the information has therefore been successfully saved in the db
+	        if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],0) == 'true') // the information has therefore been successfully saved in the db
 	        {             
 	            $this->session->set_flashdata("message","Problem Reported!");
 	            redirect('problem_c/index');   // or whatever logic needs to occur
