@@ -60,7 +60,6 @@
 			        redirect(current_url());
 			    }
 			}
-<<<<<<< HEAD
 		    if ($this->member_m->checkMember($form_data['username'],$form_data['email']) == "true") // the information has therefore been successfully saved in the db
 		    {             
 		    	$this->member_m->createMember($formdata);
