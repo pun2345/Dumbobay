@@ -6,7 +6,7 @@ Class member_m extends CI_Model
 		$this->db->select('user_id, username, password, type');
 		$this->db->from('user');
 		$this->db->where('username = ' . "'" . $username . "'"); 
-		$this->db->where('password = ' . "'" . $password . "'"); 
+		$this->db->where('password = ' . "'" . MD5($password) . "'"); 
 		$this->db->limit(1);
 
 		$query = $this->db->get();
