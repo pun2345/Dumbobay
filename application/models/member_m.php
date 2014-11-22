@@ -3,7 +3,7 @@ Class member_m extends CI_Model
 {
 
 	function checkLogin($username, $password){
-		$this->db->select('user_id, username, password');
+		$this->db->select('user_id, username, password, type');
 		$this->db->from('user');
 		$this->db->where('username = ' . "'" . $username . "'"); 
 		$this->db->where('password = ' . "'" . md5($password) . "'"); 
@@ -15,29 +15,36 @@ Class member_m extends CI_Model
 		{	
 			foreach ($query->result() as $row)
 				{	
-					// print_r($row);
+					//print_r($row);
 					$id = $row->user_id; 
-					echo "id = ".$row->user_id;
+					//echo "id = ".$row->user_id;
 					$userData = array(
 							'User_ID' => $id,
-							'username' => $row->username
+							'username' => $row->username,
+							'Type' => $row->type
 					);
 				}
-			$this->db->select('Activated');
-			$query2 = $this->db->get_where('Member',array('User_ID' => $id));
-			if($query->num_rows() == 1){
-				foreach ($query2->result() as $row)
-				{
-					// print_r($row);
-					if( $row->Activated== 1) 
-						// print_r($userData);
-						return $userData;
-				}
-			}	
+			if($row->type != 1)
+			{	$this->db->select('Activated');
+				$query2 = $this->db->get_where('Member',array('User_ID' => $id));
+				if($query->num_rows() == 1){
+					foreach ($query2->result() as $row)
+					{
+						// print_r($row);
+						if( $row->Activated== 1) 
+							// print_r($userData);
+							return $userData;
+					}
+				}	
+			}
+			else{
+				return $userData;
+			}
 		}
 		$userData = array(
 			'User_ID' => 0,
-			'username' => "null"
+			'username' => "null",
+			'Type' => 0
 		);
 		return $userData;
 
