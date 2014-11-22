@@ -102,7 +102,7 @@
 
 		function memberDetail($user_id){
 			$data['member'] = $this->member_m->getMemberDetail($user_id);
-			$this->load->view('member_detail.html/',$data);
+			$this->load->view('member_detail.html',$data);
 		}
 
 	}

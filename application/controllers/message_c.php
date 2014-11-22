@@ -82,14 +82,15 @@ class message_c extends CI_Controller {
 
   function manageMessageBox()
   {
-      $session_data = $this->session->userdata(logged_in);
-      $data['user_id']=$session_data['user_id'];
-      $data['messages'] = $this->message_m->getUserMessage($data['user_id']);
-      foreach($data['messages'] as $msg){
-        $member = $this->message_m->getMemberDetail($msg->Sender_ID);
-        $msg->Sender_Name = $member->Username;
+      // $session_data = $this->session->userdata(logged_in);
+      // $data['user_id']=$session_data['user_id'];
+      $data['messages'] = $this->message_m->getUserMessage(1000);
+      foreach ($data['messages']->result() as $msg){
+        $x = $this->member_m->getUserDetail($msg->Sender_ID);
+        $msg->Sender_Name = $x->Username;
+        // $msg->Sender_Name = $member['Username'];
       }
-      $this->load->view('messageBox.html/',$data);
+      $this->load->view('messageBox.html',$data);
   }
 
   function messageDetail($message_id)
