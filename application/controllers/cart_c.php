@@ -49,7 +49,7 @@ class Cart_c extends CI_Controller {
     }
     redirect("cart_c");
   }
-  function editAmount($product_id){
+  function editAmount($product_id,$amount){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
     $temp = $this->cart_m->editAmount($session_data['user_id'],$product_id,$amount);

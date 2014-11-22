@@ -106,7 +106,12 @@
                               echo $row->Price.' baht';
                             echo '</div>';
                             echo '<div class="col-md-1" style="padding-top:15px; padding-left:0px; padding-right:0px">';
-                              echo '<input style="width:100%; font-size: 12px; padding-right: 10px" type="text" class="form-control" id="'.$row->Product_ID.'" placeholder="'.$row->Quantity.'" >';
+                            echo'<form name="form" action = "" method="get">';
+                              echo '<input style="width:100%; font-size: 12px; padding-right: 10px" type="text" class="form-control" name="'.$row->Product_ID.'"
+                              id="'.$row->Product_ID.'" placeholder="'.$row->Quantity.'" >';
+                              echo'</form>';
+                              echo'<a href="cart_c/editAmount/'.$row->Product_ID.
+                              '/'.$_GET[$row->Product_ID].'"><button type="button" class="btn btn-default"> Edit Amount </button></a>';
                             echo '</div>';
                             echo '<div class="col-md-3" style="font-size: 13px; padding-top:27px; padding-right:0px; padding-left:70px">';
                               echo '2,000,000 bath';
