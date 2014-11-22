@@ -16,22 +16,11 @@ class Payment_c extends CI_Controller {
   {
     //This method will have the credentials validation
     $data['price']=$price;
-<<<<<<< HEAD
-    $transaction_ids = $this->session->flashdata("cart");
-    $this->session->keep_flashdata("cart");
-    //
-    $products = $this->session->flashdata("cart2");
-    $this->session->keep_flashdata("cart2");
-    $data['products']=$products;
-    // print_r($data['products']);
-
-=======
     $transaction_ids = $this->session->get_flashdata("cart");
     $this->session->keep_flashdata("cart");
     //
     $data['products'] = $this->session->get_flashdata("cart2");
     $this->session->keep_flashdata("cart2");
->>>>>>> 3faa1d992101c79c936dc5f36cd4e6ccbcc78695
     $this->load->view('paymentForm.html',$data);
   }
 
@@ -39,15 +28,10 @@ class Payment_c extends CI_Controller {
   {
     //This method will have the credentials validation
     $data['price']=$price;
-<<<<<<< HEAD
     $transaction_ids = $this->session->flashdata("cart");
     //
     $data['products'] = $this->session->flashdata("cart2");
-=======
-    $transaction_ids = $this->session->get_flashdata("cart");
-    //
-    $data['products'] = $this->session->get_flashdata("cart2");
->>>>>>> 3faa1d992101c79c936dc5f36cd4e6ccbcc78695
+
     $this->load->view('paymentForm.html',$data);
     $this->load->library('form_validation');
 
