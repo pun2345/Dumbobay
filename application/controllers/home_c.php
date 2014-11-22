@@ -1,3 +1,4 @@
+
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start(); //we need to call PHP's session object to access it through CI
 class Home_c extends CI_Controller {
@@ -8,7 +9,7 @@ class Home_c extends CI_Controller {
     parent::__construct();
     $this->load->helper("html");
     $this->load->helper('html');
-    $this->load->database();
+    // $this->load->database();
     $this->load->model('member_m');
   }
 
