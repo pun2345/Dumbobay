@@ -6,48 +6,27 @@ Class member_m extends CI_Model
 		$this->db->select('user_id, username, password, type');
 		$this->db->from('user');
 		$this->db->where('username = ' . "'" . $username . "'"); 
-		$this->db->where('password = ' . "'" . md5($password) . "'"); 
+		$this->db->where('password = ' . "'" . $password . "'"); 
 		$this->db->limit(1);
 
 		$query = $this->db->get();
-
+		$row = $query ->row();
 		if($query->num_rows() == 1)
-		{	
-			foreach ($query->result() as $row)
-				{	
-					//print_r($row);
-					$id = $row->user_id; 
-					//echo "id = ".$row->user_id;
-					$userData = array(
-							'User_ID' => $id,
-							'username' => $row->username,
-							'Type' => $row->type
-					);
-				}
-			if($row->type != 1)
-			{	$this->db->select('Activated');
-				$query2 = $this->db->get_where('Member',array('User_ID' => $id));
-				if($query->num_rows() == 1){
-					foreach ($query2->result() as $row)
-					{
-						// print_r($row);
-						if( $row->Activated== 1) 
-							// print_r($userData);
-							return $userData;
-					}
-				}	
-			}
-			else{
-				return $userData;
-			}
+		{
+			$userData = array(
+				'User_ID' => $row->user_id,
+				'Username' => $row->username,
+				'Type' => $row->type
+			);
+		}else{
+			$userData = array(
+				'User_ID' => 0,
+				'Username' => "",
+				'Type' => 0
+			);
 		}
-		$userData = array(
-			'User_ID' => 0,
-			'username' => "null",
-			'Type' => 0
-		);
+	
 		return $userData;
-
 	}
 	function checkUserType($user_id){
 		$query = $this->db->query("select Type from User where User_ID = $user_id");
@@ -122,13 +101,69 @@ Class member_m extends CI_Model
 		);
 		$this->db->where('User_ID',$user_id);
    		$this->db->update('member',$data2);
-   		echo $this->db->affected_rows() ."<br>";
+   		// echo $this->db->affected_rows() ."<br>";
    		if ($this->db->affected_rows() <= 0) return "false";
    	  	$this->db->trans_complete();
    	  	return "true";
 	}
 	function getMemberDetail($user_id){
 		return $this->db->query("select * from Member where User_ID=$user_id");
+	}
+	function getFeedbackScore($user_id){
+		$this->db->where('User_ID', $user_id);
+		$query=$this->db->get('member');
+		if($query->num_rows() == 1){
+			foreach ($query->result() as $row)
+			{
+			   // echo "feedback score " .$row->Feedback_Score ."<br>";
+			   return $row->Feedback_Score;
+				}
+		}
+	}
+	function updateFeedbackScore($user_id,$score){
+		$count =$this->member_m->getFeedbackCount($user_id);
+		$oldScore = $this->member_m->getFeedbackScore($user_id);
+		$newScore = ($oldScore*$count+$score)/($count+1);
+		// echo "newScore " .$newScore ."<br>";
+		$data = array(
+				'Feedback_Score' => $newScore
+			);
+			$this->db->trans_start();
+			$this->db->where('User_ID', $user_id);
+			$this->db->update('member', $data);
+			$complete = $this->db->affected_rows();
+			$this->db->trans_complete();
+			$this->member_m->incFeedbackCount($user_id);
+			if ($complete>0) {	
+				return "true";
+			}
+	}
+	function getFeedbackCount($user_id){
+		$this->db->where('User_ID', $user_id);
+		$query=$this->db->get('member');
+		if($query->num_rows() == 1){
+			foreach ($query->result() as $row)
+			{
+			   // echo "feedback Count " .$row->Feedback_Count ."<br>";
+			   return $row->Feedback_Count;
+				}
+		}
+	}
+	function incFeedbackCount($user_id){
+		$oldCount = $this->member_m->getFeedbackCount($user_id);
+		$newCount = $oldCount+1;
+		$data = array(
+				'Feedback_Count' => $newCount
+			);
+			$this->db->trans_start();
+			$this->db->where('User_ID', $user_id);
+			$this->db->update('member', $data);
+			$complete = $this->db->affected_rows();
+			$this->db->trans_complete();
+			if ($complete>0) {
+				// echo "newCount " .$newCount ."<br>";
+				return $newCount;
+			}
 	}
 }
 ?>
