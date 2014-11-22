@@ -38,10 +38,15 @@ class Login_c extends CI_Controller {
     //Field validation succeeded.  Validate against database
     $username = $this->input->post('username');
     
+    $password = $this->input->post('password');
+    //echo $username." ";
+    //echo $password." ";
     //query the database
     $result = $this->member_m->checkLogin($username, $password);
     print_r($result);
     if($result)
+    //print_r($result);
+    if($result->user_id != 0)
     {
       if($result->activated=="true"){ 
         print_r("true");
@@ -52,6 +57,17 @@ class Login_c extends CI_Controller {
           $this->session->set_userdata('logged_in', $sess_array);
         
         return TRUE;
+      //if($result->activated=="true"){ 
+      print_r($result);
+      echo $result->user_id;
+      echo $result->username;
+      $sess_array = array(
+          'user_id' => $result->user_id,
+          'username' => $result->username
+        );
+        $this->session->set_userdata('logged_in', $sess_array);
+      
+      return TRUE;
       //}else{
         //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
         //return false;
@@ -64,6 +80,13 @@ class Login_c extends CI_Controller {
         return false;
       }
     }
+    else
+    {
+      // $this->session->set_flashdata("message",'Invalid username or password');
+      $this->form_validation->set_message('check_database', 'Invalid username or password');
+      return false;
+    }
+    
   }
 }
 ?>

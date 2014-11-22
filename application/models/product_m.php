@@ -1,5 +1,5 @@
 <?php
-Class Product extends CI_Model
+Class Product_m extends CI_Model
 {
 	function search($data){
 		$query = $this->db->get_where('Product',array('name'=>$data),40);
@@ -10,7 +10,7 @@ Class Product extends CI_Model
 		$query = $this->db->get('Product');
 		return $query;
 	}
-	function getDetail(&id){
+	function getDetail($id){
 		$query = $this->db->get_where('Product',array('id'=>$id));
 		if($query->num_rows() == 1)
 		{
@@ -54,9 +54,9 @@ Class Product extends CI_Model
 		$this->db->delete('product');
 		return true;
 	}
-	function newDirectProduct();
+	//function newDirectProduct();
 	
-	function newBiddingProduct();
+	//function newBiddingProduct();
 
 }
 ?>
