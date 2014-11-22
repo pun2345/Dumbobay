@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+    <title>DUMBOBAY - shopping area</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/dumbobaycss.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      li.watchlist{
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+      
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><img src="assets/img/dumbobay-logo-sm.png"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+
+           <li><a href="#">HOME</a></li>
+           <li><a href="#">PRODUCT</a></li>
+           <li><a href="#">MY CART</a></li>
+           <li><a href="#">WATCH LIST</a></li>
+           <li><a href="#">ORDER</a></li>
+           <li><a href="#">MSG BOX</a></li>
+           <li class="active"><a href="#">HISTORY</a></li>
+           <!-- <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li> -->
+            <li><a href="index.html">SIGN OUT</a></li>
+            <li><a href="#">| Pookpik |</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div id="myheaderwrap">
+      <div class="container">
+        <div class="row centered">
+            <h2>Want it that much ? Then <b>PAY</b> more. <b>-DumboBay-</b></h2> 
+        </div><!-- row -->
+      </div><!-- container -->
+    </div><!-- headerwrap -->
+
+    <div>
+      <div class="container">
+        <div>
+
+          <div class="col-md-10 col-md-offset-1" style="padding-top:50px; padding-bottom:25px">
+            <div class="row">
+              
+              <div class="col-md-8" style="padding-left:20px">
+                <h1 style="color:black;padding-top:30px;padding-left:0px">Add product</h1>
+              </div>
+              
+            </div>
+          </div>
+          <div class="row col-md-10 col-md-offset-1">
+            <form class="form-horizontal">
+              <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                  <label for="inputName" class="col-md-2 control-label">Product name</label>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Product name">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label id="image" class="col-md-2 control-label">Product image</label>
+                  <div class="col-md-10">
+                    <input type="file" class="form-control" id="image" placeholder="Price">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputProperty" class="col-md-2 control-label">Product property</label>
+                  <div class="col-md-10">
+                    
+                    <textarea class="form-control" rows="3" id="inputProperty" placeholder="Product property"></textarea>
+                    
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputQuantity" class="col-md-2 control-label">Quantity</label>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" id="inputQuantity" placeholder="Quantity">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="condition" class="col-md-2 control-label">Product condition</label>
+                  <div class="col-md-10">
+                    <textarea class="form-control" rows="3" id="condition" placeholder="Product condition"></textarea>
+                    
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-2 control-label">Sale method</label>
+                  <div class="col-md-10">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" onclick="bid();">
+                        Bidding sale
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick="direct();">
+                        Direct sale
+                      </label>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="form-group">
+                  <label id="update" class="col-md-2 control-label">Starting price</label>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" id="inputPrice" placeholder="Price">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="package" class="col-md-2 control-label">Product packaging</label>
+                  <div class="col-md-10">
+                    <textarea class="form-control" rows="3" id="package" placeholder="Product packaging"></textarea>
+                    
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputfee" class="col-md-2 control-label">Shipping fee</label>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" id="inputfee" placeholder="Shipping fee">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputShipping" class="col-md-2 control-label">Shipping comfirmation</label>
+                  <div class="col-md-10" style="padding-top:10px">
+                    <input type="text" class="form-control" id="inputShipping" placeholder="Shipping comfirmation">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="refund" class="col-md-2 control-label">Refund policy</label>
+                  <div class="col-md-10">
+                    <textarea class="form-control" rows="3" id="refund" placeholder="Refund policy"></textarea>
+                    
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="fee" class="col-md-2 control-label">Other fee</label>
+                  <div class="col-md-10">
+                    <textarea class="form-control" rows="3" id="fee" placeholder="Other fee"></textarea>
+                    
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <div class="col-md-10 col-md-offset-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button class="btn btn-default">Cancel</button>
+                    
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="f" style="margin-top:50px">
+      <div class="container">
+        <div class="row">
+        <div class="col-md-6 col-md-push-2">
+          <img src="assets/img/DumboBay-Logo-b.png">
+        </div>
+        <div class="col-md-6 col-md-push-2">
+          <img src="assets/img/Frappe-Logo-bg-sm.png">
+        </div>
+        </div><!-- row -->
+      </div><!-- container -->
+    </div><!-- Footer -->
+
+
+    <script type="text/javascript">
+            function bid(){
+                document.getElementById("update").innerHTML = "Starting price";
+            }
+            function direct(){
+                document.getElementById("update").innerHTML = "Price";
+            }
+        </script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+  </body>
+</html>
