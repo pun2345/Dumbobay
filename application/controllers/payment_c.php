@@ -31,7 +31,6 @@ class Payment_c extends CI_Controller {
     //$transaction_ids = $this->get_flashdata("cart");
     $transaction_ids[] = 1;
     $transaction_ids[] = 2;
-    $transaction_ids[] = 3;
     //
     //$data['products'] = $this->get_flashdata("cart2");
     $product1 = array('name'=>'testProduct',
