@@ -113,7 +113,7 @@ Class member_m extends CI_Model
    	  	return "true";
 	}
 	function getMemberDetail($user_id){
-		return $this->db->query("select * from Member where User_ID=$user_id");
+		return $this->db->query("select * from Member where User_ID=$user_id")->row();
 	}
 	function getFeedbackScore($user_id){
 		$this->db->where('User_ID', $user_id);

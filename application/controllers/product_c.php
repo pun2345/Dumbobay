@@ -342,8 +342,19 @@ class Product_c extends CI_Controller {
     }
     redirect('home_c');
   }
-  // function 
-  // redirect("bidding_c/initializeStepBidding/".$product_id)
+  function maxBiddingForm(){
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('maxbid', 'maxbid', 'trim|required');
+
+  }
+
+  function joinMaxBidding($product_id){
+
+  } 
+  function joinStepBidding($product_id){
+    redirect("bidding_c/initializeStepBidding/".$product_id);
+  }
+  
   // redirect("bidding_c/initializeMaxBidding/"$product_id)
   
   function isLogin(){
