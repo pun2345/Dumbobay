@@ -83,7 +83,7 @@
 						<div class="productcontainer">
 							<?php 
 
-								foreach($products as $product=>$row){
+								foreach($products->result() as $row){
 								if($row->Type==1){
 									echo "<hr>";
 									echo "<div class=\"row\">";
@@ -126,7 +126,7 @@
 						<div class="productcontainer">
 							<?php 
 
-								foreach($products as $product=>$row){
+								foreach($products->result() as $row){
 								if($row->Type==2){
 									echo "<hr>";
 									echo "<div class=\"row\">";
