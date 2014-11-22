@@ -21,16 +21,18 @@ class Cart_c extends CI_Controller {
     //$data['products'] = $this->cart_m->getProductInCart($session_data['user_id']);
     $product1=array("product_id"=>1,
                     "name" => "product1",
-                    "image" => ,
+                    "image" => 'assets/img/imac-retina-step1-hero-2014.jpeg',
                     "price" => 50,
                     "amount" => 1);
-    $product1=array("product_id"=>2,
+    $product2=array("product_id"=>2,
                     "name" => "product2",
-                    "image" => ,
+                    "image" => 'assets/img/imac-retina-step1-hero-2014.jpeg',
                     "price" => 150,
                     "amount" => 1);
     $products[] = $product1;
     $products[] = $product2;
+    
+    $data['products']=$products;
     $this->load->view('cart.html',$data);
     $this->load->view('footer.html');
   }
@@ -69,25 +71,26 @@ class Cart_c extends CI_Controller {
   }
   function checkOut(){
     $this->load->helper('date');
+    echo "checkout";
     // $session_data = $this->session->userdata('logged_in');
     // $products = $this->cart_m->getProductInCart($session_data['user_id']);
     $product1=array("product_id"=>1,
                     "name" => "product1",
-                    "image" => ,
+                    "image" => 'assets/img/imac-retina-step1-hero-2014.jpeg',
                     "price" => 50,
                     "amount" => 1);
-    $product1=array("product_id"=>2,
+    $product2=array("product_id"=>2,
                     "name" => "product2",
-                    "image" => ,
+                    "image" => 'assets/img/imac-retina-step1-hero-2014.jpeg',
                     "price" => 150,
                     "amount" => 1);
     $products[] = $product1;
     $products[] = $product2;
     $sumamount = 0;
-    foreach ($products as $product) {
-      $amount = $product->amount;
-      $price = $product->price;
-      $sumamount = $sumamount+$amount*$price;
+    foreach ($products as $product=>$row) {
+      $amount = $row['amount'];
+      $price = $row['price'];
+      $sumamount = $sumamount+($amount*$price);
       $transaction = array( 'datetime' => date('Y-m-d H:i:s'),
                             'status' => 'waiting for payment',
                             'status_detail' => '',
@@ -99,7 +102,7 @@ class Cart_c extends CI_Controller {
                             'buyer_feedback' => null,
                             'buyer_id' => 1,
                             // 'buyer_id' => $session_data['user_id'],
-                            'product_id'=>$product->product_id);
+                            'product_id'=>$row['product_id']);
       
       $transaction_ids[] = 1;
       $transaction_ids[] = 2;
@@ -107,7 +110,7 @@ class Cart_c extends CI_Controller {
     }
     $this->session->set_flashdata("cart",$transaction_ids);
     $this->session->set_flashdata("cart2",$products);
-    redirect('payment_c/'.$sumamount);
+    redirect('payment_c/index/'.$sumamount);
   }
   function afterPaid(){
     // $session_data = $this->session->userdata('logged_in');

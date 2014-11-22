@@ -7,7 +7,7 @@ class Login_c extends CI_Controller {
     parent::__construct();
     $this->load->helper('html');
 
-    $this->load->database();
+    // $this->load->database();
 
     $this->load->model('member_m');
   }
@@ -43,11 +43,7 @@ class Login_c extends CI_Controller {
     print_r($result);
     if($result)
     {
-<<<<<<< HEAD
-      //if($result->activated){ 
-=======
       if($result->activated=="true"){ 
->>>>>>> 0be5bbb20db951d89b7d55050cb28004a984fb9c
         print_r("true");
         $sess_array = array(
             'user_id' => $result->user_id,
@@ -60,12 +56,13 @@ class Login_c extends CI_Controller {
         //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
         //return false;
       //}
-    }
-    else
-    {
-      // $this->session->set_flashdata("message",'Invalid username or password');
-      $this->form_validation->set_message('check_database', 'Invalid username or password');
-      return false;
+      }
+      else
+      {
+        // $this->session->set_flashdata("message",'Invalid username or password');
+        $this->form_validation->set_message('check_database', 'Invalid username or password');
+        return false;
+      }
     }
   }
 }
