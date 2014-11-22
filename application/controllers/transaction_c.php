@@ -91,7 +91,7 @@ class Transaction_c extends CI_Controller {
       else
       {
         $this->session->set_flashdata("message","Updating Status Failed! Try Again.");
-        redirect(current_url());
+        redirect("transacion_c/viewTransactionDetail/".$transaction_id);
       }
     }
   }
