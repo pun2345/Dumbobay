@@ -27,7 +27,7 @@ Class product_m extends CI_Model
 							$size,$property,$defect,$quality,$payment,$return_product,$return_fee,
 							$packaging,$delivery_fee,$delivery_confirmation,$tax,$quantity,$user_id){
 		$data1 = array(
-			// 'Product_ID' => $id, 
+			'Type' => 1,
 			'Name' => $name, 
 			'Image'=> $image,
 			'Brand' => $brand, 
@@ -66,6 +66,7 @@ Class product_m extends CI_Model
 		$status,$current_price,$current_max_bid,$current_win_cust_id,$bid_increment,$user_id){
 
 		$data1 = array(
+			'Type' => 2,
 			'Name' => $name, 
 			'Image'=> $image,
 			'Brand' => $brand, 
