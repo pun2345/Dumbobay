@@ -19,7 +19,7 @@
 	        $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
 	        if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 	        {
-	            $this->load->view('report.html',$data);
+	            $this->load->view('problemForm.html',$data);
 	        }
 	        else // passed validation proceed to post success logic
 	        {
