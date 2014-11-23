@@ -21,6 +21,10 @@ Class transaction_m extends CI_Model {
 	function getTransactionDetail($transaction_id){
 		return $this->db->get_where('transaction',array('Transaction_ID'=>$transaction_id))->row();
 	}
+	function getTenCustTransaction($buyer_id){
+		$this->db->limit(10);
+		return $this->db->get_where('transaction',array('Buyer_ID'=>$buyer_id));
+	}
 	function getCustTransaction($buyer_id){
 		return $this->db->get_where('transaction',array('Buyer_ID'=>$buyer_id));
 	}

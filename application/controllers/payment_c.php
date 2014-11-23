@@ -40,7 +40,10 @@ class Payment_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $data['products'] = $this->session->flashdata("cart2");
+      $
+    $products = $this->session->flashdata("cart2");
+    $this->session->keep_flashdata("cart2");
+    $data['products'] = $products;
 
     //$this->load->view('paymentForm.html',$data);
     $this->load->library('form_validation');
@@ -61,8 +64,9 @@ class Payment_c extends CI_Controller {
         $this->transaction_m->updateStatus($transaction_id,"already Paid","");
         Feedback($transaction_id);
       }
-      $this->session->set_flashdata('cart2',$data['products']);
-      redirect('cart/afterPaid');
+      // $this->session->set_flashdata("cart2",$products);
+    $this->session->keep_flashdata("cart2");
+      redirect('cart_c/afterPaid');
     }
     //$this->load->view('payment_view',$data);
 
