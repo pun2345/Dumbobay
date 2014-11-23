@@ -19,20 +19,30 @@ class Report_c extends CI_Controller {
     // $session_data = $this->session->userdata('logged_in');
     // $data['user_id'] = $session_data['user_id'];
     // $data['username'] = $session_data['username'];
-    $data['products'] = $this->transaction_m->getTopTenBestProduct();
-    $data['sellers'] = $this->transaction_m->getTopTenBestSeller();
-    $data['blacklistUsers'] = $this->member_m->getBlacklist();
-    $this->load->view("report.html",$data);
+    $data['type'] = 0;
+    if($this->session->userdata('logged_in'))
+    {
+      $session_data = $this->session->userdata('logged_in');
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
+      $data['type'] = $session_data['type'];
+
+      $data['products'] = $this->transaction_m->getTopTenBestProduct();
+      $data['sellers'] = $this->transaction_m->getTopTenBestSeller();
+      $data['blacklistUsers'] = $this->member_m->getBlacklist();
+      $this->load->view("report.html",$data);
+    }
+    else
+    {
+      //If no session, redirect to login page
+      // $this->load->view('product.html',$data
+      redirect("home_c");
+            // $this->load->view('footer.html');
+    }
+
+  
   }
 
-  // function isLogin(){
-  //   if($this->session->userdata('logged_in')){
-  //     return true;
-  //   } else{
-  //     $this->session->set_flashdata("message","Please Login!");
-  //     redirect('home');
-  //   }
-  // }
 
 }
 ?>
