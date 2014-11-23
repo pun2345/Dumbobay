@@ -92,7 +92,12 @@ class message_c extends CI_Controller {
       $data['user_id']=$session_data['user_id'];
       $data['type'] = $session_data['type'];
       $data['username'] = $session_data['username'];
-      $data['messages'] = $this->message_m->getUserMessage($data['user_id']);
+      if($data['type'] == 1){
+          $data['messages'] = $this->message_m->getUserMessage(0);
+      }
+      else{
+          $data['messages'] = $this->message_m->getUserMessage($data['user_id']);
+      }
       foreach ($data['messages']->result() as $msg){
         $x = $this->member_m->getMemberDetail($msg->Sender_ID);
         $msg->Sender_Name = $x->Username;

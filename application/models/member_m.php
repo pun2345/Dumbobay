@@ -92,10 +92,16 @@ Class member_m extends CI_Model
 			select User_ID, Username, Email 
 			from Member 
 			join User using (User_ID) 
-			where Blacklist_score >=$maxScore 
+			where Blacklist_score <=$maxScore 
 			order by user_id ");
 	}
-	function incBlacklist($user_id){
+	function getBlacklistScore($user_id){
+		$maxScore = $this->member_m->getBlacklistMaxScore();
+		$this->db->select('Blacklist_score');
+		$query = $this->db->get_where('Member',array('User_ID'=>$user_id));
+		return $query->row()->Blacklist_score;
+	}
+	function incBlacklistScore($user_id){
 		$oldScore = $this->member_m->getBlacklist($user_id);
 		$newScore = $oldScore+1;
 		$data = array(
