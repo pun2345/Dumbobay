@@ -56,6 +56,7 @@
 			    	redirect('member_c/createMember');
 			    }	
 			}
+		}
 		
 		function confirmMember($user_id){
 		    $session_data = $this->session->userdata('logged_in');
