@@ -16,7 +16,7 @@ Class cart_m extends CI_Model
 		else return "false";
 	}
 	function getProductInCart($user_id){
-			return $this->db->get_where('Cart',array('User_ID'=>$user_id));
+			 return $this->db->query("select * from cart join Product using (product_id) where User_ID = $user_id");
 	}
 	function checkProductIncart($user_id,$product_id){
 		$this->db->where('Product_ID', $product_id);

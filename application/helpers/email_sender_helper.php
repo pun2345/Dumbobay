@@ -3,9 +3,6 @@
 function test($text ='test test test'){
 
 		$CI =& get_instance();
-
-
-
         $CI->load->library('email');               
         //or autoload it from /application/config/autoload.php
 
@@ -17,7 +14,7 @@ function test($text ='test test test'){
 	    $config['smtp_pass']    = '2345pun2345pun';
 	    $config['charset']      = 'utf-8';
 	    $config['newline']      = "\r\n";
-	    $config['mailtype']     = 'text';
+	    $config['mailtype']     = 'html';
 	    $config['validation']   = TRUE;
 
 		$CI->email->initialize($config);
@@ -25,7 +22,7 @@ function test($text ='test test test'){
 		$CI->email->from('pun_Taweekiat@hotmail.com'); 
 		$CI->email->to('pun_Taweekiat@hotmail.com'); 
 		$CI->email->subject('test123');
-		$CI->email->message($text);
+		$CI->email->message("Follow the link: <a href=\"localhost/Dumbobay/index.php/home_c\">Localhost/Dumbobay/index.php/home_c</a>");
 		if($CI->email->send())
 			return true;
 		return false;
@@ -34,14 +31,35 @@ function test($text ='test test test'){
 	//}
 	//return false
 }
-/*function highest_bid($id,$product_id){
-	$user_data = $this->member_m->getMemberDetail($id);
-	$product_data = $this->member_m->getDetail($product_id);
-	$this->email->to($user_data['E-mail']); 
-	$subject = "Current Highest Bid on ".$product_data['Name']
+
+function winning_Bid($id,$product_id){
+	$CI =& get_instance();
+	$CI->load->model('member_m');
+	$CI->load->model('product_m');
+    $CI->load->library('email');               
+
+    $config['protocol']     = 'smtp';
+    $config['smtp_host']    = 'ssl://smtp.gmail.com';
+    $config['smtp_port']    = '465';
+    $config['smtp_timeout'] = '7';
+    $config['smtp_user']    = 'pun2345@gmail.com';
+    $config['smtp_pass']    = '2345pun2345pun';
+    $config['charset']      = 'utf-8';
+    $config['newline']      = "\r\n";
+    $config['mailtype']     = 'text';
+    $config['validation']   = TRUE;
+
+	$user_data = $CI->member_m->getMemberDetail($id);
+	$product_data = $CI->product_m->getDetail($product_id);
+
+	$CI->email->to($user_data['E-mail']); 
+	
+	$subject = "Winning: ".$product_data['Name'];
 	$this->email->subject($subject);
-	$text = "To ".$user_data['name']."\r\n you has the current hihgest bid on ".$product_data['name']."\r\nFrom Dumbobay";
+	
+	$text = "To ".$user_data['name']."\r\n you has the current hihgest bid on ".$product_data['name'].".\r\nFrom Dumbobay";
 	$this->email->message($text);
+	
 	if($this->email->send())
 		return true;
 	return false;
@@ -49,5 +67,156 @@ function test($text ='test test test'){
 	//	return true;
 	//}
 	//return false
-}*/
+}
+
+function losing_Bid($id,$product_id){
+	$CI =& get_instance();
+	$CI->load->model('member_m');
+	$CI->load->model('product_m');
+    $CI->load->library('email');               
+
+    $config['protocol']     = 'smtp';
+    $config['smtp_host']    = 'ssl://smtp.gmail.com';
+    $config['smtp_port']    = '465';
+    $config['smtp_timeout'] = '7';
+    $config['smtp_user']    = 'pun2345@gmail.com';
+    $config['smtp_pass']    = '2345pun2345pun';
+    $config['charset']      = 'utf-8';
+    $config['newline']      = "\r\n";
+    $config['mailtype']     = 'text';
+    $config['validation']   = TRUE;
+
+	$user_data = $CI->member_m->getMemberDetail($id);
+	$product_data = $CI->product_m->getDetail($product_id);
+
+	$CI->email->to($user_data['E-mail']); 
+	
+	$subject = "Losing: ".$product_data['Name'];
+	$this->email->subject($subject);
+	
+	$text = "To ".$user_data['name']."\r\n your bid was beaten on ".$product_data['name'].".\r\nFrom Dumbobay";
+	$this->email->message($text);
+	
+	if($this->email->send())
+		return true;
+	return false;
+	//if($this->email->print_debugger()){
+	//	return true;
+	//}
+	//return false
+}
+
+function win_Bid($id,$product_id){
+	$CI =& get_instance();
+	$CI->load->model('member_m');
+	$CI->load->model('product_m');
+    $CI->load->library('email');               
+
+    $config['protocol']     = 'smtp';
+    $config['smtp_host']    = 'ssl://smtp.gmail.com';
+    $config['smtp_port']    = '465';
+    $config['smtp_timeout'] = '7';
+    $config['smtp_user']    = 'pun2345@gmail.com';
+    $config['smtp_pass']    = '2345pun2345pun';
+    $config['charset']      = 'utf-8';
+    $config['newline']      = "\r\n";
+    $config['mailtype']     = 'text';
+    $config['validation']   = TRUE;
+
+	$user_data = $CI->member_m->getMemberDetail($id);
+	$product_data = $CI->product_m->getDetail($product_id);
+
+	$CI->email->to($user_data['E-mail']); 
+	
+	$subject = "Win Bid: ".$product_data['Name'];
+	$this->email->subject($subject);
+	
+	$text = "To ".$user_data['name']."\r\n you win the bid of ".$product_data['name'].".\r\nPlease proceed the payment.\r\nFrom Dumbobay";
+	$this->email->message($text);
+	
+	if($this->email->send())
+		return true;
+	return false;
+	//if($this->email->print_debugger()){
+	//	return true;
+	//}
+	//return false
+}
+
+function BlackList($id,$product_id){
+	$CI =& get_instance();
+	$CI->load->model('member_m');
+	$CI->load->model('product_m');
+    $CI->load->library('email');               
+
+    $config['protocol']     = 'smtp';
+    $config['smtp_host']    = 'ssl://smtp.gmail.com';
+    $config['smtp_port']    = '465';
+    $config['smtp_timeout'] = '7';
+    $config['smtp_user']    = 'pun2345@gmail.com';
+    $config['smtp_pass']    = '2345pun2345pun';
+    $config['charset']      = 'utf-8';
+    $config['newline']      = "\r\n";
+    $config['mailtype']     = 'text';
+    $config['validation']   = TRUE;
+
+	$user_data = $CI->member_m->getMemberDetail($id);
+	$product_data = $CI->product_m->getDetail($product_id);
+
+	$CI->email->to($user_data['E-mail']); 
+	
+	$subject = "Blacklist: ".$product_data['Name'];
+	$this->email->subject($subject);
+	
+	$text = "To ".$user_data['name']."\r\n 
+	you are now on BlackList becuase exceeding payment time limit on ".$product_data['name'].".\r\n
+	Your Blacklist Score is now ".$user_data['Blacklist_Score'].".\r\n
+	From Dumbobay";
+	$this->email->message($text);
+	
+	if($this->email->send())
+		return true;
+	return false;
+	//if($this->email->print_debugger()){
+	//	return true;
+	//}
+	//return false
+}
+
+function Feedback($id,$link){
+	$CI =& get_instance();
+	$CI->load->model('member_m');
+	$CI->load->model('product_m');
+    $CI->load->library('email');               
+
+    $config['protocol']     = 'smtp';
+    $config['smtp_host']    = 'ssl://smtp.gmail.com';
+    $config['smtp_port']    = '465';
+    $config['smtp_timeout'] = '7';
+    $config['smtp_user']    = 'pun2345@gmail.com';
+    $config['smtp_pass']    = '2345pun2345pun';
+    $config['charset']      = 'utf-8';
+    $config['newline']      = "\r\n";
+    $config['mailtype']     = 'link';
+    $config['validation']   = TRUE;
+
+	$user_data = $CI->member_m->getMemberDetail($id);
+	$product_data = $CI->product_m->getDetail($product_id);
+
+	$CI->email->to($user_data['E-mail']); 
+	
+	$subject = "Feedback: ".$product_data['Name'];
+	$this->email->subject($subject);
+	
+	$text = "To ".$user_data['name']."\r\n 
+	Please give feed back to the".$product_data['name']." transaction.\r\n
+	Follow the link: <a href=\"".$link."\">".$link."</a>.\r\nFrom Dumbobay";
+		if($CI->email->send())
+	
+	$this->email->message($text);
+	
+	if($this->email->send())
+		return true;
+	return false;
+}
 ?>

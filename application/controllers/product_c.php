@@ -76,60 +76,60 @@ class Product_c extends CI_Controller {
     $data['type'] = $session_data['type'];
     $this->load->library('form_validation');
     $this->form_validation->set_rules('type', 'type', 'required');
-    $this->form_validation->set_rules('name', 'name', 'trim|required|max_length[30]');      
-    $this->form_validation->set_rules('image', 'image', 'trim|required|max_length[70]');
-    $this->form_validation->set_rules('brand', 'brand', 'rtrim|required|max_length[250]');      
-    $this->form_validation->set_rules('model', 'model', 'trim|required|max_length[250]');
-    $this->form_validation->set_rules('price', 'price', 'trim|required');      
-    $this->form_validation->set_rules('additional_info', 'additional_info', 'trim|required|text');
-    $this->form_validation->set_rules('capacity', 'capacity', 'trim|required|max_length[250]');      
-    $this->form_validation->set_rules('size', 'size', 'trim|required|max_length[250]');
-    $this->form_validation->set_rules('property', 'property', 'trim|required|max_length[250]');      
-    $this->form_validation->set_rules('defect', 'defect', 'trim|required|max_length[250]');
-    $this->form_validation->set_rules('quality', 'quality', 'trim|required|max_length[250]');      
-    $this->form_validation->set_rules('payment', 'payment', 'trim|required|max_length[250]');
-    $this->form_validation->set_rules('return_product', 'return_product', 'trim|required|max_length[250]');
-    $this->form_validation->set_rules('return_fee', 'return_fee', 'trim');      
-    $this->form_validation->set_rules('packaging', 'packaging', 'trim|max_length[250]');
-    $this->form_validation->set_rules('delevery_fee', 'delivery_fee', 'trim|max_length[250]');      
-    $this->form_validation->set_rules('delivry_confirmation', 'delivry_confirmation', 'trim|max_length[250]');
-    $this->form_validation->set_rules('tax', 'tax', 'trim|max_length[250]');  
-    $this->form_validation->set_rules('quantity', 'quantity', 'trim'); 
-    $this->form_validation->set_rules('end_datetime', 'end_datetime', 'trim'); 
+    $this->form_validation->set_rules('Name', 'Name', 'trim|required|max_length[30]');      
+    $this->form_validation->set_rules('Image', 'Image', 'trim|max_length[70]');
+    $this->form_validation->set_rules('Brand', 'Brand', 'rtrim|max_length[250]');      
+    $this->form_validation->set_rules('Model', 'Model', 'trim|max_length[250]');
+    $this->form_validation->set_rules('Price', 'Price', 'trim|required');      
+    $this->form_validation->set_rules('Additional_Info', 'Additional_Info', 'trim|text');
+    $this->form_validation->set_rules('Capacity', 'Capacity', 'trim|max_length[250]');      
+    $this->form_validation->set_rules('Size', 'Size', 'trim|max_length[250]');
+    $this->form_validation->set_rules('Property', 'Property', 'trim|max_length[250]');      
+    $this->form_validation->set_rules('Defect', 'Defect', 'trim|max_length[250]');
+    $this->form_validation->set_rules('Quality', 'Quality', 'trim|max_length[250]');      
+    $this->form_validation->set_rules('Payment', 'Payment', 'trim|max_length[250]');
+    $this->form_validation->set_rules('Return_Product', 'Return_Product', 'trim|max_length[250]');
+    $this->form_validation->set_rules('Return_Fee', 'Return_Fee', 'trim');      
+    $this->form_validation->set_rules('Packaging', 'Packaging', 'trim|max_length[250]');
+    $this->form_validation->set_rules('Delevery_Fee', 'Delivery_Fee', 'trim|max_length[250]');      
+    $this->form_validation->set_rules('Delivry_Confirmation', 'Delivry_Confirmation', 'trim|max_length[250]');
+    $this->form_validation->set_rules('Tax', 'Tax', 'trim|max_length[250]');  
+    $this->form_validation->set_rules('Quantity', 'Quantity', 'trim'); 
+    $this->form_validation->set_rules('End_Datetime', 'End_Datetime', 'trim'); 
 
     $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
     if($this->form_validation->run() == FALSE)
     {
-      $this->load->view('newProduct_form.html',$data);
+      $this->load->view('add_product.html',$data);
     $this->load->view('footer.html');
     }
     else
     {
       $type = $this->input->post('type');
-      $name = $this->input->post('name');      
-      $image = $this->input->post('image');
-      $brand = $this->input->post('brand');      
-      $model = $this->input->post('model');
-      $price = $this->input->post('price');      
-      $additional_info = $this->input->post('additional_info');
-      $capacity = $this->input->post('capacity');      
-      $size = $this->input->post('size');
-      $property = $this->input->post('property');      
-      $defect = $this->input->post('defect');
-      $quality = $this->input->post('quality');      
-      $payment = $this->input->post('payment');
-      $return_product = $this->input->post('return_product');
-      $return_fee = $this->input->post('return_fee');      
-      $packaging = $this->input->post('packaging');
-      $delevery_fee = $this->input->post('delivery_fee');      
-      $delivry_confirmation = $this->input->post('delivry_confirmation');
-      $tax = $this->input->post('tax');
+      $name = $this->input->post('Name');      
+      $image = $this->input->post('Image');
+      $brand = $this->input->post('Brand');      
+      $model = $this->input->post('Model');
+      $price = $this->input->post('Price');      
+      $additional_info = $this->input->post('Additional_Info');
+      $capacity = $this->input->post('Capacity');      
+      $size = $this->input->post('Size');
+      $property = $this->input->post('Property');      
+      $defect = $this->input->post('Defect');
+      $quality = $this->input->post('Quality');      
+      $payment = $this->input->post('Payment');
+      $return_product = $this->input->post('Return_Product');
+      $return_fee = $this->input->post('Return_Fee');      
+      $packaging = $this->input->post('Packaging');
+      $delevery_fee = $this->input->post('Delivery_Fee');      
+      $delivry_confirmation = $this->input->post('Delivry_Confirmation');
+      $tax = $this->input->post('Tax');
       if($type == 1){ // direct product
-        $quantity = $this->input->post('quantity');
+        $quantity = $this->input->post('Quantity');
       }
       if($type == 2){ // bidding
-        $end_datetime = $this->input->post('end_datetime');
+        $end_datetime = $this->input->post('End_Datetime');
         $status = "auction start";
         $current_price = $price;
         $current_max_bid = 0;

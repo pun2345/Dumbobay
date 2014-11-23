@@ -11,12 +11,12 @@
     <title>DUMBOBAY - shopping area</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/dumbobaycss.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -85,20 +85,23 @@
             </div>
           </div>
           <div class="row col-md-10 col-md-offset-1">
+            <?php echo validation_errors(); ?>
+            <?php echo form_open("product_c/newProduct");?>
+
             <form class="form-horizontal">
               <fieldset>
                 <legend></legend>
                 <div class="form-group">
                   <label for="inputName" class="col-md-2 control-label">Product name</label>
                   <div class="col-md-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="Product name">
+                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Product name">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label id="image" class="col-md-2 control-label">Product image</label>
                   <div class="col-md-10">
-                    <input type="file" class="form-control" id="image" placeholder="Price">
+                    <input type="file" class="form-control" id="Image">
                   </div>
                 </div>
 
@@ -106,7 +109,7 @@
                   <label for="inputProperty" class="col-md-2 control-label">Product property</label>
                   <div class="col-md-10">
                     
-                    <textarea class="form-control" rows="3" id="inputProperty" placeholder="Product property"></textarea>
+                    <textarea class="form-control" rows="3" id="Property" placeholder="Product property"></textarea>
                     
                   </div>
                 </div>
@@ -114,14 +117,14 @@
                 <div class="form-group">
                   <label for="inputQuantity" class="col-md-2 control-label">Quantity</label>
                   <div class="col-md-10">
-                    <input type="text" class="form-control" id="inputQuantity" placeholder="Quantity">
+                    <input type="text" class="form-control" id="Quantity" placeholder="Quantity">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="condition" class="col-md-2 control-label">Product condition</label>
                   <div class="col-md-10">
-                    <textarea class="form-control" rows="3" id="condition" placeholder="Product condition"></textarea>
+                    <textarea class="form-control" rows="3" id="Quality" placeholder="Product condition"></textarea>
                     
                   </div>
                 </div>
@@ -131,13 +134,13 @@
                   <div class="col-md-10">
                     <div class="radio">
                       <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" onclick="bid();">
+                        <input type="radio" id="type" name="type" value=2 checked="" onclick="bid();">
                         Bidding sale
                       </label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick="direct();">
+                        <input type="radio" id="type" name="type"value=1 onclick="direct();">
                         Direct sale
                       </label>
                     </div>
@@ -147,35 +150,35 @@
                 <div class="form-group">
                   <label id="update" class="col-md-2 control-label">Starting price</label>
                   <div class="col-md-10">
-                    <input type="text" class="form-control" id="inputPrice" placeholder="Price">
+                    <input type="text" class="form-control" id="Price" name="Price" placeholder="Price">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="package" class="col-md-2 control-label">Product packaging</label>
                   <div class="col-md-10">
-                    <textarea class="form-control" rows="3" id="package" placeholder="Product packaging"></textarea>
+                    <textarea class="form-control" rows="3" id="Packaging" placeholder="Product packaging"></textarea>
                     
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="inputfee" class="col-md-2 control-label">Shipping fee</label>
+                  <label for="Delivery_Fee" class="col-md-2 control-label">Shipping fee</label>
                   <div class="col-md-10">
-                    <input type="text" class="form-control" id="inputfee" placeholder="Shipping fee">
+                    <input type="text" class="form-control" id="Delivery_Fee" placeholder="Shipping fee">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputShipping" class="col-md-2 control-label">Shipping comfirmation</label>
+                  <label for="Delivery_Comfirmation" class="col-md-2 control-label">Shipping comfirmation</label>
                   <div class="col-md-10" style="padding-top:10px">
-                    <input type="text" class="form-control" id="inputShipping" placeholder="Shipping comfirmation">
+                    <input type="text" class="form-control" id="Delivery_Confirmation" placeholder="Shipping comfirmation">
                   </div>
                 </div>
                 
                 <div class="form-group">
-                  <label for="refund" class="col-md-2 control-label">Refund policy</label>
+                  <label for="Refund_Product" class="col-md-2 control-label">Refund policy</label>
                   <div class="col-md-10">
-                    <textarea class="form-control" rows="3" id="refund" placeholder="Refund policy"></textarea>
+                    <textarea class="form-control" rows="3" id="Refund_Product" placeholder="Refund policy"></textarea>
                     
                   </div>
                 </div>
@@ -183,7 +186,7 @@
                 <div class="form-group">
                   <label for="fee" class="col-md-2 control-label">Other fee</label>
                   <div class="col-md-10">
-                    <textarea class="form-control" rows="3" id="fee" placeholder="Other fee"></textarea>
+                    <textarea class="form-control" rows="3" id="Tax" placeholder="Other fee"></textarea>
                     
                   </div>
                 </div>

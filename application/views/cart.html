@@ -88,7 +88,7 @@
         
         <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white; padding-bottom: 20px">
           <ol style="list-style-type:none; padding-left: 0px ;padding-bottom: 0px">
-
+<!-- 
 <<<<<<< HEAD
             <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
               <div class="row">
@@ -241,7 +241,7 @@
                 </div>
               </div>
             </li>
-=======
+======= -->
           <?php foreach($products->result() as $row)
                 {
                   echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">';
@@ -259,12 +259,14 @@
                               echo $row->Price.' baht';
                             echo '</div>';
                             echo '<div class="col-md-1" style="padding-top:15px; padding-left:0px; padding-right:0px">';
-                            echo'<form name="form" action = "" method="get">';
+                            echo'<form name="form" action = "cart_c/editAmount/'.$row->Product_ID.
+                              '" method="post">';
                               echo '<input style="width:100%; font-size: 12px; padding-right: 10px" type="text" class="form-control" name="'.$row->Product_ID.'"
                               id="'.$row->Product_ID.'" placeholder="'.$row->Quantity.'" >';
+
+                              echo'<button type="submit" class="btn btn-default"> Edit Amount </button>';
                               echo'</form>';
-                              echo'<a href="cart_c/editAmount/'.$row->Product_ID.
-                              '/'.$_GET[$row->Product_ID].'"><button type="button" class="btn btn-default"> Edit Amount </button></a>';
+                              
                             echo '</div>';
                             echo '<div class="col-md-3" style="font-size: 13px; padding-top:27px; padding-right:0px; padding-left:70px">';
                               echo '2,000,000 bath';
@@ -288,7 +290,6 @@
                   echo '</li>';
                 }
               ?>
->>>>>>> 9b9b99b7e67e5bc022c381bd5ee9f8a9dfe06572
             
           </ol>
           <div class="row" style="padding-bottom:0px">
