@@ -22,17 +22,17 @@
 	        {
 	            $form_data = array( 'msgSubject' => $this->post->input('msgSubject'),
 	                              'msgText' => $this->post->input('msgText'));
-	        }
-	        // run insert model to write data to db
-	        if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],0) == 'true') // the information has therefore been successfully saved in the db
-	        {             
-	            $this->session->set_flashdata("message","Problem Reported!");
-	            redirect('problem_c/index');   // or whatever logic needs to occur
-	        }
-	        else
-	        {
-	            $this->session->set_flashdata("message","Error to report problem");
-	            redirect('problem_c/index');
+		        // run insert model to write data to db
+		        if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],0) == 'true') // the information has therefore been successfully saved in the db
+		        {             
+		            $this->session->set_flashdata("message","Problem Reported!");
+		            redirect('problem_c/index');   // or whatever logic needs to occur
+		        }
+		        else
+		        {
+		            $this->session->set_flashdata("message","Error to report problem");
+		            redirect('problem_c/index');
+		        }
 	        }
 
 		}
