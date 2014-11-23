@@ -39,6 +39,18 @@
           document.getElementById("update").innerHTML = "Price";
       }
     </script>
+
+    <script type="text/javascript">
+      function quantity(){
+        var x = document.getElementById("quantity").innerHTML;
+        document.getElementById("form1").innerHTML = x;
+      }
+      function expDate(){
+        var x = document.getElementById("expDate").innerHTML;
+        document.getElementById("form1").innerHTML = x;
+      }
+    </script>
+
   </head>
 
   <body>
@@ -124,13 +136,6 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="inputQuantity" class="col-md-2 control-label">Quantity</label>
-                  <div class="col-md-10">
-                    <input type="text" class="form-control" id="Quantity" placeholder="Quantity">
-                  </div>
-                </div>
-
-                <div class="form-group">
                   <label for="condition" class="col-md-2 control-label">Product condition</label>
                   <div class="col-md-10">
                     <textarea class="form-control" rows="3" id="Quality" placeholder="Product condition"></textarea>
@@ -143,19 +148,44 @@
                   <div class="col-md-10">
                     <div class="radio">
                       <label>
-                        <input type="radio" id="type" name="type" value=2 checked="" onclick="bid();">
+                        <input type="radio" id="type" name="type" value=2 checked="" onclick="bid();expDate();">
                         Bidding sale
                       </label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" id="type" name="type"value=1 onclick="direct();">
+                        <input type="radio" id="type" name="type"value=1 onclick="direct();quantity();">
                         Direct sale
                       </label>
                     </div>
                   </div>
                   
                 </div>
+
+                <div class="form-group" id="form1">
+                  <label for="End_Datetime" class="col-md-2 control-label">Expiration Date</label>
+                  <div class="col-md-10">
+                    <input type="text" id="End_Datetime" class="form-control" placeholder="Exp date">
+                    
+                  </div>
+                </div>
+
+
+                <div class="form-group" id="expDate">
+                  <label for="End_Datetime" class="col-md-2 control-label">Expiration Date</label>
+                  <div class="col-md-10">
+                    <input type="text" id="End_Datetime" class="form-control" placeholder="Exp date">
+                    
+                  </div>
+                </div>
+
+                <div class="form-group" id="quantity">
+                  <label for="inputQuantity" class="col-md-2 control-label">Quantity</label>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" id="Quantity" placeholder="Quantity">
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <label id="update" class="col-md-2 control-label">Starting price</label>
                   <div class="col-md-10">
@@ -167,14 +197,6 @@
                   <label for="package" class="col-md-2 control-label">Product packaging</label>
                   <div class="col-md-10">
                     <textarea class="form-control" rows="3" id="Packaging" placeholder="Product packaging"></textarea>
-                    
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="End_Datetime" class="col-md-2 control-label">Expiration Date</label>
-                  <div class="col-md-10">
-                    <input type="text" id="End_Datetime" class="form-control" placeholder="Exp date">
                     
                   </div>
                 </div>
@@ -242,5 +264,12 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+      $("#expDate").hide();
+      $("#quantity").hide();
+    });
+    </script>
   </body>
 </html>
