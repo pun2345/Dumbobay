@@ -129,7 +129,7 @@ Class member_m extends CI_Model
    	  	return "true";
 	}
 	function getMemberDetail($user_id){
-		return $this->db->query("select * from User where User_ID=$user_id")->row();
+		return $this->db->query("select * from User join member using (user_id) where user_id = $user_id")->row();
 	}
 	function getUserID($username){
 		$this->db->select('User_ID');
