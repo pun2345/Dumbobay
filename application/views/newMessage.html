@@ -19,18 +19,18 @@
 
       <!-- Fixed navbar -->
   <?php
-      // if($type==0){
-      //   include 'guest_menu.html';
-      // }
-      // else if($type==1){
-      //   include 'admin_menu.html';  
-      // }            
-      // else if($type==2){
-      //   include 'buyer_menu.html';  
-      // }
-      // else if($type==3){
-      //   include 'seller_menu.html'; 
-      // }
+      if($type==0){
+        include 'guest_menu.html';
+      }
+      else if($type==1){
+        include 'admin_menu.html';  
+      }            
+      else if($type==2){
+        include 'buyer_menu.html';  
+      }
+      else if($type==3){
+        include 'seller_menu.html'; 
+      }
     ?>
 
       <!-- msg part-->
@@ -47,8 +47,7 @@
           
 
             <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-              <form class="form-horizontal" id="message-form" name="message-form" onsubmit="return validateForm()">
-              
+            <?php echo form_open('message_c/sendMessage','class="form-horizontal" id="message-form" name="message-form" onsubmit="return validateForm()"'); ?>
                   <div class="row centered" style="margin-right:20px">
                     <fieldset>
                       <h3>New Messege</h3>
@@ -78,8 +77,8 @@
                   <div class="col-lg-2">
                   </div>
                   <div class="col-lg-10">
-                    <a href="<?php echo site_url('message_c/sendMessage') ?>"><button type="submit" value="Submit" class="btn btn-warning">Send</button></a>
-                  <a href="<?php echo site_url('message_c/manageMessageBox') ?>"><button type="button" class="btn btn-default" >Cancel</button></a>
+                    <a href=<?php echo site_url('message_c/sendMessage'); ?>><button type="submit" value="Submit" class="btn btn-warning">Send</button></a>
+                  <a href=<?php echo site_url('message_c/manageMessageBox'); ?>><button type="button" class="btn btn-default" >Cancel</button></a>
                   </div>
                 </div>
               </form>

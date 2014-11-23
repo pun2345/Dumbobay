@@ -23,7 +23,7 @@ Class message_m extends CI_Model
 			return $this->db->query("select * from Message where Receiver_ID =$user_id");
 		}
 		function getMessage($message_id){
-			return $this->db->query("select * from Message where Message_ID = $message_id");
+			return $this->db->query("select * from Message where Message_ID = $message_id")->row();
 		}
 		function deleteMessage($message_id){
 			$this->db->trans_start();
