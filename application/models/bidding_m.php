@@ -102,6 +102,19 @@ Class bidding_m extends CI_Model
 					return "true";
 				}
 		}
+		function setBidProductStatus($product_id,$status){
+			$data = array(
+				'Status' => $status
+			);
+			$this->db->trans_start();
+			$this->db->where('Product_ID', $product_id);
+			$this->db->update('product_bid', $data);
+			$complete = $this->db->affected_rows();
+			$this->db->trans_complete();
+			if ($complete>0) {
+				return "true";
+			}
+		}
 		function setJoinBiddingStatus($user_id,$product_id,$status){
 			$data = array(
 				'Status' => $status

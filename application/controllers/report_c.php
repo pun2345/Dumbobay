@@ -16,44 +16,33 @@ class Report_c extends CI_Controller {
 
   function index()
   {
-    $this->load->view("report.html");
-  }
-  function topTenProduct(){
-    $session_data = $this->session->userdata('logged_in');
+    // $session_data = $this->session->userdata('logged_in');
+    // $data['user_id'] = $session_data['user_id'];
+    // $data['username'] = $session_data['username'];
+    $data['type'] = 0;
+    if($this->session->userdata('logged_in'))
+    {
+      $session_data = $this->session->userdata('logged_in');
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $data['products'] = $this->transaction_m->getTopTenBestProduct();
-    $this->load->view("topTenProduct.html",$data);
-  }
-  function topTenSeller(){
-    $session_data = $this->session->userdata('logged_in');
-      $data['user_id'] = $session_data['user_id'];
-      $data['username'] = $session_data['username'];
-      $data['type'] = $session_data['type'];
-    $sellers = $this->transaction_m->getTopTenBestSeller();
-    // foreach($sellers as $seller->$row){
-    //   print_r($row);
-    //   // print_r($row['seller_id']);
-    // }
-    $this->load->view("topTenSeller.html",$data);
-  }
-  function blacklist(){
-    $session_data = $this->session->userdata('logged_in');
-      $data['user_id'] = $session_data['user_id'];
-      $data['username'] = $session_data['username'];
-      $data['type'] = $session_data['type'];
-    $data['users'] = $this->member_m->getBlacklist();
-    $this->load->view("blacklist.html",$data);
-  }
-  function isLogin(){
-    if($this->session->userdata('logged_in')){
-      return true;
-    } else{
-      $this->session->set_flashdata("message","Please Login!");
-      redirect('home');
+
+      $data['products'] = $this->transaction_m->getTopTenBestProduct();
+      $data['sellers'] = $this->transaction_m->getTopTenBestSeller();
+      $data['blacklistUsers'] = $this->member_m->getBlacklist();
+      $this->load->view("report.html",$data);
     }
+    else
+    {
+      //If no session, redirect to login page
+      // $this->load->view('product.html',$data
+      redirect("home_c");
+            // $this->load->view('footer.html');
+    }
+
+  
   }
+
 
 }
 ?>
