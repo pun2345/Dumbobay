@@ -113,7 +113,9 @@
 
 		function maxBidding($product_id){
 			$session_data = $this->session->userdata(logged_in);
-      		$data['type'] = $session_data['type'];			
+      		$data['type'] = $session_data['type'];	
+      		$data['user_id'] = $session_data['user_id'];
+      		$data['username'] = $session_data['username'];		
 			$this->load->library('form_validation');
 	        $this->form_validation->set_rules('maxbid', 'maxbid', 'require|css_clean');
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
@@ -140,6 +142,8 @@
 		function stepBidding($product_id){
 			$session_data = $this->session->userdata(logged_in);
       		$data['type'] = $session_data['type'];
+      		$data['user_id'] = $session_data['user_id'];
+      		$data['username'] = $session_data['username'];
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
 			$bit_increment = $this->bidding_m->getBitIncrement($product_id);
 			$this->bidding($session_data['user_id'],$product_id,$current_price+$bit_increment,'manual');
