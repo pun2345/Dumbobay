@@ -81,6 +81,9 @@ Class transaction_m extends CI_Model {
 			return "true";
 		}else return "false";
 	}
+	function getWatchList($user_id){
+		return $this->db->query("select * from join_bidding join product using (product_ID) where user_id =$user_id");
+	}
 	
 }
 ?>
