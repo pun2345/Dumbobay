@@ -41,7 +41,7 @@
 		                            'country' => $this->input->post('country'),
 		                            'email' => $this->input->post('email'),
 		                            'type' => $this->input->post('type'));
-		        $form_data['address'] = $form_data['address'] + " " + $form_data['country'];
+		        $form_data['address'] = $form_data['address'] . " " . $form_data['country'];
 			    if ($this->member_m->checkMember($form_data['username'],$form_data['email']) == 'false') // the information has therefore been successfully saved in the db
 			    {             
 			    	$this->member_m->createMember($form_data['username'],$form_data['password'],$form_data['firstname'],$form_data['lastname'],$form_data['type'],$form_data['address'],$form_data['telephone'],$form_data['email']);
