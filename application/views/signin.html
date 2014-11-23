@@ -69,9 +69,8 @@
 	<!-- ======================================================================= -->
 	<!-- Log in form -->
 	
-   	<?php echo form_open('login_c'); ?>
 	<div class="signin">
-		<form class="form-horizontal" id="login-form" name="login-form" onsubmit="return validateForm()">
+		<?php echo form_open('login_c','class="form-horizontal" id="login-form" name="login-form" onsubmit="return validateForm()"'); ?>
 			<div class="row centered">
 				<fieldset>
 					<legend><h1>SIGN IN</h1></legend>
@@ -85,7 +84,7 @@
 						<div class="form-group" >
 							<label style="left:20%" for="inputPassword" class="col-sm-2 control-label">Password</label>
 							<div class="col-sm-10">
-								<input style="width:50%" type="password" class="form-control" size="20" id="password" name="password">
+								<input style="width:50%" type="password" class="form-control" size="20" id="password" name="passwordd">
 							</div>
 						</div>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -114,7 +113,7 @@
 	    }
 
 	    if(message != ""){
-	    	alert(message+' must be filled out.');
+	    	alert(message+' is invalid.');
 	    	return false;
 	    }
 
@@ -123,7 +122,7 @@
 	    else if(y.length >20 ) message = "Your password";
 
 	    if(message != ""){
-	    	alert(message+' is over 20 characters.');
+	    	alert(message+' is invalid.');
 	    	return false;
 	    }
 	  
@@ -138,6 +137,6 @@
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-
+	<script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
 </body>
 </html>
