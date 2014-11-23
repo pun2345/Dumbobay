@@ -85,9 +85,10 @@ class Cart_c extends CI_Controller {
   function afterPaid(){
     $session_data = $this->session->userdata('logged_in');
     $products = $this->cart_m->getProductInCart($session_data['user_id']);
-    $products= $this->session->get_flashdata('cart');
-    foreach ($products as $product=>$row) {
-      $temp = $this->cart_m->deleteFormCart($session_data['user_id'],$row->Product_ID);
+    $products= $this->session->flashdata("cart2");
+    // print_r($products);
+    foreach ($products as $row) {
+      $temp = $this->cart_m->deleteFromCart($session_data['user_id'],$row->Product_ID);
     }
     $this->session->set_flashdata("message","Checkout Sucessfuly!");
     redirect('home_c','refresh');
