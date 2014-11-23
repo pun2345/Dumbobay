@@ -88,7 +88,6 @@ class message_c extends CI_Controller {
       foreach ($data['messages']->result() as $msg){
         $x = $this->member_m->getUserDetail($msg->Sender_ID);
         $msg->Sender_Name = $x->Username;
-        // $msg->Sender_Name = $member['Username'];
       }
       $this->load->view('messageBox.html',$data);
   }
@@ -98,7 +97,10 @@ class message_c extends CI_Controller {
       $session_data = $this->session->userdata(logged_in);
       $data['user_id']=$session_data['user_id'];
       $data['message'] = $this->message_m->getMessage($message_id);
-      $this->load->view('viewMessage.html/',$data);
+      $msg = $data['message']->result();
+      $x = $this->member_m->getUserDetail($msg->Sender_ID);
+      $msg->Sender_Name = $x->Username;
+      $this->load->view('viewMessage.html',$data);
   }
 
   function reply($message_id)
@@ -135,7 +137,7 @@ class message_c extends CI_Controller {
   {
       $session_data = $this->session->userdata(logged_in);
       $this->message_m->deleteMessage($message_id);
-      redirect('message_c/manageMessageBox/');
+      redirect('message_c/manageMessageBox');
       // refresh view duay na 
   }
 
