@@ -1,5 +1,28 @@
-	function clickk(){
-		alert('isus');
+	function validateForm() {
+		// alert('vali');
+	    var name = document.forms["editprofile-form"]["name"].value;
+	    var surname = document.forms["editprofile-form"]["surname"].value;
+	    var address = document.forms["editprofile-form"]["address"].value;
+	    var email = document.forms["editprofile-form"]["email"].value;
+	    var tel = document.forms["editprofile-form"]["tel"].value;
+	    
+
+	    if (!validateName(name)||!validateName(surname)){
+	  		alert("Your firstname or lastname is invalid.");
+	    	return false;
+	  	}
+	  	if (!validateAddress(address)){
+	    	alert("Your address is invalid.");
+	    	return false;
+	    }
+	    if (!validateEmail(email)){
+	    	alert("Your e-mail is invalid.");
+	    	return false;
+	    }
+	    if (!validateTelephone(tel)){
+	    	alert("Your telephone number is invalid.");
+	    	return false;
+	    }
 	}
 	function validateUsername(word){
 		var wordReg = new RegExp(/^[a-zA-Z0-9_\.]{1,20}$/);
