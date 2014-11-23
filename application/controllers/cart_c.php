@@ -79,7 +79,7 @@ class Cart_c extends CI_Controller {
       $transaction_ids[] = $this->transaction_m->newTransaction($status,$price,$quantity,$row->Seller_ID,$buyer_id,$product_id);
     }
     $this->session->set_flashdata("cart",$transaction_ids);
-    $this->session->set_flashdata("cart2",$products);
+    $this->session->set_flashdata("cart2",$products->result());
     redirect('payment_c/index/'.$sumamount);
   }
   function afterPaid(){
