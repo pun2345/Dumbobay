@@ -5,6 +5,7 @@
   		    parent::__construct();
    		    $this->load->helper('html');
    		    $this->load->helper('form');
+   		    $this->load->helper('email_sender');
 		    $this->load->database();
 			$this->load->model('member_m');
 		}
@@ -45,6 +46,8 @@
 			    {             
 			    	$this->member_m->createMember($form_data['username'],$form_data['password'],$form_data['firstname'],$form_data['lastname'],$form_data['type'],$form_data['address'],$form_data['telephone'],$form_data['email']);
 			        $this->session->set_flashdata("message","Registration Completed");
+			        $createdMemberID = $this->member_m->getUserID($form_data['username']);
+			        activate_User($createdMemberID,$form_data['username'],$form_data['email']);
 			        redirect('home_c');   // or whatever logic needs to occur
 			    }
 			    else
@@ -61,7 +64,7 @@
 		}
 
 		function editProfile($user_id){
-			$data['user'] = $this->member_m->getUserDetail($user_id);
+			$data['user'] = $this->member_m->getMemberDetail($user_id);
 			$user = $data['user'];
     		$this->load->library('form_validation');
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
@@ -103,7 +106,9 @@
 		    }
 		}
 
-		function memberDetail($user_id){
+		function memberDetail(){      
+			$session_data = $this->session->userdata(logged_in);
+      		$data['user_id'] = $session_data['user_id'];
 			$data['member'] = $this->member_m->getMemberDetail($user_id);
 			$this->load->view('member_detail.html',$data);
 		}
