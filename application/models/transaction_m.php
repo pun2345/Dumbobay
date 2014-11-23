@@ -26,7 +26,7 @@ Class transaction_m extends CI_Model {
 			from transaction 
 			join product using (product_id) 
 			join user on (transaction.seller_id = user.user_id) 
-			where Buyer_ID = 2 limit 30");
+			where Buyer_ID = $buyer_id limit 30");
 
 	}
 	function getCustTransaction($buyer_id){

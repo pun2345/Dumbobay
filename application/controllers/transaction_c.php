@@ -63,16 +63,30 @@ class Transaction_c extends CI_Controller {
       $score = $this->input->post('score');
       $feedback = $this->input->post('feedback');
       // run insert model to write data to db
-      if ($this->transaction_m->saveFeedback($transactionID,$user_id,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
-      {
-        $this->session->set_flashdata("message","Feedback saved!");
-        redirect('transaction/history/'.$user_id); 
+      if($data['user_id']==$seller){
+        if ($this->transaction_m->saveFeedbackBuyer($transactionID,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
+        {
+          $this->session->set_flashdata("message","Feedback saved!");
+          redirect('transaction_c/history/'.$user_id); 
+        }
+        else
+        {
+          $this->session->set_flashdata("message","Feedback Failed! Try Again.");
+          redirect('transaction_c/history/'.$user_id);
+        }
+      }else{
+        if ($this->transaction_m->saveFeedbackSeller($transactionID,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
+        {
+          $this->session->set_flashdata("message","Feedback saved!");
+          redirect('transaction_c/history/'.$user_id); 
+        }
+        else
+        {
+          $this->session->set_flashdata("message","Feedback Failed! Try Again.");
+          redirect('transaction_c/history/'.$user_id);
+        }
       }
-      else
-      {
-        $this->session->set_flashdata("message","Feedback Failed! Try Again.");
-        redirect('transaction/history/'.$user_id);
-      }
+      
     }
   }
   function loginBeforeFeedback(){
@@ -113,7 +127,7 @@ class Transaction_c extends CI_Controller {
       if ($temp == "true") // the information has therefore been successfully saved in the db
       {
         $this->session->set_flashdata("message","Status updated!");
-        redirect('transaction/viewTransactionDetail/'.$transaction_id); 
+        redirect('transaction_c/viewTransactionDetail/'.$transaction_id); 
         // $this->load->view('footer.html');
       }
       else

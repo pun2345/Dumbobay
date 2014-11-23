@@ -61,7 +61,7 @@
     // print_r($products);
 						
 							echo '<div class="row">';
-							echo '<div class="col-md-7">';
+							echo '<div align="middle">';
 							echo 'Please Give Feedback for '.$other;
 							echo '</div>';
 							echo '</div>';
@@ -75,45 +75,25 @@
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px">
 							<div class="row form-group">
-								<label for="score" class="col-md-3 control-label" align="right">Score 0</label>
-								<div class="col-md-9">
-									<input type="radio" class="form-control" id="score" name="score" value = 0  <?php echo $this->form_validation->set_radio('score', 0); ?>
+								<label for="score" class="col-md-3 control-label" align="right">Score</label>
+								<div class="col-md-9">									<input type="radio" id="score" name="score" value = 0  <?php echo $this->form_validation->set_radio('score', 0); ?>
 									/>
-									<input type="radio" class="form-control" id="score" name="score" value = 1  <?php echo $this->form_validation->set_radio('score', 1); ?>
+									<label for="score" align="right">0</label>
+									<input type="radio" id="score" name="score" value = 1  <?php echo $this->form_validation->set_radio('score', 1); ?>
 									/>
-									<input type="radio" class="form-control" id="score" name="score" value = 2  <?php echo $this->form_validation->set_radio('score', 2); ?>
+									<label for="score" align="right">1</label>
+									<input type="radio" id="score" name="score" value = 2  <?php echo $this->form_validation->set_radio('score', 2); ?>
 									/>
-									<input type="radio" class="form-control" id="score" name="score" value = 3  <?php echo $this->form_validation->set_radio('score', 3); ?>
+									<label for="score" align="right">2</label>
+									<input type="radio" id="score" name="score" value = 3  <?php echo $this->form_validation->set_radio('score', 3, TRUE); ?>
 									/>
-									<input type="radio" class="form-control" id="score" name="score" value = 4  <?php echo $this->form_validation->set_radio('score', 4); ?>
+									<label for="score" align="right">3</label>
+									<input type="radio" id="score" name="score" value = 4  <?php echo $this->form_validation->set_radio('score', 4); ?>
 									/>
-									<input type="radio" class="form-control" id="score" name="score" value = 5  <?php echo $this->form_validation->set_radio('score', 5); ?>
+									<label for="score" align="right">4</label>
+									<input type="radio" id="score" name="score" value = 5  <?php echo $this->form_validation->set_radio('score', 5); ?>
 									/>
-								</div>
-								<label for="score" class="col-md-3 control-label" align="right">Score 1</label>
-								<div class="col-md-9">
-									<input type="radio" class="form-control" id="score" name="score" value = 1 autofocus <?php echo $this->form_validation->set_radio('score', 1); ?>
-									/>
-								</div>
-								<label for="score" class="col-md-3 control-label" align="right">Score 2</label>
-								<div class="col-md-9">
-									<input type="radio" class="form-control" id="score" name="score" value = 2 autofocus <?php echo $this->form_validation->set_radio('score', 2); ?>
-									/>
-								</div>
-								<label for="score" class="col-md-3 control-label" align="right">Score 3</label>
-								<div class="col-md-9">
-									<input type="radio" class="form-control" id="score" name="score" value = 3 autofocus <?php echo $this->form_validation->set_radio('score', 3); ?>
-									/>
-								</div>
-								<label for="score" class="col-md-3 control-label" align="right">Score 4</label>
-								<div class="col-md-9">
-									<input type="radio" class="form-control" id="score" name="score" value = 4 autofocus <?php echo $this->form_validation->set_radio('score', 4); ?>
-									/>
-								</div>
-								<label for="score" class="col-md-3 control-label" align="right">Score 5</label>
-								<div class="col-md-9">
-									<input type="radio" class="form-control" id="score" name="score" value = 5 autofocus <?php echo $this->form_validation->set_radio('score', 5); ?>
-									/>
+									<label for="score" align="right">5</label>
 								</div>
 							</div>
 							<div class="row form-group">
@@ -121,12 +101,6 @@
 								<label class="col-md-3 control-label" align="right">Feedback</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control" id="feedback" name="feedback">
-								</div>
-							</div>
-							<div class="row form-group">
-								<label class="col-md-3 control-label" align="right">Expired Date</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control" id="expireddate" name="expireddate">
 								</div>
 							</div>
 							<div class="row form-group">
