@@ -62,7 +62,7 @@
 	}
 	function validateKeyword(word){
 		var searchReg = new RegExp(/^[a-zA-Z0-9]+$/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;
@@ -72,7 +72,7 @@
 	}
 	function validateReceiverName(word){
 		var searchReg = new RegExp(/^[a-zA-Z0-9_\.-]{1,20}$/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;
@@ -97,7 +97,7 @@
 	
 	function validateVisaID(word){
 		var searchReg = new RegExp(/^[0-9]{16}$/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;
@@ -107,7 +107,7 @@
 	}
 	function validateExpiredDate(word){
 		var searchReg = new RegExp(/^([0-2][0-9]|30|31)\/(0[0-9]|1[0-2])\/25[0-9][0-9]$/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;
@@ -131,7 +131,7 @@
 	}
 	function validateDigit(word){
 		var searchReg = new RegExp(/[[:digit:]]/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;
