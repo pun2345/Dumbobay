@@ -7,7 +7,6 @@ class Login_c extends CI_Controller {
   {
     parent::__construct();
     $this->load->helper('html');
-    $this->load->helper('array');
     $this->load->database();
     $this->load->model('member_m');
   }

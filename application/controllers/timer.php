@@ -37,9 +37,12 @@ class Timer extends CI_Controller {
 		foreach $query->result() as $row{
 			// Manage BL
 			$this->transaction_m->updateStatus($row->Trandsaction_ID,'Exceed Paymeny Due Date');
-			$this->member_m->increaseBlacklistScore($row->Buyer_ID);
-			$email= $this->member_m->getMemberDetail($row->$Buyer_ID)->'E-mail';
+			$bscore=$this->member_m->increaseBlacklistScore($row->Buyer_ID);
+			//$email= $this->member_m->getMemberDetail($row->$Buyer_ID)->'E-mail';
 			BlackList($row->Buyer_ID,$row->$Transaction_ID);
+			if($bscore >=3){
+				$this->member_m->disableMember($row->$Buyer_ID);
+			}
 		}
 	}
 }
