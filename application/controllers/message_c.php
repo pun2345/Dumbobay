@@ -22,8 +22,11 @@ class message_c extends CI_Controller {
       $senderID=$session_data['user_id'];
       $data['type'] = $session_data['type'];
       $data['user_id'] = $session_data['user_id'];
-      if($data['type']==1) $data['user_id']==0;
       $data['username'] = $session_data['username'];
+      if($data['type']==1){
+          $data['user_id'] = 0;
+          $data['username'] = 'Admin';
+      }
       $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
       $this->form_validation->set_rules('msgReceiver', 'msgReceiver', 'require|css_clean');
       $this->form_validation->set_rules('msgText', 'msgText', 'require|max_length[200]');
@@ -126,8 +129,11 @@ class message_c extends CI_Controller {
       $session_data = $this->session->userdata('logged_in');
       $data['user_id']=$session_data['user_id'];
       $data['type'] = $session_data['type'];
-      if($data['type']==1) $data['user_id']=0;
       $data['username'] = $session_data['username'];
+      if($data['type']==1){
+          $data['user_id'] = 0;
+          $data['username'] = 'Admin';
+      }
       $data['receiver_id'] = $this->message_m->getSender($message_id);
       $tmp = $this->member_m->getMemberDetail($data['receiver_id']);
       $data['receiverName'] = $tmp->Username;
