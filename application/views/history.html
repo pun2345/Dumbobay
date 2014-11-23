@@ -65,7 +65,7 @@
         
         <?php 
         //print_r($transactions->num_rows); 
-        print_r($transactions->result()); 
+        // print_r($transactions->result()); 
 
 
         ?>
@@ -90,14 +90,14 @@
                   
                 echo '</div>';
                 echo '<div class="col-md-4">';
-                  echo "<h3>".$row->Product_name."</h3>";
+                  echo "<h3>".$row->product_name."</h3>";
                    
-                 echo "<a href=\"product_c/viewProductDetail/".$row->Product_ID."\">more info...</a>";
+                 echo "<a href=\"product_c/viewProductDetail/".$row->product_id."\">more info...</a>";
                 echo '</div>';
                 echo '<div class="col-md-5">';
                   echo '<div class="row" style="padding-top:10px">';
                     echo '<div class="col-md-5">';
-                     echo "<strong>Seller: </strong>".$row->Seller_name."<br>";
+                     echo "<strong>Seller: </strong>".$row->seller_name."<br>";
                     echo '</div>';
                   
                     echo '<div class="col-md-6">';
@@ -107,11 +107,11 @@
                   echo '<div class="row">';
                     echo '<br>';
                     echo '<div class="col-md-5">';
-                     echo "Price: ".$row->Price;
+                     echo "Price: ".$row->price;
                     echo '</div>';
                     echo '<div class="col-md-6">';
                       echo '<div class="row">';
-                        echo "Status: ".$row->Status;
+                        echo "Status: ".$row->status;
                       echo '</div>';
                     echo '</div>';
                   echo '</div>';
