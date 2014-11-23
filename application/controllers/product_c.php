@@ -67,7 +67,7 @@ class Product_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $data['product'] = $this->product_m->getDetail($product_id);
+    $data['product'] = $this->product_m->getProductDetail($product_id);
     $this->load->view('productDesc.html',$data);
     $this->load->view('footer.html');
   }
