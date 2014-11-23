@@ -42,7 +42,7 @@ class Cart_c extends CI_Controller {
   function deleteProduct($product_id){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
-    $temp = $this->cart_m->deleteFormCart($session_data['user_id'],$product_id);
+    $temp = $this->cart_m->deleteFromCart($session_data['user_id'],$product_id);
     if($temp=="true"){
       $this->session->set_flashdata("message","Product was deleted");
     }else{
