@@ -5,7 +5,8 @@ class Product_c extends CI_Controller {
   function __construct()
   {
     parent::__construct();
-    $this->load->library('form_validation');    
+    $this->load->library('form_validation');
+    $this->load->helper("html");
     $this->load->helper('html');
     $this->load->database();
     $this->load->helper('form');

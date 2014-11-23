@@ -26,8 +26,8 @@ class Transaction_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $data['transactions'] = $this->transaction_m->getTransaction($data['user_id']);
-    $this->load->view('history',$data);
+    $data['transactions'] = $this->transaction_m->getCustTransaction($data['user_id']);
+    $this->load->view('history.html',$data);
         $this->load->view('footer.html');
   }
   function feedback($transactionID){
