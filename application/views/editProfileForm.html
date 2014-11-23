@@ -53,36 +53,37 @@
 						<h1>Edit Profile</h1>
 					</legend>
 				</div>
-				<?php echo form_open('member_c/editProfile','class="form-horizontal" id="editprofile-form" name="editprofile-form" onsubmit="return validateForm()"'); ?>
+				<?php //echo form_open('member_c/editProfile','class="form-horizontal" id="editprofile-form" name="editprofile-form" onsubmit="return validateForm()"'); ?>
+				<form class="form-horizontal" id="editprofile-form" name="editprofile-form" onsubmit="return validateForm()">
 				<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px">
 					<div class="row form-group">
 						<label class="col-md-3 control-label" align="right">Firstname:</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" id="name" placeholder="<?php echo $member->Firstname; ?>" autofocus>
+							<input type="text" class="form-control" id="name" name="name" value="<?php echo $member->Firstname; ?>" autofocus>
 						</div>
 					</div>
 					<div class="row form-group">
 						<label class="col-md-3 control-label" align="right">Lastname:</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" id="surname" placeholder="<?php echo $member->Lastname; ?>">
+							<input type="text" class="form-control" id="surname" name="surname" value="<?php echo $member->Lastname; ?>">
 						</div>
 					</div>
 					<div class="row form-group">
 						<label class="col-md-3 control-label" align="right">Address:</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" id="address" placeholder="<?php echo $member->address; ?>">
+							<input type="text" class="form-control" id="address" name="address" value="<?php echo $member->Address; ?>">
 						</div>
 					</div>
 					<div class="row form-group">
 						<label class="col-md-3 control-label" align="right">E-mail:</label>						
 						<div class="col-md-9">
-							<input type="text" class="form-control" id="email" placeholder="<?php echo $member->Email; ?>">
+							<input type="text" class="form-control" id="email" name="email" value="<?php echo $member->Email; ?>">
 						</div>
 					</div>
 					<div class="row form-group">
 						<label class="col-md-3 control-label" align="right">Tel.:</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" id="tel" placeholder="<?php echo $member->Telephone; ?>">
+							<input type="text" class="form-control" id="tel" name="tel" value="<?php echo $member->Telephone; ?>">
 						</div>
 					</div>
 					<div class="row form-group">
@@ -90,7 +91,7 @@
 						
 						</div>
 						<div class="col-md-9">
-							<a href="profile.html"><button type="submit" class="btn btn-default" >Cancel</button></a>
+							<button type="submit" class="btn btn-default" >Cancel</button>
 							<button type="submit" class="btn btn-info" >Save</button>
 						</div>
 					</div>
@@ -109,7 +110,7 @@
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src=<?php echo base_url("assets/js/bootstrap.min.js"); ?>></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
@@ -117,21 +118,15 @@
 	<script>
 
 	function validateForm() {
-	    var membername = document.forms["editprofile-form"]["membername"].value;
+		// alert('vali');
 	    var name = document.forms["editprofile-form"]["name"].value;
 	    var surname = document.forms["editprofile-form"]["surname"].value;
 	    var address = document.forms["editprofile-form"]["address"].value;
 	    var email = document.forms["editprofile-form"]["email"].value;
-	    var tel = document.forms["editprofile-form"]["telephone"].value;
+	    var tel = document.forms["editprofile-form"]["tel"].value;
+	    
 
-	    var message ="";
-
-	    if (!validatemembername(membername) ) {
-	    	alert("Your membername is invalid.");
-	    	return false;
-	    }
-
-	    if (!validateName(name)&!validateName(surname)){
+	    if (!validateName(name)||!validateName(surname)){
 	  		alert("Your firstname or lastname is invalid.");
 	    	return false;
 	  	}
