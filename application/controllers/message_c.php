@@ -151,7 +151,7 @@ class message_c extends CI_Controller {
           else
           {
               $this->session->set_flashdata("message","Sending error");
-              redirect(current_url());
+              redirect('message_c/reply2/',$message_id);
           }
       }
   }

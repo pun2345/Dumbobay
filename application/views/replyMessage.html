@@ -27,6 +27,11 @@
       else if($type==3){
         include 'seller_menu.html'; 
       }
+      if($this->session->flashdata('message')) echo '
+    <script>
+      alert("'.$this->session->flashdata('message').'");
+    </script>
+    ';
     ?>
 
 
@@ -44,11 +49,10 @@
             
 
             <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-            <?php echo form_open('message_c/reply','class="form-horizontal" id="message-form" name="message-form" onsubmit="return validateForm()'); ?>
+            <?php echo form_open('message_c/reply/11','class="form-horizontal" id="message-form" name="message-form" onsubmit="return validateForm()'); ?>
                 <div class="row centered" style="margin-right:20px">
                   <fieldset>
                     <h3>Reply Messege</h3>
-
                     <div align="center">
                       <div class="form-group">
                         <label for="inputEmail" class="col-lg-2 control-label">Reply to :</label>
@@ -59,7 +63,7 @@
                       <div class="form-group">
                         <label for="inputTopic" class="col-lg-2 control-label">Subject :</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="msgSubject" value=<? echo 'Re: '.$subject; ?> disabled>
+                          <input type="text" class="form-control" id="msgSubject" value=<? echo '"Re: '.$subject.'"'; ?> disabled>
                         </div>
                       </div>
                       <div class="form-group">
