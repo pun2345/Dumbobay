@@ -92,12 +92,7 @@
 		                            'telephone' => $this->input->post('telephone'),
 		                            'password' => $this->input->post('password'),
 		                            'email' => $this->input->post('email'));
-			    $member['firstname'] = $form_data['firstname'];
-			    $member['lastname'] = $form_data['lastname'];
-			    $member['address'] = $form_data['address'];
-			    $member['telephone'] = $form_data['telephone'];
-			    $member['email'] = $form_data['email'];
-			    if ($this->member_m->editMemberDetail($member['User_ID'],$member['username'],$member['Password'],$member['firstname'],$member['lastname'],$member['type'],$member['address'],$member['telephone'],$member['email']) == 'true') // the information has therefore been successfully saved in the db
+			    if ($this->member_m->editMemberDetail($member->User_ID,$member->Username,$member->Password,$form_data['firstname'],$form_data['lastname'],$member->Type,$form_data['address'],$form_data['telephone'],$form_data['email']) == 'true') // the information has therefore been successfully saved in the db
 			    {             
 			        $this->session->set_flashdata("message","Profile edited");
 			        redirect('member_c/memberDetail');   // or whatever logic needs to occur
