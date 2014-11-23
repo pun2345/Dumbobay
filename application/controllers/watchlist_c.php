@@ -8,6 +8,7 @@
 			$this->load->model('watchlist_m');
 			$this->load->model('product_m');
 			$this->load->model('transaction_m');
+			$this->load->model('bidding_m');
 		}
 
 		function index(){
@@ -15,7 +16,8 @@
 			$data['user_id'] = $session_data['user_id'];
       		$data['username'] = $session_data['username'];
       		$data['type'] = $session_data['type'];
-			$data['pruducts'] = $this->transaction_m->getWatchlist($data['user_id']);
+			$data['pruducts'] = $this->transaction_m->getWatchlist($data['user_id'])
+			$data['joinbids'] = $this->bidding_m->getJoinBiddingUser($data['user_id'],$data['products']->result()->)
 			$this->load->view('watchlist.html',$data);	
 		}
 
