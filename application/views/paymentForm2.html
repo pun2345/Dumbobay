@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	  <?php
+    include 'HTMLHeader.html';
+  ?>
+
+	<style type="text/css">
+		.control-label{
+			padding-top: 4px;
+					}
+				
+	</style>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+	<!-- Fixed navbar -->
+	<?php
+	if($type==1){
+        include 'admin_menu.html';  
+      }            
+      else if($type==2){
+        include 'buyer_menu.html';  
+      }
+      else if($type==3){
+        include 'seller_menu.html'; 
+      }?>
+	<!-- =======================================================================-->
+	<div id="myheaderwrap">
+		<div class="container">
+			<div class="row centered">
+				<h2>Just let me <b>Shop</b> and no one gets hurt. <b>-DumboBay-</b></h2>	
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- headerwrap -->
+	<!-- ======================================================================= -->
+	<div>
+		<div class="container">
+			<div>
+				<div class="col-md-10 col-md-offset-1 centered" style="padding-top:50px; padding-bottom:10px">
+					<legend>
+						<h1>Payment</h1>
+					</legend>
+				</div>
+				<!-- item list -->
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px;">
+						<?php 
+						// print_r($products);
+
+						// echo "===========================================================================";
+
+    // print_r($products);
+						
+							echo '<div class="row">';
+							echo '<div class="col-md-7">';
+							echo $products->Name;
+							echo '</div>';
+							echo '<div class="col-md-2">';
+							echo '1 ea';
+							echo '</div>';							
+							echo '<div class="col-md-3">';
+							echo $price.'Baht';
+							echo '</div>';
+							echo '</div>';
+						?>
+
+						<hr>
+						<div class="row" style="margin-top:-20px">
+							<div class="col-md-7">
+								<h3>TOTAL</h3>
+							</div>
+							<div class="col-md-3">
+								<h3><?php echo $price; ?> Baht</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php echo validation_errors(); ?>
+				<?php echo form_open('payment_c/payBid/'.$transaction_id); ?>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px">
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">VISA No.</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="visano" name="visano" autofocus>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">Password</label>
+								<div class="col-md-9">
+									<input type="password" class="form-control" id="visapw" name="visapw">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">Send Address</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="sendaddress" name="sendaddress">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">Expired Date</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="expireddate" name="expireddate">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-3" align="right">
+								
+								</div>
+								<div class="col-md-9">
+									<a href="cart.html"><button type="button" class="btn btn-default" >Cancel</button></a>
+									<button type="submit" value="Submit" class="btn btn-success" >Submit</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- headerwrap -->
+
+
+<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+</body>
+</html>

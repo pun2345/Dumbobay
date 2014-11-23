@@ -128,9 +128,10 @@ class message_c extends CI_Controller {
       $data['type'] = $session_data['type'];
       $data['username'] = $session_data['username'];
       $data['receiver_id'] = $this->message_m->getSender($message_id);
+      $tmp = $this->member_m->getMemberDetail($data['receiver_id']);
+      $data['receiverName'] = $tmp->Username;
       $data['subject'] = $this->message_m->getSubject($message_id);
       if(strlen($data['subject'])>26) $data['subject'] = substr($data['subject'],0,23) . "..";
-      $this->load->view('replyMessage.html',$data);
       
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
@@ -150,7 +151,7 @@ class message_c extends CI_Controller {
           else
           {
               $this->session->set_flashdata("message","Sending error");
-              redirect(current_url());
+              redirect('message_c/reply2/',$message_id);
           }
       }
   }
