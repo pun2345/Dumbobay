@@ -14,7 +14,7 @@
 			#$data['user_id'] = $session_data['user_id'];
 			$data['user_id'] = 1000;
 			$data['pruducts'] = $this->watchlist_m->getWatchlist($data['user_id']);
-			$this->load->view('watchlist.html',$data);
+			$this->load->view('watchlist.html',$data);	
 		}
 
 		function productDetail($product_id){
