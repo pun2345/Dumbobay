@@ -127,31 +127,34 @@ class message_c extends CI_Controller {
       $data['user_id']=$session_data['user_id'];
       $data['type'] = $session_data['type'];
       $data['username'] = $session_data['username'];
+      echo $message_id;
       $data['receiver_id'] = $this->message_m->getSender($message_id);
       $tmp = $this->member_m->getMemberDetail($data['receiver_id']);
       $data['receiverName'] = $tmp->Username;
+      $data['message_id'] = $message_id;
       $data['subject'] = $this->message_m->getSubject($message_id);
-      if(strlen($data['subject'])>26) $data['subject'] = substr($data['subject'],0,23) . "..";
-      
+      if(strlen($data['subject'])>24) $data['subject'] = "RE: " . substr($data['subject'],0,22) . "..";
+      else $data['subject'] = "RE: " . $data['subject'];
+
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('replyMessage.html',$data);
-          
       }
       else // passed validation proceed to post success logic
       {
           $form_data = array('msgText' => $this->input->post('msgText'));
               // run insert model to write data to db
-          if ($this->message_m->createMessage($user_id,$data['subject'],$form_data['msgText'],$data['receiver_id']) == 'true') // the information has therefore been successfully saved in the db
+          if ($this->message_m->createMessage($data['user_id'],$data['subject'],$form_data['msgText'],$data['receiver_id']) == 'true') // the information has therefore been successfully saved in the db
           {
               $this->session->set_flashdata("message","Message sent!");
               redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
           }
           else
           {
+              echo $message_id;
               $this->session->set_flashdata("message","Sending error");
-              redirect('message_c/reply2/',$message_id);
+              redirect('message_c/reply/',$message_id);
           }
       }
   }

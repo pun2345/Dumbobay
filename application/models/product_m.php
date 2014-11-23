@@ -248,7 +248,7 @@ Class product_m extends CI_Model
 		else return false;
 	}
 	function getEndBiddingProduct(){
-		return $query = $this->db->query("select product.product_id, current_price, current_winner, seller_id from product_bid join product using (product_id) where status= 0 and End_Date < curdate();");
+		return $query = $this->db->query("select product.product_id, current_price, current_winner, seller_id from product_bid join product using (product_id) where status= 0 and End_Date < curdate()");
 
 	}
 }

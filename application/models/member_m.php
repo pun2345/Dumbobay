@@ -77,9 +77,23 @@ Class member_m extends CI_Model
 		$this->db->update('member',$data);
 		$this->db->trans_complete();
 	}
+	function deactivateMember($ID){
+		$data = array(
+			'Activated' => 0
+		);
+		$this->db->trans_start();
+		$this->db->where('User_ID', $ID);
+		$this->db->update('member',$data);
+		$this->db->trans_complete();
+	}
 	function getBlacklist(){
 		$maxScore = $this->member_m->getBlacklistMaxScore();
-		return $this->db->query("select * from Member where Blacklist_score >=$maxScore order by user_id ");
+		return $this->db->query("
+			select User_ID, Username, Email 
+			from Member 
+			join User using (User_ID) 
+			where Blacklist_score >=$maxScore 
+			order by user_id ");
 	}
 	function incBlacklist($user_id){
 		$oldScore = $this->member_m->getBlacklist($user_id);
