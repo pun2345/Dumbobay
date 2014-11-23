@@ -25,7 +25,7 @@ class message_c extends CI_Controller {
       $data['username'] = $session_data['username'];
       $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
       $this->form_validation->set_rules('msgReceiver', 'msgReceiver', 'require|css_clean');
-      $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
+      $this->form_validation->set_rules('msgText', 'msgText', 'require|max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('newMessage.html',$data);
@@ -38,7 +38,7 @@ class message_c extends CI_Controller {
                               'msgReceiver' => $this->input->post('msgReceiver'));      // run insert model to write data to db
           $receiverID = $this->member_m->getUserID($form_data['msgReceiver']);
           if($receiverID == null){
-              $this->session->set_flashdata("message","This user is not available!");
+              $this->session->set_flashdata("message","The user is not available!");
               redirect('message_c/sendMessage'); 
           }
           else if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiverID) == 'true') // the information has therefore been successfully saved in the db
@@ -48,7 +48,7 @@ class message_c extends CI_Controller {
           }
           else
           {
-              $this->session->set_flashdata("message","Sending error");
+              $this->session->set_flashdata("message","All Information need to be completed");
               redirect('message_c/manageMessageBox');
           }
       }
@@ -62,7 +62,7 @@ class message_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
-      $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
+      $this->form_validation->set_rules('msgText', 'msgText', 'require|max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('newMessage.html',$data);
@@ -80,7 +80,7 @@ class message_c extends CI_Controller {
           }
           else
           {
-              $this->session->set_flashdata("message","Sending error");
+              $this->session->set_flashdata("message","All Information need to be completed");
               redirect(current_url());
           }
       }
