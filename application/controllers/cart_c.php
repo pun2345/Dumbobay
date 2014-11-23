@@ -12,6 +12,7 @@ class Cart_c extends CI_Controller {
     $this->load->model('cart_m');
     $this->load->model('transaction_m');
     $this->load->model('product_m');
+    $this->load->model('member_m');
   }
 
   function index()

@@ -69,17 +69,17 @@ class Product_c extends CI_Controller {
     $this->load->view('productDesc.html',$data);
     $this->load->view('footer.html');
   }
-  function do_upload()
-  {
-    $config['upload_path'] = './assets/img/';
-        $config['allowed_types'] = 'gif|jpg|jpeg|png';
-        $config['max_size'] = '5120000';
+  // function do_upload()
+  // {
+  //   $config['upload_path'] = './assets/img/';
+  //       $config['allowed_types'] = 'gif|jpg|jpeg|png';
+  //       $config['max_size'] = '5120000';
 
-    $this->load->library('upload', $config);
+  //   $this->load->library('upload', $config);
 
-        $datafoto = $this->upload->data();
-        $image = $datafoto['file_path'];
-  }   
+  //       $datafoto = $this->upload->data();
+  //       $image = $datafoto['file_path'];
+  // }   
   function newProduct(){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
