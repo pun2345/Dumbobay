@@ -77,7 +77,8 @@
            <li><a href="#">HISTORY</a></li>
            <!-- <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li> -->
             <li><a href="index.html">SIGN OUT</a></li>
-            <li><a href="#">| Pookpik |</a></li>
+            <li><a href="#">|<?php echo $username; ?>|</a></li>
+            
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -107,9 +108,9 @@
           <div class="row col-md-10 col-md-offset-1">
             <?php echo validation_errors(); ?>
             <?php echo $this->session->flashdata("message"); ?>
-            <?php echo form_open_multipart("product_c/newProduct");?>
+            <?php echo form_open_multipart("product_c/newProduct"," class='form-horizontal' id='newProduct-form' name='newProduct-form' onsubmit='return validateForm()'");?>
 
-            <form class="form-horizontal">
+            
               <fieldset>
                 <legend></legend>
                 <div class="form-group">
@@ -163,18 +164,18 @@
                 </div>
 
                 <div class="form-group" id="form1">
-                  <label for="End_Datetime" class="col-md-2 control-label">Expiration Date</label>
+                  <label for="End_Date" class="col-md-2 control-label">Expiration Date</label>
                   <div class="col-md-10">
-                    <input type="text" id="End_Datetime" class="form-control" placeholder="Exp date">
+                    <input type="text" id="End_Date" name = "End_Date" class="form-control" placeholder="Exp date">
                     
                   </div>
                 </div>
 
 
                 <div class="form-group" id="expDate">
-                  <label for="End_Datetime" class="col-md-2 control-label">Expiration Date</label>
+                  <label for="End_Date" class="col-md-2 control-label">Expiration Date</label>
                   <div class="col-md-10">
-                    <input type="text" id="End_Datetime" class="form-control" placeholder="Exp date">
+                    <input type="text" id="End_Date" name = "End_Date" class="form-control" placeholder="Exp date">
                     
                   </div>
                 </div>
@@ -182,7 +183,7 @@
                 <div class="form-group" id="quantity">
                   <label for="inputQuantity" class="col-md-2 control-label">Quantity</label>
                   <div class="col-md-10">
-                    <input type="text" class="form-control" id="Quantity" placeholder="Quantity">
+                    <input type="text" class="form-control" id="Quantity" name ="Quantity" placeholder="Quantity">
                   </div>
                 </div>
 
@@ -243,7 +244,20 @@
         </div>
       </div>
     </div>
-
+    <?php
+  if($this->session->flashdata('message')) echo '
+    <script>
+      alert("'.$this->session->flashdata('message').'");
+    </script>
+    ';
+?>
+    <?php
+  if(validation_errors()) echo '
+    <script>
+      alert("'.validation_errors().'");
+    </script>
+    ';
+?>
     <!-- FOOTER -->
     <div id="f" style="margin-top:50px">
       <div class="container">
@@ -264,8 +278,72 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
+  <!--  The form that will be parsed by jQuery before submit  -->
+  <script>
 
-    <script>
+    function validateForm() {
+      // var username = document.forms["newProduct-form"]["username"].value;
+      // var password = document.forms["newProduct-form"]["password"].value;
+      // var repassword = document.forms["newProduct-form"]["re-password"].value;
+      // var name = document.forms["newProduct-form"]["name"].value;
+      // var surname = document.forms["newProduct-form"]["surname"].value;
+      // var address = document.forms["newProduct-form"]["address"].value;
+      // var email = document.forms["newProduct-form"]["email"].value;
+      // var tel = document.forms["newProduct-form"]["telephone"].value;
+      var enddate = document.forms["newProduct-form"]["End_Date"].value;
+      if (!validateExpiredDate(enddate)) {
+        alert("Your Date is invalid.");
+        return false;
+      }
+      // var message ="";
+
+      // if (!validateUsername(username) ) {
+      //   alert("Your username is invalid.");
+      //   return false;
+      // }
+
+      // if (!validatePassword(password) ) {
+      //   alert("Your password is invalid.");
+      //   return false;
+      // }
+
+      // if (repassword==null || repassword=="" ) {
+      //   alert("Re-password is required.");
+      //   return false;
+      // }
+      // if (password!=repassword ) {
+      //   alert("Please try again Re-password. It doesn't match with your password.");
+      //   return false;
+      // }
+
+      // if (name.length+surname.length > 50){
+      //   alert("Name and surname is over 50 characters.");
+      //   return false;
+      // }
+      // if (!validateName(name)||!validateName(surname)){
+      //   alert("Your name or surname is invalid.");
+      //   return false;
+      // }
+      // if (!validateAddress(address)){
+      //   alert("Your address is invalid.");
+      //   return false;
+      // }
+      // if (!validateEmail(email)){
+      //   alert("Your e-mail is invalid.");
+      //   return false;
+      // }
+      // if (!validateTelephone(tel)){
+      //   alert("Your telephone number is invalid.");
+      //   return false;
+      // }
+    }
+
+  </script>
+  
+     <script>
     $(document).ready(function(){
       $("#expDate").hide();
       $("#quantity").hide();
