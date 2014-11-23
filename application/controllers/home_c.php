@@ -30,13 +30,13 @@ class Home_c extends CI_Controller {
       if($data['type'] == 1)
       {
         $this->load->view('admin_home.html',$data);
-        $this->load->view('footer.html');
+        // $this->load->view('footer.html');
       }elseif($data['type'] == 2){
         $this->load->view('buyer_home.html',$data);
-        $this->load->view('footer.html');
+        // $this->load->view('footer.html');
       }elseif($data['type'] == 3){
         $this->load->view('seller_home.html',$data);
-        $this->load->view('footer.html');
+        // $this->load->view('footer.html');
       }
     }
     else
