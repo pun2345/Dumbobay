@@ -10,7 +10,7 @@ class Report_c extends CI_Controller {
     $this->load->database();
     $this->load->helper('form');
     $this->load->model('transaction_m');
-    
+
     $this->load->model('member_m');
   }
 
@@ -23,7 +23,7 @@ class Report_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $data['products'] = $this->transaction_m->getTopTenProduct();
+    $data['products'] = $this->transaction_m->getTopTenBestProduct();
     $this->load->view("topTenProduct.html",$data);
   }
   function topTenSeller(){
@@ -31,7 +31,7 @@ class Report_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $sellers = $this->transaction_m->getTopTenSeller();
+    $sellers = $this->transaction_m->getTopTenBestSeller();
     // foreach($sellers as $seller->$row){
     //   print_r($row);
     //   // print_r($row['seller_id']);
@@ -43,7 +43,7 @@ class Report_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $data['users'] = $this->transaction_m->getBlacklist();
+    $data['users'] = $this->member_m->getBlacklist();
     $this->load->view("blacklist.html",$data);
   }
   function isLogin(){
