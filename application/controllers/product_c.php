@@ -48,12 +48,13 @@ class Product_c extends CI_Controller {
   {
     redirect('member_c/createMember');
   }
-  function search($searchWord){
+  function search(){
 
      $session_data = $this->session->userdata('logged_in');
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
+      $searchWord=$this->input->post("search");
     $data['products'] = $this->product_m->search($searchWord);
     $this->load->view('product.html',$data);
     $this->load->view('footer.html');
