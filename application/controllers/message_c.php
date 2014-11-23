@@ -85,7 +85,7 @@ class message_c extends CI_Controller {
       // $data['user_id']=$session_data['user_id'];
       $data['messages'] = $this->message_m->getUserMessage(1000);
       foreach ($data['messages']->result() as $msg){
-        $x = $this->member_m->getUserDetail($msg->Sender_ID);
+        $x = $this->member_m->getMemberDetail($msg->Sender_ID);
         $msg->Sender_Name = $x->Username;
       }
       $this->load->view('messageBox.html',$data);
@@ -97,7 +97,7 @@ class message_c extends CI_Controller {
       $data['user_id']=$session_data['user_id'];
       $data['message'] = $this->message_m->getMessage($message_id);
       $msg = $data['message']->result();
-      $x = $this->member_m->getUserDetail($msg->Sender_ID);
+      $x = $this->member_m->getMemberDetail($msg->Sender_ID);
       $msg->Sender_Name = $x->Username;
       $this->load->view('viewMessage.html',$data);
   }
