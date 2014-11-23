@@ -25,6 +25,7 @@ class Home_c extends CI_Controller {
       //$user_type = $session_data['type'];
       $data['type'] = $session_data['type'];
 
+      echo $data['type'];
       //print_r($data);
       if($data['type'] == 1)
       {
@@ -41,6 +42,7 @@ class Home_c extends CI_Controller {
     else
     {
       //If no session, redirect to login page
+      echo "Y";
       $this->load->view('index.html');
       $this->load->view('footer.html');
     }
