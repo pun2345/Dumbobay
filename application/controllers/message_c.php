@@ -114,7 +114,7 @@ class message_c extends CI_Controller {
       $data['type'] = $session_data['type'];
       $data['username'] = $session_data['username'];
       $data['message'] = $this->message_m->getMessage($message_id);
-      $msg = $data['message']->result();
+      $msg = $data['message'];
       $x = $this->member_m->getMemberDetail($msg->Sender_ID);
       $msg->Sender_Name = $x->Username;
       $this->load->view('viewMessage.html',$data);
