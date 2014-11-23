@@ -3,8 +3,8 @@
 
 		function __construct(){
   		    parent::__construct();
-    $this->load->helper('html');
-			// $this->load->database();
+   		    $this->load->helper('html');
+		    $this->load->database();
 			$this->load->model('member_m');
 		}
 
@@ -13,7 +13,6 @@
 		}
 
 		function createMember(){
-			$this->load->view('signup.html');
 			$this->load->library('form_validation');
 	        $this->form_validation->set_rules('username', 'username', 'require|css_clean|max_length[20]');
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
@@ -38,18 +37,17 @@
 		                            'password' => $this->input->post('password'),
 		                            'email' => $this->input->post('email'),
 		                            'type' => $this->input->post('type'));
+			    if ($this->member_m->checkMember($form_data['username'],$form_data['email']) == 'true') // the information has therefore been successfully saved in the db
+			    {             
+			    	$this->member_m->createMember($form_data);
+			        $this->session->set_flashdata("message","Registration Completed");
+			        redirect('home_c');   // or whatever logic needs to occur
+			    }
+			    else
+			    {
+			        $this->session->set_flashdata("message","Registration Failed, Try Again");
+			    }
 			}
-		    if ($this->member_m->checkMember($form_data['username'],$form_data['email']) == 'true') // the information has therefore been successfully saved in the db
-		    {             
-		    	$this->member_m->createMember($formdata);
-		        $this->session->set_flashdata("message","Registration Completed");
-		        redirect('home_c');   // or whatever logic needs to occur
-		    }
-		    else
-		    {
-		        $this->session->set_flashdata("message","Registration Failed, Try Again");
-		        redirect(current_url());
-		    }
 		}
 
 		function confirmMember($user_id){
