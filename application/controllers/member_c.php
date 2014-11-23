@@ -57,19 +57,23 @@
 			    }	
 			}
 		}
-
+		
 		function confirmMember($user_id){
 		    $session_data = $this->session->userdata('logged_in');
 			$this->member_m->activateMember($user_id);
       		$data['type'] = $session_data['type'];
+      		$data['user_id'] = $session_data['user_id'];
+      		$data['username'] = $session_data['username'];
 			$this->load->view('activationComfirmed.html',$data);
 		}
 
-		function editProfile($user_id){
+		function editProfile(){
 		    $session_data = $this->session->userdata('logged_in');
-			$data['user'] = $this->member_m->getMemberDetail($user_id);
+			$data['member'] = $this->member_m->getMemberDetail($session_data['user_id']);
       		$data['type'] = $session_data['type'];
-			$user = $data['user'];
+      		$data['user_id'] = $session_data['user_id'];
+      		$data['username'] = $session_data['username'];
+			$member = $data['member'];
     		$this->load->library('form_validation');
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
 	        $this->form_validation->set_rules('firstname', 'firstname', 'require|css_clean|max_length[20]');
@@ -83,37 +87,31 @@
 		    }
       	    else // passed validation proceed to post success logic
 	        {
-		        $form_data = array( 'password' => $this->input->post('password'),
-		                            'firstname' => $this->input->post('firstname'),
+		        $form_data = array( 'firstname' => $this->input->post('firstname'),
 		                            'lastname' => $this->input->post('lastname'),
 		                            'address' => $this->input->post('address'),
 		                            'telephone' => $this->input->post('telephone'),
 		                            'password' => $this->input->post('password'),
 		                            'email' => $this->input->post('email'));
-			    $member['password'] = $form_data['password'];
-			    $member['firstname'] = $form_data['$firstname'];
-			    $member['lastname'] = $form_data['$lastname'];
-			    $member['address'] = $form_data['$address'];
-			    $member['telephone'] = $form_data['$telephone'];
-			    $member['password'] = $form_data['$password'];
-			    $member['email'] = $form_data['$email'];
+			    if ($this->member_m->editMemberDetail($member->User_ID,$member->Username,$member->Password,$form_data['firstname'],$form_data['lastname'],$member->Type,$form_data['address'],$form_data['telephone'],$form_data['email']) == 'true') // the information has therefore been successfully saved in the db
+			    {             
+			        $this->session->set_flashdata("message","Profile edited");
+			        redirect('member_c/memberDetail');   // or whatever logic needs to occur
+			    }
+			    else
+			    {
+			        $this->session->set_flashdata("message","Error to edit profile");
+			        redirect('member_c/editProfile');
+			    }
 
 			}
-		    if ($this->member_m->editUserDetail($user) == 'true') // the information has therefore been successfully saved in the db
-		    {             
-		        $this->session->set_flashdata("message","Profile edited");
-		        redirect('home_c');   // or whatever logic needs to occur
-		    }
-		    else
-		    {
-		        $this->session->set_flashdata("message","Error to edit profile");
-		    }
 		}
 
 		function memberDetail(){      
       		$session_data = $this->session->userdata('logged_in');
       		$data['user_id'] = $session_data['user_id'];
       		$data['type'] = $session_data['type'];
+      		$data['username'] = $session_data['username'];
 			$data['member'] = $this->member_m->getMemberDetail($data['user_id']);
 			$this->load->view('profile.html',$data);
 		}

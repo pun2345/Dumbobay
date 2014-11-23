@@ -7,7 +7,7 @@
 			$this->load->model('product_m');
 			//$this->load->model('transaction_m')
 		
-			//$this->load->database();
+			$this->load->database();
 			//$this->load->model('email_m');
 		
 
@@ -24,7 +24,7 @@
 		}
 		function index(){
 			$this->load->helper('email_sender');
-			activate_User(6,'test','pun_Taweekiat@hotmail.com');
+			Feedback(1);
 			$this->email->print_debugger();
 		}
 		function winning_bid($id,$product_id){

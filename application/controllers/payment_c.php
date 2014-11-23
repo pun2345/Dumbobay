@@ -57,7 +57,7 @@ class Payment_c extends CI_Controller {
       //Go to private area
       foreach ($transaction_ids as $transaction_id) {
         $this->transaction_m->updateStatus($transaction_id,"already Paid","");
-        redirect("Feedback/".$transaction_id);
+        Feedback($transaction_id);
       }
       $this->session->set_flashdata('cart2',$data['products']);
       redirect('cart/afterPaid');

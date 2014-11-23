@@ -5,7 +5,7 @@
   		    parent::__construct();
 			$this->load->database();
 			$this->load->model('bidding_m');
-
+			$this->load->helper('email_sender');
 		}
 
 		function index(){
@@ -26,7 +26,7 @@
 						$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
 						$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
 						$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-						$this->notifyBidLosingEmail($oldWinner,$product_id);
+						$this->notifyBidLosingEmail($oldWinner->User_ID,$product_id)
 						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 						$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price+$bit_increment,'auto');
 						$this->bidding_m->setJoinBiddingType($user_id,$product_id,'auto');
@@ -38,7 +38,7 @@
 						$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
 						$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
 						$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-						$this->notifyBidLosingEmail($oldWinner,$product_id);
+						$this->notifyBidLosingEmail($oldWinner->User_ID,$product_id)
 						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 						$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'auto');
 						$this->bidding_m->setJoinBiddingType($user_id,$product_id,'auto');
@@ -62,7 +62,7 @@
 					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
 					$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
 					$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-					$this->notifyBidLosingEmail($oldWinner,$product_id);
+					$this->notifyBidLosingEmail($oldWinner->User_ID,$product_id)
 					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$newprice,'auto');
 					$this->bidding_m->setJoinBiddingType($user_id,$product_id,'auto');
@@ -101,7 +101,7 @@
 					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
 					$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
 					$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-					$this->notifyBidLosingEmail($oldWinner,$product_id);
+					$this->notifyBidLosingEmail($oldWinner->User_ID,$product_id)
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$price,'manual');
 					$this->bidding_m->setJoinBiddingType($user_id,$product_id,'manual');
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
@@ -113,7 +113,9 @@
 
 		function maxBidding($product_id){
 			$session_data = $this->session->userdata(logged_in);
-      		$data['type'] = $session_data['type'];			
+      		$data['type'] = $session_data['type'];	
+      		$data['user_id'] = $session_data['user_id'];
+      		$data['username'] = $session_data['username'];		
 			$this->load->library('form_validation');
 	        $this->form_validation->set_rules('maxbid', 'maxbid', 'require|css_clean');
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
@@ -124,22 +126,24 @@
 	        {
 		        $form_data = array( 'maxbid' => $this->input->post('maxbid'));
 			    $maxbid = $form_data['$maxbid'];
+			    if ($this->bidding($session_data['user_id'],$product_id,$maxbid,'auto') == TRUE) // the information has therefore been successfully saved in the db
+			    {             
+			        $this->session->set_flashdata("message","Bidding completed");
+			        redirect(current_url());   // or whatever logic needs to occur
+			    }
+			    else
+			    {
+			        $this->session->set_flashdata("message","Unable to bid");
+			        redirect(current_url());
+			    }
 			}
-		    if ($this->bidding($session_data['user_id'],$product_id,$maxbid,'auto') == TRUE) // the information has therefore been successfully saved in the db
-		    {             
-		        $this->session->set_flashdata("message","Bidding completed");
-		        redirect(current_url());   // or whatever logic needs to occur
-		    }
-		    else
-		    {
-		        $this->session->set_flashdata("message","Unable to bid");
-		        redirect(current_url());
-		    }
 		}
 
 		function stepBidding($product_id){
 			$session_data = $this->session->userdata(logged_in);
       		$data['type'] = $session_data['type'];
+      		$data['user_id'] = $session_data['user_id'];
+      		$data['username'] = $session_data['username'];
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
 			$bit_increment = $this->bidding_m->getBitIncrement($product_id);
 			$this->bidding($session_data['user_id'],$product_id,$current_price+$bit_increment,'manual');
@@ -167,7 +171,7 @@
 		}
 
 		function notifyBidLosingEmail($user_id,$product_id){
-
+			losing_Bid($user_id,$product_id);
 		}
 
 		function initializeMaxBidding($product_id,$maxbid){

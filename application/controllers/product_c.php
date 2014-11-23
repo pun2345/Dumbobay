@@ -16,7 +16,8 @@ class Product_c extends CI_Controller {
   {
     //This method will have the credentials validation
     $page_num=1;
-    $data['products'] = $this->product_m->allProduct($page_num);
+    $data['bidProducts'] = $this->product_m->allBidProduct($page_num);
+    $data['directProducts'] = $this->product_m->allDirectProduct($page_num);
     $data['type'] = 0;
     if($this->session->userdata('logged_in'))
     {
@@ -55,7 +56,8 @@ class Product_c extends CI_Controller {
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
       $searchWord=$this->input->post("search");
-    $data['products'] = $this->product_m->search($searchWord);
+      $data['bidProducts'] = $this->product_m->searchBid($searchWord);
+    $data['directProducts'] = $this->product_m->searchDirect($searchWord);
     $this->load->view('product.html',$data);
     $this->load->view('footer.html');
   }
@@ -65,7 +67,7 @@ class Product_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $data['product'] = $this->product_m->getDetail($product_id);
+    $data['product'] = $this->product_m->getProductDetail($product_id);
     $this->load->view('productDesc.html',$data);
     $this->load->view('footer.html');
   }
