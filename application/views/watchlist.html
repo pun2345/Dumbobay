@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <?php
-    include 'HTMLHeader.html';
-  ?>
+<?php
+include 'HTMLHeader.html';
+?>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-    <style>
-    li.watchlist{
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
+      <![endif]-->
+      <style>
+        li.watchlist{
+          margin-top: 30px;
+          margin-bottom: 30px;
+        }
 
-    </style>
-  </head>
+      </style>
+    </head>
 
-  <body>
-<!-- Fixed navbar -->
-  <?php
+    <body>
+      <!-- Fixed navbar -->
+      <?php
       if($type==0){
         include 'guest_menu.html';
       }
@@ -34,261 +34,175 @@
         include 'seller_menu.html'; 
       }
       if($this->session->flashdata('message')) echo '
-    <script>
-      alert("'.$this->session->flashdata('message').'");
-    </script>
-    ';
-    ?>
+        <script>
+          alert("'.$this->session->flashdata('message').'");
+        </script>
+        ';
+        ?>
 
-  <div id="myheaderwrap">
-    <div class="container">
-      <div class="row centered">
-          <h2>Want it that much ? Then <b>PAY</b> more. <b>-DumboBay-</b></h3> 
-      </div><!-- row -->
-    </div><!-- container -->
-  </div><!-- headerwrap -->
+        <div id="myheaderwrap">
+          <div class="container">
+            <div class="row centered">
+              <h2>Want it that much ? Then <b>PAY</b> more. <b>-DumboBay-</b></h3> 
+              </div><!-- row -->
+            </div><!-- container -->
+          </div><!-- headerwrap -->
 
-	<div>
-		<div class="container">
-			<div>
-				<div class="col-md-10 col-md-offset-1" style="padding-top:50px; padding-bottom:25px">
-          <div class="row">
-            <div class="col-md-2" style="padding-left:20px">
-              <img src="assets/img/watchlist.png" width="130" height="100">
+          <div>
+            <div class="container">
+             <div>
+              <div class="col-md-10 col-md-offset-1" style="padding-top:50px; padding-bottom:25px">
+                <div class="row">
+                  <div class="col-md-2" style="padding-left:20px">
+                    <img src="assets/img/watchlist.png" width="130" height="100">
+                  </div>
+                  <div class="col-md-8">
+                    <h1 style="color:black;padding-top:13px">Watchlist</h1>
+                  </div>
+                  <div class="col-md-2" style="padding-top:70px;padding-left:70px"> 
+                    item: 4
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
+                <ol style="list-style-type:none; padding-left: 0px">
+                  <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
+                    <div class="row">
+                      <div class="col-md-6">
+                      </div>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" id="inputDirectSaleSearch" placeholder="Search...">
+                      </div>
+
+                      <div class="col-md-1" style="padding-left:0px">
+                        <button type="button" class="btn btn-default">Search</button>
+                      </div>
+                    </div>
+                  </li>
+                  <?php 
+                  foreach ($products->result() as $row){
+                    echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <img src="assets/img/iphone6.jpg" width="185" height="104">
+                      </div>
+                      <div class="col-md-4">
+                        <h3>'.$row->Name.'</h3>
+                        <strong>Due date: </strong>'.$row->End_Date.'<br>
+                        <strong>status: </strong>'.'<br>
+                        <a href="'.'product_m/getProductDetail/'.$row->Product_ID.'">more info...</a>
+                      </div>
+                      <div class="col-md-5">
+                        <div class="row" style="padding-top:10px">
+                          <div class="col-md-12">
+                            <strong>current bid: </strong>'.$row->Current_Price.'<br><strong>time left: </strong>18 hr**<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>'.$row->Bid_Price.'
+                          </div>
+                        </div>
+                        <div class="row">
+                          <br>
+                          <div class="col-md-2">
+                            <a href="watchlist_c/stepBidding/'.$row->Product_ID.'"><button type="button" class="btn btn-default">Bid</button></a>
+                          </div>
+                          <div class="col-md-10">
+
+                            <div class="row">
+                              <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
+
+                              <div class="form-group col-md-7" style="left:0%; padding-right:0px">
+                                <div class="input-group">
+                                '.form_open('bidding_c/maxBidding/'.$row->Product_ID,'id="maxbid-form" name="maxbid-form" onsubmit="return validateForm()"').'
+                                  <input type="text" class="form-control" name="maxbid"  placeholder="Enter max bid">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">Bid</button>
+                                  </span>
+                                  </form>
+                                </div>
+                              </div>
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>';
+                }
+                ?>
+                <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <img src="assets/img/iphone6.jpg" width="185" height="104">
+                    </div>
+                    <div class="col-md-4">
+                      <h3>iPhone 6</h3>
+                      <strong>Due date: </strong>12 Dec 14<br>
+                      <strong>status: </strong>bidding<br>
+                      <a href="#">more info...</a>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="row" style="padding-top:10px">
+                        <div class="col-md-12">
+                          <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>-
+                        </div>
+                      </div>
+                      <div class="row">
+                        <br>
+                        <div class="col-md-2">
+                          <button type="button" class="btn btn-default">Bid</button>
+                        </div>
+                        <div class="col-md-10">
+
+                          <div class="row">
+                            <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
+
+                            <div class="form-group col-md-7" style="left:0%; padding-right:0px">
+                              <div class="input-group">
+
+                                <input type="text" class="form-control"  placeholder="Enter max bid">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-default" type="button">Bid</button>
+                                </span>
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+              </ol>
             </div>
-            <div class="col-md-8">
-              <h1 style="color:black;padding-top:13px">Watchlist</h1>
-            </div>
-            <div class="col-md-2" style="padding-top:70px;padding-left:70px">
-              items: 4
-            </div>
-          </div>
-				</div>
-        
-        <div class="col-md-10 col-md-offset-1 border-shadow border-radius" style="background-color:white">
-          <ol style="list-style-type:none; padding-left: 0px">
-            <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
-              <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-5">
-                  <input type="text" class="form-control" id="inputDirectSaleSearch" placeholder="Search...">
-                </div>
-
-                <div class="col-md-1" style="padding-left:0px">
-                  <button type="button" class="btn btn-default">Search</button>
-                </div>
-              </div>
-            </li>
-            <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
-              <div class="row">
-                <div class="col-md-3">
-                  <img src="assets/img/iphone6.jpg" width="185" height="104">
-                </div>
-                <div class="col-md-4">
-                  <h3>iPhone 6</h3>
-                  <strong>Due date: </strong>12 Dec 14<br>
-                  <strong>status: </strong>bidding<br>
-                  <a href="#">more info...</a>
-                </div>
-                <div class="col-md-5">
-                  <div class="row" style="padding-top:10px">
-                    <div class="col-md-12">
-                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>-
-                    </div>
-                  </div>
-                  <div class="row">
-                    <br>
-                    <div class="col-md-2">
-                      <button type="button" class="btn btn-default">Bid</button>
-                    </div>
-                    <div class="col-md-10">
-                      
-                      <div class="row">
-                        <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
-
-                        <div class="form-group col-md-7" style="left:0%; padding-right:0px">
-                          <div class="input-group">
-                
-                            <input type="text" class="form-control"  placeholder="Enter max bid">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">Bid</button>
-                            </span>
-                          </div>
-                        </div>
-
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
-              <div class="row">
-                <div class="col-md-3">
-                  <img src="assets/img/iphone6.jpg" width="185" height="104">
-                </div>
-                <div class="col-md-4">
-                  <h3>iPhone 6</h3>
-                  <strong>Due date: </strong>12 Dec 14<br>
-                  <strong>status: </strong>bidding<br>
-                  <a href="#">more info...</a>
-                </div>
-                <div class="col-md-5">
-                  <div class="row" style="padding-top:10px">
-                    <div class="col-md-12">
-                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>auto<br><strong>your max bid: </strong>200 bath
-                    </div>
-                  </div>
-                  <div class="row">
-                    <br>
-                    <div class="col-md-2">
-                      <button type="button" class="btn btn-default">Bid</button>
-                    </div>
-                    <div class="col-md-10">
-                      <div class="row">
-                        <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
-
-                        <div class="form-group col-md-7" style="left:0%; padding-right:0px">
-                          <div class="input-group">
-                
-                            <input type="text" class="form-control"  placeholder="Enter max bid">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">Bid</button>
-                            </span>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
-              <div class="row">
-                <div class="col-md-3">
-                  <img src="assets/img/iphone6.jpg" width="185" height="104">
-                </div>
-                <div class="col-md-4">
-                  <h3>iPhone 6</h3>
-                  <strong>Due date: </strong>12 Dec 14<br>
-                  <strong>status: </strong>bidding<br>
-                  <a href="#">more info...</a>
-                </div>
-                <div class="col-md-5">
-                  <div class="row" style="padding-top:10px">
-                    <div class="col-md-12">
-                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>-
-                    </div>
-                  </div>
-                  <div class="row">
-                    <br>
-                    <div class="col-md-2">
-                      <button type="button" class="btn btn-default">Bid</button>
-                    </div>
-                    <div class="col-md-10">
-                      
-                      <div class="row">
-                        <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
-
-                        <div class="form-group col-md-7" style="left:0%; padding-right:0px">
-                          <div class="input-group">
-                
-                            <input type="text" class="form-control"  placeholder="Enter max bid">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">Bid</button>
-                            </span>
-                          </div>
-                        </div>
-
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
-              <div class="row">
-                <div class="col-md-3">
-                  <img src="assets/img/iphone6.jpg" width="185" height="104">
-                </div>
-                <div class="col-md-4">
-                  <h3>iPhone 6</h3>
-                  <strong>Due date: </strong>12 Dec 14<br>
-                  <strong>status: </strong>bidding<br>
-                  <a href="#">more info...</a>
-                </div>
-                <div class="col-md-5">
-                  <div class="row" style="padding-top:10px">
-                    <div class="col-md-12">
-                      <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>-
-                    </div>
-                  </div>
-                  <div class="row">
-                    <br>
-                    <div class="col-md-2">
-                      <button type="button" class="btn btn-default">Bid</button>
-                    </div>
-                    <div class="col-md-10">
-                      
-                      <div class="row">
-                        <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
-
-                        <div class="form-group col-md-7" style="left:0%; padding-right:0px">
-                          <div class="input-group">
-                
-                            <input type="text" class="form-control"  placeholder="Enter max bid">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">Bid</button>
-                            </span>
-                          </div>
-                        </div>
-
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            
-          </ol>
-        </div>
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- headerwrap -->
-
-
-	
-	
-	<!-- FOOTER -->
-    <div id="f" style="margin-top:50px">
-      <div class="container">
-        <div class="row">
-        <div class="col-md-6 col-md-push-2">
-          <img src="assets/img/DumboBay-Logo-b.png">
-        </div>
-        <div class="col-md-6 col-md-push-2">
-          <img src="assets/img/Frappe-Logo-bg-sm.png">
-        </div>
-        </div><!-- row -->
-      </div><!-- container -->
-    </div><!-- Footer -->
-
-
-	
-
+          </div><!-- row -->
+        </div><!-- container -->
+      </div><!-- headerwrap -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
+  <script>
+    function validateForm() {
+      var subject = document.forms["problem-form"]["msgSubject"].value;
+      var text = document.forms["problem-form"]["msgText"].value;
+      var message ="";
+
+      if (!validateSubject(subject)||subject==""||subject==null) {
+        alert("The subject is invalid.");
+        return false;
+      }
+      if (!validateMessageText(text)||text==""||text==null ) {
+        alert("Text is invalid.");
+        return false;
+      }
+  }
+  </script>
   </body>
-</html>
+  </html>
