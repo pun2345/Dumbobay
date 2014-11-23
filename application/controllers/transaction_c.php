@@ -30,13 +30,21 @@ class Transaction_c extends CI_Controller {
     $this->load->view('history.html',$data);
         // $this->load->view('footer.html');
   }
-  function feedback($transactionID){
-    //$this->isLogin();
+  function feedback($transaction_id){
+    $this->loginBeforeFeedback();
     $data['transaction'] = $this->transaction_m->getTransactionDetail($transaction_id);
+
     $session_data = $this->session->userdata('logged_in');
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
+    $seller = $this->member_m->getMemberDetail($data['transaction']->Seller_ID);
+    $buyer = $this->member_m->getMemberDetail($data['transaction']->Buyer_ID);
+    if($data['user_id']==$seller){
+      $data['other'] = $seller->Username;
+    }else{
+      $data['other'] = $buyer->Username;
+    }
     $this->load->library('form_validation');
     $this->form_validation->set_rules('score', 'score', 'required|xss_clean');      
     $this->form_validation->set_rules('feedback', 'feedback', 'trim|max_length[200]');
@@ -46,8 +54,8 @@ class Transaction_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
 
-      $data['transactionID']= $transactionID;
-      $this->load->view('feedback_form',$data);
+      // $data['transactionID']= $transactionID;
+      $this->load->view('feedback_form.html',$data);
         // $this->load->view('footer.html');
     }
     else
@@ -65,6 +73,15 @@ class Transaction_c extends CI_Controller {
         $this->session->set_flashdata("message","Feedback Failed! Try Again.");
         redirect('transaction/history/'.$user_id);
       }
+    }
+  }
+  function loginBeforeFeedback(){
+    if($this->session->userdata('logged_in')){
+      return true;
+    } else{
+      $this->session->set_flashdata("message","Please Login!");
+      $this->session->set_flashdata("beforePay",current_url());
+      redirect('login_c');
     }
   }
   function updateStatus($transaction_id){
