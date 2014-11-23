@@ -121,6 +121,7 @@
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
 		        $this->load->view(' .html',$data);
+		        $this->load->view('footer.html');
 		    }
       	    else // passed validation proceed to post success logic
 	        {
@@ -149,6 +150,7 @@
 			$this->bidding($session_data['user_id'],$product_id,$current_price+$bit_increment,'manual');
 			$data['current_price'] = $this->bidding_m->getCurrentPrice($product_id);
 			$this->load->view('watchlist.html',$data);
+		    $this->load->view('footer.html');
 		    $this->session->set_flashdata("message","Bidding completed !");
 		}
 

@@ -28,6 +28,7 @@ class message_c extends CI_Controller {
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('newMessage.html',$data);
+          $this->load->view('footer.html');
       }
       else // passed validation proceed to post success logic
       {
@@ -57,6 +58,7 @@ class message_c extends CI_Controller {
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('newMessage.html',$data);
+          $this->load->view('footer.html');
       }
       else // passed validation proceed to post success logic
       {
@@ -96,6 +98,7 @@ class message_c extends CI_Controller {
         $msg->Sender_Name = $x->Username;
       }
       $this->load->view('messageBox.html',$data);
+      $this->load->view('footer.html');
   }
 
   function messageDetail($message_id)
@@ -109,6 +112,7 @@ class message_c extends CI_Controller {
       $x = $this->member_m->getMemberDetail($msg->Sender_ID);
       $msg->Sender_Name = $x->Username;
       $this->load->view('viewMessage.html',$data);
+      $this->load->view('footer.html');
   }
 
   function reply($message_id)
@@ -121,10 +125,12 @@ class message_c extends CI_Controller {
       $data['subject'] = $this->message_m->getSubject($message_id);
       if(strlen($data['subject'])>26) $data['subject'] = substr($data['subject'],0,23) . "..";
       $this->load->view('replyMessage.html',$data);
+      $this->load->view('footer.html');
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('replyMessage.html',$data);
+          $this->load->view('footer.html');
       }
       else // passed validation proceed to post success logic
       {
