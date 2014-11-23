@@ -107,7 +107,7 @@ function Feedback($t_id){
 	//echo $buyer_data->Email;
 	//print_r($buyer_data);
 // //To Buyer
-	$CI->email->to($buyer_data->'Email'); 
+	$CI->email->to($buyer_data->Email); 
 	
 	$subject = "Feedback: ".$product_data['Name'];
 	$this->email->subject($subject);
@@ -119,7 +119,7 @@ function Feedback($t_id){
 		return false;
 	}
 // //To Seller
-	$CI->email->to($seller_data->'Email'); 
+	$CI->email->to($seller_data->Email); 
 	
 	$subject = "Feedback: ".$product_data['Name'];
 	$this->email->subject($subject);
