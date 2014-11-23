@@ -128,7 +128,8 @@ class message_c extends CI_Controller {
       $data['type'] = $session_data['type'];
       $data['username'] = $session_data['username'];
       $data['receiver_id'] = $this->message_m->getSender($message_id);
-      $data['receiverName'] = $this->message_m->getMemberDetail($data['receiver_id'])->Username;
+      $tmp = $this->member_m->getMemberDetail($data['receiver_id']);
+      $data['receiverName'] = $tmp->Username;
       $data['subject'] = $this->message_m->getSubject($message_id);
       if(strlen($data['subject'])>26) $data['subject'] = substr($data['subject'],0,23) . "..";
       
