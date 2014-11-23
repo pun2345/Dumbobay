@@ -12,6 +12,7 @@
 		function index(){
 			$session_data = $this->session->userdata('logged_in');
 			$data['user_id'] = $session_data['user_id'];
+      		$data['username'] = $session_data['username'];
       		$data['type'] = $session_data['type'];
 			$data['pruducts'] = $this->watchlist_m->getWatchlist($data['user_id']);
 			$this->load->view('watchlist.html',$data);	
@@ -21,6 +22,7 @@
 			$session_data = $this->session->userdata('logged_in');
 			$data['user_id'] = $session_data['user_id'];
       		$data['type'] = $session_data['type'];
+      		$data['username'] = $session_data['username'];
 			$data['product'] = $this->product_m->getBidProductDetail($product_id);
 			$this->load->view('watchlistdetail.html',$data);
 		}

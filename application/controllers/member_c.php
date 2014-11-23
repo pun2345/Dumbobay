@@ -56,12 +56,13 @@
 			    	redirect('member_c/createMember');
 			    }	
 			}
-		}
-
+		
 		function confirmMember($user_id){
 		    $session_data = $this->session->userdata('logged_in');
 			$this->member_m->activateMember($user_id);
       		$data['type'] = $session_data['type'];
+      		$data['user_id'] = $session_data['user_id'];
+      		$data['username'] = $session_data['username'];
 			$this->load->view('activationComfirmed.html',$data);
 		}
 
@@ -69,6 +70,8 @@
 		    $session_data = $this->session->userdata('logged_in');
 			$data['member'] = $this->member_m->getMemberDetail($session_data['user_id']);
       		$data['type'] = $session_data['type'];
+      		$data['user_id'] = $session_data['user_id'];
+      		$data['username'] = $session_data['username'];
 			$member = $data['member'];
     		$this->load->library('form_validation');
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
@@ -89,13 +92,7 @@
 		                            'telephone' => $this->input->post('telephone'),
 		                            'password' => $this->input->post('password'),
 		                            'email' => $this->input->post('email'));
-			    $member['firstname'] = $form_data['firstname'];
-			    $member['lastname'] = $form_data['lastname'];
-			    $member['address'] = $form_data['address'];
-			    $member['telephone'] = $form_data['telephone'];
-			    $member['password'] = $form_data['password'];
-			    $member['email'] = $form_data['email'];
-			    if ($this->member_m->editMemberDetail($memeber) == 'true') // the information has therefore been successfully saved in the db
+			    if ($this->member_m->editMemberDetail($member->User_ID,$member->Username,$member->Password,$form_data['firstname'],$form_data['lastname'],$member->Type,$form_data['address'],$form_data['telephone'],$form_data['email']) == 'true') // the information has therefore been successfully saved in the db
 			    {             
 			        $this->session->set_flashdata("message","Profile edited");
 			        redirect('member_c/memberDetail');   // or whatever logic needs to occur
@@ -113,6 +110,7 @@
       		$session_data = $this->session->userdata('logged_in');
       		$data['user_id'] = $session_data['user_id'];
       		$data['type'] = $session_data['type'];
+      		$data['username'] = $session_data['username'];
 			$data['member'] = $this->member_m->getMemberDetail($data['user_id']);
 			$this->load->view('profile.html',$data);
 		}

@@ -41,6 +41,13 @@
         include 'seller_menu.html'; 
       }
     ?>
+    <?php
+	if($this->session->flashdata('message')) echo '
+		<script>
+			alert("'.$this->session->flashdata('message').'");
+		</script>
+		';
+?>
 	<!-- =======================================================================-->
 	<div id="myheaderwrap">
 		<div class="container">
