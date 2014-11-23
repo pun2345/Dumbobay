@@ -31,38 +31,44 @@ function test($text ='test test test'){
 	//}
 	//return false
 }
-function activate_User($id){
+function activate_User($id,$username,$mail){
+	echo $id;
+	echo $username;
+	echo $mail;
 	$CI =& get_instance();
-	$CI->load->model('member_m');
-	$CI->load->model('product_m');
+	//$CI->load->database();
     $CI->load->library('email');               
 
     $config['protocol']     = 'smtp';
     $config['smtp_host']    = 'ssl://smtp.gmail.com';
     $config['smtp_port']    = '465';
     $config['smtp_timeout'] = '7';
-    $config['smtp_user']    = 'pun2345@gmail.com';
-    $config['smtp_pass']    = '2345pun2345pun';
+    $config['smtp_user']    = 'dumbobay@gmail.com';
+    $config['smtp_pass']    = 'dumbo123';
     $config['charset']      = 'utf-8';
     $config['newline']      = "\r\n";
-    $config['mailtype']     = 'text';
+    $config['mailtype']     = 'html';
     $config['validation']   = TRUE;
 
-	$user_data = $CI->member_m->getMemberDetail($id);
+    //echo $id;
 
-	$CI->email->to($user_data['E-mail']); 
-	
-	$subject = "Sing up: ".$user_data['Name']."for Dumbobay";
-	$this->email->subject($subject);
+	//$user_data = $CI->member_m->getUserDetail($id);
+	//rint_r($user_data);
+	$CI->email->initialize($config);
+	$CI->email->from('Dumbobay@Dumbobay.com');
+	$CI->email->to($mail); 
+	$subject = "Sign up: ".$username." for Dumbobay";
+	$CI->email->subject($subject);
 	
 
-	$text = "To ".$user_data['name']."\r\n To activate youe id, follow the link: <a href=\"".$link."\">".$link."</a>.\r\nFrom Dumbobay.\r\nFrom Dumbobay";
-	$this->email->message($text);
+	$text = "To ".$username."\r\n To activate youe id, follow the link: <a href=\"localhost/Dumbobay/index.php/member_c/confirmMember/".$id."\">localhost/Dumbobay/index.php/member_c/confirmMember/".$id."</a>.\r\nFrom Dumbobay.";
+	$CI->email->message($text);
 	
-	if($this->email->send())
+
+	if($CI->email->send())
 		return true;
 	return false;
-	//if($this->email->print_debugger()){
+	//if($CI->email->print_debugger()){
 	//	return true;
 	//}
 	//return false
