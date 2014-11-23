@@ -10,6 +10,8 @@ class Report_c extends CI_Controller {
     $this->load->database();
     $this->load->helper('form');
     $this->load->model('transaction_m');
+    
+    $this->load->model('member_m');
   }
 
   function index()
