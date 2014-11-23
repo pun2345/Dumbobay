@@ -61,7 +61,7 @@ function activate_User($id,$username,$mail){
 	$CI->email->subject($subject);
 	
 
-	$text = "To ".$username."\r\n To activate youe id, follow the link: <a href=\"localhost/Dumbobay/index.php/member_c/confirmMember/".$id."\">localhost/Dumbobay/index.php/member_c/confirmMember/".$id."</a>.\r\nFrom Dumbobay.";
+	$text = "To ".$username."\r\n To activate your id, follow the link: <a href=\"localhost/Dumbobay/index.php/member_c/confirmMember/".$id."\">localhost/Dumbobay/index.php/member_c/confirmMember/".$id."</a>.\r\nFrom Dumbobay.";
 	$CI->email->message($text);
 	
 
@@ -187,8 +187,11 @@ function win_Bid($id,$product_id){
 
 function BlackList($id,$product_id){
 	$CI =& get_instance();
+	
+
 	$CI->load->model('member_m');
 	$CI->load->model('product_m');
+    $CI->load->database();
     $CI->load->library('email');               
 
     $config['protocol']     = 'smtp';
@@ -225,10 +228,11 @@ function BlackList($id,$product_id){
 	//return false
 }
 
-function Feedback($id,$link){
+function Feedback($t_id){
 	$CI =& get_instance();
 	$CI->load->model('member_m');
 	$CI->load->model('product_m');
+	$CI->load->model('transaction_m');
     $CI->load->library('email');               
 
     $config['protocol']     = 'smtp';
@@ -239,26 +243,36 @@ function Feedback($id,$link){
     $config['smtp_pass']    = '2345pun2345pun';
     $config['charset']      = 'utf-8';
     $config['newline']      = "\r\n";
-    $config['mailtype']     = 'link';
+    $config['mailtype']     = 'html';
     $config['validation']   = TRUE;
 
-	$user_data = $CI->member_m->getMemberDetail($id);
-	$product_data = $CI->product_m->getDetail($product_id);
+    $tran_data = $CI->transaction_m->getTransactionDetail($t_id);
+    print_r($tran_data->Product_ID);
 
-	$CI->email->to($user_data['E-mail']); 
+    $product_data = $CI->product_m->getProductDetail($tran_data->Product_ID);
+    print_r($product_data);
+//     $buyer_data = $CI->member_m->getMemberDetail($tran_data->Buyer_ID);
+//     $seller_data = $CI->member_m->getMemberDetail($tran_data->Seller_ID);
+
+// 	$CI->email->initialize($config);	
+// 	$CI->email->from('Dumbobay@Dumbobay.com');
 	
-	$subject = "Feedback: ".$product_data['Name'];
-	$this->email->subject($subject);
+// 	print_r($buyer_data);
+// //To Buyer
+// 	 //$CI->email->to($buyer_data->'E-mail'); 
 	
-	$text = "To ".$user_data['name']."\r\n 
-	Please give feed back to the".$product_data['name']." transaction.\r\n
-	Follow the link: <a href=\"".$link."\">".$link."</a>.\r\nFrom Dumbobay";
-		if($CI->email->send())
+// 	 $subject = "Feedback: ".$product_data['Name'];
+// 	 $this->email->subject($subject);
 	
-	$this->email->message($text);
+	 // $text = "To ".$buyer_data->Username."\r\n 
+	 // Please give feed back to the".$product_data['name']." transaction.\r\n
+	 // Follow the link: <a href=\"Localhost/Dumbobay/index.php/transaction_c/Feedback/".$t_id."\">"."Localhost/Dumbobay/index.php/transaction_c/Feedback/".$t_id.".</a>.\r\nFrom Dumbobay";
+	 //if($CI->email->send())
 	
-	if($this->email->send())
-		return true;
-	return false;
+	// $this->email->message($text);
+	
+	// if($this->email->send())
+	// 	return true;
+	// return false;
 }
 ?>
