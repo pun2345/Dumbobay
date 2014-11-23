@@ -37,7 +37,7 @@ Class transaction_m extends CI_Model {
 		return $query->num_rows();
 	}
 	function getEndPayment(){
-		$query = $this->db->query("Select * from transaction where End_Date < curdate()");
+		$query = $this->db->query("Select * from transaction where End_Date < curdate() and Status = 'Waiting for payment'");
 		return $query;
 	}
 	function saveFeedbackBuyer($transaction_id,$score,$feedback){
