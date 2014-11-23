@@ -23,10 +23,7 @@
 
     <!-- Fixed navbar -->
 <?php
-      if($type==0){
-        include 'guest_menu.html';
-      }
-      else if($type==1){
+     if($type==1){
         include 'admin_menu.html';  
       }            
       else if($type==2){
@@ -216,7 +213,10 @@
               </div>
             </li>
 ======= -->
-          <?php foreach($products->result() as $row)
+
+          <?php 
+                $sum=0;
+                foreach($products->result() as $row)
                 {
                   echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">';
                     echo '<div class="row">';
@@ -243,7 +243,8 @@
                               
                             echo '</div>';
                             echo '<div class="col-md-3" style="font-size: 13px; padding-top:27px; padding-right:0px; padding-left:70px">';
-                              echo '2,000,000 bath';
+                              $sum += $row->Price*$row->Quantity;
+                              echo $row->Price*$row->Quantity.' bath';
                             echo '</div>';
                           echo '</div>';
                           echo '<div class="row">';
@@ -269,11 +270,15 @@
           <div class="row" style="padding-bottom:0px">
 
             <div class="row col-md-2" style="padding-left:30px">
-              <button type="button" class="btn btn-default"> Save my cart </button>
             </div>
-            <div class="row col-md-9">
+            <div class="row col-md-7">
+            </div>
+            <div class="row col-md-2">
+              <?php echo "Total: " .$sum;?>
             </div>
             <div class="row col-md-1" style="padding-left:50px">
+              <!--add sum-->
+              
               <a href="cart_c/checkOut"><button type="button" class="btn btn-default"> Check out </button></a>
           </div>
           </div>

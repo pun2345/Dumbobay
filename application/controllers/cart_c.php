@@ -42,7 +42,7 @@ class Cart_c extends CI_Controller {
   function deleteProduct($product_id){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
-    $temp = $this->cart_m->deleteFormCart($session_data['user_id'],$product_id);
+    $temp = $this->cart_m->deleteFromCart($session_data['user_id'],$product_id);
     if($temp=="true"){
       $this->session->set_flashdata("message","Product was deleted");
     }else{
@@ -79,7 +79,7 @@ class Cart_c extends CI_Controller {
       $transaction_ids[] = $this->transaction_m->newTransaction($status,$price,$quantity,$row->Seller_ID,$buyer_id,$product_id);
     }
     $this->session->set_flashdata("cart",$transaction_ids);
-    $this->session->set_flashdata("cart2",$products);
+    $this->session->set_flashdata("cart2",$products->result());
     redirect('payment_c/index/'.$sumamount);
   }
   function afterPaid(){

@@ -109,7 +109,7 @@ function Feedback($t_id){
 // //To Buyer
 	$CI->email->to($buyer_data->Email); 
 	
-	$subject = "Feedback: ".$product_data['Name'];
+	$subject = "Feedback: ".$product_data->Name;
 	$this->email->subject($subject);
 	
 	$text = "To ".$buyer_data->Username."\r\n 

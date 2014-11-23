@@ -60,19 +60,19 @@
 						<h1>Edit Profile</h1>
 					</legend>
 				</div>
-				<?php //echo form_open('member_c/editProfile','class="form-horizontal" id="editprofile-form" name="editprofile-form" onsubmit="return validateForm()"'); ?>
-				<form class="form-horizontal" id="editprofile-form" name="editprofile-form" onsubmit="return validateForm()">
+				<?php echo form_open('member_c/editProfile','class="form-horizontal" id="editprofile-form" name="editprofile-form" onsubmit="return validateForm()"'); ?>
+				<!--<form class="form-horizontal" id="editprofile-form" name="editprofile-form" onsubmit="return validateForm()">-->
 				<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px">
 					<div class="row form-group">
 						<label class="col-md-3 control-label" align="right">Firstname:</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" id="name" name="name" value="<?php echo $member->Firstname; ?>" autofocus>
+							<input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $member->Firstname; ?>" autofocus>
 						</div>
 					</div>
 					<div class="row form-group">
 						<label class="col-md-3 control-label" align="right">Lastname:</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" id="surname" name="surname" value="<?php echo $member->Lastname; ?>">
+							<input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $member->Lastname; ?>">
 						</div>
 					</div>
 					<div class="row form-group">
@@ -90,7 +90,7 @@
 					<div class="row form-group">
 						<label class="col-md-3 control-label" align="right">Tel.:</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" id="tel" name="tel" value="<?php echo $member->Telephone; ?>">
+							<input type="text" class="form-control" id="telephone" name="telephone" value="<?php echo $member->Telephone; ?>">
 						</div>
 					</div>
 					<div class="row form-group">
@@ -126,14 +126,13 @@
 
 	function validateForm() {
 		// alert('vali');
-	    var name = document.forms["editprofile-form"]["name"].value;
-	    var surname = document.forms["editprofile-form"]["surname"].value;
+	    var firstname = document.forms["editprofile-form"]["firstname"].value;
+	    var lastname = document.forms["editprofile-form"]["lastname"].value;
 	    var address = document.forms["editprofile-form"]["address"].value;
 	    var email = document.forms["editprofile-form"]["email"].value;
-	    var tel = document.forms["editprofile-form"]["tel"].value;
-	    
+	    var telephone = document.forms["editprofile-form"]["telephone"].value;
 
-	    if (!validateName(name)||!validateName(surname)){
+	    if (!validateName(firstname)||!validateName(lastname)){
 	  		alert("Your firstname or lastname is invalid.");
 	    	return false;
 	  	}
@@ -145,7 +144,7 @@
 	    	alert("Your e-mail is invalid.");
 	    	return false;
 	    }
-	    if (!validateTelephone(tel)){
+	    if (!validateTelephone(telephone)){
 	    	alert("Your telephone number is invalid.");
 	    	return false;
 	    }

@@ -6,6 +6,7 @@ class Payment_c extends CI_Controller {
   {
     parent::__construct();
     $this->load->library('form_validation');
+    $this->load->helper('array');
     $this->load->helper('html');
     $this->load->database();
     $this->load->helper('email_sender');
@@ -25,6 +26,7 @@ class Payment_c extends CI_Controller {
     $this->session->keep_flashdata("cart");
     //
     $data['products'] = $this->session->flashdata("cart2");
+    //print_r($data['products']);
     $this->session->keep_flashdata("cart2");
     $this->load->view('paymentForm.html',$data);
   }
@@ -40,7 +42,7 @@ class Payment_c extends CI_Controller {
       $data['type'] = $session_data['type'];
     $data['products'] = $this->session->flashdata("cart2");
 
-    $this->load->view('paymentForm.html',$data);
+    //$this->load->view('paymentForm.html',$data);
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('visano', 'visano', 'trim|required|xss_clean');

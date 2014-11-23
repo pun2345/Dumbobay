@@ -102,31 +102,27 @@ Class member_m extends CI_Model
 		if($query2 -> num_rows()> 0) return "true";
 		return "false";
 	}
-	function editMemberDetail($user_id,$username, $password, $firstname, $lastname, $type, $address, $telephone, $email){
+	function editMemberDetail($user_id, $firstname, $lastname, $address, $telephone, $email){
 		$data1 = array(
-		   	'Username' => $username,
-	   		'Password' => $password,
 	   		'Firstname' => $firstname,
 	   		'Lastname' => $lastname,
-	   		'Type' => $type
 		);
 		 $this->db->trans_start();
 		 $this->db->where('User_ID',$user_id);
    		 $this->db->update('user',$data1);
-   		 if ($this->db->affected_rows() <= 0) return "false";
+   		 $complete = ($this->db->affected_rows() > 0) ;
          
    		 $data2 = array(
-		   	'User_ID' => $user_id,
 		   	'Address' => $address,
 	   		'Telephone' => $telephone,
 	   		'Email' => $email	   		
 		);
 		$this->db->where('User_ID',$user_id);
    		$this->db->update('member',$data2);
-   		// echo $this->db->affected_rows() ."<br>";
-   		if ($this->db->affected_rows() <= 0) return "false";
+   		$complete = $complete or ($this->db->affected_rows() > 0) ;
    	  	$this->db->trans_complete();
-   	  	return "true";
+   	  	if ($complete) return "true";
+   	  	else return "false";
 	}
 	function getMemberDetail($user_id){
 		return $this->db->query("select * from User join member using (user_id) where user_id = $user_id")->row();
