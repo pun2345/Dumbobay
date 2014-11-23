@@ -54,6 +54,8 @@ class message_c extends CI_Controller {
       $session_data = $this->session->userdata('logged_in');
       $senderID=$session_data['user_id'];
       $data['type'] = $session_data['type'];
+      $data['user_id'] = $session_data['user_id'];
+      $data['username'] = $session_data['username'];
       $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
