@@ -31,18 +31,17 @@ class message_c extends CI_Controller {
       {
           $form_data = array( 'msgSubject' => $this->input->post('msgSubject'),
                               'msgText' => $this->input->post('msgText'),
-                              'msgReceiver' => $this->input->post('msgReceiver'));
-      }
-      // run insert model to write data to db
-      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$form_data['msgReceiver']) == 'true') // the information has therefore been successfully saved in the db
-      {             
-          $this->session->set_flashdata("message","Message sent!");
-          redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
-      }
-      else
-      {
-          $this->session->set_flashdata("message","Sending error");
-          redirect('message_c/manageMessageBox');
+                              'msgReceiver' => $this->input->post('msgReceiver'));      // run insert model to write data to db
+          if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$form_data['msgReceiver']) == 'true') // the information has therefore been successfully saved in the db
+          {             
+              $this->session->set_flashdata("message","Message sent!");
+              redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
+          }
+          else
+          {
+              $this->session->set_flashdata("message","Sending error");
+              redirect('message_c/manageMessageBox');
+          }
       }
   }
 
@@ -61,17 +60,17 @@ class message_c extends CI_Controller {
       {
           $form_data = array( 'msgSubject' => $this->input->post('msgSubject'),
                               'msgText' => $this->input->post('msgText'));
-      }
-      // run insert model to write data to db
-      if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiver_id) == 'true') // the information has therefore been successfully saved in the db
-      {             
-          $this->session->set_flashdata("message","Message sent!");
-          redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
-      }
-      else
-      {
-          $this->session->set_flashdata("message","Sending error");
-          redirect(current_url());
+          // run insert model to write data to db
+          if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiver_id) == 'true') // the information has therefore been successfully saved in the db
+          {             
+              $this->session->set_flashdata("message","Message sent!");
+              redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
+          }
+          else
+          {
+              $this->session->set_flashdata("message","Sending error");
+              redirect(current_url());
+          }
       }
   }
 
@@ -123,17 +122,17 @@ class message_c extends CI_Controller {
       else // passed validation proceed to post success logic
       {
           $form_data = array('msgText' => $this->input->post('msgText'));
-      }
               // run insert model to write data to db
-      if ($this->message_m->createMessage($user_id,$data['subject'],$form_data['msgText'],$data['receiver_id']) == 'true') // the information has therefore been successfully saved in the db
-      {
-          $this->session->set_flashdata("message","Message sent!");
-          redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
-      }
-      else
-      {
-          $this->session->set_flashdata("message","Sending error");
-          redirect(current_url());
+          if ($this->message_m->createMessage($user_id,$data['subject'],$form_data['msgText'],$data['receiver_id']) == 'true') // the information has therefore been successfully saved in the db
+          {
+              $this->session->set_flashdata("message","Message sent!");
+              redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
+          }
+          else
+          {
+              $this->session->set_flashdata("message","Sending error");
+              redirect(current_url());
+          }
       }
   }
 
