@@ -22,6 +22,7 @@ class message_c extends CI_Controller {
       $senderID=$session_data['user_id'];
       $data['type'] = $session_data['type'];
       $data['user_id'] = $session_data['user_id'];
+      if($data['type']==1) $data['user_id']==0;
       $data['username'] = $session_data['username'];
       $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
       $this->form_validation->set_rules('msgReceiver', 'msgReceiver', 'require|css_clean');
@@ -41,7 +42,7 @@ class message_c extends CI_Controller {
               $this->session->set_flashdata("message","The user is not available!");
               redirect('message_c/sendMessage'); 
           }
-          else if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiverID) == 'true') // the information has therefore been successfully saved in the db
+          else if ($this->message_m->createMessage($data['user_id'],$form_data['msgSubject'],$form_data['msgText'],$receiverID) == 'true') // the information has therefore been successfully saved in the db
           {             
               $this->session->set_flashdata("message","Message sent!");
               redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
@@ -92,7 +93,12 @@ class message_c extends CI_Controller {
       $data['user_id']=$session_data['user_id'];
       $data['type'] = $session_data['type'];
       $data['username'] = $session_data['username'];
-      $data['messages'] = $this->message_m->getUserMessage($data['user_id']);
+      if($data['type'] == 1){
+          $data['messages'] = $this->message_m->getUserMessage(0);
+      }
+      else{
+          $data['messages'] = $this->message_m->getUserMessage($data['user_id']);
+      }
       foreach ($data['messages']->result() as $msg){
         $x = $this->member_m->getMemberDetail($msg->Sender_ID);
         $msg->Sender_Name = $x->Username;
@@ -120,6 +126,7 @@ class message_c extends CI_Controller {
       $session_data = $this->session->userdata('logged_in');
       $data['user_id']=$session_data['user_id'];
       $data['type'] = $session_data['type'];
+      if($data['type']==1) $data['user_id']=0;
       $data['username'] = $session_data['username'];
       $data['receiver_id'] = $this->message_m->getSender($message_id);
       $tmp = $this->member_m->getMemberDetail($data['receiver_id']);
