@@ -29,6 +29,11 @@
 			else if($type==3){
 				include 'seller_menu.html';	
 			}
+			 if($this->session->flashdata('message')) echo '
+    <script>
+      alert("'.$this->session->flashdata('message').'");
+    </script>
+    ';
     ?>
 	<!-- =======================================================================-->
 	<div id="myheaderwrap">
@@ -101,10 +106,10 @@
 											echo "<a href= \"product_c/viewProductDetail/".$row->Product_ID."\" >More info..</a>";
 										echo "</div>";
 										echo "<div class=\"col-lg-4 productbutton\">";
-											echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
+											echo "<a  href=\"cart_c/addToCart/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
 										echo "</div>";
 									echo "</div>";
-									//}
+									//}data-toggle=\"modal\" data-target=\"#amountform\"
 								}					
 							?>
 							<hr>

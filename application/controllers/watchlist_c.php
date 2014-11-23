@@ -15,7 +15,7 @@
 			$data['user_id'] = $session_data['user_id'];
       		$data['username'] = $session_data['username'];
       		$data['type'] = $session_data['type'];
-			$data['pruducts'] = $this->transaction_m->getWatchlist($data['user_id']);
+			$data['products'] = $this->transaction_m->getWatchlist($data['user_id']);
 			$this->load->view('watchlist.html',$data);	
 		}
 
