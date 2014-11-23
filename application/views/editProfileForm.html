@@ -131,7 +131,6 @@
 	    var address = document.forms["editprofile-form"]["address"].value;
 	    var email = document.forms["editprofile-form"]["email"].value;
 	    var telephone = document.forms["editprofile-form"]["telephone"].value;
-	    // alert('ss');
 
 	    if (!validateName(firstname)||!validateName(lastname)){
 	  		alert("Your firstname or lastname is invalid.");
@@ -145,7 +144,7 @@
 	    	alert("Your e-mail is invalid.");
 	    	return false;
 	    }
-	    if (!validateTelephone(tel)){
+	    if (!validateTelephone(telephone)){
 	    	alert("Your telephone number is invalid.");
 	    	return false;
 	    }
