@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<?php
-		include 'HTMLheader.html';
+	include 'HTMLheader.html';
 	?>
 	<style type="text/css">
 		.signin{
@@ -13,7 +13,7 @@
 			margin-right: auto;
 		}
 	</style>  
- 	
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -25,7 +25,7 @@
 
 	<!-- Fixed navbar -->
 	<?php
-		include 'guest_menu.html';
+	include 'guest_menu.html';
 		//
 	?>
 	<!-- =======================================================================-->
@@ -42,100 +42,704 @@
 	<div class="container">
 		<?php echo form_open('member_c/createMember','class="form-horizontal" id="register-form" name="register-form" onsubmit="return validateForm()"'); ?>
 		<!--<form class="form-horizontal" id="register-form" name="register-form" onsubmit="return validateForm()">-->
-			<div>
-				<fieldset>
-					<legend align="center" style="padding-top:10px"><h1>SIGN UP</h1></legend>
-					<div class="col-md-10 col-md-offset-1 border-radius" style="padding-top:20px;margin-bottom:25px">
+		<div>
+			<fieldset>
+				<legend align="center" style="padding-top:10px"><h1>SIGN UP</h1></legend>
+				<div class="col-md-10 col-md-offset-1 border-radius" style="padding-top:20px;margin-bottom:25px">
 
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Username</label>
-							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" placeholder="A-Z, a-z, 0-9 (maximum 20 characters)" autofocus>
-							</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">Username</label>
+						<div class="col-md-9">
+							<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" placeholder="A-Z, a-z, 0-9 (maximum 20 characters)" autofocus>
 						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Password</label>
-							<div class="col-md-9">
-								<input style="width:50%" type="password" class="form-control" size="20" id="password" name="password">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">Password</label>
+						<div class="col-md-9">
+							<input style="width:50%" type="password" class="form-control" size="20" id="password" name="password">
 						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Re-password</label>
-							<div class="col-md-9">
-								<input style="width:50%" type="password" class="form-control" size="20" id="re-password" name="re-password">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">Re-password</label>
+						<div class="col-md-9">
+							<input style="width:50%" type="password" class="form-control" size="20" id="re-password" name="re-password">
 						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Firstname</label>
-							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="firstname" name="firstname" placeholder="A-Z, a-z (maximum 20 characters)">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">Firstname</label>
+						<div class="col-md-9">
+							<input style="width:50%" type="text" class="form-control" size="20" id="firstname" name="firstname" placeholder="A-Z, a-z (maximum 20 characters)">
 						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Lastname</label>
-							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="lastname" name="lastname" placeholder="A-Z, a-z (maximum 20 characters)">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">Lastname</label>
+						<div class="col-md-9">
+							<input style="width:50%" type="text" class="form-control" size="20" id="lastname" name="lastname" placeholder="A-Z, a-z (maximum 20 characters)">
 						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Address</label>
-							<div class="col-md-9">
-								<input type="text" class="form-control" size="20" id="address" name="address" placeholder="A-Z, a-z, 0-9, ".", "/", " " (maximum 70 characters)">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">Address</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" size="20" id="address" name="address" placeholder="A-Z, a-z, 0-9, ".", "/", " " (maximum 70 characters)">
 						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Country</label>
-							<div class="col-md-9">
-								<select class="form-control" id="select" style="width:50%">
-						          <option>Thailand</option>
-						        </select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">E-mail</label>
-							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="email" name="email" placeholder="name@mail.com">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Tel.</label>
-							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="telephone" name="telephone" placeholder="+(country code)XXXXXXXX">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">User Type</label>
-							<div class="col-md-9">
-								<div class="radio">
-									<label>
-										<input type="radio" name="type" id="type" value="2" checked="">
-										Customer
-									</label>
-								</div>
-								<div class="radio">
-									<label>
-										<input type="radio" name="type" id="type" value="3">
-										Seller
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="row form-group">
-							<div class="col-md-3" align="right">
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">Country</label>
+						<div class="col-md-9">
+							<select class="form-control" id="select" style="width:50%">
+								<option>Afghanistan</option>
+								<option>
+									Akrotiri
+								</option><option>
+								Albania
+							</option><option>
+							Algeria
+						</option><option>
+						American Samoa
+					</option><option>
+					Andorra
+				</option><option>
+				Angola
+			</option><option>
+			Anguilla
+		</option><option>
+		Antarctica
+	</option><option>
+	Antigua and Barbuda
+</option><option>
+Argentina
+</option><option>
+Armenia
+</option><option>
+Aruba
+</option><option>
+Ashmore and Cartier Islands
+</option><option>
+Australia
+</option><option>
+Austria
+</option><option>
+Azerbaijan
+</option><option>
+Bahamas, The
+</option><option>
+Bahrain
+</option><option>
+Bangladesh
+</option><option>
+Barbados
+</option><option>
+Bassas da India
+</option><option>
+Belarus
+</option><option>
+Belgium
+</option><option>
 
+Belize
+</option><option>
+
+Benin
+</option><option>
+
+Bermuda
+</option><option>
+
+Bhutan
+</option><option>
+
+Bolivia
+</option><option>
+
+Bosnia and Herzegovina
+</option><option>
+
+Botswana
+</option><option>
+
+Bouvet Island
+</option><option>
+
+Brazil
+</option><option>
+
+British Indian Ocean Territory
+</option><option>
+
+British Virgin Islands
+</option><option>
+
+Brunei
+</option><option>
+
+Bulgaria
+</option><option>
+
+Burkina Faso
+</option><option>
+
+Burma
+</option><option>
+
+Burundi
+</option><option>
+
+Cambodia
+</option><option>
+
+Cameroon
+</option><option>
+
+Canada
+</option><option>
+
+Cape Verde
+</option><option>
+
+Cayman Islands
+</option><option>
+
+Central African Republic
+</option><option>
+
+Chad
+</option><option>
+
+Chile
+</option><option>
+
+China
+</option><option>
+
+Christmas Island
+</option><option>
+
+Clipperton Island
+</option><option>
+
+Cocos (Keeling) Islands
+</option><option>
+
+Colombia
+</option><option>
+
+Comoros
+</option><option>
+
+Congo, Democratic Republic of the
+</option><option>
+
+Congo, Republic of the
+</option><option>
+
+Cook Islands
+</option><option>
+
+Coral Sea Islands
+</option><option>
+
+Costa Rica
+</option><option>
+
+Cote d'Ivoire
+</option><option>
+
+Croatia
+</option><option>
+
+Cuba
+</option><option>
+
+Cyprus
+</option><option>
+
+Czech Republic
+</option><option>
+
+Denmark
+</option><option>
+
+Dhekelia
+</option><option>
+
+Djibouti
+</option><option>
+
+Dominica
+</option><option>
+
+Dominican Republic
+</option><option>
+
+Ecuador
+</option><option>
+
+Egypt
+</option><option>
+
+El Salvador
+</option><option>
+
+Equatorial Guinea
+</option><option>
+
+Eritrea
+</option><option>
+
+Estonia
+</option><option>
+
+Ethiopia
+</option><option>
+
+Europa Island
+</option><option>
+
+Falkland Islands (Islas Malvinas)
+</option><option>
+
+Faroe Islands
+</option><option>
+
+Fiji
+</option><option>
+
+Finland
+</option><option>
+
+France
+</option><option>
+
+French Guiana
+</option><option>
+
+French Polynesia
+</option><option>
+
+French Southern and Antarctic Lands
+</option><option>
+
+Gabon
+</option><option>
+
+Gambia, The
+</option><option>
+
+Gaza Strip
+</option><option>
+
+Georgia
+</option><option>
+
+Germany
+</option><option>
+
+Ghana
+</option><option>
+
+Gibraltar
+</option><option>
+
+Glorioso Islands
+</option><option>
+
+Greece
+</option><option>
+
+Greenland
+</option><option>
+
+Grenada
+</option><option>
+
+Guadeloupe
+</option><option>
+
+Guam
+</option><option>
+
+Guatemala
+</option><option>
+
+Guernsey
+</option><option>
+
+Guinea
+</option><option>
+
+Guinea-Bissau
+</option><option>
+
+Guyana
+</option><option>
+
+Haiti
+</option><option>
+
+Heard Island and McDonald Islands
+</option><option>
+
+Holy See (Vatican City)
+</option><option>
+
+Honduras
+</option><option>
+
+Hong Kong
+</option><option>
+
+Hungary
+</option><option>
+
+Iceland
+</option><option>
+
+India
+</option><option>
+
+Indonesia
+</option><option>
+
+Iran
+</option><option>
+
+Iraq
+</option><option>
+Ireland
+</option><option>
+Isle of Man
+</option><option>
+Israel
+</option><option>
+Italy
+</option><option>
+Jamaica
+</option><option>
+Jan Mayen
+</option><option>
+
+Japan
+</option><option>
+Jersey
+</option><option>
+Jordan
+</option><option>
+Juan de Nova Island
+</option><option>
+Kazakhstan
+</option><option>
+Kenya
+</option><option>
+Kiribati
+</option><option>
+Korea, North
+</option><option>
+Korea, South
+</option><option>
+Kuwait
+</option><option>
+Kyrgyzstan
+</option><option>
+Laos
+</option><option>
+Latvia
+</option><option>
+Lebanon
+</option><option>
+Lesotho
+</option><option>
+Liberia
+</option><option>
+Libya
+</option><option>
+Liechtenstein
+</option><option>
+Lithuania
+</option><option>
+Luxembourg
+</option><option>
+Macau
+</option><option>
+Macedonia
+</option><option>
+Madagascar
+</option><option> 
+Malawi
+</option><option>
+Malaysia
+</option><option>
+Maldives
+</option><option>
+Mali
+</option><option> 
+Malta
+</option><option>
+Marshall Islands
+</option><option>
+Martinique
+</option><option>
+Mauritania
+</option><option> 
+Mauritius
+</option><option>
+Mayotte
+</option><option>
+Mexico
+</option><option>
+Micronesia, Federated States of
+</option><option>
+Moldova
+</option><option>
+Monaco
+</option><option>
+Mongolia
+</option><option>
+Montserrat
+</option><option>
+Morocco
+</option><option>
+Mozambique
+</option><option>
+Namibia
+</option><option>
+Nauru
+</option><option>
+Navassa Island
+</option><option>
+Nepal
+</option><option>
+Netherlands
+</option><option>
+Netherlands Antilles
+</option><option>
+New Caledonia
+</option><option>
+New Zealand
+</option><option>
+Nicaragua
+</option><option>
+Niger
+</option><option>
+Nigeria
+</option><option>
+Niue
+</option><option>
+Norfolk Island
+</option><option>
+Northern Mariana Islands
+</option><option>
+Norway
+</option><option>
+Oman
+</option><option>
+Pakistan
+</option><option>
+Palau
+</option><option>
+Panama
+</option><option>
+Papua New Guinea
+</option><option>
+Paracel Islands
+</option><option>
+Paraguay
+</option><option>
+Peru
+</option><option>
+Philippines
+</option><option>
+Pitcairn Islands
+</option><option>
+Poland
+</option><option>
+Portugal
+</option><option>
+Puerto Rico
+</option><option>
+Qatar
+</option><option>
+Reunion
+</option><option>
+Romania
+</option><option>
+Russia
+</option><option>
+Rwanda
+</option><option>
+Saint Helena
+</option><option>
+Saint Kitts and Nevis
+</option><option>
+Saint Lucia
+</option><option>
+Saint Pierre and Miquelon
+</option><option>
+Saint Vincent and the Grenadines
+</option><option>
+Samoa
+</option><option> 
+San Marino
+</option><option>
+Sao Tome and Principe
+</option><option>
+Saudi Arabia
+</option><option>
+Senegal
+</option><option>
+Serbia and Montenegro
+</option><option>
+Seychelles
+</option><option>
+Sierra Leone
+</option><option>
+Singapore
+</option><option>
+Slovakia
+</option><option>
+Slovenia
+</option><option>
+Solomon Islands
+</option><option> 
+Somalia
+</option><option>
+South Africa
+</option><option>
+South Georgia and the South Sandwich Islands
+</option><option>
+Spain
+</option><option>
+Spratly Islands
+</option><option>
+Sri Lanka
+</option><option>
+Sudan
+</option><option>
+Suriname
+</option><option>
+Svalbard
+</option><option>
+Swaziland
+</option><option>
+Sweden
+</option><option>
+Switzerland
+</option><option>
+Syria
+</option><option>
+Taiwan
+226
+Tajikistan
+</option><option>
+Tanzania
+</option><option>
+Thailand
+</option><option>
+Timor-Leste
+</option><option>
+Togo
+</option><option>
+Tokelau
+</option><option>
+Tonga
+</option><option>
+Trinidad and Tobago
+</option><option>
+Tromelin Island
+</option><option>
+Tunisia
+</option><option>
+Turkey
+</option><option>
+Turkmenistan
+</option><option>
+Turks and Caicos Islands
+</option><option>
+Tuvalu
+</option><option>
+Uganda
+</option><option>
+Ukraine
+</option><option>
+United Arab Emirates
+</option><option>
+United Kingdom
+</option><option>
+United States
+</option><option>
+Uruguay
+</option><option>
+Uzbekistan
+</option><option>
+Vanuatu
+</option><option>
+Venezuela
+</option><option>
+Vietnam
+</option><option>
+Virgin Islands
+</option><option> 
+Wake Island
+</option><option>
+Wallis and Futuna
+</option><option>
+West Bank
+</option><option>
+Western Sahara
+</option><option>
+Yemen
+</option><option>
+Zambia
+</option><option>
+Zimbabwe
+</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">E-mail</label>
+						<div class="col-md-9">
+							<input style="width:50%" type="text" class="form-control" size="20" id="email" name="email" placeholder="name@mail.com">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">Tel.</label>
+						<div class="col-md-9">
+							<input style="width:50%" type="text" class="form-control" size="20" id="telephone" name="telephone" placeholder="+(country code)XXXXXXXX">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" align="right">User Type</label>
+						<div class="col-md-9">
+							<div class="radio">
+								<label>
+									<input type="radio" name="type" id="type" value="2" checked="">
+									Customer
+								</label>
 							</div>
-							<div class="col-md-9">
-								<a href=<?php echo site_url('home_c'); ?>><button type="button" class="btn btn-default">Cancel</button></a>
-								<button type="submit" value="Submit" class="btn btn-warning">Submit</button>
+							<div class="radio">
+								<label>
+									<input type="radio" name="type" id="type" value="3">
+									Seller
+								</label>
 							</div>
 						</div>
-						
+					</div>
+					<div class="row form-group">
+						<div class="col-md-3" align="right">
+
+						</div>
+						<div class="col-md-9">
+							<a href=<?php echo site_url('home_c'); ?>><button type="button" class="btn btn-default">Cancel</button></a>
+							<button type="submit" value="Submit" class="btn btn-warning">Submit</button>
+						</div>
 					</div>
 
-				</fieldset>
-			</div>
-		</form>
-	</div>
+				</div>
+
+			</fieldset>
+		</div>
+	</form>
+</div>
 <!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -147,58 +751,58 @@
 	<!--  The form that will be parsed by jQuery before submit  -->
 	<script>
 
-	function validateForm() {
-	    var username = document.forms["register-form"]["username"].value;
-	    var password = document.forms["register-form"]["password"].value;
-	    var repassword = document.forms["register-form"]["re-password"].value;
-	    var name = document.forms["register-form"]["name"].value;
-	    var surname = document.forms["register-form"]["surname"].value;
-	    var address = document.forms["register-form"]["address"].value;
-	    var email = document.forms["register-form"]["email"].value;
-	    var tel = document.forms["register-form"]["telephone"].value;
+		function validateForm() {
+			var username = document.forms["register-form"]["username"].value;
+			var password = document.forms["register-form"]["password"].value;
+			var repassword = document.forms["register-form"]["re-password"].value;
+			var name = document.forms["register-form"]["name"].value;
+			var surname = document.forms["register-form"]["surname"].value;
+			var address = document.forms["register-form"]["address"].value;
+			var email = document.forms["register-form"]["email"].value;
+			var tel = document.forms["register-form"]["telephone"].value;
 
-	    var message ="";
+			var message ="";
 
-	    if (!validateUsername(username) ) {
-	    	alert("Your username is invalid.");
-	    	return false;
-	    }
+			if (!validateUsername(username) ) {
+				alert("Your username is invalid.");
+				return false;
+			}
 
-	    if (!validatePassword(password) ) {
-	    	alert("Your password is invalid.");
-	    	return false;
-	    }
+			if (!validatePassword(password) ) {
+				alert("Your password is invalid.");
+				return false;
+			}
 
-	    if (repassword==null || repassword=="" ) {
-	    	alert("Re-password is required.");
-	    	return false;
-	    }
-	    if (password!=repassword ) {
-	    	alert("Please try again Re-password. It doesn't match with your password.");
-	    	return false;
-	    }
+			if (repassword==null || repassword=="" ) {
+				alert("Re-password is required.");
+				return false;
+			}
+			if (password!=repassword ) {
+				alert("Please try again Re-password. It doesn't match with your password.");
+				return false;
+			}
 
-	    if (name.length+surname.length > 50){
-	    	alert("Name and surname is over 50 characters.");
-	    	return false;
-	    }
-	    if (!validateName(name)||!validateName(surname)){
-	  		alert("Your name or surname is invalid.");
-	    	return false;
-	  	}
-	  	if (!validateAddress(address)){
-	    	alert("Your address is invalid.");
-	    	return false;
-	    }
-	    if (!validateEmail(email)){
-	    	alert("Your e-mail is invalid.");
-	    	return false;
-	    }
-	    if (!validateTelephone(tel)){
-	    	alert("Your telephone number is invalid.");
-	    	return false;
-	    }
-	}
+			if (name.length+surname.length > 50){
+				alert("Name and surname is over 50 characters.");
+				return false;
+			}
+			if (!validateName(name)||!validateName(surname)){
+				alert("Your name or surname is invalid.");
+				return false;
+			}
+			if (!validateAddress(address)){
+				alert("Your address is invalid.");
+				return false;
+			}
+			if (!validateEmail(email)){
+				alert("Your e-mail is invalid.");
+				return false;
+			}
+			if (!validateTelephone(tel)){
+				alert("Your telephone number is invalid.");
+				return false;
+			}
+		}
 
 	</script>
 

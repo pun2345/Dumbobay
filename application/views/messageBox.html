@@ -32,8 +32,12 @@
       else if($type==3){
         include 'seller_menu.html'; 
       }
+      if($this->session->flashdata('message')) echo '
+    <script>
+      alert("'.$this->session->flashdata('message').'");
+    </script>
+    ';
     ?>
-
       <div>
         <div class="container w ">
           <div class="container">
@@ -41,12 +45,12 @@
                 <legend><h1>Message Box</h1></legend>
               </div>
               <div class="row" style="margin-top:20px">
-                <a href="newMessage.html"><button type="button" class="btn btn-default" style="margin-top:-30px;margin-bottom:20px">NEW Message</button></a>
+                <a href=<?php echo site_url("message_c/sendMessage"); ?>><button type="button" class="btn btn-default" style="margin-top:-30px;margin-bottom:20px">NEW Message</button></a>
               </div>
             </div><!-- row -->
           </div><!-- container -->
         </div>
-        <div class="container border-radius" style="background-color:white;margin-bottom:40px">
+        <div class="container border-radius" style="background-color:white;margin-bottom:40px;">
           <!-- header message table -->
           <div class="row centered">
             <div class="col-sm-1 op" style="padding-top:23px">
@@ -70,25 +74,25 @@
           <!-- body message table -->
           <?php foreach ($messages->result() as $row){
              echo '<div class="row mf">';
-            echo '<div class="col-sm-1 centered">';
-              echo '<a href="'.site_url('message_c/delete/'.$row->Message_ID).'"><img src="assets/img/del-icon.png"></a>';
+            echo '<div class="col-sm-1 centered" style="margin-bottom:5px">';
+              echo '<a href="'.site_url('message_c/delete/'.$row->Message_ID).'">'.img("assets/img/del-icon.png").'</a>';
             echo '</div>';
-            echo '<div class="col-sm-1 centered">';
-              echo '<a href="'.site_url('message_c/reply/'.$row->Message_ID).'"><img src="assets/img/reply-icon.jpg"></a>';
+            echo '<div class="col-sm-1 centered" style="margin-bottom:5px">';
+              echo '<a href="'.site_url('message_c/reply/'.$row->Message_ID).'">'.img("assets/img/reply-icon.jpg").'</a>';
             echo '</div>';
             echo '<div class="col-sm-3">';
               echo '<h4>'.$row->Sender_Name.'</h4>';
             echo '</div>';
             echo '<div class="col-sm-4">';
-              echo '<a href="'.site_url('message_c/messageDetail/'.$row->Message_ID).'" ><h4>'.$row->Subject.'</h4>';
+              echo '<a href="'.site_url('message_c/messageDetail/'.$row->Message_ID).'" ><h4>'.$row->Subject.'</a></h4>';
             echo '</div>';
-            echo '<div class="col-sm-3">';
+            echo '<div class="col-sm-3 centered">';
               echo '<h4>'.$row->Datetime.'</h4>';
             echo '</div>';
           echo '</div>';
         }
         ?>
-       
+        <br>
       </div>
       <!-- msg part-->
 
