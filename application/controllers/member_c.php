@@ -28,6 +28,7 @@
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
 		        $this->load->view('signup.html');
+		        
 		    }
       	    else // passed validation proceed to post success logic
 	        {
@@ -61,6 +62,7 @@
 		function confirmMember($user_id){
 			$this->member_m->activateMember($user_id);
 			$this->load->view('activationConfirmed.html');
+		    
 		}
 
 		function editProfile(){
@@ -79,6 +81,7 @@
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
 		        $this->load->view('editProfileForm.html',$data);
+		        
 		    }
       	    else // passed validation proceed to post success logic
 	        {
@@ -108,6 +111,7 @@
       		$data['username'] = $session_data['username'];
 			$data['member'] = $this->member_m->getMemberDetail($data['user_id']);
 			$this->load->view('profile.html',$data);
+		    
 		}
 
 	}

@@ -25,6 +25,7 @@ class Home_c extends CI_Controller {
       //$user_type = $session_data['type'];
       $data['type'] = $session_data['type'];
 
+      echo $data['type'];
       //print_r($data);
       if($data['type'] == 1)
       {
