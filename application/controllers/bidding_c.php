@@ -6,6 +6,7 @@
 			$this->load->database();
 			$this->load->model('bidding_m');
 			$this->load->helper('email_sender');
+			$this->load->helper('html');
 		}
 
 		function index(){
@@ -120,7 +121,7 @@
 	        $this->form_validation->set_rules('maxbid', 'maxbid', 'require|css_clean');
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
-		        $this->load->view(' .html',$data);
+		        $this->load->view('watchlist.html',$data);
 		    }
       	    else // passed validation proceed to post success logic
 	        {

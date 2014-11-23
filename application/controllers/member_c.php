@@ -53,6 +53,8 @@
 			    }
 			    else
 			    {
+			    	///////////////////////// NAMPUN CASE
+
 			        $this->session->set_flashdata("message","Registration Failed, Try Again");
 			    	redirect('member_c/createMember');
 			    }	
