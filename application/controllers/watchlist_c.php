@@ -16,7 +16,6 @@
       		$data['type'] = $session_data['type'];
 			$data['pruducts'] = $this->watchlist_m->getWatchlist($data['user_id']);
 			$this->load->view('watchlist.html',$data);	
-		    $this->load->view('footer.html');
 		}
 
 		function productDetail($product_id){
@@ -26,7 +25,6 @@
       		$data['username'] = $session_data['username'];
 			$data['product'] = $this->product_m->getBidProductDetail($product_id);
 			$this->load->view('watchlistdetail.html',$data);
-		    $this->load->view('footer.html');
 		}
 
 		function maxBidding($product_id){

@@ -19,7 +19,6 @@
 	        if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 	        {
 	            $this->load->view('problem_report_form.html',$data);
-		        $this->load->view('footer.html');
 	        }
 	        else // passed validation proceed to post success logic
 	        {

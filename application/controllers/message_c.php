@@ -29,7 +29,7 @@ class message_c extends CI_Controller {
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('newMessage.html',$data);
-          $this->load->view('footer.html');
+          
       }
       else // passed validation proceed to post success logic
       {
@@ -59,7 +59,7 @@ class message_c extends CI_Controller {
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('newMessage.html',$data);
-          $this->load->view('footer.html');
+          
       }
       else // passed validation proceed to post success logic
       {
@@ -89,9 +89,13 @@ class message_c extends CI_Controller {
   {
       $session_data = $this->session->userdata('logged_in');
       $data['user_id']=$session_data['user_id'];
+<<<<<<< HEAD
       $data['user_id'] = 6;
       $data['type'] = $session_data['type'];
       $data['type'] = 2;
+=======
+      $data['type'] = $session_data['type'];
+>>>>>>> 427f5d8c29d07e39f47c7c5979300318320e1415
       $data['username'] = $session_data['username'];
       $data['messages'] = $this->message_m->getUserMessage($data['user_id']);
       foreach ($data['messages']->result() as $msg){
@@ -99,7 +103,7 @@ class message_c extends CI_Controller {
         $msg->Sender_Name = $x->Username;
       }
       $this->load->view('messageBox.html',$data);
-      $this->load->view('footer.html');
+      
   }
 
   function messageDetail($message_id)
@@ -113,7 +117,7 @@ class message_c extends CI_Controller {
       $x = $this->member_m->getMemberDetail($msg->Sender_ID);
       $msg->Sender_Name = $x->Username;
       $this->load->view('viewMessage.html',$data);
-      $this->load->view('footer.html');
+      
   }
 
   function reply($message_id)
@@ -126,12 +130,12 @@ class message_c extends CI_Controller {
       $data['subject'] = $this->message_m->getSubject($message_id);
       if(strlen($data['subject'])>26) $data['subject'] = substr($data['subject'],0,23) . "..";
       $this->load->view('replyMessage.html',$data);
-      $this->load->view('footer.html');
+      
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('replyMessage.html',$data);
-          $this->load->view('footer.html');
+          
       }
       else // passed validation proceed to post success logic
       {
