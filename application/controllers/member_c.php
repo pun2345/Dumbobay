@@ -79,7 +79,7 @@
 	        $this->form_validation->set_rules('email', 'email', 'require|css_clean|max_length[25]');
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
-		        $this->load->view('edit_profile_form.html',$data);
+		        $this->load->view('editProfileForm.html',$data);
 		    }
       	    else // passed validation proceed to post success logic
 	        {
