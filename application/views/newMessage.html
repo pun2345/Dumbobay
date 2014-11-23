@@ -31,6 +31,11 @@
       else if($type==3){
         include 'seller_menu.html'; 
       }
+      if($this->session->flashdata('message')) echo '
+    <script>
+      alert("'.$this->session->flashdata('message').'");
+    </script>
+    ';
     ?>
 
       <!-- msg part-->

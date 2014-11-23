@@ -8,33 +8,34 @@
     <?php
     include 'HTMLHeader.html';
   ?>
-
-   
-
-
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
       <![endif]-->
+      <style>
+        .col-lg-10 {
+          margin-top:4px;
+        }
+      </style>
     </head>
 
     <body>
 
       <!-- Fixed navbar -->
   <?php
-      // if($type==0){
-      //   include 'guest_menu.html';
-      // }
-      // else if($type==1){
-      //   include 'admin_menu.html';  
-      // }            
-      // else if($type==2){
-      //   include 'buyer_menu.html';  
-      // }
-      // else if($type==3){
-      //   include 'seller_menu.html'; 
-      // }
+      if($type==0){
+        include 'guest_menu.html';
+      }
+      else if($type==1){
+        include 'admin_menu.html';  
+      }            
+      else if($type==2){
+        include 'buyer_menu.html';  
+      }
+      else if($type==3){
+        include 'seller_menu.html'; 
+      }
     ?>
 
       <!-- msg part-->
@@ -51,8 +52,8 @@
             <div class="container">
           <div class="row">
             <!--<img src="assets/img/products.png" id="back" style="cursor:pointer">-->
-            <div class="col-lg-6">
-              <a href="<?php echo site_url('message_c/manageMessageBox') ?>"><button type="button" class="btn btn-default" style="margin-top:-10px;margin-bottom:20px">All Messages</button></a>
+            <div class="col-lg-6 col-lg-offset-1">
+              <a href=<?php echo site_url('message_c/manageMessageBox'); ?>><button type="button" class="btn btn-default" style="margin-top:-10px;margin-bottom:20px">All Messages</button></a>
             </div>
             <div class="col-lg-6">
               
@@ -68,29 +69,29 @@
                     <fieldset>
                       <h3 align="center">View Message</h3>
                       <?php
-                        foreach ($message->result() as $msg){
-                          $from = $msg->Sender_Name;
-                          $topic = $msg->Subject;
-                          $text = $msg->Text;
-                        }
+                        // foreach ($message->result() as $msg){
+                        //   $from = $msg->Sender_Name;
+                        //   $topic = $msg->Subject;
+                        //   $text = $msg->Text;
+                        
                       ?>
                       <div>
                         <div class="form-group">
                           <label for="inputEmail" class="col-lg-2 control-label" align="right">From :</label>
                           <div class="col-lg-10">
-                            <p><? echo $from; ?></p>
+                            <p><? echo $message->Sender_Name; ?></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputTopic" class="col-lg-2 control-label" align="right">Topic :</label>
                           <div class="col-lg-10">
-                            <p><? echo $topic; ?></p>
+                            <p><? echo $message->Subject; ?></p>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputMsg" class="col-lg-2 control-label" align="right">Messege :</label>
                           <div class="col-lg-10">
-                            <p><? echo $text; ?></p>
+                            <p><? echo $message->Text; ?></p>
                           </div>
                         </div>
                       </div>
