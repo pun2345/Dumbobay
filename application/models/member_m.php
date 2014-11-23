@@ -102,7 +102,7 @@ Class member_m extends CI_Model
 		if($query2 -> num_rows()> 0) return "true";
 		return "false";
 	}
-	function editUserDetail($user_id,$username, $password, $firstname, $lastname, $type, $address, $telephone, $email){
+	function editMemberDetail($user_id,$username, $password, $firstname, $lastname, $type, $address, $telephone, $email){
 		$data1 = array(
 		   	'Username' => $username,
 	   		'Password' => $password,
@@ -128,8 +128,13 @@ Class member_m extends CI_Model
    	  	$this->db->trans_complete();
    	  	return "true";
 	}
-	function getUserDetail($user_id){
+	function getMemberDetail($user_id){
 		return $this->db->query("select * from User where User_ID=$user_id")->row();
+	}
+	function getUserID($username){
+		$this->db->select('User_ID');
+		$query = $this->db->get_where('User',array('Username'=>$username));
+		return $query->row()->User_ID;
 	}
 	function getFeedbackScore($user_id){
 		$this->db->where('User_ID', $user_id);
