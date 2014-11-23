@@ -169,12 +169,12 @@
 		}
 
 		function initializeMaxBidding($product_id,$maxbid){
-			$session_data = $this->session->userdata(logged_in);
+			$session_data = $this->session->userdata('logged_in');
 			$this->bidding($session_data['user_id'],$product_id,$maxbid,'auto');
 		}
 
 		function initializeStepBidding($product_id){
-			$session_data = $this->session->userdata(logged_in);
+			$session_data = $this->session->userdata('logged_in');
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
 			$bit_increment = $this->bidding_m->getBitIncrement($product_id);
 			$this->bidding($session_data['user_id'],$product_id,$current_price+$bit_increment,'manual');
