@@ -112,12 +112,13 @@
 		}
 
 		function maxBidding($product_id){
-			$session_data = $this->session->userdata(logged_in);			
+			$session_data = $this->session->userdata(logged_in);
+      		$data['type'] = $session_data['type'];			
 			$this->load->library('form_validation');
 	        $this->form_validation->set_rules('maxbid', 'maxbid', 'require|css_clean');
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
-		        $this->load->view(' .html/',$data);
+		        $this->load->view(' .html',$data);
 		    }
       	    else // passed validation proceed to post success logic
 	        {
@@ -138,11 +139,12 @@
 
 		function stepBidding($product_id){
 			$session_data = $this->session->userdata(logged_in);
+      		$data['type'] = $session_data['type'];
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
 			$bit_increment = $this->bidding_m->getBitIncrement($product_id);
 			$this->bidding($session_data['user_id'],$product_id,$current_price+$bit_increment,'manual');
 			$data['current_price'] = $this->bidding_m->getCurrentPrice($product_id);
-			$this->load->view('watchlist.html/',$data);
+			$this->load->view('watchlist.html',$data);
 		    $this->session->set_flashdata("message","Bidding completed !");
 		}
 

@@ -62,7 +62,7 @@ Class member_m extends CI_Model
 		   	'User_ID' => $insert_id,
 		   	'Address' => $address,
 	   		'Telephone' => $telephone,
-	   		'E-mail' => $email	   		
+	   		'Email' => $email	   		
 		);
 		$this->db->insert('member',$data2);
    	  	$this->db->trans_complete();
@@ -98,7 +98,7 @@ Class member_m extends CI_Model
 	function checkMember($username,$email){
 		$query1=$this->db->get_where('User',array('Username'=>$username));
 		if($query1 -> num_rows()> 0) return "true";
-		$query2= $this->db->get_where('Member',array('E-mail' => $email));
+		$query2= $this->db->get_where('Member',array('Email' => $email));
 		if($query2 -> num_rows()> 0) return "true";
 		return "false";
 	}
@@ -119,7 +119,7 @@ Class member_m extends CI_Model
 		   	'User_ID' => $user_id,
 		   	'Address' => $address,
 	   		'Telephone' => $telephone,
-	   		'E-mail' => $email	   		
+	   		'Email' => $email	   		
 		);
 		$this->db->where('User_ID',$user_id);
    		$this->db->update('member',$data2);

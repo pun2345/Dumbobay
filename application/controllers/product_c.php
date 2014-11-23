@@ -69,17 +69,17 @@ class Product_c extends CI_Controller {
     $this->load->view('productDesc.html',$data);
     $this->load->view('footer.html');
   }
-  function do_upload()
-  {
-    $config['upload_path'] = './assets/img/';
-        $config['allowed_types'] = 'gif|jpg|jpeg|png';
-        $config['max_size'] = '5120000';
+  // function do_upload()
+  // {
+  //   $config['upload_path'] = './assets/img/';
+  //       $config['allowed_types'] = 'gif|jpg|jpeg|png';
+  //       $config['max_size'] = '5120000';
 
-    $this->load->library('upload', $config);
+  //   $this->load->library('upload', $config);
 
-        $datafoto = $this->upload->data();
-        $image = $datafoto['file_path'];
-  }   
+  //       $datafoto = $this->upload->data();
+  //       $image = $datafoto['file_path'];
+  // }   
   function newProduct(){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
@@ -157,11 +157,21 @@ class Product_c extends CI_Controller {
       }
       if($type == 2){ // bidding
         $end_datetime = $this->input->post('End_Datetime');
-        $status = "auction start";
+        $status = "auction open";
         $current_price = $price;
         $current_max_bid = 0;
         $current_win_cust_id = null;
-        $bit_increment = 1;
+        if($price<=1.0){
+          $bit_increment = 0.05;
+        }elseif($price <= 5.0){
+          $bit_increment = 0.1;
+        }elseif($price <= 10.0){
+          $bit_increment = 0.25;
+        }elseif($price <= 50.0){
+          $bit_increment = 0.5;
+        }else{
+          $bit_increment = 1;
+        }
       }
 
       // run insert model to write data to db

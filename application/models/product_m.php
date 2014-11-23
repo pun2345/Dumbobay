@@ -13,16 +13,18 @@ Class product_m extends CI_Model
 		return $query;
 	}
 	function getProductDetail($product_id){
-		$type = $this->db->select('Type')->row();
-		if(type){ 
+		$this->db->select('Type');
+		$query= $this->db->get_where('product',array('Product_ID'=>$product_id));
+		$row = $query->row();
+		if($row->Type == 1){ 
 			//Direct product
-			$query = $this->db->query("Select * from product join product_direct using (product_id) where product_id = $product_id");
-			return $query->row();
+			$query2 = $this->db->query("Select * from product join product_direct using (product_id) where product_id = $product_id");
 		}
 		else{
-			$query = $this->db->query("Select * from product join product_bid using (product_id) where product_id = $product_id");
-			return $query->row();
+			//Bid product
+			$query2 = $this->db->query("Select * from product join product_bid using (product_id) where product_id = $product_id");
 		}
+		return $query2->row();
 
 	}
 	function newDirectProduct($name,$image,$brand,$model,$price,$additional_info,$capacity,

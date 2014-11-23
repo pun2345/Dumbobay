@@ -7,9 +7,10 @@ class Payment_c extends CI_Controller {
     parent::__construct();
     $this->load->library('form_validation');
     $this->load->helper('html');
-    // $this->load->database();
+    $this->load->database();
+    $this->load->helper('email_sender');
     $this->load->helper('form');
-    // $this->load->model('transaction_m');
+    $this->load->model('transaction_m');
   }
 
   function index($price)
@@ -20,10 +21,10 @@ class Payment_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $transaction_ids = $this->session->get_flashdata("cart");
+    $transaction_ids = $this->session->flashdata("cart");
     $this->session->keep_flashdata("cart");
     //
-    $data['products'] = $this->session->get_flashdata("cart2");
+    $data['products'] = $this->session->flashdata("cart2");
     $this->session->keep_flashdata("cart2");
     $this->load->payment_view('paymentForm.html',$data);
   }
@@ -56,6 +57,7 @@ class Payment_c extends CI_Controller {
       //Go to private area
       foreach ($transaction_ids as $transaction_id) {
         $this->transaction_m->updateStatus($transaction_id,"already Paid","");
+        redirect("Feedback/".$transaction_id);
       }
       $this->session->set_flashdata('cart2',$data['products']);
       redirect('cart/afterPaid');
