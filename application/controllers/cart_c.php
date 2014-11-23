@@ -72,20 +72,11 @@ class Cart_c extends CI_Controller {
       $product_id= $row->Product_ID;
       $price = $row->Price;
       $sumamount = $sumamount+($amount*$price);
-      $transaction = array( 'datetime' => date('Y-m-d H:i:s'),
-                            'status' => 'waiting for payment',
-                            'status_detail' => '',
-                            'price'=>$price,
-                            'quantity'=>$amount,
-                            'seller_score' => null,
-                            'seller_feedback' => null,
-                            'buyer_score' => null,
-                            'buyer_feedback' => null,
-                            // 'buyer_id' => 1,
-                            'buyer_id' => $session_data['user_id'],
-                            'product_id'=>$product_id);
+      $status = 'waiting for payment';
+      $quantity = $amount;
+      $buyer_id = $session_data['user_id'];
 
-      $transaction_ids[] = $this->transaction_m->newTransaction($transaction);
+      $transaction_ids[] = $this->transaction_m->newTransaction($status,$price,$quantity,$row->Seller_ID,$buyer_id,$product_id);
     }
     $this->session->set_flashdata("cart",$transaction_ids);
     $this->session->set_flashdata("cart2",$products);

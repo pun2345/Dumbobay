@@ -1,9 +1,10 @@
 <?php
 Class transaction_m extends CI_Model {
-	function newTransaction($status,$price,$seller_id,$buyer_id,$product_id){
+	function newTransaction($status,$price,$quantity,$seller_id,$buyer_id,$product_id){
 		$data = array(
 			'Status' => $status,
 			'Price' => $price,
+			'Quantity' => $quantity,
 			'Seller_ID' => $seller_id,
 			'Buyer_ID' => $buyer_id,
 			'Product_ID' => $product_id,
@@ -84,6 +85,27 @@ Class transaction_m extends CI_Model {
 	function getWatchList($user_id){
 		return $this->db->query("select * from join_bidding join product using (product_ID) where user_id =$user_id");
 	}
-	
+	function getTopTenBestSeller(){
+		return $this->db->query("
+			Select seller_id,username,Firstname,Lastname,SumPrice from 
+				(Select seller_id,count(seller_id),sum(price) as SumPrice 
+					from transaction where Month(Datetime) = Month(curdate()) 
+					group by seller_id limit 10
+				) as newtable 
+			inner join user on (user.user_id = newtable.seller_id)
+			order by Sumprice desc
+		");
+	}
+	function getTopTenBestProduct(){
+		return $this->db->query("
+			Select product.product_id,name,type,SumQuantity from 
+				(Select product_id,sum(quantity) as SumQuantity 
+					from transaction where Month(Datetime) = Month(curdate()) 
+					group by product_id limit 10
+				) as newtable 
+			inner join product on (product.product_id = newtable.product_id)
+			order by SumQuantity desc
+		");
+	}
 }
 ?>

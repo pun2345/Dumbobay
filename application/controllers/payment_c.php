@@ -26,7 +26,7 @@ class Payment_c extends CI_Controller {
     //
     $data['products'] = $this->session->flashdata("cart2");
     $this->session->keep_flashdata("cart2");
-    $this->load->payment_view('paymentForm.html',$data);
+    $this->load->view('paymentForm.html',$data);
   }
 
   function pay($price)
@@ -57,7 +57,7 @@ class Payment_c extends CI_Controller {
       //Go to private area
       foreach ($transaction_ids as $transaction_id) {
         $this->transaction_m->updateStatus($transaction_id,"already Paid","");
-        redirect("Feedback/".$transaction_id);
+        Feedback($transaction_id);
       }
       $this->session->set_flashdata('cart2',$data['products']);
       redirect('cart/afterPaid');
