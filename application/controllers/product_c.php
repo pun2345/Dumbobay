@@ -334,28 +334,38 @@ class Product_c extends CI_Controller {
   }
   function deleteProduct($product_id){
     $session_data = $this->session->userdata('logged_in');
+    $data['user_id'] = $session_data['user_id'];
+    $data['username'] = $session_data['username'];
+    $data['type'] = $session_data['type'];
     $temp = $this->product_m->deleteProduct($product_id);
     if($temp="true"){
       $this->session->set_flashdata("message","Product was deleted");
     }else{
       $this->session->set_flashdata("message","Deleted fail!");
     }
-    redirect('home_c');
+    redirect('product_c');
   }
-  function maxBiddingForm(){
-    $this->load->library('form_validation');
-    $this->form_validation->set_rules('maxbid', 'maxbid', 'trim|required');
-
-  }
-
   function joinMaxBidding($product_id){
-
+    $this->isLogin();
+    $session_data = $this->session->userdata('logged_in');
+    $data['user_id'] = $session_data['user_id'];
+    $data['username'] = $session_data['username'];
+    $data['type'] = $session_data['type'];
+    $maxbid=$this->input->post($product_id);
+    $current = $this->bidding_m->getCurrentPrice($product_id);
+    if($maxbid>$current){
+      $this->session->set_flashdata("message","Maxbid is Setted");
+      redirect("bidding_c/initializeMaxBidding/".$product_id."/".$maxbid);
+    }else{
+      $this->session->set_flashdata("message","Please bid more than current price");
+      redirect("product_c");
+    }
   } 
   function joinStepBidding($product_id){
     redirect("bidding_c/initializeStepBidding/".$product_id);
   }
   
-  // redirect("bidding_c/initializeMaxBidding/"$product_id)
+  // 
   
   function isLogin(){
     if($this->session->userdata('logged_in')){
