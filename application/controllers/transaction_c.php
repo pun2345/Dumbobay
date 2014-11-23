@@ -11,6 +11,7 @@ class Transaction_c extends CI_Controller {
     $this->load->helper('form');
     $this->load->model('transaction_m');
     $this->load->model('product_m');
+    $this->load->model('member_m');
   }
 
   function index()

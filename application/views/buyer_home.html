@@ -4,6 +4,11 @@
     <?php
       include 'HTMLHeader.html';
     ?>
+    <style>
+      h3{
+        text-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
+      }
+    </style>
   </head>
 
   <body>
@@ -12,53 +17,22 @@
 
           <?php
             //echo $username;
-            include 'buyer_menu.html'
+            include 'buyer_menu.html';
           ?>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
-  <div class="container wb">
+  <div id="myheaderwrap">
     <div class="container">
       <div class="row centered">
         <div class="col-lg-8 col-lg-offset-2">
-        <h4>- Buyer -</h4>
+        <h1>- Customer -</h1>
         <h3><a href="home_c/product_c" class=""><b>> Product <</b></a></h3>
         <h3><a href="home_c/cart" class=""><b>> My Cart <</b></a></h3>
         <h3><a href="home_c/watchlist" class=""><b>> Watch List <</b></a></h3>
         <h3><a href="home_c/message" class=""><b>> Messages Box <</b></a></h3>
         <h3><a href="home_c/history" class=""><b>> History <</b></a></h3>
-        </div>
+        </div> 
       </div><!-- row -->
     </div><!-- container -->
   </div><!-- headerwrap -->
-
-
-
-	<div id="lg">
-		<div class="row centered">
-			<br><br>
-			<div class="col-lg-4">
-				<i class="fa fa-heart"></i>
-				<h4>DESIGN</h4>
-				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
-			</div><!-- col-lg-4 -->
-
-			<div class="col-lg-4">
-				<!-- <i class="fa fa-laptop"></i> -->
-				<img src="assets/img/frappe_logo-small.gif">
-				<h4>Frappe & Co,.</h4>
-			</div><!-- col-lg-4 -->
-
-			<div class="col-lg-4">
-				<i class="fa fa-trophy"></i>
-				<h4>SUPPORT</h4>
-				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
-			</div><!-- col-lg-4 -->
-		</div><!-- row -->
-		<br>
-		<br>
-	</div><!-- container -->
 	
 	
 
@@ -66,7 +40,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-   <script src=<?echo base_url("?>assets/js/bootstrap.min.js");?>></script>
+   <script src=<?echo base_url("assets/js/bootstrap.min.js");?>></script>
   
   </body>
 </html>
