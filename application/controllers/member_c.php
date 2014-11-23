@@ -38,9 +38,9 @@
 		                            'password' => $this->input->post('password'),
 		                            'email' => $this->input->post('email'),
 		                            'type' => $this->input->post('type'));
-			    if ($this->member_m->checkMember($form_data['username'],$form_data['email']) == 'true') // the information has therefore been successfully saved in the db
+			    if ($this->member_m->checkMember($form_data['username'],$form_data['email']) == 'false') // the information has therefore been successfully saved in the db
 			    {             
-			    	$this->member_m->createMember($form_data);
+			    	$this->member_m->createMember($form_data['username'],$form_data['password'],$form_data['firstname'],$form_data['lastname'],$form_data['type'],$form_data['address'],$form_data['telephone'],$form_data['email']);
 			        $this->session->set_flashdata("message","Registration Completed");
 			        redirect('home_c');   // or whatever logic needs to occur
 			    }

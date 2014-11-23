@@ -67,7 +67,7 @@ Class member_m extends CI_Model
 		$this->db->insert('member',$data2);
    	  	$this->db->trans_complete();
 	}
-	function enableMember($ID){
+	function activateMember($ID){
 		$data = array(
 			'Activated' => 1
 		);
