@@ -91,13 +91,7 @@ class message_c extends CI_Controller {
   {
       $session_data = $this->session->userdata('logged_in');
       $data['user_id']=$session_data['user_id'];
-<<<<<<< HEAD
-      $data['user_id'] = 6;
       $data['type'] = $session_data['type'];
-      $data['type'] = 2;
-=======
-      $data['type'] = $session_data['type'];
->>>>>>> 427f5d8c29d07e39f47c7c5979300318320e1415
       $data['username'] = $session_data['username'];
       $data['messages'] = $this->message_m->getUserMessage($data['user_id']);
       foreach ($data['messages']->result() as $msg){
