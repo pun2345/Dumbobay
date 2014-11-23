@@ -124,17 +124,17 @@
 	        {
 		        $form_data = array( 'maxbid' => $this->input->post('maxbid'));
 			    $maxbid = $form_data['$maxbid'];
+			    if ($this->bidding($session_data['user_id'],$product_id,$maxbid,'auto') == TRUE) // the information has therefore been successfully saved in the db
+			    {             
+			        $this->session->set_flashdata("message","Bidding completed");
+			        redirect(current_url());   // or whatever logic needs to occur
+			    }
+			    else
+			    {
+			        $this->session->set_flashdata("message","Unable to bid");
+			        redirect(current_url());
+			    }
 			}
-		    if ($this->bidding($session_data['user_id'],$product_id,$maxbid,'auto') == TRUE) // the information has therefore been successfully saved in the db
-		    {             
-		        $this->session->set_flashdata("message","Bidding completed");
-		        redirect(current_url());   // or whatever logic needs to occur
-		    }
-		    else
-		    {
-		        $this->session->set_flashdata("message","Unable to bid");
-		        redirect(current_url());
-		    }
 		}
 
 		function stepBidding($product_id){

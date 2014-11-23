@@ -65,11 +65,11 @@
 			$this->load->view('activationComfirmed.html',$data);
 		}
 
-		function editProfile($user_id){
+		function editProfile(){
 		    $session_data = $this->session->userdata('logged_in');
-			$data['user'] = $this->member_m->getMemberDetail($user_id);
+			$data['member'] = $this->member_m->getMemberDetail($session_data['user_id']);
       		$data['type'] = $session_data['type'];
-			$user = $data['user'];
+			$member = $data['member'];
     		$this->load->library('form_validation');
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
 	        $this->form_validation->set_rules('firstname', 'firstname', 'require|css_clean|max_length[20]');
@@ -97,17 +97,17 @@
 			    $member['telephone'] = $form_data['$telephone'];
 			    $member['password'] = $form_data['$password'];
 			    $member['email'] = $form_data['$email'];
+			    if ($this->member_m->editMemberDetail($memeber) == 'true') // the information has therefore been successfully saved in the db
+			    {             
+			        $this->session->set_flashdata("message","Profile edited");
+			        redirect('home_c');   // or whatever logic needs to occur
+			    }
+			    else
+			    {
+			        $this->session->set_flashdata("message","Error to edit profile");
+			    }
 
 			}
-		    if ($this->member_m->editUserDetail($user) == 'true') // the information has therefore been successfully saved in the db
-		    {             
-		        $this->session->set_flashdata("message","Profile edited");
-		        redirect('home_c');   // or whatever logic needs to occur
-		    }
-		    else
-		    {
-		        $this->session->set_flashdata("message","Error to edit profile");
-		    }
 		}
 
 		function memberDetail(){      
