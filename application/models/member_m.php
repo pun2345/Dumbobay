@@ -8,7 +8,7 @@ Class member_m extends CI_Model
 		$this->db->where('username = ' . "'" . $username . "'"); 
 		$this->db->where('password = ' . "'" . MD5($password) . "'"); 
 		$this->db->limit(1);
-
+		// echo MD5($password);
 		$query = $this->db->get();
 		$row = $query ->row();
 		if($query->num_rows() == 1)
@@ -49,7 +49,7 @@ Class member_m extends CI_Model
 	function createMember($username, $password, $firstname, $lastname, $type, $address, $telephone, $email){
 		$data1 = array(
 		   	'Username' => $username,
-	   		'Password' => $password,
+	   		'Password' => MD5($password),
 	   		'Firstname' => $firstname,
 	   		'Lastname' => $lastname,
 	   		'Type' => $type
@@ -78,6 +78,22 @@ Class member_m extends CI_Model
 	}
 	function getBlacklist(){
 		return $this->db->query("select * from Member where Blacklist_score >=3");
+	}
+	function incBlacklist($user_id){
+		$oldScore = $this->member_m->getBlacklist($user_id);
+		$newScore = $oldScore+1;
+		$data = array(
+				'Blacklist_score' => $newScore
+			);
+			$this->db->trans_start();
+			$this->db->where('User_ID', $user_id);
+			$this->db->update('member', $data);
+			$complete = $this->db->affected_rows();
+			$this->db->trans_complete();
+			if ($complete>0) {
+				// echo "newCount " .$newCount ."<br>";
+				return $newCount;
+			}
 	}
 	function checkMember($username,$email){
 		$query1=$this->db->get_where('User',array('Username'=>$username));
