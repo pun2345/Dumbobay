@@ -4,6 +4,7 @@
 		function __construct(){
   		    parent::__construct();
    		    $this->load->helper('html');
+   		    $this->load->helper('form');
 		    $this->load->database();
 			$this->load->model('member_m');
 		}
@@ -55,8 +56,8 @@
 		}
 
 		function editProfile($user_id){
-			$data['member'] = $this->member_m->getMemberDetail($user_id);
-			$member = $data['member'];
+			$data['user'] = $this->member_m->getUserDetail($user_id);
+			$user = $data['user'];
     		$this->load->library('form_validation');
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
 	        $this->form_validation->set_rules('firstname', 'firstname', 'require|css_clean|max_length[20]');
@@ -86,15 +87,14 @@
 			    $member['email'] = $form_data['$email'];
 
 			}
-		    if ($this->member_m->editMemberDetail($member) == 'true') // the information has therefore been successfully saved in the db
+		    if ($this->member_m->editUserDetail($user) == 'true') // the information has therefore been successfully saved in the db
 		    {             
 		        $this->session->set_flashdata("message","Profile edited");
-		        redirect(current_url());   // or whatever logic needs to occur
+		        redirect('home_c');   // or whatever logic needs to occur
 		    }
 		    else
 		    {
 		        $this->session->set_flashdata("message","Error to edit profile");
-		        redirect(curent_url());
 		    }
 		}
 

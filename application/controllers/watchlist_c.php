@@ -5,6 +5,7 @@
   		    parent::__construct();
 			$this->load->database();
 			$this->load->model('watchlist_m');
+			$this->load->model('product_m');
 			$this->load->model('transaction_m');
 		}
 
@@ -20,7 +21,7 @@
 			#$session_data = $this->session->userdata(logged_in);
 			#$data['user_id'] = $session_data['user_id'];
 			$data['user_id'] = 1000;
-			$data['product'] = $this->watchlist_m->getProduct($product_id);
+			$data['product'] = $this->product_m->getBidProductDetail($product_id);
 			$this->load->view('watchlistdetail.html',$data);
 		}
 
