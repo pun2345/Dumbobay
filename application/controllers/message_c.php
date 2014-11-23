@@ -127,6 +127,7 @@ class message_c extends CI_Controller {
       $data['user_id']=$session_data['user_id'];
       $data['type'] = $session_data['type'];
       $data['username'] = $session_data['username'];
+      echo $message_id;
       $data['receiver_id'] = $this->message_m->getSender($message_id);
       $tmp = $this->member_m->getMemberDetail($data['receiver_id']);
       $data['receiverName'] = $tmp->Username;
@@ -137,7 +138,6 @@ class message_c extends CI_Controller {
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('replyMessage.html',$data);
-          
       }
       else // passed validation proceed to post success logic
       {
@@ -151,7 +151,7 @@ class message_c extends CI_Controller {
           else
           {
               $this->session->set_flashdata("message","Sending error");
-              redirect('message_c/reply2/',$message_id);
+              redirect('message_c/reply/',$message_id);
           }
       }
   }
