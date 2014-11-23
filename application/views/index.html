@@ -16,7 +16,7 @@
 	<!-- Fixed navbar -->
   <?php
          include 'guest_menu.html';
-         
+
     ?>
 	<!-- =======================================================================-->
 	<div id="headerwrap">
@@ -31,7 +31,13 @@
 		</div><!-- container -->
 	</div><!-- headerwrap -->
 	<!-- ======================================================================= -->
-
+	<?php
+	if($this->session->flashdata('message')) echo '
+		<script>
+			alert("'.$this->session->flashdata('message').'");
+		</script>
+		';
+?>
 <!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
