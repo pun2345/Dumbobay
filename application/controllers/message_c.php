@@ -37,7 +37,11 @@ class message_c extends CI_Controller {
                               'msgText' => $this->input->post('msgText'),
                               'msgReceiver' => $this->input->post('msgReceiver'));      // run insert model to write data to db
           $receiverID = $this->member_m->getUserID($form_data['msgReceiver']);
-          if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiverID) == 'true') // the information has therefore been successfully saved in the db
+          if($receiverID == null){
+              $this->session->set_flashdata("message","This user is not available!");
+              redirect('message_c/sendMessage'); 
+          }
+          else if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$receiverID) == 'true') // the information has therefore been successfully saved in the db
           {             
               $this->session->set_flashdata("message","Message sent!");
               redirect('message_c/manageMessageBox');   // or whatever logic needs to occur
