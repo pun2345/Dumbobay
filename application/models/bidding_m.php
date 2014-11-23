@@ -155,19 +155,11 @@ Class bidding_m extends CI_Model
 				}
 			}
 		}
-		// function getJoinBidding($user_id,$product_id){
-		// 	$this->db->where('User_ID', $user_id);
-		// 	$this->db->where('Product_ID', $product_id);
-		// 	$query=$this->db->get('join_bidding');
-		// 	if($query->num_rows() >0){
-		// 		foreach ($query->result() as $row)
-		// 		{
-		// 		   print_r($row);
-		// 		}
-
-		// 	}
-		// 	return $query;
-		// }
+		function getJoinBidding($product_id){
+			$query = $this->db->query("Select user_id from join_bidding where product_id = $product_id");
+			return $query;
+		}
+		
 		
 }
 ?>
