@@ -59,12 +59,8 @@
 		}
 		
 		function confirmMember($user_id){
-		    $session_data = $this->session->userdata('logged_in');
 			$this->member_m->activateMember($user_id);
-      		$data['type'] = $session_data['type'];
-      		$data['user_id'] = $session_data['user_id'];
-      		$data['username'] = $session_data['username'];
-			$this->load->view('activationComfirmed.html',$data);
+			$this->load->view('activationConfirmed.html');
 		}
 
 		function editProfile(){
