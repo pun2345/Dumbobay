@@ -28,13 +28,13 @@ class Product_c extends CI_Controller {
       $data['type'] = $session_data['type'];
 
         $this->load->view('product.html',$data);
-        $this->load->view('footer.html');
+        // $this->load->view('footer.html');
     }
     else
     {
       //If no session, redirect to login page
       $this->load->view('product.html',$data);
-      $this->load->view('footer.html');
+      // $this->load->view('footer.html');
     }
   }
   function nextpage($page_num){
@@ -44,7 +44,7 @@ class Product_c extends CI_Controller {
       $data['type'] = $session_data['type'];
     $data['products'] = $this->product_m->allProduct($page_num);
     $this->load->view('product.html',$data);
-    $this->load->view('footer.html');
+    // $this->load->view('footer.html');
   }
   function register()
   {
@@ -60,7 +60,7 @@ class Product_c extends CI_Controller {
       $data['bidProducts'] = $this->product_m->searchBid($searchWord);
     $data['directProducts'] = $this->product_m->searchDirect($searchWord);
     $this->load->view('product.html',$data);
-    $this->load->view('footer.html');
+    // $this->load->view('footer.html');
   }
   function viewProductDetail($product_id){
 
@@ -70,7 +70,7 @@ class Product_c extends CI_Controller {
       $data['type'] = $session_data['type'];
     $data['product'] = $this->product_m->getProductDetail($product_id);
     $this->load->view('productDesc.html',$data);
-    $this->load->view('footer.html');
+    // $this->load->view('footer.html');
   }
   // function do_upload()
   // {
@@ -117,7 +117,7 @@ class Product_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('add_product.html',$data);
-    $this->load->view('footer.html');
+    // $this->load->view('footer.html');
     }
     else
     {
@@ -160,7 +160,7 @@ class Product_c extends CI_Controller {
       }
       if($type == 2){ // bidding
         $end_datetime = $this->input->post('End_Datetime');
-        $status = "auction open";
+        $status = 0;
         $current_price = $price;
         $current_max_bid = 0;
         $current_win_cust_id = null;
@@ -238,7 +238,7 @@ class Product_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('editDirectProduct_form.html',$data);
-    $this->load->view('footer.html');
+    // $this->load->view('footer.html');
     }
     else
     {
@@ -321,7 +321,7 @@ class Product_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       $this->load->view('editProduct_form.html',$data);
-    $this->load->view('footer.html');
+    // $this->load->view('footer.html');
     }
     else
     {
