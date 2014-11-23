@@ -21,9 +21,13 @@ Class transaction_m extends CI_Model {
 	function getTransactionDetail($transaction_id){
 		return $this->db->get_where('transaction',array('Transaction_ID'=>$transaction_id))->row();
 	}
-	function getTenCustTransaction($buyer_id){
-		$this->db->limit(10);
-		return $this->db->get_where('transaction',array('Buyer_ID'=>$buyer_id));
+	function getHistoryCustTransaction($buyer_id){
+		return  $this->db->query("Select transaction_id, product_id, product.name as product_name, status, transaction.price,  transaction.quantity, user.firstname as seller_name 
+			from transaction 
+			join product using (product_id) 
+			join user on (transaction.seller_id = user.user_id) 
+			where Buyer_ID = 2 limit 30");
+
 	}
 	function getCustTransaction($buyer_id){
 		return $this->db->get_where('transaction',array('Buyer_ID'=>$buyer_id));
