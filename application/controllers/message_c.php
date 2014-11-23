@@ -127,7 +127,6 @@ class message_c extends CI_Controller {
       $data['user_id']=$session_data['user_id'];
       $data['type'] = $session_data['type'];
       $data['username'] = $session_data['username'];
-      echo $message_id;
       $data['receiver_id'] = $this->message_m->getSender($message_id);
       $tmp = $this->member_m->getMemberDetail($data['receiver_id']);
       $data['receiverName'] = $tmp->Username;
