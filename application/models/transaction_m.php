@@ -7,14 +7,11 @@ Class transaction_m extends CI_Model {
 			'Seller_ID' => $seller_id,
 			'Buyer_ID' => $buyer_id,
 			'Product_ID' => $product_id,
-			// 'Seller_Score' => $seller_score,
-			// 'Seller_Feedback' => $seller_feedback,
-			// 'Buyer_Score' => $buyer_score,
-			// 'Buyer_Feedback' => $buyer_feedback,
-			'End_Date' => "curdate()"
+			// 'End_Date' => 'curdate()'
 
 		);
 		$this->db->trans_start();
+		$this->db->set('End_Date', 'NOW() + INTERVAL 3 DAY', FALSE);
 		$this->db->insert('transaction', $data);
 		$insert_id = $this->db->insert_id();
 		$this->db->trans_complete();
@@ -29,6 +26,10 @@ Class transaction_m extends CI_Model {
 	function getCustTransactionNum($buyer_id){
 		$query = $this->transaction_m->getCustTransaction($buyer_id);
 		return $query->num_rows();
+	}
+	function getEndPayment(){
+		$query = $this->db->query("Select * from transaction where End_Date < curdate()");
+		return $query;
 	}
 	function saveFeedbackBuyer($transaction_id,$score,$feedback){
 		$data = array(

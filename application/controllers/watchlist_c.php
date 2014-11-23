@@ -5,20 +5,23 @@
   		    parent::__construct();
 			$this->load->database();
 			$this->load->model('watchlist_m');
+			$this->load->model('product_m');
 			$this->load->model('transaction_m');
 		}
 
 		function index(){
-			$session_data = $this->session->userdata(logged_in);
-			$data['user_id'] = $session_data['user_id'];
-			$data['pruducts'] = $this->watchlist_m->getWatchlist($session_data['user_id']);
+			#$session_data = $this->session->userdata(logged_in);
+			#$data['user_id'] = $session_data['user_id'];
+			$data['user_id'] = 1000;
+			$data['pruducts'] = $this->watchlist_m->getWatchlist($data['user_id']);
 			$this->load->view('watchlist.html',$data);
 		}
 
 		function productDetail($product_id){
-			$session_data = $this->session->userdata(logged_in);
-			$data['user_id'] = $session_data['user_id'];
-			$data['product'] = $this->watchlist_m->getProduct($product_id);
+			#$session_data = $this->session->userdata(logged_in);
+			#$data['user_id'] = $session_data['user_id'];
+			$data['user_id'] = 1000;
+			$data['product'] = $this->product_m->getBidProductDetail($product_id);
 			$this->load->view('watchlistdetail.html',$data);
 		}
 
