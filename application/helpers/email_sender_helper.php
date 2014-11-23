@@ -31,6 +31,42 @@ function test($text ='test test test'){
 	//}
 	//return false
 }
+function activate_User($id){
+	$CI =& get_instance();
+	$CI->load->model('member_m');
+	$CI->load->model('product_m');
+    $CI->load->library('email');               
+
+    $config['protocol']     = 'smtp';
+    $config['smtp_host']    = 'ssl://smtp.gmail.com';
+    $config['smtp_port']    = '465';
+    $config['smtp_timeout'] = '7';
+    $config['smtp_user']    = 'pun2345@gmail.com';
+    $config['smtp_pass']    = '2345pun2345pun';
+    $config['charset']      = 'utf-8';
+    $config['newline']      = "\r\n";
+    $config['mailtype']     = 'text';
+    $config['validation']   = TRUE;
+
+	$user_data = $CI->member_m->getMemberDetail($id);
+
+	$CI->email->to($user_data['E-mail']); 
+	
+	$subject = "Sing up: ".$user_data['Name']."for Dumbobay";
+	$this->email->subject($subject);
+	
+
+	$text = "To ".$user_data['name']."\r\n To activate youe id, follow the link: <a href=\"".$link."\">".$link."</a>.\r\nFrom Dumbobay.\r\nFrom Dumbobay";
+	$this->email->message($text);
+	
+	if($this->email->send())
+		return true;
+	return false;
+	//if($this->email->print_debugger()){
+	//	return true;
+	//}
+	//return false
+}
 
 function winning_Bid($id,$product_id){
 	$CI =& get_instance();
