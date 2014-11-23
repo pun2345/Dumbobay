@@ -31,6 +31,14 @@
       }
       
     </style>
+    <script type="text/javascript">
+      function bid(){
+          document.getElementById("update").innerHTML = "Starting price";
+      }
+      function direct(){
+          document.getElementById("update").innerHTML = "Price";
+      }
+    </script>
   </head>
 
   <body>
@@ -164,6 +172,14 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="End_Datetime" class="col-md-2 control-label">Expiration Date</label>
+                  <div class="col-md-10">
+                    <input type="text" id="End_Datetime" class="form-control" placeholder="Exp date">
+                    
+                  </div>
+                </div>
+
+                <div class="form-group">
                   <label for="Delivery_Fee" class="col-md-2 control-label">Shipping fee</label>
                   <div class="col-md-10">
                     <input type="text" class="form-control" id="Delivery_Fee" placeholder="Shipping fee">
@@ -219,16 +235,6 @@
         </div><!-- row -->
       </div><!-- container -->
     </div><!-- Footer -->
-
-
-    <script type="text/javascript">
-            function bid(){
-                document.getElementById("update").innerHTML = "Starting price";
-            }
-            function direct(){
-                document.getElementById("update").innerHTML = "Price";
-            }
-        </script>
 
 
     <!-- Bootstrap core JavaScript
