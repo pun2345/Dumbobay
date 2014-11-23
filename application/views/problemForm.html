@@ -51,8 +51,7 @@
             </div><!-- container -->
 
             <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-              <form class="form-horizontal">
-              
+              <?php echo form_open('problem_c','class="form-horizontal" id="problem-form" name="problem-form" onsubmit="return validateForm()"'); ?>
                   <div class="row centered" style="margin-right:20px">
                     <fieldset>
                       <div align="center">
@@ -60,13 +59,13 @@
                         <div class="form-group">
                           <label for="inputTopic" class="col-lg-2 control-label">Topic :</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="msgSubject" placeholder="Message's topic.">
+                            <input type="text" class="form-control" id="msgSubject" name="msgSubject" placeholder="Problem's topic.">
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputMsg" class="col-lg-2 control-label">Problem Description :</label>
                           <div class="col-lg-10">
-                            <textarea rows="4" class="form-control" id="msgText" placeholder="type your message here."></textarea>
+                            <textarea rows="4" class="form-control" id="msgText" name="msgText" placeholder="type your problem description here."></textarea>
                           </div>
                         </div>
                       </div>
@@ -76,8 +75,8 @@
                   <div class="col-lg-2">
                   </div>
                   <div class="col-lg-10">
-                    <a href="message_c/sendMessage"><button type="button" class="btn btn-danger">Report</button></a>
-                  <a href="message_c/manageMessageBox"><button type="button" class="btn btn-default" >Cancel</button></a>
+                    <button type="button" class="btn btn-danger">Report</button>
+                  <a href="home_c"><button type="button" class="btn btn-default" >Cancel</button></a>
                   </div>
                 </div>
               </form>
@@ -95,6 +94,23 @@
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
+  <script>
+    function validateForm() {
+      var subject = document.forms["message-form"]["msgSubject"].value;
+      var text = document.forms["message-form"]["msgText"].value;
 
+      var message ="";
+
+      if (!validateSubject(subject)||subject==""||subject==null) {
+        alert("The subject is invalid.");
+        return false;
+      }
+      if (!validateMessageText(text)||text==""||text==null ) {
+        alert("Text is invalid.");
+        return false;
+      }
+  }
+  </script>
 </body>
 </html>
