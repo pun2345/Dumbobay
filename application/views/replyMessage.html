@@ -63,7 +63,7 @@
                       <div class="form-group">
                         <label for="inputTopic" class="col-lg-2 control-label">Subject :</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="msgSubject" name="msgSubject" value=<? echo $subject; ?> disabled>
+                          <input type="text" class="form-control" id="msgSubject" name="msgSubject" value=<?php echo "'".$subject."'"; ?> disabled>
                         </div>
                       </div>
                       <div class="form-group">
