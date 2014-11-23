@@ -49,9 +49,10 @@ class Cart_c extends CI_Controller {
     }
     redirect("cart_c");
   }
-  function editAmount($product_id,$amount){
+  function editAmount($product_id){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
+    $amount=$this->input->post($product_id);
     $temp = $this->cart_m->editAmount($session_data['user_id'],$product_id,$amount);
     if($temp=="true"){
       $this->session->set_flashdata("message","Amount was changed");

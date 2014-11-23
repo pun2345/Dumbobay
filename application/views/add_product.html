@@ -11,12 +11,12 @@
     <title>DUMBOBAY - shopping area</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/dumbobaycss.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href=<?php echo base_url("/assets/css/bootstrap.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/dumbobaycss.css");?> rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/font-awesome.min.css");?> rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
+    <link href=<?php echo base_url("assets/css/main.css");?> rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -85,6 +85,7 @@
             </div>
           </div>
           <div class="row col-md-10 col-md-offset-1">
+            <?php echo validation_errors(); ?>
             <?php echo form_open("product_c/newProduct");?>
 
             <form class="form-horizontal">
@@ -93,7 +94,7 @@
                 <div class="form-group">
                   <label for="inputName" class="col-md-2 control-label">Product name</label>
                   <div class="col-md-10">
-                    <input type="text" class="form-control" id="Name" placeholder="Product name">
+                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Product name">
                   </div>
                 </div>
 
@@ -133,13 +134,13 @@
                   <div class="col-md-10">
                     <div class="radio">
                       <label>
-                        <input type="radio" name="optionsRadios" id="type" value=2 checked="" onclick="bid();">
+                        <input type="radio" id="type" name="type" value=2 checked="" onclick="bid();">
                         Bidding sale
                       </label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" name="optionsRadios" id="type" value=1 onclick="direct();">
+                        <input type="radio" id="type" name="type"value=1 onclick="direct();">
                         Direct sale
                       </label>
                     </div>
@@ -149,7 +150,7 @@
                 <div class="form-group">
                   <label id="update" class="col-md-2 control-label">Starting price</label>
                   <div class="col-md-10">
-                    <input type="text" class="form-control" id="Price" placeholder="Price">
+                    <input type="text" class="form-control" id="Price" name="Price" placeholder="Price">
                   </div>
                 </div>
 
