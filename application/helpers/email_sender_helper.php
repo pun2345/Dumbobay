@@ -110,7 +110,7 @@ function Feedback($t_id){
 	$CI->email->to($buyer_data->Email); 
 	
 	$subject = "Feedback: ".$product_data->Name;
-	$this->email->subject($subject);
+	$CI->email->subject($subject);
 	
 	$text = "To ".$buyer_data->Username."\r\n 
 	Please give feed back to the".$product_data->Name." transaction.\r\n
