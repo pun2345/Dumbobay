@@ -121,17 +121,10 @@ class Transaction_c extends CI_Controller {
       return true;
     } else{
       $this->session->set_flashdata("message","Please Login!");
-      redirect('home');
+      redirect('home_c');
     }
   }
-  function winAuction($winner_id,$product_id){
-    $status ='waiting for payment';
-    $product = $this->product_m->getProductDetail($product_id);
-    $price = $product->Price;
-    $quantity = 1;
-    $transaction_id = $this->transaction_m->newTransaction($status,$price,$quantity,$product->Seller_ID,$winner_id,$product_id);
-    return $transaction_id;
-  }
+
 
 }
 ?>
