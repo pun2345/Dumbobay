@@ -75,7 +75,7 @@
                   <div class="col-lg-2">
                   </div>
                   <div class="col-lg-10">
-                    <button type="button" class="btn btn-danger">Report</button>
+                    <button type="submit" class="btn btn-danger">Report</button>
                   <a href="home_c"><button type="button" class="btn btn-default" >Cancel</button></a>
                   </div>
                 </div>
@@ -97,9 +97,8 @@
   <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
   <script>
     function validateForm() {
-      var subject = document.forms["message-form"]["msgSubject"].value;
-      var text = document.forms["message-form"]["msgText"].value;
-
+      var subject = document.forms["problem-form"]["msgSubject"].value;
+      var text = document.forms["problem-form"]["msgText"].value;
       var message ="";
 
       if (!validateSubject(subject)||subject==""||subject==null) {
