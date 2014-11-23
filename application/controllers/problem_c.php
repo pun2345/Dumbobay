@@ -5,6 +5,7 @@
   		    parent::__construct();
 			$this->load->database();
 			$this->load->model('message_m');
+			$this->load->helper('html');
 		}
 
 		function index(){
