@@ -247,32 +247,42 @@ function Feedback($t_id){
     $config['validation']   = TRUE;
 
     $tran_data = $CI->transaction_m->getTransactionDetail($t_id);
-    print_r($tran_data->Product_ID);
+    //print_r($tran_data->Product_ID);
 
     $product_data = $CI->product_m->getProductDetail($tran_data->Product_ID);
-    print_r($product_data);
-//     $buyer_data = $CI->member_m->getMemberDetail($tran_data->Buyer_ID);
-//     $seller_data = $CI->member_m->getMemberDetail($tran_data->Seller_ID);
+    //print_r($product_data);
+    echo $tran_data->Buyer_ID;
+    $buyer_data = $CI->member_m->getMemberDetail($tran_data->Buyer_ID);
+    $seller_data = $CI->member_m->getMemberDetail($tran_data->Seller_ID);
 
-// 	$CI->email->initialize($config);	
-// 	$CI->email->from('Dumbobay@Dumbobay.com');
-	
-// 	print_r($buyer_data);
+	$CI->email->initialize($config);	
+	$CI->email->from('Dumbobay@Dumbobay.com');
+	//echo $buyer_data->Email;
+	//print_r($buyer_data);
 // //To Buyer
-// 	 //$CI->email->to($buyer_data->'E-mail'); 
+	$CI->email->to($buyer_data->'Email'); 
 	
-// 	 $subject = "Feedback: ".$product_data['Name'];
-// 	 $this->email->subject($subject);
+	$subject = "Feedback: ".$product_data['Name'];
+	$this->email->subject($subject);
 	
-	 // $text = "To ".$buyer_data->Username."\r\n 
-	 // Please give feed back to the".$product_data['name']." transaction.\r\n
-	 // Follow the link: <a href=\"Localhost/Dumbobay/index.php/transaction_c/Feedback/".$t_id."\">"."Localhost/Dumbobay/index.php/transaction_c/Feedback/".$t_id.".</a>.\r\nFrom Dumbobay";
-	 //if($CI->email->send())
+	$text = "To ".$buyer_data->Username."\r\n 
+	Please give feed back to the".$product_data->Name." transaction.\r\n
+	Follow the link: <a href=\"Localhost/Dumbobay/index.php/transaction_c/Feedback/".$t_id."\">"."Localhost/Dumbobay/index.php/transaction_c/Feedback/".$t_id.".</a>.\r\nFrom Dumbobay";
+	if(!$CI->email->send()){
+		return false;
+	}
+// //To Seller
+	$CI->email->to($seller_data->'Email'); 
 	
-	// $this->email->message($text);
+	$subject = "Feedback: ".$product_data['Name'];
+	$this->email->subject($subject);
 	
-	// if($this->email->send())
-	// 	return true;
-	// return false;
+	$text = "To ".$seller_data->Username."\r\n 
+	Please give feed back to the".$product_data->Name." transaction.\r\n
+	Follow the link: <a href=\"Localhost/Dumbobay/index.php/transaction_c/Feedback/".$t_id."\">"."Localhost/Dumbobay/index.php/transaction_c/Feedback/".$t_id.".</a>.\r\nFrom Dumbobay";
+	if(!$CI->email->send()){
+		return false;
+	}
+	return true;
 }
 ?>
