@@ -15,25 +15,30 @@
 
       <!-- Fixed navbar -->
   <?php
-      // if($type==0){
-      //   include 'guest_menu.html';
-      // }
-      // else if($type==1){
-      //   include 'admin_menu.html';  
-      // }            
-      // else if($type==2){
-      //   include 'buyer_menu.html';  
-      // }
-      // else if($type==3){
-      //   include 'seller_menu.html'; 
-      // }
+      if($type==0){
+        include 'guest_menu.html';
+      }
+      else if($type==1){
+        include 'admin_menu.html';  
+      }            
+      else if($type==2){
+        include 'buyer_menu.html';  
+      }
+      else if($type==3){
+        include 'seller_menu.html'; 
+      }
+      if($this->session->flashdata('message')) echo '
+    <script>
+      alert("'.$this->session->flashdata('message').'");
+    </script>
+    ';
     ?>
 
 
       <!-- msg part-->
       <div>
         <div class="container">
-          <div>
+          
             <div class="container w ">
               <div class="container">
                 <div class="row centered">              
@@ -44,33 +49,28 @@
             
 
             <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-              <form class="form-horizontal" id="message-form" name="message-form" onsubmit="return validateForm()">
-
+            <?php echo form_open('message_c/reply/11','class="form-horizontal" id="message-form" name="message-form" onsubmit="return validateForm()"'); ?>
+            
                 <div class="row centered" style="margin-right:20px">
                   <fieldset>
                     <h3>Reply Messege</h3>
-                    <?php
-                        // foreach ($message->result() as $msg){
-                        //   $replyto = $msg->Sender_Name; // the person name whom user send msg to
-                        // }
-                      ?>
                     <div align="center">
                       <div class="form-group">
                         <label for="inputEmail" class="col-lg-2 control-label">Reply to :</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="msgReceiver" value="ReceiverName" disabled>
+                          <input type="text" class="form-control" id="msgReceiver" name="msgReceiver" value=<? echo $receiverName; ?> disabled>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputTopic" class="col-lg-2 control-label">Subject :</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="msgSubject" value="Re: Subject">
+                          <input type="text" class="form-control" id="msgSubject" name="msgSubject" value=<? echo '"Re: '.$subject.'"'; ?> disabled>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputMsg" class="col-lg-2 control-label">Message :</label>
                         <div class="col-lg-10">
-                        <textarea rows="4"class="form-control" id="msgText" placeholder="type your message here."></textarea>
+                        <textarea rows="4"class="form-control" id="msgText" name="msgText" placeholder="type your message here."></textarea>
                         </div>
                       </div>
                     </div>
@@ -81,13 +81,13 @@
                   <div class="col-lg-2">
                   </div>
                   <div class="col-lg-10">
-                    <a href="<?php echo site_url('message_c/sendMessage') ?>"><button type="submit" class="btn btn-warning">Reply</button></a>
-                    <a href="<?php echo site_url('message_c/manageMessageBox') ?>"><button type="button" class="btn btn-default" >Cancel</button></a>
+                    <button type="submit" class="btn btn-warning">Reply</button>
+                    <a href=<?php echo site_url('message_c/manageMessageBox') ?>><button type="button" class="btn btn-default" >Cancel</button></a>
                   </div>
                 </div>
               </form>
             </div>
-          </div><!-- row -->
+          <!-- row -->
         </div><!-- container -->
       </div><!-- headerwrap -->
 
@@ -103,21 +103,10 @@
   <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
   <script>
     function validateForm() {
-      var receiver = document.forms["message-form"]["msgReceiver"].value;
-      var subject = document.forms["message-form"]["msgSubject"].value;
       var text = document.forms["message-form"]["msgText"].value;
-
       var message ="";
 
-      if (!validateReceiverName(receiver) ) {
-        alert("Receiver name is invalid.");
-        return false;
-      }
-      if (!validateSubject(subject) ) {
-        alert("The subject is invalid.");
-        return false;
-      }
-      if (!validateMessageText(text) ) {
+      if (!validateMessageText(text)||text==''||text==null) {
         alert("Text is invalid.");
         return false;
       }
