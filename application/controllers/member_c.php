@@ -83,28 +83,27 @@
 		    }
       	    else // passed validation proceed to post success logic
 	        {
-		        $form_data = array( 'password' => $this->input->post('password'),
-		                            'firstname' => $this->input->post('firstname'),
+		        $form_data = array( 'firstname' => $this->input->post('firstname'),
 		                            'lastname' => $this->input->post('lastname'),
 		                            'address' => $this->input->post('address'),
 		                            'telephone' => $this->input->post('telephone'),
 		                            'password' => $this->input->post('password'),
 		                            'email' => $this->input->post('email'));
+			    $member['firstname'] = $form_data['firstname'];
+			    $member['lastname'] = $form_data['lastname'];
+			    $member['address'] = $form_data['address'];
+			    $member['telephone'] = $form_data['telephone'];
 			    $member['password'] = $form_data['password'];
-			    $member['firstname'] = $form_data['$firstname'];
-			    $member['lastname'] = $form_data['$lastname'];
-			    $member['address'] = $form_data['$address'];
-			    $member['telephone'] = $form_data['$telephone'];
-			    $member['password'] = $form_data['$password'];
-			    $member['email'] = $form_data['$email'];
+			    $member['email'] = $form_data['email'];
 			    if ($this->member_m->editMemberDetail($memeber) == 'true') // the information has therefore been successfully saved in the db
 			    {             
 			        $this->session->set_flashdata("message","Profile edited");
-			        redirect('home_c');   // or whatever logic needs to occur
+			        redirect('member_c/memberDetail');   // or whatever logic needs to occur
 			    }
 			    else
 			    {
 			        $this->session->set_flashdata("message","Error to edit profile");
+			        redirect('member_c/editProfile');
 			    }
 
 			}
