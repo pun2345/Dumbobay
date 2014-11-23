@@ -38,7 +38,7 @@
       <!-- msg part-->
       <div>
         <div class="container">
-          <div>
+          
             <div class="container w ">
               <div class="container">
                 <div class="row centered">              
@@ -49,7 +49,8 @@
             
 
             <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-            <?php echo form_open('message_c/reply/11','class="form-horizontal" id="message-form" name="message-form" onsubmit="return validateForm()'); ?>
+            <?php echo form_open('message_c/reply/11','class="form-horizontal" id="message-form" name="message-form" onsubmit="return validateForm()"'); ?>
+            
                 <div class="row centered" style="margin-right:20px">
                   <fieldset>
                     <h3>Reply Messege</h3>
@@ -57,19 +58,19 @@
                       <div class="form-group">
                         <label for="inputEmail" class="col-lg-2 control-label">Reply to :</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="msgReceiver" value=<? echo $receiverName; ?> disabled>
+                          <input type="text" class="form-control" id="msgReceiver" name="msgReceiver" value=<? echo $receiverName; ?> disabled>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputTopic" class="col-lg-2 control-label">Subject :</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="msgSubject" value=<? echo '"Re: '.$subject.'"'; ?> disabled>
+                          <input type="text" class="form-control" id="msgSubject" name="msgSubject" value=<? echo '"Re: '.$subject.'"'; ?> disabled>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputMsg" class="col-lg-2 control-label">Message :</label>
                         <div class="col-lg-10">
-                        <textarea rows="4"class="form-control" id="msgText" placeholder="type your message here."></textarea>
+                        <textarea rows="4"class="form-control" id="msgText" name="msgText" placeholder="type your message here."></textarea>
                         </div>
                       </div>
                     </div>
@@ -80,13 +81,13 @@
                   <div class="col-lg-2">
                   </div>
                   <div class="col-lg-10">
-                    <a href=<?php echo site_url('message_c/sendMessage') ?>><button type="submit" class="btn btn-warning">Reply</button></a>
+                    <button type="submit" class="btn btn-warning">Reply</button>
                     <a href=<?php echo site_url('message_c/manageMessageBox') ?>><button type="button" class="btn btn-default" >Cancel</button></a>
                   </div>
                 </div>
               </form>
             </div>
-          </div><!-- row -->
+          <!-- row -->
         </div><!-- container -->
       </div><!-- headerwrap -->
 
@@ -103,7 +104,6 @@
   <script>
     function validateForm() {
       var text = document.forms["message-form"]["msgText"].value;
-
       var message ="";
 
       if (!validateMessageText(text)||text==''||text==null) {

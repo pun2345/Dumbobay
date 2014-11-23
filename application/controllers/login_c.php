@@ -22,11 +22,17 @@ class Login_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       //Field validation failed.  User redirected to login page
+      if($this->session->flashdata("beforePay")){
+        $this->session->keep_flashdata("beforePay");
+      }
       $this->load->view('signin.html');
     }
     else
     {
       //Go to private area
+      if($this->session->flashdata("beforePay")){
+        redirect($this->session->flashdata("beforePay"));
+      }
       redirect('home_c', 'refresh');
     }
     
