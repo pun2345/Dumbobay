@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	  <?php
+    include 'HTMLHeader.html';
+  ?>
+
+	<style type="text/css">
+		.control-label{
+			padding-top: 4px;
+					}
+				
+	</style>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+	<!-- Fixed navbar -->
+	<?php
+	if($type==1){
+        include 'admin_menu.html';  
+      }            
+      else if($type==2){
+        include 'buyer_menu.html';  
+      }
+      else if($type==3){
+        include 'seller_menu.html'; 
+      }?>
+	<!-- =======================================================================-->
+	<div id="myheaderwrap">
+		<div class="container">
+			<div class="row centered">
+				<h2>Just let me <b>Shop</b> and no one gets hurt. <b>-DumboBay-</b></h2>	
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- headerwrap -->
+	<!-- ======================================================================= -->
+	<div>
+		<div class="container">
+			<div>
+				<div class="col-md-10 col-md-offset-1 centered" style="padding-top:50px; padding-bottom:10px">
+					<legend>
+						<h1>Feedback</h1>
+					</legend>
+				</div>
+				<!-- item list -->
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px;">
+						<?php 
+						// print_r($products);
+
+						// echo "===========================================================================";
+
+    // print_r($products);
+						
+							echo '<div class="row">';
+							echo '<div class="col-md-7">';
+							echo 'Please Give Feedback for '.$other;
+							echo '</div>';
+							echo '</div>';
+						?>
+
+						<hr>
+					</div>
+				</div>
+				<?php echo validation_errors(); ?>
+				<?php echo form_open('transaction_c/feedback/'.$transaction->Transaction_ID); ?>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px">
+							<div class="row form-group">
+								<label for="score" class="col-md-3 control-label" align="right">Score 0</label>
+								<div class="col-md-9">
+									<input type="radio" class="form-control" id="score" name="score" value = 0  <?php echo $this->form_validation->set_radio('score', 0); ?>
+									/>
+									<input type="radio" class="form-control" id="score" name="score" value = 1  <?php echo $this->form_validation->set_radio('score', 1); ?>
+									/>
+									<input type="radio" class="form-control" id="score" name="score" value = 2  <?php echo $this->form_validation->set_radio('score', 2); ?>
+									/>
+									<input type="radio" class="form-control" id="score" name="score" value = 3  <?php echo $this->form_validation->set_radio('score', 3); ?>
+									/>
+									<input type="radio" class="form-control" id="score" name="score" value = 4  <?php echo $this->form_validation->set_radio('score', 4); ?>
+									/>
+									<input type="radio" class="form-control" id="score" name="score" value = 5  <?php echo $this->form_validation->set_radio('score', 5); ?>
+									/>
+								</div>
+								<label for="score" class="col-md-3 control-label" align="right">Score 1</label>
+								<div class="col-md-9">
+									<input type="radio" class="form-control" id="score" name="score" value = 1 autofocus <?php echo $this->form_validation->set_radio('score', 1); ?>
+									/>
+								</div>
+								<label for="score" class="col-md-3 control-label" align="right">Score 2</label>
+								<div class="col-md-9">
+									<input type="radio" class="form-control" id="score" name="score" value = 2 autofocus <?php echo $this->form_validation->set_radio('score', 2); ?>
+									/>
+								</div>
+								<label for="score" class="col-md-3 control-label" align="right">Score 3</label>
+								<div class="col-md-9">
+									<input type="radio" class="form-control" id="score" name="score" value = 3 autofocus <?php echo $this->form_validation->set_radio('score', 3); ?>
+									/>
+								</div>
+								<label for="score" class="col-md-3 control-label" align="right">Score 4</label>
+								<div class="col-md-9">
+									<input type="radio" class="form-control" id="score" name="score" value = 4 autofocus <?php echo $this->form_validation->set_radio('score', 4); ?>
+									/>
+								</div>
+								<label for="score" class="col-md-3 control-label" align="right">Score 5</label>
+								<div class="col-md-9">
+									<input type="radio" class="form-control" id="score" name="score" value = 5 autofocus <?php echo $this->form_validation->set_radio('score', 5); ?>
+									/>
+								</div>
+							</div>
+							<div class="row form-group">
+
+								<label class="col-md-3 control-label" align="right">Feedback</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="feedback" name="feedback">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">Expired Date</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="expireddate" name="expireddate">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-3" align="right">
+								
+								</div>
+								<div class="col-md-9">
+									<a href="cart.html"><button type="button" class="btn btn-default" >Cancel</button></a>
+									<button type="submit" value="Submit" class="btn btn-success" >Submit</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- headerwrap -->
+
+
+<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+</body>
+</html>

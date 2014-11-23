@@ -4,6 +4,7 @@
 		function __construct(){
   		    parent::__construct();
 			$this->load->database();
+			$this->load->helper('html');
 			$this->load->model('watchlist_m');
 			$this->load->model('product_m');
 			$this->load->model('transaction_m');
@@ -14,7 +15,7 @@
 			$data['user_id'] = $session_data['user_id'];
       		$data['username'] = $session_data['username'];
       		$data['type'] = $session_data['type'];
-			$data['pruducts'] = $this->watchlist_m->getWatchlist($data['user_id']);
+			$data['pruducts'] = $this->transaction_m->getWatchlist($data['user_id']);
 			$this->load->view('watchlist.html',$data);	
 		}
 
