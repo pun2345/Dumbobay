@@ -41,6 +41,26 @@
       }
 
     </style>
+
+    <script type="text/javascript">
+
+     function changeReport() {
+      var selectBox = document.getElementById("select");
+      var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+      if(selectedValue=="1"){
+      var x = document.getElementById("table1").innerHTML;
+      document.getElementById("table0").innerHTML = x;
+      }else if(selectedValue=="2"){
+      var x = document.getElementById("table2").innerHTML;
+      document.getElementById("table0").innerHTML = x;
+      }else if(selectedValue=="3"){
+      var x = document.getElementById("table3").innerHTML;
+      document.getElementById("table0").innerHTML = x;
+      }
+     }
+
+    </script>
+
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -94,11 +114,24 @@
               
             </div>
           </div>
-        
+          <div class="col-md-10 col-md-offset-1" style="padding-bottom:10px">
+            <div class="row">
+              <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Select report : </label>
+                <div class="col-lg-4" style="padding-left:0px">
+                  <select class="form-control" id="select" onchange="changeReport();">
+                    <option id="bestseller" value="1" selected="">Best selling products</option>
+                    <option value="2">Best sellers</option>
+                    <option value="3">Blacklist</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-            <table style="width:100%;">
+            <table id="table0" style="width:100%;">
               <tr>
-                <th colspan="4"><h3><b>Best selling product (Top 10)</b></h3></th>
+                <th colspan="4"><h3><b>Best selling products (Top 10)</b></h3></th>
               </tr>
               <tr>
                 <th>Rank</th>
@@ -125,9 +158,38 @@
                 <td>200</td>
               </tr>
             </table>
-            <table style="width:100%; visibility:hidden;">
+            <table id="table1" style="width:100%;">
               <tr>
-                <th colspan="4"><h3><b>Best seller(Top 10)</b></h3></th>
+                <th colspan="4"><h3><b>Best selling products (Top 10)</b></h3></th>
+              </tr>
+              <tr>
+                <th>Rank</th>
+                <th>Product name</th>
+                <th>Sale method</th>
+                <th>Sell amount</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>iPhone6</td>
+                <td>Direct</td>
+                <td>2,000</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>iPhone6 plus</td>
+                <td>bidding</td>
+                <td>1,000</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>iPhone5S</td>
+                <td>Direct</td>
+                <td>200</td>
+              </tr>
+            </table>
+            <table id="table2" style="width:100%;">
+              <tr>
+                <th colspan="4"><h3><b>Best sellers(Top 10)</b></h3></th>
               </tr>
               <tr>
                 <th>Rank</th>
@@ -154,7 +216,7 @@
                 <td>1,000 bath</td>
               </tr>
             </table>
-            <table style="width:100%;">
+            <table id="table3" style="width:100%;">
               <tr>
                 <th colspan="2"><h3><b>Blacklist</b></h3></th>
               </tr>
@@ -201,5 +263,13 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("#table1").hide();
+      $("#table2").hide();
+      $("#table3").hide();
+    });
+    </script>
+    
   </body>
 </html>
