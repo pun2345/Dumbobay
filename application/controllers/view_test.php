@@ -12,7 +12,7 @@ class View_test extends CI_Controller {
 
   function index()
   {
-    $this->load->view('signup.html');
+    $this->load->view('product.html');
   }
 }
 ?>

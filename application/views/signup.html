@@ -12,8 +12,8 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
-	</style>
-
+	</style>  
+ 	
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -26,6 +26,7 @@
 	<!-- Fixed navbar -->
 	<?php
 		include 'guest_menu.html';
+		//
 	?>
 	<!-- =======================================================================-->
 	<div id="myheaderwrap">
@@ -39,7 +40,8 @@
 	<!-- Log in form -->
 	
 	<div class="container">
-		<form class="form-horizontal" id="register-form" name="register-form" onsubmit="return validateForm()">
+		<?php echo form_open('member_c/createMember','class="form-horizontal" id="register-form" name="register-form" onsubmit="return validateForm()"'); ?>
+		<!--<form class="form-horizontal" id="register-form" name="register-form" onsubmit="return validateForm()">-->
 			<div>
 				<fieldset>
 					<legend align="center" style="padding-top:10px"><h1>SIGN UP</h1></legend>
@@ -48,7 +50,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" align="right">Username</label>
 							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" autofocus>
+								<input style="width:50%" type="text" class="form-control" size="20" id="username" name="username" placeholder="A-Z, a-z, 0-9 (maximum 20 characters)" autofocus>
 							</div>
 						</div>
 						<div class="form-group">
@@ -64,117 +66,41 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Name</label>
+							<label class="col-md-3 control-label" align="right">Firstname</label>
 							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="name" name="name" >
+								<input style="width:50%" type="text" class="form-control" size="20" id="firstname" name="firstname" placeholder="A-Z, a-z (maximum 20 characters)">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label" align="right">Surname</label>
+							<label class="col-md-3 control-label" align="right">Lastname</label>
 							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="surname" name="surname">
+								<input style="width:50%" type="text" class="form-control" size="20" id="lastname" name="lastname" placeholder="A-Z, a-z (maximum 20 characters)">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label" align="right">Address</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" size="20" id="address" name="address">
+								<input type="text" class="form-control" size="20" id="address" name="address" placeholder="A-Z, a-z, 0-9, ".", "/", " " (maximum 70 characters)">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label" align="right">Country</label>
 							<div class="col-md-9">
-								<select class="form-control" id="select">
-						          <option>กรุงเทพมหานคร</option>
-						          <option>กระบี่ </option>
-						          <option>กาญจนบุรี </option>
-						          <option>กาฬสินธุ์ </option>
-						          <option>กำแพงเพชร </option>
-						          <option>ขอนแก่น </option>
-						          <option>จันทบุรี </option>
-						          <option>ฉะเชิงเทรา </option>
-						          <option>ชลบุรี </option>
-						          <option>ชัยนาท </option>
-						          <option>ชัยภูมิ </option>
-						          <option>ชุมพร </option>
-						          <option>เชียงราย </option>
-						          <option>เชียงใหม่ </option>
-						          <option>ตรัง </option>
-						          <option>ตราด </option>
-						          <option>ตาก </option>
-						          <option>นครนายก </option>
-						          <option>นครปฐม </option>
-						          <option>นครพนม </option>
-						          <option>นครราชสีมา </option>
-						          <option>นครศรีธรรมราช </option>
-						          <option>นครสวรรค์ </option>
-						          <option>นนทบุรี </option>
-						          <option>นราธิวาส </option>
-						          <option>น่าน </option>
-						          <option>บึงกาฬ </option>
-						          <option>บุรีรัมย์ </option>
-						          <option>ปทุมธานี </option>
-						          <option>ประจวบคีรีขันธ์ </option>
-						          <option>ปราจีนบุรี </option>
-						          <option>ปัตตานี </option>
-						          <option>พระนครศรีอยุธยา </option>
-						          <option>พังงา </option>
-						          <option>พัทลุง </option>
-						          <option>พิจิตร </option>
-						          <option>พิษณุโลก </option>
-						          <option>เพชรบุรี </option>
-						          <option>เพชรบูรณ์ </option>
-						          <option>แพร่ </option>
-						          <option>พะเยา </option>
-						          <option>ภูเก็ต </option>
-						          <option>มหาสารคาม </option>
-						          <option>มุกดาหาร </option>
-						          <option>แม่ฮ่องสอน </option>
-						          <option>ยะลา </option>
-						          <option>ยโสธร </option>
-						          <option>ร้อยเอ็ด </option>
-						          <option>ระนอง </option>
-						          <option>ระยอง </option>
-						          <option>ราชบุรี </option>
-						          <option>ลพบุรี </option>
-						          <option>ลำปาง </option>
-						          <option>ลำพูน </option>
-						          <option>เลย </option>
-						          <option>ศรีสะเกษ </option>
-						          <option>สกลนคร </option>
-						          <option>สงขลา </option>
-						          <option>สตูล </option>
-						          <option>สมุทรปราการ </option>
-						          <option>สมุทรสงคราม </option>
-						          <option>สมุทรสาคร </option>
-						          <option>สระแก้ว </option>
-						          <option>สระบุรี </option>
-						          <option>สิงห์บุรี </option>
-						          <option>สุโขทัย </option>
-						          <option>สุพรรณบุรี </option>
-						          <option>สุราษฎร์ธานี </option>
-						          <option>สุรินทร์ </option>
-						          <option>หนองคาย </option>
-						          <option>หนองบัวลำภู </option>
-						          <option>อ่างทอง </option>
-						          <option>อุดรธานี </option>
-						          <option>อุทัยธานี </option>
-						          <option>อุตรดิตถ์ </option>
-						          <option>อุบลราชธานี </option>
-						          <option>อำนาจเจริญ</option>
+								<select class="form-control" id="select" style="width:50%">
+						          <option>Thailand</option>
 						        </select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label" align="right">E-mail</label>
 							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="email" name="email">
+								<input style="width:50%" type="text" class="form-control" size="20" id="email" name="email" placeholder="name@mail.com">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label" align="right">Tel.</label>
 							<div class="col-md-9">
-								<input style="width:50%" type="text" class="form-control" size="20" id="telephone" name="telephone">
+								<input style="width:50%" type="text" class="form-control" size="20" id="telephone" name="telephone" placeholder="+(country code)XXXXXXXX">
 							</div>
 						</div>
 						<div class="form-group">
@@ -182,13 +108,13 @@
 							<div class="col-md-9">
 								<div class="radio">
 									<label>
-										<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-										Buyer
+										<input type="radio" name="type" id="type" value="2" checked="">
+										Customer
 									</label>
 								</div>
 								<div class="radio">
 									<label>
-										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										<input type="radio" name="type" id="type" value="3">
 										Seller
 									</label>
 								</div>
@@ -199,7 +125,7 @@
 
 							</div>
 							<div class="col-md-9">
-								<button type="button" class="btn btn-default" onclick="clickk()">Cancel</button>
+								<a href=<?php echo site_url('home_c'); ?>><button type="button" class="btn btn-default">Cancel</button></a>
 								<button type="submit" value="Submit" class="btn btn-warning">Submit</button>
 							</div>
 						</div>
@@ -275,5 +201,6 @@
 	}
 
 	</script>
+
 </body>
 </html>

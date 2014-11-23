@@ -31,6 +31,48 @@ function test($text ='test test test'){
 	//}
 	//return false
 }
+function activate_User($id,$username,$mail){
+	echo $id;
+	echo $username;
+	echo $mail;
+	$CI =& get_instance();
+	//$CI->load->database();
+    $CI->load->library('email');               
+
+    $config['protocol']     = 'smtp';
+    $config['smtp_host']    = 'ssl://smtp.gmail.com';
+    $config['smtp_port']    = '465';
+    $config['smtp_timeout'] = '7';
+    $config['smtp_user']    = 'dumbobay@gmail.com';
+    $config['smtp_pass']    = 'dumbo123';
+    $config['charset']      = 'utf-8';
+    $config['newline']      = "\r\n";
+    $config['mailtype']     = 'html';
+    $config['validation']   = TRUE;
+
+    //echo $id;
+
+	//$user_data = $CI->member_m->getUserDetail($id);
+	//rint_r($user_data);
+	$CI->email->initialize($config);
+	$CI->email->from('Dumbobay@Dumbobay.com');
+	$CI->email->to($mail); 
+	$subject = "Sign up: ".$username." for Dumbobay";
+	$CI->email->subject($subject);
+	
+
+	$text = "To ".$username."\r\n To activate youe id, follow the link: <a href=\"localhost/Dumbobay/index.php/member_c/confirmMember/".$id."\">localhost/Dumbobay/index.php/member_c/confirmMember/".$id."</a>.\r\nFrom Dumbobay.";
+	$CI->email->message($text);
+	
+
+	if($CI->email->send())
+		return true;
+	return false;
+	//if($CI->email->print_debugger()){
+	//	return true;
+	//}
+	//return false
+}
 
 function winning_Bid($id,$product_id){
 	$CI =& get_instance();

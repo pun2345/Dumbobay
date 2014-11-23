@@ -1,26 +1,9 @@
 <!doctype html>
 <htlm lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
-
-    <title>DUMBOBAY - shopping area</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/dumbobaycss.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
-
-
-
-
+    <?php
+    include 'HTMLHeader.html';
+  ?>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -30,33 +13,22 @@
 
     <body>
 
-      <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#" style="padding:2px 15px 2px 15px"><img src="assets/img/dumbobay-logo-sm.png"></a>
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
+      <!-- Fixed navbar -->
+  <?php
+      // if($type==0){
+      //   include 'guest_menu.html';
+      // }
+      // else if($type==1){
+      //   include 'admin_menu.html';  
+      // }            
+      // else if($type==2){
+      //   include 'buyer_menu.html';  
+      // }
+      // else if($type==3){
+      //   include 'seller_menu.html'; 
+      // }
+    ?>
 
-              <li><a href="#">HOME</a></li>
-              <li><a href="#">PRODUCT</a></li>
-              <li><a href="#">MY CART</a></li>
-              <li ><a href="#">WATCH LIST</a></li>
-              <li><a href="#">ORDER</a></li>
-              <li class="active"><a href="#">MSG BOX</a></li>
-              <li><a href="#">HISTORY</a></li>
-              <!-- <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li> -->
-              <li><a href="index.html">SIGN OUT</a></li>
-              <li><a href="#">| Pookpik |</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
 
       <!-- msg part-->
       <div>
@@ -69,29 +41,30 @@
                 </div>
               </div><!-- row -->
             </div><!-- container -->
-            <!--<?php
-            if(this->session->flashdata('message')){
-              //show a pop-up displaying 'Your message has been sent.'
-            }
-            ?>-->
+            
 
             <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-              <form class="form-horizontal">
+              <form class="form-horizontal" id="message-form" name="message-form" onsubmit="return validateForm()">
 
                 <div class="row centered" style="margin-right:20px">
                   <fieldset>
                     <h3>Reply Messege</h3>
+                    <?php
+                        // foreach ($message->result() as $msg){
+                        //   $replyto = $msg->Sender_Name; // the person name whom user send msg to
+                        // }
+                      ?>
                     <div align="center">
                       <div class="form-group">
                         <label for="inputEmail" class="col-lg-2 control-label">Reply to :</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="msgReceiver" value="<?php echo $receiverID ?>" ><!--cant type-->
+                          <input type="text" class="form-control" id="msgReceiver" value="ReceiverName" disabled>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputTopic" class="col-lg-2 control-label">Subject :</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="msgSubject" value="Re: <?php echo $subject ?>">
+                          <input type="text" class="form-control" id="msgSubject" value="Re: Subject">
                         </div>
                       </div>
                       <div class="form-group">
@@ -108,8 +81,8 @@
                   <div class="col-lg-2">
                   </div>
                   <div class="col-lg-10">
-                    <a href="message_c/sendMessage"><button type="button" class="btn btn-warning">Reply</button></a>
-                    <a href="message_c/manageMessageBox"><button type="button" class="btn btn-default" >Cancel</button></a>
+                    <a href="<?php echo site_url('message_c/sendMessage') ?>"><button type="submit" class="btn btn-warning">Reply</button></a>
+                    <a href="<?php echo site_url('message_c/manageMessageBox') ?>"><button type="button" class="btn btn-default" >Cancel</button></a>
                   </div>
                 </div>
               </form>
@@ -127,6 +100,28 @@
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
+  <script>
+    function validateForm() {
+      var receiver = document.forms["message-form"]["msgReceiver"].value;
+      var subject = document.forms["message-form"]["msgSubject"].value;
+      var text = document.forms["message-form"]["msgText"].value;
 
+      var message ="";
+
+      if (!validateReceiverName(receiver) ) {
+        alert("Receiver name is invalid.");
+        return false;
+      }
+      if (!validateSubject(subject) ) {
+        alert("The subject is invalid.");
+        return false;
+      }
+      if (!validateMessageText(text) ) {
+        alert("Text is invalid.");
+        return false;
+      }
+  }
+  </script>
 </body>
 </html>

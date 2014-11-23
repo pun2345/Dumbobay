@@ -8,7 +8,7 @@ Class member_m extends CI_Model
 		$this->db->where('username = ' . "'" . $username . "'"); 
 		$this->db->where('password = ' . "'" . MD5($password) . "'"); 
 		$this->db->limit(1);
-
+		// echo MD5($password);
 		$query = $this->db->get();
 		$row = $query ->row();
 		if($query->num_rows() == 1)
@@ -49,7 +49,7 @@ Class member_m extends CI_Model
 	function createMember($username, $password, $firstname, $lastname, $type, $address, $telephone, $email){
 		$data1 = array(
 		   	'Username' => $username,
-	   		'Password' => $password,
+	   		'Password' => MD5($password),
 	   		'Firstname' => $firstname,
 	   		'Lastname' => $lastname,
 	   		'Type' => $type
@@ -67,7 +67,7 @@ Class member_m extends CI_Model
 		$this->db->insert('member',$data2);
    	  	$this->db->trans_complete();
 	}
-	function enableMember($ID){
+	function activateMember($ID){
 		$data = array(
 			'Activated' => 1
 		);
@@ -79,6 +79,22 @@ Class member_m extends CI_Model
 	function getBlacklist(){
 		return $this->db->query("select * from Member where Blacklist_score >=3");
 	}
+	function incBlacklist($user_id){
+		$oldScore = $this->member_m->getBlacklist($user_id);
+		$newScore = $oldScore+1;
+		$data = array(
+				'Blacklist_score' => $newScore
+			);
+			$this->db->trans_start();
+			$this->db->where('User_ID', $user_id);
+			$this->db->update('member', $data);
+			$complete = $this->db->affected_rows();
+			$this->db->trans_complete();
+			if ($complete>0) {
+				// echo "newCount " .$newCount ."<br>";
+				return $newCount;
+			}
+	}
 	function checkMember($username,$email){
 		$query1=$this->db->get_where('User',array('Username'=>$username));
 		if($query1 -> num_rows()> 0) return "true";
@@ -86,7 +102,7 @@ Class member_m extends CI_Model
 		if($query2 -> num_rows()> 0) return "true";
 		return "false";
 	}
-	function editUserDetail($user_id,$username, $password, $firstname, $lastname, $type, $address, $telephone, $email){
+	function editMemberDetail($user_id,$username, $password, $firstname, $lastname, $type, $address, $telephone, $email){
 		$data1 = array(
 		   	'Username' => $username,
 	   		'Password' => $password,
@@ -112,8 +128,13 @@ Class member_m extends CI_Model
    	  	$this->db->trans_complete();
    	  	return "true";
 	}
-	function getUserDetail($user_id){
-		return $this->db->query("select * from User where User_ID=$user_id")->row();
+	function getMemberDetail($user_id){
+		return $this->db->query("select * from User join member using (user_id) where user_id = $user_id")->row();
+	}
+	function getUserID($username){
+		$this->db->select('User_ID');
+		$query = $this->db->get_where('User',array('Username'=>$username));
+		return $query->row()->User_ID;
 	}
 	function getFeedbackScore($user_id){
 		$this->db->where('User_ID', $user_id);

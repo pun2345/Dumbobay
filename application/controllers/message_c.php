@@ -19,7 +19,6 @@ class message_c extends CI_Controller {
   {
       $session_data = $this->session->userdata(logged_in);
       $senderID=$session_data['user_id'];
-      $this->load->view('newMessage.html');
       $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
       $this->form_validation->set_rules('msgReceiver', 'msgReceiver', 'require|css_clean');
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
@@ -31,7 +30,7 @@ class message_c extends CI_Controller {
       {
           $form_data = array( 'msgSubject' => $this->input->post('msgSubject'),
                               'msgText' => $this->input->post('msgText'),
-                             'msgReceiver' => $this->input->post('msgReceiver'));
+                              'msgReceiver' => $this->input->post('msgReceiver'));
       }
       // run insert model to write data to db
       if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],$form_data['msgReceiver']) == 'true') // the information has therefore been successfully saved in the db
@@ -86,7 +85,7 @@ class message_c extends CI_Controller {
       // $data['user_id']=$session_data['user_id'];
       $data['messages'] = $this->message_m->getUserMessage(1000);
       foreach ($data['messages']->result() as $msg){
-        $x = $this->member_m->getUserDetail($msg->Sender_ID);
+        $x = $this->member_m->getMemberDetail($msg->Sender_ID);
         $msg->Sender_Name = $x->Username;
       }
       $this->load->view('messageBox.html',$data);
@@ -98,7 +97,7 @@ class message_c extends CI_Controller {
       $data['user_id']=$session_data['user_id'];
       $data['message'] = $this->message_m->getMessage($message_id);
       $msg = $data['message']->result();
-      $x = $this->member_m->getUserDetail($msg->Sender_ID);
+      $x = $this->member_m->getMemberDetail($msg->Sender_ID);
       $msg->Sender_Name = $x->Username;
       $this->load->view('viewMessage.html',$data);
   }
