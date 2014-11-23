@@ -107,10 +107,10 @@
 		}
 
 		function memberDetail(){      
-			$session_data = $this->session->userdata(logged_in);
+      		$session_data = $this->session->userdata('logged_in');
       		$data['user_id'] = $session_data['user_id'];
-			$data['member'] = $this->member_m->getMemberDetail($user_id);
-			$this->load->view('member_detail.html',$data);
+			$data['member'] = $this->member_m->getMemberDetail($data['user_id']);
+			$this->load->view('profile.html',$data);
 		}
 
 	}
