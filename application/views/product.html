@@ -87,8 +87,8 @@
 						<div class="productcontainer">
 							<?php 
 
-								foreach($products->result() as $row){
-								if($row->Type==1){
+								foreach($directProducts->result() as $row){
+								//if($row->Type==1){
 									echo "<hr>";
 									echo "<div class=\"row\">";
 										echo "<div class=\"col-lg-4 centered productimg\">";
@@ -97,14 +97,14 @@
 										echo "<div class=\"col-lg-4\">";
 											echo "<b>".$row->Name."</b><br>";
 											echo "Price: ".$row->Price." Baht<br>";
-											echo "Amount: ".$row->Amount." ea<br>";
+											echo "Amount: ".$row->Quantity." ea<br>";
 											echo "<a href= \"product_c/viewProductDetail/".$row->Product_ID."\" >More info..</a>";
 										echo "</div>";
 										echo "<div class=\"col-lg-4 productbutton\">";
 											echo "<a data-toggle=\"modal\" data-target=\"#amountform\" href=\"cart_c/addToCart/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Cart</button></a>";
 										echo "</div>";
 									echo "</div>";
-									}
+									//}
 								}					
 							?>
 							<hr>
@@ -130,8 +130,9 @@
 						<div class="productcontainer">
 							<?php 
 
-								foreach($products->result() as $row){
-								if($row->Type==2){
+								foreach($bidProducts->result() as $row){
+								//if($row->Type==2)
+									//{
 									echo "<hr>";
 									echo "<div class=\"row\">";
 										echo "<div class=\"col-lg-4 centered productimg\">";
@@ -140,7 +141,7 @@
 										echo "<div class=\"col-lg-4\">";
 											echo "<b>".$row->Name."</b><br>";
 											echo "Max bid: ".$row->Current_Max_Bid." Baht<br>";
-											echo "Due date: ".$row->N_Datetime." ea<br>";
+											echo "Due date: ".$row->End_Date." ea<br>";
 											echo "<a href= \"product_c/viewProductDetail/".$row->Product_ID."\" >More info..</a>";
 										echo "</div>";
 										echo "<div class=\"col-lg-4 centered auctionbutton\">";
@@ -148,7 +149,7 @@
 											echo "<a data-toggle=\"modal\" data-target=\"#bidform\" href=\"#bidform".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Watch List</button></a>";
 										echo "</div>";
 									echo "</div>";
-									}
+									//}
 								}					
 							?>
 							<hr>
