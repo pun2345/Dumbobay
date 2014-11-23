@@ -5,6 +5,7 @@
   		    parent::__construct();
 			$this->load->database();
 			$this->load->model('message_m');
+			$this->load->helper('html');
 		}
 
 		function index(){
@@ -18,7 +19,7 @@
 	        $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
 	        if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 	        {
-	            $this->load->view('problem_report_form.html',$data);
+	            $this->load->view('report.html',$data);
 	        }
 	        else // passed validation proceed to post success logic
 	        {
@@ -28,11 +29,11 @@
 		        if ($this->message_m->createMessage($senderID,$form_data['msgSubject'],$form_data['msgText'],0) == 'true') // the information has therefore been successfully saved in the db
 		        {             
 		            $this->session->set_flashdata("message","Problem Reported!");
-		            redirect('problem_c/index');   // or whatever logic needs to occur
+		            redirect('home_c');   // or whatever logic needs to occur
 		        }
 		        else
 		        {
-		            $this->session->set_flashdata("message","Error to report problem");
+		            $this->session->set_flashdata("message","Unable to report problem");
 		            redirect('problem_c/index');
 		        }
 	        }

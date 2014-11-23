@@ -86,12 +86,6 @@ class message_c extends CI_Controller {
       }
   }
 
-  function reportProblem($problem)
-  {
-      $adminID = 0;
-      redirect('message_c/sendMessageTo',$adminID);
-  }
-
   function manageMessageBox()
   {
       $session_data = $this->session->userdata('logged_in');
