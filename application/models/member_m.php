@@ -106,7 +106,6 @@ Class member_m extends CI_Model
 		$data1 = array(
 	   		'Firstname' => $firstname,
 	   		'Lastname' => $lastname,
-	   		'Type' => $type
 		);
 		 $this->db->trans_start();
 		 $this->db->where('User_ID',$user_id);

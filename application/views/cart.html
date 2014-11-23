@@ -23,10 +23,7 @@
 
     <!-- Fixed navbar -->
 <?php
-      if($type==0){
-        include 'guest_menu.html';
-      }
-      else if($type==1){
+     if($type==1){
         include 'admin_menu.html';  
       }            
       else if($type==2){
@@ -274,10 +271,14 @@
 
             <div class="row col-md-2" style="padding-left:30px">
             </div>
-            <div class="row col-md-9">
+            <div class="row col-md-7">
+            </div>
+            <div class="row col-md-2">
+              <?php echo "Total: " .$sum;?>
             </div>
             <div class="row col-md-1" style="padding-left:50px">
               <!--add sum-->
+              
               <a href="cart_c/checkOut"><button type="button" class="btn btn-default"> Check out </button></a>
           </div>
           </div>
