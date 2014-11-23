@@ -132,12 +132,10 @@ class message_c extends CI_Controller {
       $data['receiverName'] = $tmp->Username;
       $data['subject'] = $this->message_m->getSubject($message_id);
       if(strlen($data['subject'])>26) $data['subject'] = substr($data['subject'],0,23) . "..";
-      
       $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
       if ($this->form_validation->run() == FALSE) // validation hasn't been passed
       {
           $this->load->view('replyMessage.html',$data);
-          
       }
       else // passed validation proceed to post success logic
       {
@@ -151,7 +149,7 @@ class message_c extends CI_Controller {
           else
           {
               $this->session->set_flashdata("message","Sending error");
-              redirect(current_url());
+              redirect('message_c/reply/',$message_id);
           }
       }
   }
