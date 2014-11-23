@@ -24,7 +24,8 @@
 		}
 		function index(){
 			$this->load->helper('email_sender');
-			test('try try try');
+			activate_User(6,'test','pun_Taweekiat@hotmail.com');
+			$this->email->print_debugger();
 		}
 		function winning_bid($id,$product_id){
 			
