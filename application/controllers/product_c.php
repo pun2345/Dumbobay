@@ -68,6 +68,17 @@ class Product_c extends CI_Controller {
     $this->load->view('productDesc.html',$data);
     $this->load->view('footer.html');
   }
+  function do_upload()
+  {
+    $config['upload_path'] = './assets/img/';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
+        $config['max_size'] = '5120000';
+
+    $this->load->library('upload', $config);
+
+        $datafoto = $this->upload->data();
+        $image = $datafoto['file_path'];
+  }   
   function newProduct(){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
@@ -106,9 +117,24 @@ class Product_c extends CI_Controller {
     }
     else
     {
+        $config['upload_path'] = './assets/img/';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
+        $config['max_size'] = '5120000';
+
+        $this->load->library('upload', $config);
+        if ( ! $this->upload->do_upload('Image'))       //you forgot this
+        {
+            $image = null;
+            $this->session->set_flashdata("message","cannot upload Image");
+            redirect("product_c/newProduct");
+        }
+        else
+        {
+            $datafoto=$this->upload->data();
+            $image = $datafoto['file_name'];
+        }
       $type = $this->input->post('type');
-      $name = $this->input->post('Name');      
-      $image = $this->input->post('Image');
+      $name = $this->input->post('Name');   
       $brand = $this->input->post('Brand');      
       $model = $this->input->post('Model');
       $price = $this->input->post('Price');      
@@ -163,7 +189,7 @@ class Product_c extends CI_Controller {
       else
       {
         $this->session->set_flashdata("message","Creating Product Failed! Try Again.");
-        redirect(current_url());
+        redirect('product_c/newProduct');
       }
     }
   }

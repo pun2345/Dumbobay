@@ -86,7 +86,8 @@
           </div>
           <div class="row col-md-10 col-md-offset-1">
             <?php echo validation_errors(); ?>
-            <?php echo form_open("product_c/newProduct");?>
+            <?php echo $this->session->flashdata("message"); ?>
+            <?php echo form_open_multipart("product_c/newProduct");?>
 
             <form class="form-horizontal">
               <fieldset>
@@ -101,7 +102,7 @@
                 <div class="form-group">
                   <label id="image" class="col-md-2 control-label">Product image</label>
                   <div class="col-md-10">
-                    <input type="file" class="form-control" id="Image">
+                    <input type="file" class="form-control" name = "Image" id="Image">
                   </div>
                 </div>
 
