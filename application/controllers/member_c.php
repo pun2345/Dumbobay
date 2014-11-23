@@ -59,12 +59,16 @@
 		}
 
 		function confirmMember($user_id){
+		    $session_data = $this->session->userdata('logged_in');
 			$this->member_m->activateMember($user_id);
-			redirect('home_c');
+      		$data['type'] = $session_data['type'];
+			$this->load->view('activationComfirmed.html',$data);
 		}
 
 		function editProfile($user_id){
+		    $session_data = $this->session->userdata('logged_in');
 			$data['user'] = $this->member_m->getMemberDetail($user_id);
+      		$data['type'] = $session_data['type'];
 			$user = $data['user'];
     		$this->load->library('form_validation');
 	        $this->form_validation->set_rules('password', 'password', 'require|css_clean|max_length[20]');
@@ -75,7 +79,7 @@
 	        $this->form_validation->set_rules('email', 'email', 'require|css_clean|max_length[25]');
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
-		        $this->load->view('edit_profile_form.html');
+		        $this->load->view('edit_profile_form.html',$data);
 		    }
       	    else // passed validation proceed to post success logic
 	        {
@@ -109,6 +113,7 @@
 		function memberDetail(){      
       		$session_data = $this->session->userdata('logged_in');
       		$data['user_id'] = $session_data['user_id'];
+      		$data['type'] = $session_data['type'];
 			$data['member'] = $this->member_m->getMemberDetail($data['user_id']);
 			$this->load->view('profile.html',$data);
 		}

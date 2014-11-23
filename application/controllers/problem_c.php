@@ -11,11 +11,12 @@
 		    $session_data = $this->session->userdata('logged_in');
 		    $senderID = $session_data['user_id'];
 			$this->load->library('form_validation');
+      		$data['type'] = $session_data['type'];
 	        $this->form_validation->set_rules('msgSubject', 'msgSubject', 'require|css_clean|max_length[30]');
 	        $this->form_validation->set_rules('msgText', 'msgText', 'max_length[200]');
 	        if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 	        {
-	            $this->load->view('problem_report_form.html');
+	            $this->load->view('problem_report_form.html',$data);
 	        }
 	        else // passed validation proceed to post success logic
 	        {
