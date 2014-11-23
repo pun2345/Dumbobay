@@ -16,7 +16,8 @@ class Product_c extends CI_Controller {
   {
     //This method will have the credentials validation
     $page_num=1;
-    $data['products'] = $this->product_m->allProduct($page_num);
+    $data['bidProducts'] = $this->product_m->allBidProduct($page_num);
+    $data['directProducts'] = $this->product_m->allDirectProduct($page_num);
     $data['type'] = 0;
     if($this->session->userdata('logged_in'))
     {

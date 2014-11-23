@@ -6,10 +6,17 @@ Class product_m extends CI_Model
 		$query = $this->db->query("Select * from product where Name like '%$searchWord%'");
 		return $query;
 	}
-	function allProduct($page_num){
+	function allBidProduct($page_num){
 		$min = ($page_num-1)*10+1;
-		$this->db->limit(10,0);
-		$query = $this->db->get('Product');
+		
+		$query = $this->db->query("Select * from product_bid join product where product_bid.product_id = product.product_id limit 10");
+
+		return $query;
+	}
+	function allDirectProduct($page_num){
+		$min = ($page_num-1)*10+1;
+		$query = $this->db->query("Select * from product_direct join product where product_direct.product_id = product.product_id limit 10");
+		
 		return $query;
 	}
 	function getProductDetail($product_id){
