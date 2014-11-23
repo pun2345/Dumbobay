@@ -102,7 +102,7 @@ Class member_m extends CI_Model
 		return $query->row()->Blacklist_score;
 	}
 	function incBlacklistScore($user_id){
-		$oldScore = $this->member_m->getBlacklist($user_id);
+		$oldScore = $this->member_m->getBlacklistScore($user_id);
 		$newScore = $oldScore+1;
 		$data = array(
 				'Blacklist_score' => $newScore
