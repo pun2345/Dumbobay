@@ -66,6 +66,7 @@ Class member_m extends CI_Model
 		);
 		$this->db->insert('member',$data2);
    	  	$this->db->trans_complete();
+   	  	return $insert_id;
 	}
 	function activateMember($ID){
 		$data = array(
@@ -77,7 +78,8 @@ Class member_m extends CI_Model
 		$this->db->trans_complete();
 	}
 	function getBlacklist(){
-		return $this->db->query("select * from Member where Blacklist_score >=3");
+		$maxScore = $this->member_m->getBlacklistMaxScore();
+		return $this->db->query("select * from Member where Blacklist_score >=$maxScore order by user_id ");
 	}
 	function incBlacklist($user_id){
 		$oldScore = $this->member_m->getBlacklist($user_id);
@@ -95,6 +97,11 @@ Class member_m extends CI_Model
 				return $newCount;
 			}
 	}
+	function getBlacklistMaxScore(){
+		$this->db->limit(1);
+		$query = $this->db->get('Blacklist_Max_Score');
+		return $query ->row()->MaxScore;
+	}
 	function checkMember($username,$email){
 		$query1=$this->db->get_where('User',array('Username'=>$username));
 		if($query1 -> num_rows()> 0) return "true";
@@ -110,6 +117,7 @@ Class member_m extends CI_Model
 		 $this->db->trans_start();
 		 $this->db->where('User_ID',$user_id);
    		 $this->db->update('user',$data1);
+   		 echo $this->db->affected_rows();
    		 $complete = ($this->db->affected_rows() > 0) ;
          
    		 $data2 = array(
