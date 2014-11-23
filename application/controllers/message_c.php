@@ -8,6 +8,7 @@ class message_c extends CI_Controller {
     $this->load->model('message_m');
     $this->load->model('member_m');
     $this->load->library('form_validation');
+    $this->load->helper('html');
   }
 
   function index()
@@ -86,10 +87,10 @@ class message_c extends CI_Controller {
 
   function manageMessageBox()
   {
-      //$session_data = $this->session->userdata('logged_in');
-      //$data['user_id']=$session_data['user_id'];
+      $session_data = $this->session->userdata('logged_in');
+      $data['user_id']=$session_data['user_id'];
       $data['user_id'] = 6;
-      //$data['type'] = $session_data['type'];
+      $data['type'] = $session_data['type'];
       $data['type'] = 2;
       $data['username'] = $session_data['username'];
       $data['messages'] = $this->message_m->getUserMessage($data['user_id']);
