@@ -1,28 +1,5 @@
-	function validateForm() {
-		// alert('vali');
-	    var name = document.forms["editprofile-form"]["name"].value;
-	    var surname = document.forms["editprofile-form"]["surname"].value;
-	    var address = document.forms["editprofile-form"]["address"].value;
-	    var email = document.forms["editprofile-form"]["email"].value;
-	    var tel = document.forms["editprofile-form"]["tel"].value;
-	    
-
-	    if (!validateName(name)||!validateName(surname)){
-	  		alert("Your firstname or lastname is invalid.");
-	    	return false;
-	  	}
-	  	if (!validateAddress(address)){
-	    	alert("Your address is invalid.");
-	    	return false;
-	    }
-	    if (!validateEmail(email)){
-	    	alert("Your e-mail is invalid.");
-	    	return false;
-	    }
-	    if (!validateTelephone(tel)){
-	    	alert("Your telephone number is invalid.");
-	    	return false;
-	    }
+	function clickk(){
+		alert('isus');
 	}
 	function validateUsername(word){
 		var wordReg = new RegExp(/^[a-zA-Z0-9_\.]{1,20}$/);
@@ -74,7 +51,7 @@
 	    }
 	}
 	function validateTelephone(word){
-		var wordReg = new RegExp(/^\+[0-9]{9}$/);
+		var wordReg = new RegExp(/^\+[0-9]{11}$/);
 		var valid = wordReg.test(word);
 
 		if(!valid) {
@@ -85,7 +62,7 @@
 	}
 	function validateKeyword(word){
 		var searchReg = new RegExp(/^[a-zA-Z0-9]+$/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;
@@ -95,7 +72,7 @@
 	}
 	function validateReceiverName(word){
 		var searchReg = new RegExp(/^[a-zA-Z0-9_\.-]{1,20}$/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;
@@ -120,7 +97,7 @@
 	
 	function validateVisaID(word){
 		var searchReg = new RegExp(/^[0-9]{16}$/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;
@@ -130,7 +107,7 @@
 	}
 	function validateExpiredDate(word){
 		var searchReg = new RegExp(/^([0-2][0-9]|30|31)\/(0[0-9]|1[0-2])\/25[0-9][0-9]$/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;
@@ -154,7 +131,7 @@
 	}
 	function validateDigit(word){
 		var searchReg = new RegExp(/[[:digit:]]/);
-		var valid = searchReg.test(search);
+		var valid = searchReg.test(word);
 
 		if(!valid) {
 	        return false;

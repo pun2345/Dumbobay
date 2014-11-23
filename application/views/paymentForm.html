@@ -59,11 +59,14 @@
 						// echo "===========================================================================";
 						foreach ($products as $row){
 							echo '<div class="row">';
-							echo '<div class="col-md-9">';
+							echo '<div class="col-md-7">';
 							echo $row->Name;
 							echo '</div>';
+							echo '<div class="col-md-2">';
+							echo $row->Quantity.' ea';
+							echo '</div>';							
 							echo '<div class="col-md-3">';
-							echo $row->Price.'Baht';
+							echo $row->Price*$row->Quantity.'Baht';
 							echo '</div>';
 							echo '</div>';
 						}
@@ -71,7 +74,7 @@
 
 						<hr>
 						<div class="row" style="margin-top:-20px">
-							<div class="col-md-9">
+							<div class="col-md-7">
 								<h3>TOTAL</h3>
 							</div>
 							<div class="col-md-3">
@@ -81,7 +84,7 @@
 					</div>
 				</div>
 				<?php echo validation_errors(); ?>
-				<?php echo form_open('payment_c/index/'.$price); ?>
+				<?php echo form_open('payment_c/pay/'.$price); ?>
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px">
 							<div class="row form-group">

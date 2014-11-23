@@ -41,7 +41,7 @@
 		                            'country' => $this->input->post('country'),
 		                            'email' => $this->input->post('email'),
 		                            'type' => $this->input->post('type'));
-		        $form_data['address'] = $form_data['address'] + " " + $form_data['country'];
+		        $form_data['address'] = $form_data['address'] . " " . $form_data['country'];
 			    if ($this->member_m->checkMember($form_data['username'],$form_data['email']) == 'false') // the information has therefore been successfully saved in the db
 			    {             
 			    	$this->member_m->createMember($form_data['username'],$form_data['password'],$form_data['firstname'],$form_data['lastname'],$form_data['type'],$form_data['address'],$form_data['telephone'],$form_data['email']);
@@ -91,7 +91,7 @@
 		                            'address' => $this->input->post('address'),
 		                            'telephone' => $this->input->post('telephone'),
 		                            'email' => $this->input->post('email'));
-			    if ($this->member_m->editMemberDetail($member->User_ID,$member->Username,$form_data['firstname'],$form_data['lastname'],$member->Type,$form_data['address'],$form_data['telephone'],$form_data['email']) == "true") // the information has therefore been successfully saved in the db
+			    if ($this->member_m->editMemberDetail($member->User_ID,$form_data['firstname'],$form_data['lastname'],$form_data['address'],$form_data['telephone'],$form_data['email']) == "true") // the information has therefore been successfully saved in the db
 			    {             
 			        $this->session->set_flashdata("message","Profile edited");
 			        redirect('member_c/memberDetail');   // or whatever logic needs to occur

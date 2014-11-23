@@ -42,7 +42,7 @@ class Payment_c extends CI_Controller {
       $data['type'] = $session_data['type'];
     $data['products'] = $this->session->flashdata("cart2");
 
-    $this->load->view('paymentForm.html',$data);
+    //$this->load->view('paymentForm.html',$data);
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('visano', 'visano', 'trim|required|xss_clean');

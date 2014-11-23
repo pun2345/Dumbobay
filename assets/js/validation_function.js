@@ -51,7 +51,7 @@
 	    }
 	}
 	function validateTelephone(word){
-		var wordReg = new RegExp(/^\+[0-9]{9}$/);
+		var wordReg = new RegExp(/^\+[0-9]{11}$/);
 		var valid = wordReg.test(word);
 
 		if(!valid) {
