@@ -132,7 +132,7 @@ class message_c extends CI_Controller {
       $data['username'] = $session_data['username'];
       if($data['type']==1){
           $data['user_id'] = 0;
-          $data['username'] = 'Admin';
+          $data['username'] = 'Adminooo';
       }
       $data['receiver_id'] = $this->message_m->getSender($message_id);
       $tmp = $this->member_m->getMemberDetail($data['receiver_id']);

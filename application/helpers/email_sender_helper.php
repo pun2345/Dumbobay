@@ -194,7 +194,7 @@ function win_Bid($id,$product_id,$t_id){
     $config['validation']   = TRUE;
 
 	$user_data = $CI->member_m->getMemberDetail($id);
-	$product_data = $CI->product_m->getDetail($product_id);
+	$product_data = $CI->product_m->getProductDetail($product_id);
 
 	$CI->email->initialize($config);	
 	$CI->email->from('Dumbobay@Dumbobay.com');
