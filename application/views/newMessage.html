@@ -105,15 +105,15 @@
 
       var message ="";
 
-      if (!validateReceiverName(receiver) ) {
+      if (!validateUsername(receiver) ) {
         alert("Receiver name is invalid.");
         return false;
       }
-      if (!validateSubject(subject) ) {
+      if (!validateSubject(subject)||subject==""||subject==null) {
         alert("The subject is invalid.");
         return false;
       }
-      if (!validateMessageText(text) ) {
+      if (!validateMessageText(text)||text==""||text==null ) {
         alert("Text is invalid.");
         return false;
       }
