@@ -26,7 +26,11 @@
 	<!-- Fixed navbar -->
 	<?php
 	include 'guest_menu.html';
-		//
+	if($this->session->flashdata('message')) echo '
+    <script>
+      alert("'.$this->session->flashdata('message').'");
+    </script>
+    ';
 	?>
 	<!-- =======================================================================-->
 	<div id="myheaderwrap">
@@ -752,17 +756,18 @@ Zimbabwe
 	<script>
 
 		function validateForm() {
+
 			var username = document.forms["register-form"]["username"].value;
 			var password = document.forms["register-form"]["password"].value;
 			var repassword = document.forms["register-form"]["re-password"].value;
-			var name = document.forms["register-form"]["name"].value;
-			var surname = document.forms["register-form"]["surname"].value;
+			var name = document.forms["register-form"]["firstname"].value;
+			var surname = document.forms["register-form"]["lastname"].value;
 			var address = document.forms["register-form"]["address"].value;
 			var email = document.forms["register-form"]["email"].value;
-			var tel = document.forms["register-form"]["telephone"].value;
+			var telephone = document.forms["register-form"]["telephone"].value;
 
 			var message ="";
-
+		
 			if (!validateUsername(username) ) {
 				alert("Your username is invalid.");
 				return false;
@@ -798,7 +803,7 @@ Zimbabwe
 				alert("Your e-mail is invalid.");
 				return false;
 			}
-			if (!validateTelephone(tel)){
+			if (!validateTelephone(telephone)){
 				alert("Your telephone number is invalid.");
 				return false;
 			}

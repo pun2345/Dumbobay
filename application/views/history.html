@@ -70,7 +70,7 @@
 
         ?>
         <!--for each=========================================================================================================-->
-        <div class="col-md-10 col-md-offset-1 border-shadow border-radius" style="background-color:white">
+        <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
           <ol style="list-style-type:none; padding-left: 0px">
 
             <?php
@@ -115,6 +115,14 @@
                       echo '</div>';
                     echo '</div>';
                   echo '</div>';
+                  if($row->status=="Paid" || $row->status=="Shipped"){
+                    echo '<div class="row">';
+                    echo '<br>';
+                    echo'<div class="col-md-5">';
+                    echo'<button class="btn bnt-default">Review</button>';
+                    echo'</div>';
+                    echo'</div>';
+                  }
                 echo '</div>';
               echo '</div>';
             echo '</li>';
