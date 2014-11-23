@@ -56,7 +56,8 @@ class Product_c extends CI_Controller {
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
       $searchWord=$this->input->post("search");
-    $data['products'] = $this->product_m->search($searchWord);
+      $data['bidProducts'] = $this->product_m->searchBid($searchWord);
+    $data['directProducts'] = $this->product_m->searchDirect($searchWord);
     $this->load->view('product.html',$data);
     $this->load->view('footer.html');
   }
