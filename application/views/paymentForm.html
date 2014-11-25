@@ -139,6 +139,7 @@
 	  <script>
 	    function validateForm() {
 	      var visano = document.forms["payment-form"]["visano"].value;
+	      var ccv = document.forms["payment-form"]["ccv"].value;
 	      var sendaddress = document.forms["payment-form"]["sendaddress"].value;
 	      var expireddate = document.forms["payment-form"]["expireddate"].value;
 	      var message ="";
@@ -153,6 +154,10 @@
 	      }
 	      if (!validateExpiredDate(expireddate)||expireddate==""||expireddate==null ) {
 	        alert("Expired Date is invalid.");
+	        return false;
+	      }
+	      if (!validateCCV(ccv)||ccv==""||ccv==null ) {
+	        alert("CCV is invalid.");
 	        return false;
 	      }
 	  }
