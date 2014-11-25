@@ -83,7 +83,6 @@
 						</div>
 					</div>
 				</div>
-				<?php echo validation_errors(); ?>
 				<?php echo form_open('payment_c/pay/'.$price,'class="form-horizontal" id="payment-form" name="payment-form" onsubmit="return validateForm()"'); ?>
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;padding-top:20px;margin-bottom:25px">
@@ -94,15 +93,21 @@
 								</div>
 							</div>
 							<div class="row form-group">
-								<label class="col-md-3 control-label" align="right">Send Address</label>
+								<label class="col-md-3 control-label" align="right">CCV</label>
 								<div class="col-md-9">
-									<input type="text" class="form-control" id="sendaddress" name="sendaddress">
+									<input type="text" class="form-control" id="ccv" name="ccv">
 								</div>
 							</div>
 							<div class="row form-group">
 								<label class="col-md-3 control-label" align="right">Expired Date</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control" id="expireddate" name="expireddate">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-md-3 control-label" align="right">Send Address</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="sendaddress" name="sendaddress">
 								</div>
 							</div>
 							<div class="row form-group">
