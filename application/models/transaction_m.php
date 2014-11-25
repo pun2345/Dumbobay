@@ -93,6 +93,7 @@ Class transaction_m extends CI_Model {
 	function getWatchList($user_id){
 		$this->db->select('*, join_bidding.Status AS Bidding_Status, product_bid.status AS Product_Status, join_bidding.Datetime AS Bidding_Datetime, product.Datetime AS Product_Datetime');
 		$this->db->from('join_bidding');
+		$this->db->where('join_bidding.User_ID', $user_id);
 		$this->db->join('product', 'product.product_id = join_bidding.product_id');
 		$this->db->join('product_bid', 'product.product_id = product_bid.product_id');
 		$query = $this->db->get(); 
