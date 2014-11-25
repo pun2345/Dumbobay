@@ -182,7 +182,7 @@
 
       //m = checkTime(dd);
       //s = checkTime(mm);
-      document.getElementById('time1').innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
+      if (diff > 0) document.getElementById('time1').innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
       t = setTimeout(function () {
           startTime()
       }, 500);

@@ -50,8 +50,16 @@
       </div><!-- row -->
     </div><!-- container -->
   </div><!-- headerwrap -->
-	<div id="time"><?php echo $Date;?></div>
-  <div id="time1">10</div>
+  <div id="to"><? echo $Date; ?></div>
+  <div id="to1">10</div>
+
+  <?php for($x=0;$x<=3;$x++){
+	 echo '<div id="t'.$x.'">'.$Date.'</div>
+  <div id="time'.$x.'">10</div>';
+
+  }
+?>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -66,8 +74,8 @@
     return i;
   }
 
-  function startTime() {
-      var x = document.getElementById("time").innerHTML;
+  function startTime(t,t1) {
+      var x = document.getElementById(t).innerHTML;
       var dx = new Date(x);
       var today = new Date();
 
@@ -89,15 +97,24 @@
       //var s = today.getYear();
       // add a zero in front of numbers<10
 
-
+      var a = t;
+      var b = t1;
       //m = checkTime(dd);
       //s = checkTime(mm);
-      document.getElementById('time1').innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
+      document.getElementById(t1).innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
       t = setTimeout(function () {
-          startTime()
+          startTime(a,b)
       }, 500);
     }
-  startTime();
+ 
+  
+ startTime('to','to1');
+
+ var t = 0;
+ for (t=0;t<=3;t++){
+    startTime('t'+t,'time'+t);
+ }
   </script>
+  
   </body>
 </html>

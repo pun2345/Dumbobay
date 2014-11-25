@@ -18,7 +18,7 @@ class View_test extends CI_Controller {
     //print_r($query->End_Date);
     $data['Date'] = $query->End_Date;
     $data['username'] = 'use12';
-    $this->load->view('paymentForm.html',$data);
+    $this->load->view('test_time.html',$data);
     $this->load->view('footer.html',$data);
   }
 }
