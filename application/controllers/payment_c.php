@@ -51,7 +51,7 @@ class Payment_c extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('visano', 'visano', 'trim|required|xss_clean');
-    $this->form_validation->set_rules('visapw', 'visapw', 'trim|required|xss_clean');
+    $this->form_validation->set_rules('ccv', 'ccv', 'trim|required|xss_clean');
     $this->form_validation->set_rules('sendaddress', 'sendaddress', 'trim|required|xss_clean');  
 
     if($this->form_validation->run() == FALSE)
