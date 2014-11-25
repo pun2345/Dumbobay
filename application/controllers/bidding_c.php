@@ -8,7 +8,7 @@
 			$this->load->helper('email_sender');
 			$this->load->helper('html');	
 			$this->load->library('form_validation');
-			$this->load->library('form');
+			$this->load->helper('form');
 
 		}
 
