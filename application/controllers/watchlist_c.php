@@ -17,7 +17,6 @@
       		$data['username'] = $session_data['username'];
       		$data['type'] = $session_data['type'];
 			$data['products'] = $this->transaction_m->getWatchlist($data['user_id']);
-			$data['joinbids'] = $this->bidding_m->getJoinBiddingUser($data['user_id'],$data['products']->result()->);
 			$this->load->view('watchlist.html',$data);	
 		}
 
