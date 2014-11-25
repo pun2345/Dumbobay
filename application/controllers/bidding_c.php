@@ -30,7 +30,7 @@
 						$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
 						$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
 						$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-						$this->notifyBidLosingEmail($oldWinner->User_ID,$product_id);
+						$this->notifyBidLosingEmail($oldWinner,$product_id);
 						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 						$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price+$bit_increment,'auto');
 						$this->bidding_m->setJoinBiddingType($user_id,$product_id,'auto');
@@ -42,7 +42,7 @@
 						$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
 						$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
 						$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-						$this->notifyBidLosingEmail($oldWinner->User_ID,$product_id);
+						$this->notifyBidLosingEmail($oldWinner,$product_id);
 						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 						$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'auto');
 						$this->bidding_m->setJoinBiddingType($user_id,$product_id,'auto');
@@ -66,7 +66,7 @@
 					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
 					$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
 					$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-					$this->notifyBidLosingEmail($oldWinner->User_ID,$product_id);
+					$this->notifyBidLosingEmail($oldWinner,$product_id);
 					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$newprice,'auto');
 					$this->bidding_m->setJoinBiddingType($user_id,$product_id,'auto');
@@ -105,7 +105,7 @@
 					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
 					$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
 					$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-					$this->notifyBidLosingEmail($oldWinner->User_ID,$product_id);
+					$this->notifyBidLosingEmail($oldWinner,$product_id);
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$price,'manual');
 					$this->bidding_m->setJoinBiddingType($user_id,$product_id,'manual');
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
@@ -116,7 +116,7 @@
 		}
 
 		function maxBidding($product_id){
-			$session_data = $this->session->userdata(logged_in);
+			$session_data = $this->session->userdata('logged_in');
       		$data['type'] = $session_data['type'];	
       		$data['user_id'] = $session_data['user_id'];
       		$data['username'] = $session_data['username'];
@@ -143,16 +143,16 @@
 		}
 
 		function stepBidding($product_id){
-			$session_data = $this->session->userdata(logged_in);
+			$session_data = $this->session->userdata('logged_in');
       		$data['type'] = $session_data['type'];
       		$data['user_id'] = $session_data['user_id'];
       		$data['username'] = $session_data['username'];
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
-			$bit_increment = $this->bidding_m->getBitIncrement($product_id);
+			$bit_increment = $this->bidding_m->getBidIncrement($product_id);
 			$this->bidding($session_data['user_id'],$product_id,$current_price+$bit_increment,'manual');
 			$data['current_price'] = $this->bidding_m->getCurrentPrice($product_id);
-			$this->load->view('watchlist.html',$data);
 		    $this->session->set_flashdata("message","Bidding completed !");
+		    redirect('watchlist_c');
 		}
 
 		function getBiddingParticipants($product_id){
