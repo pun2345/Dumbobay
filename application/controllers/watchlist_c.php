@@ -7,9 +7,10 @@
 			$this->load->helper('html');
 			$this->load->model('watchlist_m');
 			$this->load->model('product_m');
-			$this->load->model('form');
 			$this->load->model('transaction_m');
 			$this->load->model('bidding_m');
+			$this->load->library('form_validation');
+			$this->load->library('form');
 		}
 
 		function index(){
