@@ -10,6 +10,7 @@
       margin-bottom: 30px;
     }
 
+
     </style>
   </head>
 
@@ -54,7 +55,8 @@
           <div class="row" >
             <img class="col-md-5" src=<?php echo '"'.base_url().'assets/img/'.$product->Image.'"' ?> width="350px" height="300" style="margin:20px 20px">
             <div class="col-md-5" style="margin-left:40px;margin-right:40px;margin-bottom:40px">
-            <h1><?php echo $product->Name; ?></h1><!-- detail of each type (2 type)-->
+            <h1><?php echo $product->Name; ?></h1><h3> Time left: <a id="time1">00</a></h3>
+            <!-- detail of each type (2 type)-->
             <?php
               
               if($product->Type==1){
@@ -82,7 +84,7 @@
               if($product->Product_Status==0) $status='Auction open';
               else if($product->Product_Status==1) $status='Auction closed';
            
-                  
+                echo '<a id="time">'.$product->End_Date.'</a>';
                 echo '<p><strong>Auction status: </strong>'.$status;
                 echo '<br><strong>Current price: </strong>'.$product->Current_Price.' Baht';
                 echo '<br><strong>Start price: </strong>'.$product->Price. ' Baht';
@@ -122,5 +124,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src=<?echo base_url("assets/js/bootstrap.min.js");?>></script>
+  <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
+  <script>
+    $('#time').hide();
+    startTime();
+  </script>
   </body>
 </html>
