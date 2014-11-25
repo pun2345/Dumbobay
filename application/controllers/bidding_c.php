@@ -128,7 +128,7 @@
       	    else // passed validation proceed to post success logic
 	        {
 		        $form_data = array( 'maxbid' => $this->input->post('maxbid'));
-			    $maxbid = $form_data['$maxbid'];
+			    $maxbid = $form_data['maxbid'];
 			    if ($this->bidding($session_data['user_id'],$product_id,$maxbid,'auto') == TRUE) // the information has therefore been successfully saved in the db
 			    {             
 			        $this->session->set_flashdata("message","Bidding completed");
