@@ -136,20 +136,21 @@
                             
                           <label for="select" class="col-md-2 control-label">Rate</label>
                           <div class="col-md-10">
-                            <select class="form-control" id="select" name="rate">
-                              <option value="0">0</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                            </select>
-                          </div>
-                        </div>';
+                            <select class="form-control" id="select" name="rate" placeholder="'.$row->Seller_Score.'">';
+                            
+                            echo  '<option value="0"'; if($row->Seller_Score == 0) echo 'selected="selected"'; echo'>0</option>';
+                            echo  '<option value="1"'; if($row->Seller_Score == 1) echo 'selected="selected"'; echo'>1</option>';
+                            echo  '<option value="2"'; if($row->Seller_Score == 2) echo 'selected="selected"'; echo'>2</option>';
+                            echo  '<option value="3"'; if($row->Seller_Score == 3) echo 'selected="selected"'; echo'>3</option>';
+                            echo  '<option value="4"'; if($row->Seller_Score == 4) echo 'selected="selected"'; echo'>4</option>';
+                            echo  '<option value="5"'; if($row->Seller_Score == 5) echo 'selected="selected"'; echo'>5</option>';
+                            echo '</select>';
+                          echo '</div>';
+                        echo '</div>';
                     echo'<div class="form-group">
                           <label for="textArea" class="col-md-2 control-label">Review</label>
                           <div class="col-md-10">
-                            <textarea class="form-control" rows="2" id="comment" name="comment"></textarea>
+                            <textarea class="form-control" rows="2" id="comment" name="comment" placeholder="'.$row->Seller_Feedback.'"></textarea>
                           </div>
                         </div>';
                     echo '<div class="row">';
