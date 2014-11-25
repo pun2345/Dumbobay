@@ -23,10 +23,11 @@ class Transaction_c extends CI_Controller {
   function history(){
     $this->isLogin();
     $session_data = $this->session->userdata('logged_in');
-      $data['user_id'] = $session_data['user_id'];
-      $data['username'] = $session_data['username'];
-      $data['type'] = $session_data['type'];
+    $data['user_id'] = $session_data['user_id'];
+    $data['username'] = $session_data['username'];
+    $data['type'] = $session_data['type'];
     $data['transactions'] = $this->transaction_m->getHistoryCustTransaction($data['user_id']);
+    //print_r($data['transactions']->result());
     $this->load->view('history.html',$data);
         // $this->load->view('footer.html');
   }
@@ -35,59 +36,63 @@ class Transaction_c extends CI_Controller {
     $data['transaction'] = $this->transaction_m->getTransactionDetail($transaction_id);
 
     $session_data = $this->session->userdata('logged_in');
-      $data['user_id'] = $session_data['user_id'];
-      $data['username'] = $session_data['username'];
-      $data['type'] = $session_data['type'];
+    $data['user_id'] = $session_data['user_id'];
+    $data['username'] = $session_data['username'];
+    $data['type'] = $session_data['type'];
     $seller = $this->member_m->getMemberDetail($data['transaction']->Seller_ID);
     $buyer = $this->member_m->getMemberDetail($data['transaction']->Buyer_ID);
-    if($data['user_id']==$seller){
-      $data['other'] = $seller->Username;
-    }else{
-      $data['other'] = $buyer->Username;
-    }
-    $this->load->library('form_validation');
-    $this->form_validation->set_rules('score', 'score', 'required|xss_clean');      
-    $this->form_validation->set_rules('feedback', 'feedback', 'trim|max_length[200]');
+    $this->transaction_m->saveFeedbackBuyer($transaction_id,$this->input->post('rate'),$this->input->post('comment'));
+    redirect('transaction_c/history/'.$user_id);
+    //$this->input->post('rate');
+    //echo $this->input->post('comment');
+    // if($data['user_id']==$seller){
+    //   $data['other'] = $seller->Username;
+    // }else{
+    //   $data['other'] = $buyer->Username;
+    // }
+    // $this->load->library('form_validation');
+    // $this->form_validation->set_rules('score', 'score', 'required|xss_clean');      
+    // $this->form_validation->set_rules('feedback', 'feedback', 'trim|max_length[200]');
 
-    $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
+    // $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
   
-    if($this->form_validation->run() == FALSE)
-    {
+    // if($this->form_validation->run() == FALSE)
+    // {
 
-      // $data['transactionID']= $transactionID;
-      $this->load->view('feedback_form.html',$data);
-        // $this->load->view('footer.html');
-    }
-    else
-    {
-      $score = $this->input->post('score');
-      $feedback = $this->input->post('feedback');
-      // run insert model to write data to db
-      if($data['user_id']==$seller){
-        if ($this->transaction_m->saveFeedbackBuyer($transactionID,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
-        {
-          $this->session->set_flashdata("message","Feedback saved!");
-          redirect('transaction_c/history/'.$user_id); 
-        }
-        else
-        {
-          $this->session->set_flashdata("message","Feedback Failed! Try Again.");
-          redirect('transaction_c/history/'.$user_id);
-        }
-      }else{
-        if ($this->transaction_m->saveFeedbackSeller($transactionID,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
-        {
-          $this->session->set_flashdata("message","Feedback saved!");
-          redirect('transaction_c/history/'.$user_id); 
-        }
-        else
-        {
-          $this->session->set_flashdata("message","Feedback Failed! Try Again.");
-          redirect('transaction_c/history/'.$user_id);
-        }
-      }
+    //   // $data['transactionID']= $transactionID;
+    //   $this->load->view('feedback_form.html',$data);
+    //     // $this->load->view('footer.html');
+    // }
+    // else
+    // {
+    //   $score = $this->input->post('score');
+    //   $feedback = $this->input->post('feedback');
+    //   // run insert model to write data to db
+    //   if($data['user_id']==$seller){
+    //     if ($this->transaction_m->saveFeedbackBuyer($transactionID,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
+    //     {
+    //       $this->session->set_flashdata("message","Feedback saved!");
+    //       redirect('transaction_c/history/'.$user_id); 
+    //     }
+    //     else
+    //     {
+    //       $this->session->set_flashdata("message","Feedback Failed! Try Again.");
+    //       redirect('transaction_c/history/'.$user_id);
+    //     }
+    //   }else{
+    //     if ($this->transaction_m->saveFeedbackSeller($transactionID,$score,$feedback) == TRUE) // the information has therefore been successfully saved in the db
+    //     {
+    //       $this->session->set_flashdata("message","Feedback saved!");
+    //       redirect('transaction_c/history/'.$user_id); 
+    //     }
+    //     else
+    //     {
+    //       $this->session->set_flashdata("message","Feedback Failed! Try Again.");
+    //       redirect('transaction_c/history/'.$user_id);
+    //     }
+    //   }
       
-    }
+    // }
   }
   function loginBeforeFeedback(){
     if($this->session->userdata('logged_in')){

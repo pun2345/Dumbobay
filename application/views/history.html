@@ -95,14 +95,14 @@
             <?php
             
               foreach ($transactions->result() as $row) {
-              
+              echo $row->transaction_id;
               echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">';
               echo '<div class="row">';
                 echo '<div class="col-md-3">';
 
                   
                   $image_properties = array(
-                      'src' => 'assets/img/iphone6.jpg',
+                      'src' => "assets/img/".$row->image,
                       'width' => '185',
                       'height' => '104',
                       );
@@ -131,31 +131,34 @@
                     echo '</div>';
                   echo '</div>';
                   if($row->status=="Paid" || $row->status=="Shipped"){
-                    
+                    echo '<form name="form" action = "feedback/'.$row->transaction_id.'" method="post">';
                     echo'<div class="form-group" style="padding-left:0px;">
+                            
                           <label for="select" class="col-md-2 control-label">Rate</label>
                           <div class="col-md-10">
-                            <select class="form-control" id="select">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                            <select class="form-control" id="select" name="rate">
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
                             </select>
                           </div>
                         </div>';
                     echo'<div class="form-group">
                           <label for="textArea" class="col-md-2 control-label">Review</label>
                           <div class="col-md-10">
-                            <textarea class="form-control" rows="2" id="textArea"></textarea>
+                            <textarea class="form-control" rows="2" id="comment" name="comment"></textarea>
                           </div>
                         </div>';
                     echo '<div class="row">';
                     echo '<br>';
                     echo'<div class="col-md-3 col-md-offset-8" style="padding-top:10px; padding-left:30px">';
-                    echo'<button class="btn bnt-default">Review</button>';
+                    echo'<button class="btn bnt-default" type="submit">Review</button>';
                     echo'</div>';
                     echo'</div>';
+                    echo '</form>'; 
                   }
                 echo '</div>';
               echo '</div>';
