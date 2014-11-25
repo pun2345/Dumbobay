@@ -72,6 +72,8 @@
 .productcontainer{
 	height:450px;
 	overflow:auto;
+	margin-bottom:20px;
+	margin-top:-10px;
 	
 }
 .border-shadow{

@@ -51,72 +51,63 @@
 				</div>
         
         <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-          <div class="row centered" >
-            <img src=<?php echo '"'.base_url().'assets/img/'.$product->Image.'"' ?> width="350px" height="300" style="margin:20px 20px">
-          </div>
-          <div class="row" style="margin-left:40px;margin-right:40px;margin-bottom:40px">
+          <div class="row" >
+            <img class="col-md-5" src=<?php echo '"'.base_url().'assets/img/'.$product->Image.'"' ?> width="350px" height="300" style="margin:20px 20px">
+            <div class="col-md-5" style="margin-left:40px;margin-right:40px;margin-bottom:40px">
             <h1><?php echo $product->Name; ?></h1><!-- detail of each type (2 type)-->
             <?php
               if($product->Type==1){
-                
-                echo '<br>Price: '.$product->Price. 'Baht';
-                echo '<br>Quantity: '.$product->Quantity. ' ea';
-                echo '<br>Announcement date: '.$product->Datetime;
-                echo '<br>Seller: '.$seller_name;
-                echo '<br>Brand: '.$product->Brand;
-                echo '<br>Model: '.$product->Model;
-                echo '<br>Capacity: '.$product->Capacity;
-                echo '<br>Size: '.$product->Size;
-                echo '<br>Property: '.$product->Property;
-                echo '<br>Defect: '.$product->Defect;
-                echo '<br>Quality: '.$product->Quality;
-                echo '<br>Payment: '.$product->Payment;
-                echo '<br>Packaging: '.$product->Packaging;
-                echo '<br>Delivery fee: '.$product->Delivery_Fee;
-                echo '<br>Delivery confirmation: '.$product->Delivery_Confirmation;
-                echo '<br>Tax: '.$product->Tax;
-                echo '<br>Return product: '.$product->Return_Product;
-                echo '<br>Return fee: '.$product->Return_Fee.'</p>';
+                echo '<br><strong>Price: </strong>'.$product->Price. ' Baht';
+                echo '<br><strong>Quantity: </strong>'.$product->Quantity. ' ea';
+                echo '<br><strong>Announcement date: </strong>'.$product->Datetime;
+                echo '<br><strong>Seller: </strong>';
+                echo '<br><strong>Brand: </strong>'.$product->Brand;
+                echo '<br><strong>Model: </strong>'.$product->Model;
+                echo '<br><strong>Capacity: </strong>'.$product->Capacity;
+                echo '<br><strong>Size: </strong>'.$product->Size;
+                echo '<br><strong>Property: </strong>'.$product->Property;
+                echo '<br><strong>Defect: </strong>'.$product->Defect;
+                echo '<br><strong>Quality: </strong>'.$product->Quality;
+                echo '<br><strong>Payment: </strong>'.$product->Payment;
+                echo '<br><strong>Packaging: </strong>'.$product->Packaging;
+                echo '<br><strong>Delivery fee: </strong>'.$product->Delivery_Fee;
+                echo '<br><strong>Delivery confirmation: </strong>'.$product->Delivery_Confirmation;
+                echo '<br><strong>Tax: </strong>'.$product->Tax;
+                echo '<br><strong>Return product: </strong>'.$product->Return_Product;
+                echo '<br><strong>Return fee: </strong>'.$product->Return_Fee.'</p>';
             } else if($product->Type==2) {
-                echo '<p>Auction status: '.$product->Status;
-                echo '<br>Current price: '.$product->Current_Price.' Baht';
-                echo '<br>Start price: '.$product->Price. 'Baht';
-                echo '<br>Bid Increment: '.$product->Bid_Increment. 'Baht';
-                echo '<br>End of auction date: '.$product->End_Date;
-                echo '<br>Auction start date: '.$product->Datetime;
-                echo '<br>Seller: '.$seller_name;
-                echo '<br>Brand: '.$product->Brand;
-                echo '<br>Model: '.$product->Model;
-                echo '<br>Capacity: '.$product->Capacity;
-                echo '<br>Size: '.$product->Size;
-                echo '<br>Property: '.$product->Property;
-                echo '<br>Defect: '.$product->Defect;
-                echo '<br>Quality: '.$product->Quality;
-                echo '<br>Payment: '.$product->Payment;
-                echo '<br>Packaging: '.$product->Packaging;
-                echo '<br>Delivery fee: '.$product->Delivery_Fee;
-                echo '<br>Delivery confirmation: '.$product->Delivery_Confirmation;
-                echo '<br>Tax: '.$product->Tax;
-                echo '<br>Return product: '.$product->Return_Product;
-                echo '<br>Return fee: '.$product->Return_Fee.'</p>';
+                echo '<p><strong>Auction status: </strong>'.$product->Status;
+                echo '<br><strong>Current price: </strong>'.$product->Current_Price.' Baht';
+                echo '<br><strong>Start price: </strong>'.$product->Price. ' Baht';
+                echo '<br><strong>Bid Increment: </strong>'.$product->Bid_Increment. 'Baht';
+                echo '<br><strong>End of auction date: </strong>'.$product->End_Date;
+                echo '<br><strong>Auction start date: </strong>'.$product->Datetime;
+                echo '<br><strong>Seller: </strong>'.$seller_name;
+                echo '<br><strong>Brand: </strong>'.$product->Brand;
+                echo '<br><strong>Model: </strong>'.$product->Model;
+                echo '<br><strong>Capacity: </strong>'.$product->Capacity;
+                echo '<br><strong>Size: </strong>'.$product->Size;
+                echo '<br><strong>Property: </strong>'.$product->Property;
+                echo '<br><strong>Defect: </strong>'.$product->Defect;
+                echo '<br><strong>Quality: </strong>'.$product->Quality;
+                echo '<br><strong>Payment: </strong>'.$product->Payment;
+                echo '<br><strong>Packaging: </strong>'.$product->Packaging;
+                echo '<br><strong>Delivery fee: </strong>'.$product->Delivery_Fee;
+                echo '<br><strong>Delivery confirmation: </strong>'.$product->Delivery_Confirmation;
+                echo '<br><strong>Tax: </strong>'.$product->Tax;
+                echo '<br><strong>Return product: </strong>'.$product->Return_Product;
+                echo '<br><strong>Return fee: </strong>'.$product->Return_Fee.'</p>';
 
                      }
             ?>
 
             <a href="javascript:window.history.go(-1);"><button type="button" class="btn btn-default">Back</button></a>
           </div>
-          <div class="row">
-            
           </div>
         </div>
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- headerwrap -->
-
-
-
-	
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
