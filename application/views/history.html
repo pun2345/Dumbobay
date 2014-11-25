@@ -20,18 +20,11 @@
 
     <script type="text/javascript">
 
-     function rate1(rateid) {
-      var clicked = document.getElementById(rateid);
+     function disabled(id1) {
+      var tag1 = document.getElementById(id1);
       var isClick = clicked.checked
-      if(isClick){
-      document.getElementById("rating1").disabled = true;
-      document.getElementById("rating2").disabled = true;
-      document.getElementById("rating3").disabled = true;
-      document.getElementById("rating4").disabled = true;
-      document.getElementById("rating5").disabled = true;
-      }
-     
-     
+      document.getElementById("id1").disabled = true;
+     }
 
     </script>
 
@@ -95,7 +88,7 @@
             <?php
             
               foreach ($transactions->result() as $row) {
-              echo $row->transaction_id;
+              echo 'Transaction ID : '.$row->transaction_id;
               echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">';
               echo '<div class="row">';
                 echo '<div class="col-md-3">';
@@ -131,11 +124,26 @@
                     echo '</div>';
                   echo '</div>';
                   if($row->status=="Paid" || $row->status=="Shipped"){
-                    echo '<form name="form" action = "feedback/'.$row->transaction_id.'" method="post">';
+                    if($row->Seller_Score==NULL){echo '<form name="form" action = "feedback/'.$row->transaction_id.'" method="post">';}
                     echo'<div class="form-group" style="padding-left:0px;">
                             
-                          <label for="select" class="col-md-2 control-label">Rate</label>
+                          <label for="select" class="col-md-2 control-label">Rate</label>';
+                          if($row->Seller_Score!=NULL){
+                           echo' <div class="col-md-10">
+                            <select class="form-control" id="select" name="rate" placeholder="'.$row->Seller_Score.'">
+                              <option selected="selected">'.$row->Seller_Score.
+                              '</option>';
+                              echo'<div class="form-group">
+                          <label for="textArea" class="col-md-2 control-label">Review</label>
                           <div class="col-md-10">
+                            <textarea class="form-control" rows="2" id="comment" name="comment" placeholder="'.$row->Seller_Feedback.'"></textarea>
+                          </div>
+                        </div>';
+                        
+
+                            }
+
+                      else {echo'    <div class="col-md-10">
                             <select class="form-control" id="select" name="rate" placeholder="'.$row->Seller_Score.'">';
                             
                             echo  '<option value="0"'; if($row->Seller_Score == 0) echo 'selected="selected"'; echo'>0</option>';
@@ -159,8 +167,8 @@
                     echo'<button class="btn bnt-default" type="submit">Review</button>';
                     echo'</div>';
                     echo'</div>';
-                    echo '</form>'; 
-                  }
+                    if($row->Seller_Score==NULL){echo '</form>';} 
+                  }}
                 echo '</div>';
               echo '</div>';
             echo '</li>';
