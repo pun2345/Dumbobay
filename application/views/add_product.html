@@ -238,9 +238,82 @@
 
     function validateForm() {
       
+      var productName = document.forms["newProduct-form"]["Name"].value;
+
+      var prodiuctProperty = document.forms["newProduct-form"]["Property"].value;
+
+      var productQuality = document.forms["newProduct-form"]["Quality"].value;
+
       var enddate = document.forms["newProduct-form"]["End_Date"].value;
+
+      var quantity = document.forms["newProduct-form"]["Quantity"].value;
+
+      var price = document.forms["newProduct-form"]["Price"].value;
+
+      var packaging = document.forms["newProduct-form"]["Packaging"].value;
+
+      var deliveryFee = document.forms["newProduct-form"]["Delivery_Fee"].value;
+
+      var deliveryConfirmation = document.forms["newProduct-form"]["Delivery_Confirmation"].value;
+
+      var refundProduct = document.forms["newProduct-form"]["Refund_Product"].value;
+
+      var tax = document.forms["newProduct-form"]["Tax"].value;
+
+      var message ="";
+
+      if (!validateProductName(productName)) {
+        alert("Product name is too long. Product name cannot exceed 30 characters");
+        return false;
+      }
+
+      if (!validateProductDetail(prodiuctProperty)) {
+        alert("Product property is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+
+      if (!validateProductDetail(productQuality)) {
+        alert("Product condition is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+
       if (!validateExpiredDate(enddate)) {
         alert("Your Date is invalid.");
+        return false;
+      }
+
+      if (!validateDigit(quantity)) {
+        alert("Your quantity is invalid.");
+        return false;
+      }
+
+      if (!validateDigit(price)) {
+        alert("Your price is invalid.");
+        return false;
+      }
+
+      if (!validateProductDetail(packaging)) {
+        alert("Your packaging detail is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+
+      if (!validateDigit(deliveryFee)) {
+        alert("Your delivery fee is invalid.");
+        return false;
+      }
+
+      if (!validateProductDetail(deliveryConfirmation)) {
+        alert("Your delivery confirmation detail is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+
+      if (!validateProductDetail(refundProduct)) {
+        alert("Your refund policy is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+
+      if (!validateProductDetail(tax)) {
+        alert("Your other fee detail is too long. Product name cannot exceed 250 characters");
         return false;
       }
       

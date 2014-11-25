@@ -139,3 +139,41 @@
 	    	return true;
 	    }
 	}
+	function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+  }
+
+  function startTime() {
+      var x = document.getElementById("time").innerHTML;
+      var dx = new Date(x);
+      var today = new Date();
+
+      var diff = new Date(dx - today);
+
+      var yy = diff.getUTCFullYear()-1970;
+      var mm = diff.getUTCMonth();
+      var dd = diff.getUTCDate()-1;      
+      var hh = diff.getUTCHours()-7;    
+      var min = diff.getUTCMinutes();
+      var sec = diff.getUTCSeconds();
+      //var dd = diff.getDate();
+      //var mm = diff.getMonth()+1; //January is 0!
+      //var yyyy = diff.getFullYear();
+
+      //var h = today.getDay();
+      //var h = diff.getHours();
+      //var m = today.getMonth();
+      //var s = today.getYear();
+      // add a zero in front of numbers<10
+
+
+      //m = checkTime(dd);
+      //s = checkTime(mm);
+      document.getElementById('time1').innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
+      t = setTimeout(function () {
+          startTime()
+      }, 500);
+    }

@@ -57,7 +57,7 @@ include 'HTMLHeader.html';
                </div>
              </div>
 
-             <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
+             <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;margin-bottom:20px">
               <ol style="list-style-type:none; padding-left: 0px">
                 <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
                   <form class="form-horizontal row" id="search-form" name="search-form" action="product_c/search" method="post" style="padding-top:20px;">
@@ -99,15 +99,17 @@ include 'HTMLHeader.html';
                       </div>
                       <div class="col-md-4">
                         <h3>'.$row->Name.'</h3>
-                        <strong><h4>Status: </strong>'.$status.'</h4><br>
-                        <strong>Due date: </strong>'.$row->End_Date.'<br>
-                        <a href="'.'watchlist_c/productDetail/'.$row->Product_ID.'">More info...</a>
+                        <h4><strong>Status: </strong>'.$status.'</h4>
+                        <strong>Due date: </strong>'.$row->End_Date.'
+                        <br><strong>Time left: </strong>'.$Date.'
+                        <a href="'.'watchlist_c/productDetail/'.$row->Product_ID.'">
+                        <br>More info...</a>
                       </div>
                       <div class="col-md-5">
-                        <div class="row" style="padding-top:10px">
+                        <div class="row" style="padding-top:25px">
                           <div class="col-md-12">
                             <strong>Current bid: </strong>'.$row->Current_Price.' baht
-                            <br><strong>Time left: </strong>18 hr**
+                            
                             <br><strong>Your bidding type: </strong>'.$row->Bid_Type.
                             '<br><strong>Your max bid: </strong>'.$maxbid.
                             '<br><strong>Bid Increment: </strong>'.$row->Bid_Increment.'
@@ -166,6 +168,8 @@ include 'HTMLHeader.html';
         }
 
       }
+        // startTime();
+
     </script>
   </body>
   </html>
