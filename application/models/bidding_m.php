@@ -64,7 +64,7 @@ Class bidding_m extends CI_Model
 		function setJoinBidding($user_id,$product_id,$price,$type,$status){
 			if($this->bidding_m->checkExistBidding($user_id,$product_id)){
 				echo "exist <br>";
-				return $this->bidding_m->updateBidding($user_id,$product_id,$price,$type,$status);
+				return $this->bidding_m->updateJoinBidding($user_id,$product_id,$price,$type,$status);
 			}else{
 				$data = array(
 					'User_ID' => $user_id,
