@@ -56,11 +56,13 @@
             <div class="col-md-5" style="margin-left:40px;margin-right:40px;margin-bottom:40px">
             <h1><?php echo $product->Name; ?></h1><!-- detail of each type (2 type)-->
             <?php
+              
               if($product->Type==1){
                 echo '<br><strong>Price: </strong>'.$product->Price. ' Baht';
                 echo '<br><strong>Quantity: </strong>'.$product->Quantity. ' ea';
                 echo '<br><strong>Announcement date: </strong>'.$product->Datetime;
                 echo '<br><strong>Seller: </strong>';
+                echo '<br><br><h3>Details</h3>';
                 echo '<br><strong>Brand: </strong>'.$product->Brand;
                 echo '<br><strong>Model: </strong>'.$product->Model;
                 echo '<br><strong>Capacity: </strong>'.$product->Capacity;
@@ -76,13 +78,19 @@
                 echo '<br><strong>Return product: </strong>'.$product->Return_Product;
                 echo '<br><strong>Return fee: </strong>'.$product->Return_Fee.'</p>';
             } else if($product->Type==2) {
-                echo '<p><strong>Auction status: </strong>'.$product->Status;
+                $status="";
+              if($product->Product_Status==0) $status='Auction open';
+              else if($product->Product_Status==1) $status='Auction closed';
+           
+                  
+                echo '<p><strong>Auction status: </strong>'.$status;
                 echo '<br><strong>Current price: </strong>'.$product->Current_Price.' Baht';
                 echo '<br><strong>Start price: </strong>'.$product->Price. ' Baht';
                 echo '<br><strong>Bid Increment: </strong>'.$product->Bid_Increment. 'Baht';
                 echo '<br><strong>End of auction date: </strong>'.$product->End_Date;
                 echo '<br><strong>Auction start date: </strong>'.$product->Datetime;
                 echo '<br><strong>Seller: </strong>'.$seller_name;
+                echo '<br><br><h3>Details</h3>';
                 echo '<br><strong>Brand: </strong>'.$product->Brand;
                 echo '<br><strong>Model: </strong>'.$product->Model;
                 echo '<br><strong>Capacity: </strong>'.$product->Capacity;

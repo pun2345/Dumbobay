@@ -27,14 +27,14 @@
 				$maxbid = $price;
 				if($current_maxbid==0){
 					if($maxbid > $current_price + $bid_increment){
-						$this->bidding_m->setCurrentPrice($product_id,$current_price+$bit_increment);
+						$this->bidding_m->setCurrentPrice($product_id,$current_price+$bid_increment);
 						$this->bidding_m->setCurrentMaxBid($product_id,$maxbid);
 						$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
 						$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
 						$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
 						$this->notifyBidLosingEmail($oldWinner,$product_id);
 						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
-						$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price+$bit_increment,'auto');
+						$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price+$bid_increment,'auto');
 						$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
 					}
 					else if($maxbid > $current_price){
@@ -55,8 +55,8 @@
 					}
 				}
 				else if($maxbid > $current_maxbid){
-					if($maxbid > $current_maxbid + $bit_increment){
-						$newprice = $current_maxbid + $bit_increment;
+					if($maxbid > $current_maxbid + $bid_increment){
+						$newprice = $current_maxbid + $bid_increment;
 					}
 					else{
 						$newprice = $maxbid;
@@ -72,22 +72,23 @@
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
 				}
 				else if($maxbid <= $current_maxbid){
-					if($current_maxbid > $maxbid + $bit_increment){
-						$newprice = $maxbid + $bit_increment;
+					if($current_maxbid > $maxbid + $bid_increment){
+						$newprice = $maxbid + $bid_increment;
 					}
 					else{
 						$newprice = $current_maxbid;
 					}
 					$this->bidding_m->setCurrentPrice($product_id,$newprice);
-					$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'manual');
+					$this->bidding_m->setJoinBidding($user_id,$product_id,$new_price,'manual');
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,0);
 					$this->notifyBidLosingEmail($user_id,$product_id);
 				}
 			}
 
 			else if($bidding_type == 'manual'){
+
 				if($price < $current_maxbid){
-					if($current_maxbid > $price + $bid_increment){
+					if($current_maxbid >= $price + $bid_increment){
 						$newprice = $price + $bid_increment;
 					}
 					else{
@@ -127,13 +128,12 @@
 			    if ($this->bidding($session_data['user_id'],$product_id,$maxbid,'auto') == TRUE) // the information has therefore been successfully saved in the db
 			    {             
 			        $this->session->set_flashdata("message","Bidding completed");
-			        redirect(current_url());   // or whatever logic needs to occur
 			    }
 			    else
 			    {
 			        $this->session->set_flashdata("message","Unable to bid");
-			        redirect(current_url());
 			    }
+			    redirect('watchlist_c');
 			}
 		}
 
@@ -143,8 +143,9 @@
       		$data['user_id'] = $session_data['user_id'];
       		$data['username'] = $session_data['username'];
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
-			$bit_increment = $this->bidding_m->getBidIncrement($product_id);
-			$this->bidding($session_data['user_id'],$product_id,$current_price+$bit_increment,'manual');
+			$bid_increment = $this->bidding_m->getBidIncrement($product_id);
+			$newprice = $current_price+$bid_increment;
+			$this->bidding($session_data['user_id'],$product_id,$newprice,'manual');
 			$data['current_price'] = $current_price;
 		    $this->session->set_flashdata("message","Bidding completed !");
 		    redirect('watchlist_c');
@@ -180,8 +181,8 @@
 		function initializeStepBidding($product_id){
 			$session_data = $this->session->userdata('logged_in');
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
-			$bit_increment = $this->bidding_m->getBitIncrement($product_id);
-			$this->bidding($session_data['user_id'],$product_id,$current_price+$bit_increment,'manual');
+			$bid_increment = $this->bidding_m->getBitIncrement($product_id);
+			$this->bidding($session_data['user_id'],$product_id,$current_price+$bid_increment,'manual');
 		}
 
 	}

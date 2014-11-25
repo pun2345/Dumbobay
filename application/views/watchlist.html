@@ -51,112 +51,125 @@ include 'HTMLHeader.html';
           <div>
             <div class="container">
              <div>
-              <div class="col-md-10 col-md-offset-1" style="padding-top:50px; padding-bottom:25px">
+              <div class="col-md-10 col-md-offset-1" style="padding-top:30px; padding-bottom:25px">
                 <div class="row centered">
-                   <h1>Watchlist</h1>
-                </div>
-              </div>
+                 <h1>Watchlist</h1>
+               </div>
+             </div>
 
-              <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-                <ol style="list-style-type:none; padding-left: 0px">
-                  <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
-                    <form class="form-horizontal row" id="search-form" name="search-form" action="product_c/search" method="post" style="padding-top:20px;">
-                        <div class="col-lg-3">
-                          
-                        </div>
-                        <div class="col-lg-5">
-                          <input type="text" class="form-control" id="inputDirectSaleSearch" name="inputDirectSaleSearch" placeholder="Search...">
-                        </div>
-                        <div class="col-lg-1">
-                          <button type="submit" value="submit" class="btn btn-default">Search</button>
-                        </div> 
-                        <div class="col-lg-2">
-                          
-                        </div>
-                    </form>
-                  </li>
-                  <?php 
-                  foreach ($products->result() as $row){
-                    if($row->Bidding_Status==0) $status='In Auction';
-                    else if($row->Bidding_Status==1) $status='First Place in Auction';
-                    else if($row->Bidding_Status==2) $status='Auction Closed';
-                    else if($row->Bidding_Status==3) $status='Won the Auction';
+             <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white;margin-bottom:20px">
+              <ol style="list-style-type:none; padding-left: 0px">
+                <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
+                  <form class="form-horizontal row" id="search-form" name="search-form" action="product_c/search" method="post" style="padding-top:20px;">
+                    <div class="col-lg-3">
 
-                    if($row->Current_Max_Bid!=$row->Bid_Price) $maxbid='-';
-                    else $maxbid = $row->Current_Max_Bid;
-                    // echo $row->Product_ID;
-                    echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
+                    </div>
+                    <div class="col-lg-5">
+                      <input type="text" class="form-control" id="inputDirectSaleSearch" name="inputDirectSaleSearch" placeholder="Search...">
+                    </div>
+                    <div class="col-lg-1">
+                      <button type="submit" value="submit" class="btn btn-default">Search</button>
+                    </div> 
+                    <div class="col-lg-2">
+
+                    </div>
+                  </form>
+                </li>
+                <?php 
+                foreach ($products->result() as $row){
+                  $highlight='';
+                  $disabled='';
+                  if($row->Bidding_Status==0) $status='In Auction';
+                  else if($row->Bidding_Status==1) {
+                    $status='First Place in Auction';
+                        $highlight =';background-color:#F7F2E0"'; // highlight yellow if 1st place
+                      } else if($row->Bidding_Status==2) $status='Auction Closed';
+                      else if($row->Bidding_Status==3) {
+                        $status='Won the Auction';
+                      $highlight =';background-color:#E0F8F1"'; // highlight green if won the auction
+                    }
+
+                    if($row->Bidding_Status==1 && $row->Bid_Type=='auto') $maxbid=$row->Current_Max_Bid;
+                    else $maxbid = '-';
+
+                    echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px'.$highlight.'">
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 centered" style="padding-top:10px">
                         <img src="assets/img/iphone6.jpg" width="185" height="104">
                       </div>
                       <div class="col-md-4">
                         <h3>'.$row->Name.'</h3>
-                        <strong>Due date: </strong>'.$row->End_Date.'<br>
-                        <strong>Status: </strong>'.$status.'<br>
-                        <a href="'.'watchlist_c/productDetail/'.$row->Product_ID.'">More info...</a>
+                        <h4><strong>Status: </strong>'.$status.'</h4>
+                        <strong>Due date: </strong>'.$row->End_Date.'
+                        <br><strong>Time left: </strong>'.$Date.'
+                        <a href="'.'watchlist_c/productDetail/'.$row->Product_ID.'">
+                        <br>More info...</a>
                       </div>
                       <div class="col-md-5">
-                        <div class="row" style="padding-top:10px">
+                        <div class="row" style="padding-top:25px">
                           <div class="col-md-12">
-                            <strong>Current bid: </strong>'.$row->Current_Price.'<br><strong>Time left: </strong>18 hr**<br><strong>Your bidding type: </strong>'.$row->Bid_Type.'<br><strong>Your max bid: </strong>'.$maxbid.'
+                            <strong>Current bid: </strong>'.$row->Current_Price.' baht
+                            
+                            <br><strong>Your bidding type: </strong>'.$row->Bid_Type.
+                            '<br><strong>Your max bid: </strong>'.$maxbid.
+                            '<br><strong>Bid Increment: </strong>'.$row->Bid_Increment.'
                           </div>
                         </div>
-                        <div class="row">
-                          <br>
-                          <div class="col-md-2">
-                            <a href="watchlist_c/stepBidding/'.$row->Product_ID.'"><button type="button" class="btn btn-default">Step Bid</button></a>
-                          </div>
-                          <div class="col-md-10">
+                        <div class="row">';
+                          if(!($row->Bidding_Status==1||$row->Bidding_Status==2||$row->Bidding_Status==3)) echo '<br>
+                            <div class="col-md-2">
+                             <a href="watchlist_c/stepBidding/'.$row->Product_ID.'"><button type="button" class="btn btn-default">Step Bid</button></a>
+                           </div>
+                           <div class="col-md-10">
 
                             <div class="row">
                               <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
 
-                              <div class="form-group col-md-7" style="left:0%; padding-right:0px">';
-                                echo form_open('bidding_c/maxBidding/'.$row->Product_ID,'id="maxbid-form" name="maxbid-form" onsubmit="return validateForm()"');
-                                 echo '<div class="input-group"><input type="text" class="form-control" id="maxbid" name="maxbid" placeholder="Enter max bid">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">Bid</button>
-                                  </span>
-                                  </div>
-                                  </form>
+                              <div class="form-group col-md-7" style="left:0%; padding-right:0px">'.
+                                form_open('bidding_c/maxBidding/'.$row->Product_ID,'id="maxbid-form" name="maxbid-form" onsubmit="return validateForm()"').
+                                '<div class="input-group"><input type="text" class="form-control" id="maxbid" name="maxbid" placeholder="Enter max bid">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-default" type="submit">Bid</button>
+                                </span>
                               </div>
-
-                            </div>
-
+                            </form>
                           </div>
                         </div>
-                      </div>
+                      </div>';
+                      echo '</div>
                     </div>
-                  </li>';
-                }
-                ?>
+                  </div>
+                </li>';
+              }
+              ?>
 
-              </ol>
-            </div>
-          </div><!-- row -->
-        </div><!-- container -->
-      </div><!-- headerwrap -->
+            </ol>
+          </div>
+        </div><!-- row -->
+      </div><!-- container -->
+    </div><!-- headerwrap -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
-  <script>
-    function validateForm() {
-      var maxbid = document.forms["maxbid-form"]["maxbid"].value;
+    <script>
+      function validateForm() {
+        var maxbid = document.forms["maxbid-form"]["maxbid"].value;
 
 
-      if (!validateDigit(maxbid)||maxbid==""||maxbid==null) {
-        alert("Max bid is invalid.");
-        return false;
+        if (!validateDigit(maxbid)||maxbid==""||maxbid==null) {
+          alert("Max bid is invalid.");
+          return false;
+        }
+
       }
-  
-  }
-  </script>
+        // startTime();
+
+    </script>
   </body>
   </html>
