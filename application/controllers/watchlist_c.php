@@ -16,12 +16,8 @@
 			$data['user_id'] = $session_data['user_id'];
       		$data['username'] = $session_data['username'];
       		$data['type'] = $session_data['type'];
-<<<<<<< HEAD
 			$data['products'] = $this->transaction_m->getWatchlist($data['user_id']);
-=======
-			$data['pruducts'] = $this->transaction_m->getWatchlist($data['user_id'])
-			$data['joinbids'] = $this->bidding_m->getJoinBiddingUser($data['user_id'],$data['products']->result()->)
->>>>>>> 46149821093e9aa00c080dc460fb727999beefa6
+			$data['joinbids'] = $this->bidding_m->getJoinBiddingUser($data['user_id'],$data['products']->result()->);
 			$this->load->view('watchlist.html',$data);	
 		}
 
