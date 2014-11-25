@@ -156,8 +156,8 @@
     return i;
   }
 
-  function startTime() {
-      var x = document.getElementById("time").innerHTML;
+  function startTime(t,t1) {
+      var x = document.getElementById(t).innerHTML;
       var dx = new Date(x);
       var today = new Date();
 
@@ -179,11 +179,13 @@
       //var s = today.getYear();
       // add a zero in front of numbers<10
 
-
+      var a = t;
+      var b = t1;
       //m = checkTime(dd);
       //s = checkTime(mm);
-      if (diff > 0) document.getElementById('time1').innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
+      document.getElementById(t1).innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
       t = setTimeout(function () {
-          startTime()
+          startTime(a,b)
       }, 500);
     }
+ 

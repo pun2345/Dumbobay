@@ -124,9 +124,17 @@
 						</div>
 						<!-- END OF SEARCH AUCTION-->
 						<br>
+						<?php
+						$x=0;
+						foreach($bidProducts->result() as $row){
+							echo '<a id="t'.$x.'">'.$row->End_Date.'</a>';
+							$x++;
+						}
+						echo '<a id="length">'.$x.'</a>';
+					?>
 						<div class="productcontainer">
 							<?php 
-
+								$x=0;
 								foreach($bidProducts->result() as $row){
 								//if($row->Type==2)
 									//{
@@ -137,13 +145,13 @@
 										echo "</div>";
 										echo "<div class=\"col-lg-4\">";
 											echo "<b>".$row->Name."</b><br>";
-											echo "Max bid: ".$row->Current_Max_Bid." Baht<br>";
+											echo "Current price: ".$row->Current_Price." Baht<br>";
 											echo "Due date: ".$row->End_Date." ea<br>";
 											echo "<a href= \"product_c/viewProductDetail/".$row->Product_ID."\" >More info..</a>";
 										echo "</div>";
 										echo "<div class=\"col-lg-4 centered auctionbutton\">";
-											echo "<p>Time left: 0:02:07</p>";
-											echo "<a data-toggle=\"modal\" data-target=\"#bidform\" href=\"/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Add to Watch List</button></a>";
+											echo "<p>Time left: <a id=\"time".$x."\">00:00:00</a></p>";
+											echo "<a href=\"product_c/joinStepBidding/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Step Bid</button></a>";
 										echo "</div>";
 									echo "</div>";
 									//}
@@ -155,7 +163,7 @@
 					<!-- END OF AUCTION ================================================ -->
 					<br><br>
 					<!--search -->
-
+					
 
 				</div><!-- row -->
 		
@@ -207,6 +215,46 @@
 		</div><!-- /.modal -->
 <!-- -->
 	<script>
+	function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+  }
+
+  function startTime(t,t1) {
+      var x = document.getElementById(t).innerHTML;
+      var dx = new Date(x);
+      var today = new Date();
+
+      var diff = new Date(dx - today);
+
+      var yy = diff.getUTCFullYear()-1970;
+      var mm = diff.getUTCMonth();
+      var dd = diff.getUTCDate()-1;      
+      var hh = diff.getUTCHours()-7;    
+      var min = diff.getUTCMinutes();
+      var sec = diff.getUTCSeconds();
+      //var dd = diff.getDate();
+      //var mm = diff.getMonth()+1; //January is 0!
+      //var yyyy = diff.getFullYear();
+
+      //var h = today.getDay();
+      //var h = diff.getHours();
+      //var m = today.getMonth();
+      //var s = today.getYear();
+      // add a zero in front of numbers<10
+
+      var a = t;
+      var b = t1;
+      //m = checkTime(dd);
+      //s = checkTime(mm);
+      document.getElementById(t1).innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
+      t = setTimeout(function () {
+          startTime(a,b)
+      }, 500);
+    }
+ 
 	function validateForm() {
 	    var search = document.forms["search-form"]["search"].value;
 
@@ -219,7 +267,14 @@
 	    	return false;
 	    }
 	}
-	
+	var t = 0;
+	// alert(p);
+	 for (t=0;t<document.getElementById('length').innerHTML;t++){
+	 	alert('t'+t);
+	    startTime('t'+t,'time'+t);
+	    // startTime('t0','time0');
+	    // alert(p);
+	 }
 	</script>
 
 <!-- Bootstrap core JavaScript
