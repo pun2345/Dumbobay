@@ -11,6 +11,7 @@ class Product_c extends CI_Controller {
     $this->load->database();
     $this->load->helper('form');
     $this->load->model('product_m');
+    $this->load->model('member_m');
   }
 
   function index()
@@ -68,8 +69,11 @@ class Product_c extends CI_Controller {
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-    $data['product'] = $this->product_m->getProductDetail($product_id);
-    $this->load->view('productDesc.html',$data);
+      $data['product'] = $this->product_m->getProductDetail($product_id);
+      $sellerid = $data['product']->Seller_ID;
+      $tmp = $this->member_m->getMemberDetail($sellerid);
+      $data['seller_name'] = $tmp->Username;
+      $this->load->view('productDesc.html',$data);
     // $this->load->view('footer.html');
   }
   // function do_upload()
