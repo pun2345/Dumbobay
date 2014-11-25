@@ -27,8 +27,11 @@
 			$data['user_id'] = $session_data['user_id'];
       		$data['type'] = $session_data['type'];
       		$data['username'] = $session_data['username'];
-			$data['product'] = $this->product_m->getBidProductDetail($product_id);
-			$this->load->view('watchlistdetail.html',$data);
+			$data['product'] = $this->product_m->getProductDetail($product_id);
+			$sellerid = $data['product']->Seller_ID;
+			$tmp = $this->member_m->getMemberDetail($sellerid);
+			$data['seller_name'] = $tmp->Username;
+			$this->load->view('productDesc_watchlist.html',$data);
 		}
 
 		function maxBidding($product_id){

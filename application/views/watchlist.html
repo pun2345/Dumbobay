@@ -99,7 +99,7 @@ include 'HTMLHeader.html';
                         <h3>'.$row->Name.'</h3>
                         <strong>Due date: </strong>'.$row->End_Date.'<br>
                         <strong>Status: </strong>'.$status.'<br>
-                        <a href="'.'product_m/getProductDetail/'.$row->Product_ID.'">More info...</a>
+                        <a href="'.'watchlist_c/productDetail/'.$row->Product_ID.'">More info...</a>
                       </div>
                       <div class="col-md-5">
                         <div class="row" style="padding-top:10px">
@@ -117,15 +117,14 @@ include 'HTMLHeader.html';
                             <div class="row">
                               <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
 
-                              <div class="form-group col-md-7" style="left:0%; padding-right:0px">
-                                <div class="input-group">';
+                              <div class="form-group col-md-7" style="left:0%; padding-right:0px">';
                                 echo form_open('bidding_c/maxBidding/'.$row->Product_ID,'id="maxbid-form" name="maxbid-form" onsubmit="return validateForm()"');
-                                 echo '<input type="text" class="form-control" id="maxbid" name="maxbid" placeholder="Enter max bid">
+                                 echo '<div class="input-group"><input type="text" class="form-control" id="maxbid" name="maxbid" placeholder="Enter max bid">
                                   <span class="input-group-btn">
                                     <button class="btn btn-default" type="submit">Bid</button>
                                   </span>
+                                  </div>
                                   </form>
-                                </div>
                               </div>
 
                             </div>
@@ -137,50 +136,6 @@ include 'HTMLHeader.html';
                   </li>';
                 }
                 ?>
-                <li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <img src="assets/img/iphone6.jpg" width="185" height="104">
-                    </div>
-                    <div class="col-md-4">
-                      <h3>iPhone 6</h3>
-                      <strong>Due date: </strong>12 Dec 14<br>
-                      <strong>status: </strong>bidding<br>
-                      <a href="#">more info...</a>
-                    </div>
-                    <div class="col-md-5">
-                      <div class="row" style="padding-top:10px">
-                        <div class="col-md-12">
-                          <strong>current bid: </strong>100 bath<br><strong>time left: </strong>18 hr<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>-
-                        </div>
-                      </div>
-                      <div class="row">
-                        <br>
-                        <div class="col-md-2">
-                          <button type="button" class="btn btn-default">Bid</button>
-                        </div>
-                        <div class="col-md-10">
-
-                          <div class="row">
-                            <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
-
-                            <div class="form-group col-md-7" style="left:0%; padding-right:0px">
-                              <div class="input-group">
-
-                                <input type="text" class="form-control"  placeholder="Enter max bid">
-                                <span class="input-group-btn">
-                                  <button class="btn btn-default" type="button">Bid</button>
-                                </span>
-                              </div>
-                            </div>
-
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
 
               </ol>
             </div>

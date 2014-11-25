@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<?php
+    include 'HTMLHeader.html';
+  ?>
+    <style>
+    li.watchlist{
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <<?php
+      if($type==0){
+        include 'guest_menu.html';
+      }
+      else if($type==1){
+        include 'admin_menu.html';  
+      }            
+      else if($type==2){
+        include 'buyer_menu.html';  
+      }
+      else if($type==3){
+        include 'seller_menu.html'; 
+      }
+    ?>
+
+  <div id="myheaderwrap">
+    <div class="container">
+      <div class="row centered">
+          <h2>Want it that much ? Then <b>PAY</b> more. <b>-DumboBay-</b></h3> 
+      </div><!-- row -->
+    </div><!-- container -->
+  </div><!-- headerwrap -->
+
+	<div>
+		<div class="container">
+			<div>
+				<div class="col-md-10 col-md-offset-1" style="padding-top:30px; padding-bottom:25px">
+          <div class="row centered">
+        
+              <legend><h1 style="color:black;padding-top:13px">Product</h1></legend>
+        
+          </div>
+				</div>
+        
+        <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
+          <div class="row centered" >
+            <img src=<?php echo '"'.base_url().'assets/img/'.$product->Image.'"' ?> width="350px" height="300" style="margin:20px 20px">
+          </div>
+          <div class="row" style="margin-left:40px;margin-right:40px;margin-bottom:40px">
+            <h1><?php echo $product->Name; ?></h1><!-- detail of each type (2 type)-->
+            <?php
+              if($product->Type==1){
+                echo '<p>Price: '.$product->Price.' Baht';
+                echo '<br>Seller: ';
+                echo '<p>Details: '.'</p>';
+            } else if($product->Type==2) {
+                echo '<p>Current Max Bid: '.$product->Current_Max_Bid.' Baht';
+                echo '<br>Time left: '.$product->End_Date;
+                echo '<br>Seller: ';
+                echo '<p>Details: '.'</p>';
+            }
+            ?>
+
+            <a href="javascript:window.history.go(-1);"><button type="button" class="btn btn-default">Back</button></a>
+          </div>
+          <div class="row">
+            
+          </div>
+        </div>
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- headerwrap -->
+
+
+
+	
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src=<?echo base_url("assets/js/bootstrap.min.js");?>></script>
+  </body>
+</html>
