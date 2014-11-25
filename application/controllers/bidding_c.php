@@ -182,13 +182,15 @@
 		function initializeMaxBidding($product_id,$maxbid){
 			$session_data = $this->session->userdata('logged_in');
 			$this->bidding($session_data['user_id'],$product_id,$maxbid,'auto');
+			redirect('watchlist_c');
 		}
 
 		function initializeStepBidding($product_id){
 			$session_data = $this->session->userdata('logged_in');
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
-			$bid_increment = $this->bidding_m->getBitIncrement($product_id);
+			$bid_increment = $this->bidding_m->getBidIncrement($product_id);
 			$this->bidding($session_data['user_id'],$product_id,$current_price+$bid_increment,'manual');
+			redirect('watchlist_c');
 		}
 
 	}
