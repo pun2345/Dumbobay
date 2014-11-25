@@ -119,8 +119,8 @@ include 'HTMLHeader.html';
 
                               <div class="form-group col-md-7" style="left:0%; padding-right:0px">
                                 <div class="input-group">';
-                                echo form_open('bidding_c/maxBidding/'.$row->Product_ID,'id="maxbid-form" name="maxbid-form" onsubmit="return validateForm()"');
-                                 echo '<input type="text" class="form-control" name="maxbid"  placeholder="Enter max bid">
+                                echo form_open('bidding_c/maxBidding/'.$row->Product_ID,'class="form-horizontal" id="maxbid-form" name="maxbid-form" onsubmit="return validateForm()"');
+                                 echo '<input type="text" class="form-control" id="maxbid" name="maxbid"  placeholder="Enter max bid">
                                   <span class="input-group-btn">
                                     <button class="btn btn-default" type="submit">Bid</button>
                                   </span>
@@ -198,18 +198,14 @@ include 'HTMLHeader.html';
     <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
   <script>
     function validateForm() {
-      var subject = document.forms["problem-form"]["msgSubject"].value;
-      var text = document.forms["problem-form"]["msgText"].value;
-      var message ="";
+      var maxbid = document.forms["maxbid-form"]["maxbid"].value;
 
-      if (!validateSubject(subject)||subject==""||subject==null) {
-        alert("The subject is invalid.");
+
+      if (!validateDigit(maxbid)||maxbid==""||maxbid==null) {
+        alert("Max bid is invalid.");
         return false;
       }
-      if (!validateMessageText(text)||text==""||text==null ) {
-        alert("Text is invalid.");
-        return false;
-      }
+  
   }
   </script>
   </body>
