@@ -46,7 +46,7 @@
 			    if ($this->member_m->checkMember($form_data['username'],$form_data['email']) == 'false') // the information has therefore been successfully saved in the db
 			    {             
 			    	$this->member_m->createMember($form_data['username'],$form_data['password'],$form_data['firstname'],$form_data['lastname'],$form_data['type'],$form_data['address'],$form_data['telephone'],$form_data['email']);
-			        $this->session->set_flashdata("message","Registration Completed");
+			        $this->session->set_flashdata("message","Registration Completed, Please activate your account through e-mail.");
 			        $createdMemberID = $this->member_m->getUserID($form_data['username']);
 			        activate_User($createdMemberID,$form_data['username'],$form_data['email']);
 			        redirect('home_c');   // or whatever logic needs to occur
