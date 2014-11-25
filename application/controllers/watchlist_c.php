@@ -32,7 +32,7 @@
 			$sellerid = $data['product']->Seller_ID;
 			$tmp = $this->member_m->getMemberDetail($sellerid);
 			$data['seller_name'] = $tmp->Username;
-			$this->load->view('productDesc_watchlist.html',$data);
+			$this->load->view('productDesc.html',$data);
 		}
 
 		function maxBidding($product_id){
