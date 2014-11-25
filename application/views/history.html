@@ -17,6 +17,32 @@
     }
 
     </style>
+
+    <script type="text/javascript">
+
+     function clicktest() {
+      var clicked = document.getElementById("rating5");
+      var click5 = clicked.checked
+      if(click5){
+      document.getElementById("rating1").disabled = true;
+      document.getElementById("rating2").disabled = true;
+      document.getElementById("rating3").disabled = true;
+      document.getElementById("rating4").disabled = true;
+      document.getElementById("rating5").disabled = true;
+      }
+     }
+     function clicktest1() {
+      
+      document.getElementById("rating1").disabled = true;
+      document.getElementById("rating2").disabled = true;
+      document.getElementById("rating3").disabled = true;
+      document.getElementById("rating4").disabled = true;
+      document.getElementById("rating5").disabled = true;
+      
+     }
+
+    </script>
+
   </head>
 
   <body>
@@ -56,6 +82,7 @@
             </div>
             <div class="col-md-8">
               <h1 style="color:black;padding-top:13px">History</h1>
+              
             </div>
             <div class="col-md-2" style="padding-top:70px;padding-left:70px">
               items: <?php echo $transactions->num_rows?>
@@ -75,7 +102,7 @@
 
             <?php
               foreach ($transactions->result() as $row) {
-               
+               print_r($row);
               echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">';
               echo '<div class="row">';
                 echo '<div class="col-md-3">';
@@ -122,6 +149,16 @@
                     echo'<button class="btn bnt-default">Review</button>';
                     echo'</div>';
                     echo'</div>';
+                    if($row->seller_score==2){clicktest1();}
+                    echo'<div class="row">
+                        <span class="star-rating">
+                         <input type="radio" name="rating" value="1" id="rating1"><i></i>
+                         <input type="radio" name="rating" value="2" id="rating2"><i></i>
+                         <input type="radio" name="rating" value="3" id="rating3"><i></i>
+                         <input type="radio" name="rating" value="4" id="rating4"><i></i>
+                         <input type="radio" name="rating" value="5" id="rating5" onclick="clicktest();"><i></i>
+                         </span>
+                         </div>';
                   }
                 echo '</div>';
               echo '</div>';
@@ -139,6 +176,7 @@
   <div class="row">
   </div>
 
+   
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

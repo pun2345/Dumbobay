@@ -5,6 +5,7 @@
   		    parent::__construct();
 			$this->load->database();
 			$this->load->model('bidding_m');
+			$this->load->model('product_m');
 			$this->load->helper('email_sender');
 			$this->load->helper('html');	
 			$this->load->library('form_validation');
@@ -18,9 +19,10 @@
 
 
 		function bidding($user_id, $product_id, $price, $bidding_type) { 
-			$current_price = $this->bidding_m->getCurrentPrice($product_id);
-			$current_maxbid = $this->bidding_m->getCurrentMaxBid($product_id);
-			$bid_increment = $this->bidding_m->getBidIncrement($product_id);
+			$product = $this->product_m->getProductDetail($product_id);
+			$current_maxbid = $product->Current_Max_Bid;
+			$current_price = $product->Current_Price;
+			$bid_increment = $product->Bid_Increment;
 			if($bidding_type == 'auto'){
 				$maxbid = $price;
 				if($current_maxbid==0){
@@ -33,7 +35,6 @@
 						$this->notifyBidLosingEmail($oldWinner,$product_id);
 						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 						$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price+$bit_increment,'auto');
-						$this->bidding_m->setJoinBiddingType($user_id,$product_id,'auto');
 						$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
 					}
 					else if($maxbid > $current_price){
@@ -45,7 +46,6 @@
 						$this->notifyBidLosingEmail($oldWinner,$product_id);
 						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 						$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'auto');
-						$this->bidding_m->setJoinBiddingType($user_id,$product_id,'auto');
 						$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
 
 					}
@@ -69,7 +69,6 @@
 					$this->notifyBidLosingEmail($oldWinner,$product_id);
 					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$newprice,'auto');
-					$this->bidding_m->setJoinBiddingType($user_id,$product_id,'auto');
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
 				}
 				else if($maxbid <= $current_maxbid){
@@ -87,12 +86,9 @@
 			}
 
 			else if($bidding_type == 'manual'){
-				$current_maxbid = $this->bidding_m->getCurrentMaxBid($product_id);
-				$current_price = $this->bidding_m->getCurrentPrice($product_id);
-				$bit_increment = $this->bidding_m->getBidIncrement($product_id);
 				if($price < $current_maxbid){
-					if($current_maxbid > $price + $bit_increment){
-						$newprice = $price + $bit_increment;
+					if($current_maxbid > $price + $bid_increment){
+						$newprice = $price + $bid_increment;
 					}
 					else{
 						$newprice = $current_price;
@@ -107,7 +103,6 @@
 					$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
 					$this->notifyBidLosingEmail($oldWinner,$product_id);
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$price,'manual');
-					$this->bidding_m->setJoinBiddingType($user_id,$product_id,'manual');
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
 					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 				}
@@ -150,7 +145,7 @@
 			$current_price = $this->bidding_m->getCurrentPrice($product_id);
 			$bit_increment = $this->bidding_m->getBidIncrement($product_id);
 			$this->bidding($session_data['user_id'],$product_id,$current_price+$bit_increment,'manual');
-			$data['current_price'] = $this->bidding_m->getCurrentPrice($product_id);
+			$data['current_price'] = $current_price;
 		    $this->session->set_flashdata("message","Bidding completed !");
 		    redirect('watchlist_c');
 		}
