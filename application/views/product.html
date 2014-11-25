@@ -150,11 +150,11 @@
 											echo "<a href= \"product_c/viewProductDetail/".$row->Product_ID."\" >More info..</a>";
 										echo "</div>";
 										echo "<div class=\"col-lg-4 centered auctionbutton\">";
-											echo "<p>Time left: <a id=\"time".$x."\">00:00:00</a></p>";
+											echo "<p>Time left: <a id=\"time".$x."\">  00:00:00:00:00  </a></p>";
 											echo "<a href=\"product_c/joinStepBidding/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Step Bid</button></a>";
 										echo "</div>";
 									echo "</div>";
-									//}
+									$x++;
 								}					
 							?>
 							<hr>
@@ -249,8 +249,8 @@
       var b = t1;
       //m = checkTime(dd);
       //s = checkTime(mm);
-      document.getElementById(t1).innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
-      t = setTimeout(function () {
+      if (diff>0) document.getElementById(t1).innerHTML = " "+yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec+" ";
+      if(diff>0 ) t = setTimeout(function () {
           startTime(a,b)
       }, 500);
     }
@@ -270,11 +270,13 @@
 	var t = 0;
 	// alert(p);
 	 for (t=0;t<document.getElementById('length').innerHTML;t++){
-	 	alert('t'+t);
+	 	alert(document.getElementById('length')+0);
 	    startTime('t'+t,'time'+t);
 	    // startTime('t0','time0');
 	    // alert(p);
+
 	 }
+	 $('#t0').hide();
 	</script>
 
 <!-- Bootstrap core JavaScript
