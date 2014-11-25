@@ -51,7 +51,7 @@ include 'HTMLHeader.html';
           <div>
             <div class="container">
              <div>
-              <div class="col-md-10 col-md-offset-1" style="padding-top:50px; padding-bottom:25px">
+              <div class="col-md-10 col-md-offset-1" style="padding-top:30px; padding-bottom:25px">
                 <div class="row centered">
                    <h1>Watchlist</h1>
                 </div>
@@ -84,22 +84,29 @@ include 'HTMLHeader.html';
 
                     if($row->Current_Max_Bid!=$row->Bid_Price) $maxbid='-';
                     else $maxbid = $row->Current_Max_Bid;
-                    // echo $row->Product_ID;
-                    echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
+                    $highlight='';
+                    if($row->Bidding_Status==1) $highlight =';background-color:#F7F2E0"';
+                    else if($row->Bidding_Status==3) $highlight =';background-color:#E0F8F1"';
+               
+                    echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px'.$highlight.'">
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 centered" style="padding-top:10px">
                         <img src="assets/img/iphone6.jpg" width="185" height="104">
                       </div>
                       <div class="col-md-4">
                         <h3>'.$row->Name.'</h3>
+                        <strong><h4>Status: </strong>'.$status.'</h4><br>
                         <strong>Due date: </strong>'.$row->End_Date.'<br>
-                        <strong>Status: </strong>'.$status.'<br>
                         <a href="'.'watchlist_c/productDetail/'.$row->Product_ID.'">More info...</a>
                       </div>
                       <div class="col-md-5">
                         <div class="row" style="padding-top:10px">
                           <div class="col-md-12">
-                            <strong>Current bid: </strong>'.$row->Current_Price.'<br><strong>Time left: </strong>18 hr**<br><strong>Your bidding type: </strong>'.$row->Bid_Type.'<br><strong>Your max bid: </strong>'.$maxbid.'
+                            <strong>Current bid: </strong>'.$row->Current_Price.' baht
+                            <br><strong>Time left: </strong>18 hr**
+                            <br><strong>Your bidding type: </strong>'.$row->Bid_Type.
+                            '<br><strong>Your max bid: </strong>'.$maxbid.
+                            '<br><strong>Bid Increment: </strong>'.$row->Bid_Increment.'
                           </div>
                         </div>
                         <div class="row">
