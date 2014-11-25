@@ -101,7 +101,7 @@ include 'HTMLHeader.html';
                         <h3>'.$row->Name.'</h3>
                         <h4><strong>Status: </strong>'.$status.'</h4>
                         <strong>Due date: </strong>'.$row->End_Date.'
-                        <br><strong>Time left: </strong>18 hr**
+                        <br><strong>Time left: </strong>'.$Date.'
                         <a href="'.'watchlist_c/productDetail/'.$row->Product_ID.'">
                         <br>More info...</a>
                       </div>
@@ -168,6 +168,8 @@ include 'HTMLHeader.html';
         }
 
       }
+        startTime();
+
     </script>
   </body>
   </html>
