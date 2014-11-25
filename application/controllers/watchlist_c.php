@@ -9,6 +9,8 @@
 			$this->load->model('product_m');
 			$this->load->model('transaction_m');
 			$this->load->model('bidding_m');
+			$this->load->library('form_validation');
+			$this->load->helper('form');
 		}
 
 		function index(){
@@ -17,7 +19,6 @@
       		$data['username'] = $session_data['username'];
       		$data['type'] = $session_data['type'];
 			$data['products'] = $this->transaction_m->getWatchlist($data['user_id']);
-			$data['joinbids'] = $this->bidding_m->getJoinBiddingUser($data['user_id'],$data['products']->result()->);
 			$this->load->view('watchlist.html',$data);	
 		}
 
@@ -26,8 +27,11 @@
 			$data['user_id'] = $session_data['user_id'];
       		$data['type'] = $session_data['type'];
       		$data['username'] = $session_data['username'];
-			$data['product'] = $this->product_m->getBidProductDetail($product_id);
-			$this->load->view('watchlistdetail.html',$data);
+			$data['product'] = $this->product_m->getProductDetail($product_id);
+			$sellerid = $data['product']->Seller_ID;
+			$tmp = $this->member_m->getMemberDetail($sellerid);
+			$data['seller_name'] = $tmp->Username;
+			$this->load->view('productDesc_watchlist.html',$data);
 		}
 
 		function maxBidding($product_id){

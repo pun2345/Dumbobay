@@ -6,7 +6,10 @@
 			$this->load->database();
 			$this->load->model('bidding_m');
 			$this->load->helper('email_sender');
-			$this->load->helper('html');
+			$this->load->helper('html');	
+			$this->load->library('form_validation');
+			$this->load->helper('form');
+
 		}
 
 		function index(){
@@ -116,9 +119,8 @@
 			$session_data = $this->session->userdata(logged_in);
       		$data['type'] = $session_data['type'];	
       		$data['user_id'] = $session_data['user_id'];
-      		$data['username'] = $session_data['username'];		
-			$this->load->library('form_validation');
-	        $this->form_validation->set_rules('maxbid', 'maxbid', 'require|css_clean');
+      		$data['username'] = $session_data['username'];
+   	        $this->form_validation->set_rules('maxbid', 'maxbid', 'require|css_clean');
 			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		    {
 		        $this->load->view('watchlist.html',$data);
@@ -126,7 +128,7 @@
       	    else // passed validation proceed to post success logic
 	        {
 		        $form_data = array( 'maxbid' => $this->input->post('maxbid'));
-			    $maxbid = $form_data['$maxbid'];
+			    $maxbid = $form_data['maxbid'];
 			    if ($this->bidding($session_data['user_id'],$product_id,$maxbid,'auto') == TRUE) // the information has therefore been successfully saved in the db
 			    {             
 			        $this->session->set_flashdata("message","Bidding completed");

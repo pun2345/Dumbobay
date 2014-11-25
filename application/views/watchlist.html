@@ -82,6 +82,14 @@ include 'HTMLHeader.html';
                   </li>
                   <?php 
                   foreach ($products->result() as $row){
+                    if($row->Bidding_Status==0) $status='In Auction';
+                    else if($row->Bidding_Status==1) $status='First Place in Auction';
+                    else if($row->Bidding_Status==2) $status='Auction Closed';
+                    else if($row->Bidding_Status==3) $status='Won the Auction';
+
+                    if($row->Current_Max_Bid!=$row->Bid_Price) $maxbid='-';
+                    else $maxbid = $row->Current_Max_Bid;
+
                     echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">
                     <div class="row">
                       <div class="col-md-3">
@@ -90,19 +98,19 @@ include 'HTMLHeader.html';
                       <div class="col-md-4">
                         <h3>'.$row->Name.'</h3>
                         <strong>Due date: </strong>'.$row->End_Date.'<br>
-                        <strong>status: </strong>'.'<br>
-                        <a href="'.'product_m/getProductDetail/'.$row->Product_ID.'">more info...</a>
+                        <strong>Status: </strong>'.$status.'<br>
+                        <a href="'.'product_m/getProductDetail/'.$row->Product_ID.'">More info...</a>
                       </div>
                       <div class="col-md-5">
                         <div class="row" style="padding-top:10px">
                           <div class="col-md-12">
-                            <strong>current bid: </strong>'.$row->Current_Price.'<br><strong>time left: </strong>18 hr**<br><strong>bidding: </strong>manual<br><strong>your max bid: </strong>'.$row->Bid_Price.'
+                            <strong>Current bid: </strong>'.$row->Current_Price.'<br><strong>Yime left: </strong>18 hr**<br><strong>Your bidding type: </strong>'.$row->Bid_Type.'<br><strong>Your max bid: </strong>'.$maxbid.'
                           </div>
                         </div>
                         <div class="row">
                           <br>
                           <div class="col-md-2">
-                            <a href="watchlist_c/stepBidding/'.$row->Product_ID.'"><button type="button" class="btn btn-default">Bid</button></a>
+                            <a href="watchlist_c/stepBidding/'.$row->Product_ID.'"><button type="button" class="btn btn-default">Step Bid</button></a>
                           </div>
                           <div class="col-md-10">
 
@@ -110,9 +118,9 @@ include 'HTMLHeader.html';
                               <label  style="left:10%; padding-top:5px" for="inputEmail" class="col-md-4">Max bid:</label>
 
                               <div class="form-group col-md-7" style="left:0%; padding-right:0px">
-                                <div class="input-group">
-                                '.form_open('bidding_c/maxBidding/'.$row->Product_ID,'id="maxbid-form" name="maxbid-form" onsubmit="return validateForm()"').'
-                                  <input type="text" class="form-control" name="maxbid"  placeholder="Enter max bid">
+                                <div class="input-group">';
+                                echo form_open('bidding_c/maxBidding/'.$row->Product_ID,'class="form-horizontal" id="maxbid-form" name="maxbid-form" onsubmit="return validateForm()"');
+                                 echo '<input type="text" class="form-control" id="maxbid" name="maxbid"  placeholder="Enter max bid">
                                   <span class="input-group-btn">
                                     <button class="btn btn-default" type="submit">Bid</button>
                                   </span>
@@ -190,18 +198,14 @@ include 'HTMLHeader.html';
     <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
   <script>
     function validateForm() {
-      var subject = document.forms["problem-form"]["msgSubject"].value;
-      var text = document.forms["problem-form"]["msgText"].value;
-      var message ="";
+      var maxbid = document.forms["maxbid-form"]["maxbid"].value;
 
-      if (!validateSubject(subject)||subject==""||subject==null) {
-        alert("The subject is invalid.");
+
+      if (!validateDigit(maxbid)||maxbid==""||maxbid==null) {
+        alert("Max bid is invalid.");
         return false;
       }
-      if (!validateMessageText(text)||text==""||text==null ) {
-        alert("Text is invalid.");
-        return false;
-      }
+  
   }
   </script>
   </body>
