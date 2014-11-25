@@ -130,7 +130,7 @@
 	    }
 	}
 	function validateDigit(word){
-		var searchReg = new RegExp(/[[:digit:]]/);
+		var searchReg = new RegExp(/^[0-9]+$/);
 		var valid = searchReg.test(word);
 
 		if(!valid) {
