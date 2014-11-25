@@ -22,6 +22,9 @@ class Login_c extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       //Field validation failed.  User redirected to login page
+      // if($this->session->flashdata("message")){
+        // $this->session->keep_flashdata("message");
+      // }
       if($this->session->flashdata("beforePay")){
         $this->session->keep_flashdata("beforePay");
       }
@@ -50,32 +53,51 @@ class Login_c extends CI_Controller {
     //print_r($result);
     //echo $result->User_ID." use ";
     //echo $result['User_ID'];
-    if($result['User_ID']!=0)
-    {
-        //echo $result->User_ID."";
-        //echo $result->Username."";
-      //echo $this->member_m->checkActivated($result['User_ID']);
-      if($this->member_m->checkActivated($result['User_ID'])==1)
-      { 
-        $sess_array = array(
-            'user_id' => $result['User_ID'],
-            'username' => $result['Username'],
-            'type' => $result['Type']
-          );
-        $this->session->set_userdata('logged_in', $sess_array);      
-        return TRUE;
-      }else{
-       $this->session->set_flashdata("message",'Please Activate your account first.');
-       //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
-       return false;
+    if($result){
+      if($result['User_ID']!=0)
+      {
+          //echo $result->User_ID."";
+          //echo $result->Username."";
+        //echo $this->member_m->checkActivated($result['User_ID']);
+        if($this->member_m->checkActivated($result['User_ID'])==1)
+        { 
+          $sess_array = array(
+              'user_id' => $result['User_ID'],
+              'username' => $result['Username'],
+              'type' => $result['Type']
+            );
+          $this->session->set_userdata('logged_in', $sess_array);      
+          return TRUE;
+        }else{
+          $this->session->set_flashdata("message",'Please Activate your account first.');
+          if($this->session->flashdata("beforePay")){
+            $this->session->keep_flashdata("beforePay");
+          }
+          redirect("login_c");
+         //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
+         return false;
+        }
       }
-    }
-    else
-    {
-        $this->session->set_flashdata("message",'Invalid username or password');
-        //$this->form_validation->set_message('check_database', 'Invalid username or password');
-        return false;
-    }    
+      else
+      {
+          $this->session->set_flashdata("message",'Invalid username or password');
+          //$this->form_validation->set_message('check_database', 'Invalid username or password');
+          if($this->session->flashdata("beforePay")){
+            $this->session->keep_flashdata("beforePay");
+          }
+          redirect("login_c");
+
+          return false;
+      }   
+    }else{
+      $this->session->set_flashdata("message",'Invalid username or password');
+      //$this->form_validation->set_message('check_database', 'Invalid username or password');
+      if($this->session->flashdata("beforePay")){
+            $this->session->keep_flashdata("beforePay");
+          }
+          redirect("login_c");
+      return false;
+    } 
   }
 }
 ?>
