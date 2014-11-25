@@ -124,14 +124,7 @@
 						</div>
 						<!-- END OF SEARCH AUCTION-->
 						<br>
-						<?php
-						$x=0;
-						foreach($bidProducts->result() as $row){
-							echo '<a id="t'.$x.'">'.$row->End_Date.'</a>';
-							$x++;
-						}
-						echo '<a id="length">'.$x.'</a>';
-					?>
+						
 						<div class="productcontainer">
 							<?php 
 								$x=0;
@@ -151,7 +144,7 @@
 										echo "</div>";
 										echo "<div class=\"col-lg-3 centered auctionbutton\">";
 											echo "<p>Time left: <a id=\"time".$x."\">  00:00:00:00:00  </a></p>";
-											echo "<a href=\"product_c/joinStepBidding/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Step Bid</button></a>";
+											if($orw->Status==) echo "<a href=\"product_c/joinStepBidding/".$row->Product_ID."\"><button type=\"button\" class=\"btn btn-default\">Step Bid</button></a>";
 										echo "</div>";
 									echo "</div>";
 									$x++;
@@ -164,9 +157,18 @@
 					<br><br>
 					<!--search -->
 					
-					<a id="hi">asdasdasd</a>
+				
 				</div><!-- row -->
-		
+				<div style="display:none">
+		<?php
+						$x=0;
+						foreach($bidProducts->result() as $row){
+							echo '<a id="t'.$x.'">'.$row->End_Date.'</a>';
+							$x++;
+						}
+						echo '<a id="length">'.$x.'</a>';
+					?>
+					</div>
 			</div><!-- container -->
 		</div>
 		<!--end PRODUCT-->
