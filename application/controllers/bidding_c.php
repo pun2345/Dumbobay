@@ -17,7 +17,6 @@
 			
 		}
 
-
 		function bidding($user_id, $product_id, $price, $bidding_type) { 
 			$product = $this->product_m->getProductDetail($product_id);
 			$current_maxbid = $product->Current_Max_Bid;
@@ -38,28 +37,24 @@
 						$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
 					}
 					else if($maxbid > $current_price){
-						$this->bidding_m->setCurrentPrice($product_id,$maxbid);
-						$this->bidding_m->setCurrentMaxBid($product_id,$maxbid);
-						$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
-						$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
-						$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-						$this->notifyBidLosingEmail($oldWinner,$product_id);
-						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
-						$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'auto');
-						$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
-
+						$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price,'manual');
+						$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,0);
+						$this->notifyBidLosingEmail($user_id,$product_id);
 					}
 					else if($maxbid <= $current_price){
 						$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'manual');
 						return FALSE;
 					}
 				}
+
 				else if($maxbid > $current_maxbid){
-					if($maxbid > $current_maxbid + $bid_increment){
-						$newprice = $current_maxbid + $bid_increment;
+					$turns = ($current_maxbid - $current_price) / $bid_increment;
+					$turn = $turns % 2;
+					if($turns == 0){
+						$newprice = $current_price;
 					}
 					else{
-						$newprice = $maxbid;
+						$newprice = $current_price + ($bid_increment * $turns);
 					}
 					$this->bidding_m->setCurrentPrice($product_id,$newprice);
 					$this->bidding_m->setCurrentMaxBid($product_id,$maxbid);
@@ -70,33 +65,50 @@
 					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$newprice,'auto');
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,1);
+
 				}
-				else if($maxbid <= $current_maxbid){
-					if($current_maxbid > $maxbid + $bid_increment){
-						$newprice = $maxbid + $bid_increment;
+				else if($maxbid < $current_maxbid){
+					$turns = ($current_maxbid - $current_price) / $bid_increment;
+					$turn = $turns % 2;
+					if($turns == 0){
+						$newprice = $current_price;
 					}
-					else{
-						$newprice = $current_maxbid;
+					else {
+						$newprice = $current_price + ($bid_increment * $turns);
 					}
 					$this->bidding_m->setCurrentPrice($product_id,$newprice);
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$new_price,'manual');
 					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,0);
 					$this->notifyBidLosingEmail($user_id,$product_id);
 				}
-			}
+				else if($maxbid == $current_maxbid){
+					$turns = ($current_maxbid - $current_price) / $bid_increment;
+					$turn = $turns % 2;
+					if($turns == 0){
+						$newprice = $current_price;
+					}
+					else {
+						$newprice = $current_price + ($bid_increment * $turns);
+					}
+					$this->bidding_m->setCurrentPrice($product_id,$newprice);
+					$this->bidding_m->setJoinBidding($user_id,$product_id,$new_price,'manual');
+					$this->bidding_m->setJoinBiddingStatus($user_id,$product_id,0);
+					$this->notifyBidLosingEmail($user_id,$product_id);
+				}
 
+			}
 			else if($bidding_type == 'manual'){
 
-				if($price < $current_maxbid){
+				if($price <= $current_maxbid){
 					if($current_maxbid >= $price + $bid_increment){
 						$newprice = $price + $bid_increment;
 					}
 					else{
-						$newprice = $current_price;
+						$newprice = $price;
 					}
 					$this->bidding_m->setCurrentPrice($product_id,$newprice);
 				}
-				else{
+				else {
 					$this->bidding_m->setCurrentPrice($product_id,$price);
 					$this->bidding_m->setCurrentMaxBid($product_id,0);
 					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
@@ -131,7 +143,7 @@
 			    }
 			    else
 			    {
-			        $this->session->set_flashdata("message","Unable to bid");
+			        $this->session->set_flashdata("message","Your max bid is lower than minimum bid incremental, please try again");
 			    }
 			    redirect('watchlist_c');
 			}

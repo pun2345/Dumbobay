@@ -61,10 +61,10 @@ Class bidding_m extends CI_Model
 				}
 			}
 		}
-		function setJoinBidding($user_id,$product_id,$price,$type){
+		function setJoinBidding($user_id,$product_id,$price,$type,$status){
 			if($this->bidding_m->checkExistBidding($user_id,$product_id)){
 				echo "exist <br>";
-				return $this->bidding_m->updateBidding($user_id,$product_id,$price,$type);
+				return $this->bidding_m->updateBidding($user_id,$product_id,$price,$type,$status);
 			}else{
 				$data = array(
 					'User_ID' => $user_id,
@@ -87,11 +87,12 @@ Class bidding_m extends CI_Model
 			if($query->num_rows() == 1) return true;
 			else return false;
 		}
-		function updateBidding($user_id,$product_id,$price,$type){
-			echo "updateBidding <br>";
+		function updateJoinBidding($user_id,$product_id,$price,$type,$status){
+			// echo "updateBidding <br>";
 			$data = array(
 					'Bid_Price' => $price,
-					'Bid_Type' => $type
+					'Bid_Type' => $type,
+					'Status' => $status
 				);
 				$this->db->trans_start();
 				$this->db->where('User_ID', $user_id);
@@ -173,8 +174,23 @@ Class bidding_m extends CI_Model
 			return $query;
 		}
 		function getJoinBiddingUser($user_id,$product_id){
-			$query = $this->db->query("Select user_id from join_bidding where product_id = $product_id and user_id = $user_id");
+			$query = $this->db->query("Select * from join_bidding where product_id = $product_id and user_id = $user_id");
 			return $query;
+		}
+		function updateBidProduct($Product_ID,$Current_Price, $Current_Max_Bid, $Current_Winner){
+			$data = array(
+					'Current_Price' => $Current_Price,
+					'Current_Max_Bid' => $Current_Max_Bid,
+					'Current_Winner' => $Current_Winner
+				);
+				$this->db->trans_start();
+				$this->db->where('Product_ID', $Product_ID);
+				$this->db->update('product_bid', $data);
+				$complete = $this->db->affected_rows();
+				$this->db->trans_complete();
+				if ($complete>0) {
+					return "true";
+				}
 		}
 		
 }
