@@ -143,13 +143,13 @@
 										echo "<div class=\"col-lg-4 centered productimg\">";
 										echo '<img src="'.$row->Image.'">';
 										echo "</div>";
-										echo "<div class=\"col-lg-4\">";
+										echo "<div class=\"col-lg-5\">";
 											echo "<b>".$row->Name."</b><br>";
 											echo "Current price: ".$row->Current_Price." Baht<br>";
 											echo "Due date: ".$row->End_Date." ea<br>";
 											echo "<a href= \"product_c/viewProductDetail/".$row->Product_ID."\" >More info..</a>";
 										echo "</div>";
-										echo "<div class=\"col-lg-4 centered auctionbutton\">";
+										echo "<div class=\"col-lg-3 centered auctionbutton\">";
 											echo "<p>Time left: <a id=\"time".$x."\">  00:00:00:00:00  </a></p>";
 											echo "<a href=\"product_c/joinStepBidding/".$row->Product_ID."/1\"><button type=\"button\" class=\"btn btn-default\">Step Bid</button></a>";
 										echo "</div>";
@@ -164,7 +164,7 @@
 					<br><br>
 					<!--search -->
 					
-
+					<a id="hi">asdasdasd</a>
 				</div><!-- row -->
 		
 			</div><!-- container -->
@@ -276,7 +276,11 @@
 	    // alert(p);
 
 	 }
-	 $('#t0').hide();
+	 alert('l');
+$('#hi').hide();
+  	$('#length').hide();
+  	// alert('l');
+  	alert('s');
 	</script>
 
 <!-- Bootstrap core JavaScript
