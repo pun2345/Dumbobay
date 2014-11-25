@@ -38,11 +38,11 @@ class Payment_c extends CI_Controller {
     //This method will have the credentials validation
     $data['price']=$price;
     $transaction_ids = $this->session->flashdata("cart");
+    $this->session->keep_flashdata("cart");
     $session_data = $this->session->userdata('logged_in');
       $data['user_id'] = $session_data['user_id'];
       $data['username'] = $session_data['username'];
       $data['type'] = $session_data['type'];
-      $
     $products = $this->session->flashdata("cart2");
     $this->session->keep_flashdata("cart2");
     $data['products'] = $products;
@@ -67,6 +67,7 @@ class Payment_c extends CI_Controller {
         Feedback($transaction_id);
       }
       // $this->session->set_flashdata("cart2",$products);
+    $this->session->keep_flashdata("cart");
     $this->session->keep_flashdata("cart2");
       redirect('cart_c/afterPaid');
     }

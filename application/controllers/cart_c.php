@@ -80,7 +80,7 @@ class Cart_c extends CI_Controller {
     }
     $this->session->set_flashdata("cart",$transaction_ids);
     $this->session->set_flashdata("cart2",$products->result());
-    redirect('payment_c/index/'.$sumamount);
+    redirect('payment_c/pay/'.$sumamount);
   }
   function afterPaid(){
     $session_data = $this->session->userdata('logged_in');
