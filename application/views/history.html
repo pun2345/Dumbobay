@@ -20,26 +20,18 @@
 
     <script type="text/javascript">
 
-     function clicktest() {
-      var clicked = document.getElementById("rating5");
-      var click5 = clicked.checked
-      if(click5){
+     function rate1(rateid) {
+      var clicked = document.getElementById(rateid);
+      var isClick = clicked.checked
+      if(isClick){
       document.getElementById("rating1").disabled = true;
       document.getElementById("rating2").disabled = true;
       document.getElementById("rating3").disabled = true;
       document.getElementById("rating4").disabled = true;
       document.getElementById("rating5").disabled = true;
       }
-     }
-     function clicktest1() {
-      
-      document.getElementById("rating1").disabled = true;
-      document.getElementById("rating2").disabled = true;
-      document.getElementById("rating3").disabled = true;
-      document.getElementById("rating4").disabled = true;
-      document.getElementById("rating5").disabled = true;
-      
-     }
+     
+     
 
     </script>
 
@@ -101,8 +93,9 @@
           <ol style="list-style-type:none; padding-left: 0px">
 
             <?php
+            
               foreach ($transactions->result() as $row) {
-               print_r($row);
+              
               echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px">';
               echo '<div class="row">';
                 echo '<div class="col-md-3">';
@@ -118,20 +111,15 @@
                 echo '</div>';
                 echo '<div class="col-md-4">';
                   echo "<h3>".$row->product_name."</h3>";
-                   
+                  
+                     echo "<strong>Seller: </strong>".$row->seller_name."<br>";
+ 
                  echo "<a href=\"product_c/viewProductDetail/".$row->product_id."\">more info...</a>";
                 echo '</div>';
                 echo '<div class="col-md-5">';
-                  echo '<div class="row" style="padding-top:10px">';
-                    echo '<div class="col-md-5">';
-                     echo "<strong>Seller: </strong>".$row->seller_name."<br>";
-                    echo '</div>';
-                  
-                    echo '<div class="col-md-6">';
-                    echo '</div>';
-                  echo '</div>';
+                
 
-                  echo '<div class="row">';
+                  echo '<div class="row" style="padding-bottom:20px;">';
                     echo '<br>';
                     echo '<div class="col-md-5">';
                      echo "Price: ".$row->price;
@@ -143,22 +131,31 @@
                     echo '</div>';
                   echo '</div>';
                   if($row->status=="Paid" || $row->status=="Shipped"){
+                    
+                    echo'<div class="form-group" style="padding-left:0px;">
+                          <label for="select" class="col-md-2 control-label">Rate</label>
+                          <div class="col-md-10">
+                            <select class="form-control" id="select">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+                          </div>
+                        </div>';
+                    echo'<div class="form-group">
+                          <label for="textArea" class="col-md-2 control-label">Review</label>
+                          <div class="col-md-10">
+                            <textarea class="form-control" rows="2" id="textArea"></textarea>
+                          </div>
+                        </div>';
                     echo '<div class="row">';
                     echo '<br>';
-                    echo'<div class="col-md-5">';
+                    echo'<div class="col-md-3 col-md-offset-8" style="padding-top:10px; padding-left:30px">';
                     echo'<button class="btn bnt-default">Review</button>';
                     echo'</div>';
                     echo'</div>';
-                    if($row->seller_score==2){clicktest1();}
-                    echo'<div class="row">
-                        <span class="star-rating">
-                         <input type="radio" name="rating" value="1" id="rating1"><i></i>
-                         <input type="radio" name="rating" value="2" id="rating2"><i></i>
-                         <input type="radio" name="rating" value="3" id="rating3"><i></i>
-                         <input type="radio" name="rating" value="4" id="rating4"><i></i>
-                         <input type="radio" name="rating" value="5" id="rating5" onclick="clicktest();"><i></i>
-                         </span>
-                         </div>';
                   }
                 echo '</div>';
               echo '</div>';
