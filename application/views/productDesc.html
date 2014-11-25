@@ -58,15 +58,49 @@
             <h1><?php echo $product->Name; ?></h1><!-- detail of each type (2 type)-->
             <?php
               if($product->Type==1){
-                echo '<p>Price: '.$product->Price.' Baht';
-                echo '<br>Seller: ';
-                echo '<p>Details: '.'</p>';
-            } else {
-                echo '<p>Current Max Bid: '.$product->Current_Max_Bid.' Baht';
-                echo '<br>Time left: '.$product->End_Date;
-                echo '<br>Seller: ';
-                echo '<p>Details: '.'</p>';
-            }
+                
+                echo '<br>Price: '.$product->Price. 'Baht';
+                echo '<br>Quantity: '.$product->Quantity. ' ea';
+                echo '<br>Announcement date: '.$product->Datetime;
+                echo '<br>Seller: '.$seller_name;
+                echo '<br>Brand: '.$product->Brand;
+                echo '<br>Model: '.$product->Model;
+                echo '<br>Capacity: '.$product->Capacity;
+                echo '<br>Size: '.$product->Size;
+                echo '<br>Property: '.$product->Property;
+                echo '<br>Defect: '.$product->Defect;
+                echo '<br>Quality: '.$product->Quality;
+                echo '<br>Payment: '.$product->Payment;
+                echo '<br>Packaging: '.$product->Packaging;
+                echo '<br>Delivery fee: '.$product->Delivery_Fee;
+                echo '<br>Delivery confirmation: '.$product->Delivery_Confirmation;
+                echo '<br>Tax: '.$product->Tax;
+                echo '<br>Return product: '.$product->Return_Product;
+                echo '<br>Return fee: '.$product->Return_Fee.'</p>';
+            } else if($product->Type==2) {
+                echo '<p>Auction status: '.$product->Status;
+                echo '<br>Current price: '.$product->Current_Price.' Baht';
+                echo '<br>Start price: '.$product->Price. 'Baht';
+                echo '<br>Bid Increment: '.$product->Bid_Increment. 'Baht';
+                echo '<br>End of auction date: '.$product->End_Date;
+                echo '<br>Auction start date: '.$product->Datetime;
+                echo '<br>Seller: '.$seller_name;
+                echo '<br>Brand: '.$product->Brand;
+                echo '<br>Model: '.$product->Model;
+                echo '<br>Capacity: '.$product->Capacity;
+                echo '<br>Size: '.$product->Size;
+                echo '<br>Property: '.$product->Property;
+                echo '<br>Defect: '.$product->Defect;
+                echo '<br>Quality: '.$product->Quality;
+                echo '<br>Payment: '.$product->Payment;
+                echo '<br>Packaging: '.$product->Packaging;
+                echo '<br>Delivery fee: '.$product->Delivery_Fee;
+                echo '<br>Delivery confirmation: '.$product->Delivery_Confirmation;
+                echo '<br>Tax: '.$product->Tax;
+                echo '<br>Return product: '.$product->Return_Product;
+                echo '<br>Return fee: '.$product->Return_Fee.'</p>';
+
+                     }
             ?>
 
             <a href="javascript:window.history.go(-1);"><button type="button" class="btn btn-default">Back</button></a>
