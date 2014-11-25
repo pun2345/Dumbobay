@@ -20,7 +20,7 @@ Class message_m extends CI_Model
 		}
 
 		function getUserMessage($user_id){
-			return $this->db->query("select * from Message where Receiver_ID =$user_id");
+			return $this->db->query("select * from Message where Receiver_ID =$user_id order by Datetime desc");
 		}
 		function getMessage($message_id){
 			return $this->db->query("select * from Message where Message_ID = $message_id")->row();
