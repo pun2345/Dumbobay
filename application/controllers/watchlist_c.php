@@ -19,15 +19,7 @@
       		$data['username'] = $session_data['username'];
       		$data['type'] = $session_data['type'];
 			$data['products'] = $this->transaction_m->getWatchlist($data['user_id']);
-   	        $this->form_validation->set_rules('maxbid', 'maxbid', 'require|css_clean');
-			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
-		    {
-		        $this->load->view('watchlist.html',$data);
-		    }
-      	    else // passed validation proceed to post success logic
-	        {
-			}
-			//$this->load->view('watchlist.html',$data);	
+			$this->load->view('watchlist.html',$data);	
 		}
 
 		function productDetail($product_id){
