@@ -1,4 +1,6 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+
 class Timer extends CI_Controller {
 	 function __construct()
   	{
@@ -51,6 +53,9 @@ class Timer extends CI_Controller {
 				$this->member_m->deactivateMember($row->Buyer_ID);
 			}
 		}
+	}
+	public function test($x = ''){
+		echo "test ".$x;
 	}
 }
 ?>
