@@ -65,21 +65,17 @@
       <div class="container">
         <div>
 
-          <div class="col-md-10 col-md-offset-1" style="padding-top:50px; padding-bottom:25px">
-            <div class="row">
-              
-              <div class="col-md-8" style="padding-left:20px">
-                <h1 style="color:black;padding-top:30px;padding-left:0px">Add product</h1>
-              </div>
-              
-            </div>
+          <div class="container w">
+            <div class="container">
+              <div class="row centered">
+                <h1>Products</h1>
+              </div><!-- row -->
+            </div><!-- container -->
           </div>
           <div class="row col-md-10 col-md-offset-1">
             <?php echo validation_errors(); ?>
             <?php echo $this->session->flashdata("message"); ?>
             <?php echo form_open_multipart("product_c/newProduct"," class='form-horizontal' id='newProduct-form' name='newProduct-form' onsubmit='return validateForm()'");?>
-
-            
               <fieldset>
                 <legend></legend>
                 <div class="form-group">
@@ -202,7 +198,7 @@
                 
                 <div class="form-group">
                   <div class="col-md-10 col-md-offset-2">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                     <button class="btn btn-default">Cancel</button>
                     
                   </div>
@@ -227,19 +223,6 @@
     </script>
     ';
 ?>
-    <!-- FOOTER -->
-    <div id="f" style="margin-top:50px">
-      <div class="container">
-        <div class="row">
-        <div class="col-md-6 col-md-push-2">
-          <img src="assets/img/DumboBay-Logo-b.png">
-        </div>
-        <div class="col-md-6 col-md-push-2">
-          <?php echo img("assets/img/Frappe-Logo-bg-sm.png");?>
-        </div>
-        </div><!-- row -->
-      </div><!-- container -->
-    </div><!-- Footer -->
 
 
     <!-- Bootstrap core JavaScript
@@ -254,60 +237,86 @@
   <script>
 
     function validateForm() {
-      // var username = document.forms["newProduct-form"]["username"].value;
-      // var password = document.forms["newProduct-form"]["password"].value;
-      // var repassword = document.forms["newProduct-form"]["re-password"].value;
-      // var name = document.forms["newProduct-form"]["name"].value;
-      // var surname = document.forms["newProduct-form"]["surname"].value;
-      // var address = document.forms["newProduct-form"]["address"].value;
-      // var email = document.forms["newProduct-form"]["email"].value;
-      // var tel = document.forms["newProduct-form"]["telephone"].value;
+      
+      var productName = document.forms["newProduct-form"]["Name"].value;
+
+      var prodiuctProperty = document.forms["newProduct-form"]["Property"].value;
+
+      var productQuality = document.forms["newProduct-form"]["Quality"].value;
+
       var enddate = document.forms["newProduct-form"]["End_Date"].value;
+
+      var quantity = document.forms["newProduct-form"]["Quantity"].value;
+
+      var price = document.forms["newProduct-form"]["Price"].value;
+
+      var packaging = document.forms["newProduct-form"]["Packaging"].value;
+
+      var deliveryFee = document.forms["newProduct-form"]["Delivery_Fee"].value;
+
+      var deliveryConfirmation = document.forms["newProduct-form"]["Delivery_Confirmation"].value;
+
+      var refundProduct = document.forms["newProduct-form"]["Refund_Product"].value;
+
+      var tax = document.forms["newProduct-form"]["Tax"].value;
+
+      var message ="";
+
+      if (!validateProductName(productName)) {
+        alert("Product name is too long. Product name cannot exceed 30 characters");
+        return false;
+      }
+
+      if (!validateProductDetail(prodiuctProperty)) {
+        alert("Product property is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+
+      if (!validateProductDetail(productQuality)) {
+        alert("Product condition is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+
       if (!validateExpiredDate(enddate)) {
         alert("Your Date is invalid.");
         return false;
       }
-      // var message ="";
 
-      // if (!validateUsername(username) ) {
-      //   alert("Your username is invalid.");
-      //   return false;
-      // }
+      if (!validateDigit(quantity)) {
+        alert("Your quantity is invalid.");
+        return false;
+      }
 
-      // if (!validatePassword(password) ) {
-      //   alert("Your password is invalid.");
-      //   return false;
-      // }
+      if (!validateDigit(price)) {
+        alert("Your price is invalid.");
+        return false;
+      }
 
-      // if (repassword==null || repassword=="" ) {
-      //   alert("Re-password is required.");
-      //   return false;
-      // }
-      // if (password!=repassword ) {
-      //   alert("Please try again Re-password. It doesn't match with your password.");
-      //   return false;
-      // }
+      if (!validateProductDetail(packaging)) {
+        alert("Your packaging detail is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
 
-      // if (name.length+surname.length > 50){
-      //   alert("Name and surname is over 50 characters.");
-      //   return false;
-      // }
-      // if (!validateName(name)||!validateName(surname)){
-      //   alert("Your name or surname is invalid.");
-      //   return false;
-      // }
-      // if (!validateAddress(address)){
-      //   alert("Your address is invalid.");
-      //   return false;
-      // }
-      // if (!validateEmail(email)){
-      //   alert("Your e-mail is invalid.");
-      //   return false;
-      // }
-      // if (!validateTelephone(tel)){
-      //   alert("Your telephone number is invalid.");
-      //   return false;
-      // }
+      if (!validateDigit(deliveryFee)) {
+        alert("Your delivery fee is invalid.");
+        return false;
+      }
+
+      if (!validateProductDetail(deliveryConfirmation)) {
+        alert("Your delivery confirmation detail is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+
+      if (!validateProductDetail(refundProduct)) {
+        alert("Your refund policy is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+
+      if (!validateProductDetail(tax)) {
+        alert("Your other fee detail is too long. Product name cannot exceed 250 characters");
+        return false;
+      }
+      
     }
 
   </script>

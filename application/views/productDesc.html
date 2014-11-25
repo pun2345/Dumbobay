@@ -16,7 +16,7 @@
   <body>
 
     <!-- Fixed navbar -->
-    <<?php
+    <?php
       if($type==0){
         include 'guest_menu.html';
       }
@@ -51,38 +51,71 @@
 				</div>
         
         <div class="col-md-10 col-md-offset-1 border-radius" style="background-color:white">
-          <div class="row centered" >
-            <img src=<?php echo '"'.base_url().'assets/img/'.$product->Image.'"' ?> width="350px" height="300" style="margin:20px 20px">
-          </div>
-          <div class="row" style="margin-left:40px;margin-right:40px;margin-bottom:40px">
+          <div class="row" >
+            <img class="col-md-5" src=<?php echo '"'.base_url().'assets/img/'.$product->Image.'"' ?> width="350px" height="300" style="margin:20px 20px">
+            <div class="col-md-5" style="margin-left:40px;margin-right:40px;margin-bottom:40px">
             <h1><?php echo $product->Name; ?></h1><!-- detail of each type (2 type)-->
             <?php
+              
               if($product->Type==1){
-                echo '<p>Price: '.$product->Price.' Baht';
-                echo '<br>Seller: ';
-                echo '<p>Details: '.'</p>';
-            } else {
-                echo '<p>Current Max Bid: '.$product->Current_Max_Bid.' Baht';
-                echo '<br>Time left: '.$product->End_Date;
-                echo '<br>Seller: ';
-                echo '<p>Details: '.'</p>';
-            }
+                echo '<br><strong>Price: </strong>'.$product->Price. ' Baht';
+                echo '<br><strong>Quantity: </strong>'.$product->Quantity. ' ea';
+                echo '<br><strong>Announcement date: </strong>'.$product->Datetime;
+                echo '<br><strong>Seller: </strong>';
+                echo '<br><br><h3>Details</h3>';
+                echo '<br><strong>Brand: </strong>'.$product->Brand;
+                echo '<br><strong>Model: </strong>'.$product->Model;
+                echo '<br><strong>Capacity: </strong>'.$product->Capacity;
+                echo '<br><strong>Size: </strong>'.$product->Size;
+                echo '<br><strong>Property: </strong>'.$product->Property;
+                echo '<br><strong>Defect: </strong>'.$product->Defect;
+                echo '<br><strong>Quality: </strong>'.$product->Quality;
+                echo '<br><strong>Payment: </strong>'.$product->Payment;
+                echo '<br><strong>Packaging: </strong>'.$product->Packaging;
+                echo '<br><strong>Delivery fee: </strong>'.$product->Delivery_Fee;
+                echo '<br><strong>Delivery confirmation: </strong>'.$product->Delivery_Confirmation;
+                echo '<br><strong>Tax: </strong>'.$product->Tax;
+                echo '<br><strong>Return product: </strong>'.$product->Return_Product;
+                echo '<br><strong>Return fee: </strong>'.$product->Return_Fee.'</p>';
+            } else if($product->Type==2) {
+                $status="";
+              if($product->Product_Status==0) $status='Auction open';
+              else if($product->Product_Status==1) $status='Auction closed';
+           
+                  
+                echo '<p><strong>Auction status: </strong>'.$status;
+                echo '<br><strong>Current price: </strong>'.$product->Current_Price.' Baht';
+                echo '<br><strong>Start price: </strong>'.$product->Price. ' Baht';
+                echo '<br><strong>Bid Increment: </strong>'.$product->Bid_Increment. 'Baht';
+                echo '<br><strong>End of auction date: </strong>'.$product->End_Date;
+                echo '<br><strong>Auction start date: </strong>'.$product->Datetime;
+                echo '<br><strong>Seller: </strong>'.$seller_name;
+                echo '<br><br><h3>Details</h3>';
+                echo '<br><strong>Brand: </strong>'.$product->Brand;
+                echo '<br><strong>Model: </strong>'.$product->Model;
+                echo '<br><strong>Capacity: </strong>'.$product->Capacity;
+                echo '<br><strong>Size: </strong>'.$product->Size;
+                echo '<br><strong>Property: </strong>'.$product->Property;
+                echo '<br><strong>Defect: </strong>'.$product->Defect;
+                echo '<br><strong>Quality: </strong>'.$product->Quality;
+                echo '<br><strong>Payment: </strong>'.$product->Payment;
+                echo '<br><strong>Packaging: </strong>'.$product->Packaging;
+                echo '<br><strong>Delivery fee: </strong>'.$product->Delivery_Fee;
+                echo '<br><strong>Delivery confirmation: </strong>'.$product->Delivery_Confirmation;
+                echo '<br><strong>Tax: </strong>'.$product->Tax;
+                echo '<br><strong>Return product: </strong>'.$product->Return_Product;
+                echo '<br><strong>Return fee: </strong>'.$product->Return_Fee.'</p>';
+
+                     }
             ?>
 
             <a href="javascript:window.history.go(-1);"><button type="button" class="btn btn-default">Back</button></a>
           </div>
-          <div class="row">
-            
           </div>
         </div>
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- headerwrap -->
-
-
-
-	
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

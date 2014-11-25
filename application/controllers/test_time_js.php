@@ -1,6 +1,6 @@
 <?php
 
-class View_test extends CI_Controller {
+class Test_time_js extends CI_Controller {
 
   function __construct()
   {

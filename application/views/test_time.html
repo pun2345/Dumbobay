@@ -5,6 +5,9 @@
       include 'HTMLHeader.html';
     ?>
     <style>
+      h3{
+        text-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
+      }
       
       a {
         color:#F3F781;
@@ -37,7 +40,7 @@
     <div class="container">
       <div class="row centered">
         <div class="col-lg-8 col-lg-offset-2">
-        <h1 style="margin-top:50px">Welcome!</h1><br><h1 style="margin-top:-20px;margin-bottom:40px;font-size:40px">You are our customer.</h1>
+        <h1>- Customer -</h1>
         <h3><a href="product_c" class=""><b>> Product <</b></a></h3>
         <h3><a href="home_c/cart" class=""><b>> My Cart <</b></a></h3>
         <h3><a href="home_c/watchlist" class=""><b>> Watch List <</b></a></h3>
@@ -47,13 +50,54 @@
       </div><!-- row -->
     </div><!-- container -->
   </div><!-- headerwrap -->
-	
+	<div id="time"><?php echo $Date;?></div>
+  <div id="time1">10</div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
    <script src=<?echo base_url("assets/js/bootstrap.min.js");?>></script>
-  
+  <script>
+  function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+  }
+
+  function startTime() {
+      var x = document.getElementById("time").innerHTML;
+      var dx = new Date(x);
+      var today = new Date();
+
+      var diff = new Date(dx - today);
+
+      var yy = diff.getUTCFullYear()-1970;
+      var mm = diff.getUTCMonth();
+      var dd = diff.getUTCDate()-1;      
+      var hh = diff.getUTCHours()-7;    
+      var min = diff.getUTCMinutes();
+      var sec = diff.getUTCSeconds();
+      //var dd = diff.getDate();
+      //var mm = diff.getMonth()+1; //January is 0!
+      //var yyyy = diff.getFullYear();
+
+      //var h = today.getDay();
+      //var h = diff.getHours();
+      //var m = today.getMonth();
+      //var s = today.getYear();
+      // add a zero in front of numbers<10
+
+
+      //m = checkTime(dd);
+      //s = checkTime(mm);
+      document.getElementById('time1').innerHTML = yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec;
+      t = setTimeout(function () {
+          startTime()
+      }, 500);
+    }
+  startTime();
+  </script>
   </body>
 </html>

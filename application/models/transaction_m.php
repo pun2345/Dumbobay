@@ -22,7 +22,7 @@ Class transaction_m extends CI_Model {
 		return $this->db->get_where('transaction',array('Transaction_ID'=>$transaction_id))->row();
 	}
 	function getHistoryCustTransaction($buyer_id){
-		return  $this->db->query("Select transaction_id, product_id, product.name as product_name, status, transaction.price,  transaction.quantity, user.firstname as seller_name 
+		return  $this->db->query("Select transaction_id, product_id, product.name as product_name, status, transaction.price, transaction.Seller_Score,  transaction.quantity, user.firstname as seller_name 
 			from transaction 
 			join product using (product_id) 
 			join user on (transaction.seller_id = user.user_id) 
@@ -91,7 +91,13 @@ Class transaction_m extends CI_Model {
 		}else return "false";
 	}
 	function getWatchList($user_id){
-		return $this->db->query("select * from join_bidding join product using (product_ID) join product_bid using (product_ID) where user_id =$user_id");
+		$this->db->select('*, join_bidding.Status AS Bidding_Status, product_bid.status AS Product_Status, join_bidding.Datetime AS Bidding_Datetime, product.Datetime AS Product_Datetime');
+		$this->db->from('join_bidding');
+		$this->db->where('join_bidding.User_ID', $user_id);
+		$this->db->join('product', 'product.product_id = join_bidding.product_id');
+		$this->db->join('product_bid', 'product.product_id = product_bid.product_id');
+		$query = $this->db->get(); 
+		return $query;
 	}
 	function getTopTenBestSeller(){
 		return $this->db->query("

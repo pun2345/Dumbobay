@@ -9,6 +9,9 @@
 			$this->load->model('product_m');
 			$this->load->model('transaction_m');
 			$this->load->model('bidding_m');
+			$this->load->model('member_m');
+			$this->load->library('form_validation');
+			$this->load->helper('form');
 		}
 
 		function index(){
@@ -16,12 +19,7 @@
 			$data['user_id'] = $session_data['user_id'];
       		$data['username'] = $session_data['username'];
       		$data['type'] = $session_data['type'];
-<<<<<<< HEAD
 			$data['products'] = $this->transaction_m->getWatchlist($data['user_id']);
-=======
-			$data['pruducts'] = $this->transaction_m->getWatchlist($data['user_id'])
-			$data['joinbids'] = $this->bidding_m->getJoinBiddingUser($data['user_id'],$data['products']->result()->)
->>>>>>> 46149821093e9aa00c080dc460fb727999beefa6
 			$this->load->view('watchlist.html',$data);	
 		}
 
@@ -30,16 +28,19 @@
 			$data['user_id'] = $session_data['user_id'];
       		$data['type'] = $session_data['type'];
       		$data['username'] = $session_data['username'];
-			$data['product'] = $this->product_m->getBidProductDetail($product_id);
-			$this->load->view('watchlistdetail.html',$data);
+			$data['product'] = $this->product_m->getProductDetail($product_id);
+			$sellerid = $data['product']->Seller_ID;
+			$tmp = $this->member_m->getMemberDetail($sellerid);
+			$data['seller_name'] = $tmp->Username;
+			$this->load->view('productDesc.html',$data);
 		}
 
 		function maxBidding($product_id){
-			redirect('bidding_c/maxBidding/',$product_id);
+			redirect('bidding_c/maxBidding/'.$product_id);
 		}
 
 		function stepBidding($product_id){
-			redirect('bidding_c/stepBidding/',$product_id);
+			redirect('bidding_c/stepBidding/'.$product_id);
 		}
 
 		function payment($product_id){
