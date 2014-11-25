@@ -9,6 +9,7 @@
 			$this->load->model('product_m');
 			$this->load->model('transaction_m');
 			$this->load->model('bidding_m');
+			$this->load->model('member_m');
 			$this->load->library('form_validation');
 			$this->load->helper('form');
 		}
