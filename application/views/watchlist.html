@@ -76,6 +76,7 @@ include 'HTMLHeader.html';
                   </form>
                 </li>
                 <?php 
+                $x=0;
                 foreach ($products->result() as $row){
                   $highlight='';
                   $disabled='';
@@ -101,7 +102,7 @@ include 'HTMLHeader.html';
                         <h3>'.$row->Name.'</h3>
                         <h4><strong>Status: </strong>'.$status.'</h4>
                         <strong>Due date: </strong>'.$row->End_Date.'
-                        <br><strong>Time left: </strong>'.$Date.'
+                        <br><strong>Time left: </strong><a id="time'.$x.'">00:00:00:00</a>
                         <a href="'.'watchlist_c/productDetail/'.$row->Product_ID.'">
                         <br>More info...</a>
                       </div>
@@ -140,10 +141,21 @@ include 'HTMLHeader.html';
                     </div>
                   </div>
                 </li>';
+                $x++;
               }
               ?>
 
             </ol>
+          </div>
+          <div style="display:none">
+    <?php
+            $x=0;
+            foreach($products->result() as $row){
+              echo '<a id="t'.$x.'">'.$row->End_Date.'</a>';
+              $x++;
+            }
+            echo '<a id="length">'.$x.'</a>';
+          ?>
           </div>
         </div><!-- row -->
       </div><!-- container -->
@@ -158,6 +170,46 @@ include 'HTMLHeader.html';
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src=<?php echo base_url("assets/js/validation_function.js");?> ></script>
     <script>
+      function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+  }
+
+  function startTime(t,t1) {
+      var x = document.getElementById(t).innerHTML;
+      var dx = new Date(x);
+      var today = new Date();
+
+      var diff = new Date(dx - today);
+
+      var yy = diff.getUTCFullYear()-1970;
+      var mm = diff.getUTCMonth();
+      var dd = diff.getUTCDate()-1;      
+      var hh = diff.getUTCHours()-7;    
+      var min = diff.getUTCMinutes();
+      var sec = diff.getUTCSeconds();
+      //var dd = diff.getDate();
+      //var mm = diff.getMonth()+1; //January is 0!
+      //var yyyy = diff.getFullYear();
+
+      //var h = today.getDay();
+      //var h = diff.getHours();
+      //var m = today.getMonth();
+      //var s = today.getYear();
+      // add a zero in front of numbers<10
+
+      var a = t;
+      var b = t1;
+      //m = checkTime(dd);
+      //s = checkTime(mm);
+      if (diff>0) document.getElementById(t1).innerHTML = " "+yy+":"+mm+":"+dd+":"+hh+":"+min+":"+sec+" ";
+      if(diff>0 ) t = setTimeout(function () {
+          startTime(a,b)
+      }, 500);
+    }
+ 
       function validateForm() {
         var maxbid = document.forms["maxbid-form"]["maxbid"].value;
 
@@ -168,8 +220,18 @@ include 'HTMLHeader.html';
         }
 
       }
-        // startTime();
+      var t = 0;
+  // alert(p);
+   for (t=0;t<document.getElementById('length').innerHTML;t++){
+    
+      startTime('t'+t,'time'+t);
+      // startTime('t0','time0');
+      // alert(p);
 
+   }
+        // startTime();
+$('#hi').hide();
+    $('#length').hide();
     </script>
   </body>
   </html>

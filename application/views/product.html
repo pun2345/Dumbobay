@@ -144,7 +144,7 @@
 										echo "</div>";
 										echo "<div class=\"col-lg-3 centered auctionbutton\">";
 											echo "<p>Time left: <a id=\"time".$x."\">  00:00:00:00:00  </a></p>";
-											if($orw->Status==) echo "<a href=\"product_c/joinStepBidding/".$row->Product_ID."\"><button type=\"button\" class=\"btn btn-default\">Step Bid</button></a>";
+											if($row->Status==0) echo "<a href=\"product_c/joinStepBidding/".$row->Product_ID."\"><button type=\"button\" class=\"btn btn-default\">Step Bid</button></a>";
 										echo "</div>";
 									echo "</div>";
 									$x++;
@@ -278,11 +278,11 @@
 	    // alert(p);
 
 	 }
-	 alert('l');
+	 // alert('l');
 $('#hi').hide();
   	$('#length').hide();
   	// alert('l');
-  	alert('s');
+  	// alert('s');
 	</script>
 
 <!-- Bootstrap core JavaScript
