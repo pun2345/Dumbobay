@@ -233,8 +233,8 @@ class Product_c extends CI_Controller {
   function check_quantity(){
     $type = $this->input->post('type');
     if($type == 1){ // bidding
-        $end_datetime = $this->input->post('End_Date');
-        if($end_datetime==null){
+        $quantity = $this->input->post('Quantity');
+        if($quantity==null){
           $this->form_validation->set_message("check_quantity","Quantity is required");
           return FALSE;
         }
