@@ -22,103 +22,152 @@
 			$current_maxbid = $product->Current_Max_Bid;
 			$current_price = $product->Current_Price;
 			$bid_increment = $product->Bid_Increment;
+
+			$newprice= $price;  // Normalize Price
 			if($bidding_type == 'auto'){
-				$maxbid = $price;
-				if($maxbid <= $current_price || $maxbid < $current_price + $bid_increment){
-					$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'manual');
-					return FALSE;
-				}
-				else if($current_maxbid==0){
-					if($maxbid > $current_price + $bid_increment){
-						$this->bidding_m->setCurrentPrice($product_id,$current_price+$bid_increment);
-						$this->bidding_m->setCurrentMaxBid($product_id,$maxbid);
-						$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
-						if($oldWinner != null){
-							$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
-							$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-							$this->notifyBidLosingEmail($oldWinner,$product_id);
-						}
-						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
-						$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price+$bid_increment,'auto',1);
-					}
-					else if($maxbid > $current_price){
-						$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price,'manual',0);
-						$this->notifyBidLosingEmail($user_id,$product_id);
-					}
-				}
-
-				else if($maxbid > $current_maxbid){
-					$turns = ($current_maxbid - $current_price) / $bid_increment;
-					$turn = $turns % 2;
-					if($turns == 0){
-						$newprice = $current_price;
-					}
-					else{
-						$newprice = $current_price + ($bid_increment * $turns);
-					}
-					$this->bidding_m->setCurrentPrice($product_id,$newprice);
-					$this->bidding_m->setCurrentMaxBid($product_id,$maxbid);
-					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
-					if($oldWinner != null){
-						$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
-						$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-						$this->notifyBidLosingEmail($oldWinner,$product_id);
-					}
-					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
-					$this->bidding_m->setJoinBidding($user_id,$product_id,$newprice,'auto',1);
-
-				}
-				else if($maxbid < $current_maxbid){
-					$turns = ($current_maxbid - $current_price) / $bid_increment;
-					$turn = $turns % 2;
-					if($turns == 0){
-						$newprice = $current_price;
-					}
-					else {
-						$newprice = $current_price + ($bid_increment * $turns);
-					}
-					$this->bidding_m->setCurrentPrice($product_id,$newprice);
-					$this->bidding_m->setJoinBidding($user_id,$product_id,$new_price,'manual',0);
-					$this->notifyBidLosingEmail($user_id,$product_id);
-				}
-				else if($maxbid == $current_maxbid){
-					$turns = ($current_maxbid - $current_price) / $bid_increment;
-					$turn = $turns % 2;
-					if($turns == 0){
-						$newprice = $current_price;
-					}
-					else {
-						$newprice = $current_price + ($bid_increment * $turns);
-					}
-					$this->bidding_m->setCurrentPrice($product_id,$newprice);
-					$this->bidding_m->setJoinBidding($user_id,$product_id,$new_price,'manual',0);
-					$this->notifyBidLosingEmail($user_id,$product_id);
-				}
-
-			}
-			else if($bidding_type == 'manual'){
-				if($price <= $current_maxbid){
-					if($current_maxbid >= $price + $bid_increment){
-						$newprice = $price + $bid_increment;
-					}
-					else{
-						$newprice = $price;
-					}
-					$this->bidding_m->setCurrentPrice($product_id,$newprice);
-				}
-				else {
-					$this->bidding_m->setCurrentPrice($product_id,$price);
-					$this->bidding_m->setCurrentMaxBid($product_id,0);
-					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
-					if($oldWinner != null){
-						$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
-						$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
-						$this->notifyBidLosingEmail($oldWinner,$product_id);
-					}
-					$this->bidding_m->setJoinBidding($user_id,$product_id,$price,'manual',1);
-					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
+				$turns = ($current_maxbid - $current_price) / $bid_increment;
+				$turn = ($current_maxbid - $current_price) % $bid_increment;
+				if($turn != 0){
+					$newprice = $current_price + ($bid_increment * $turns);
+					$this->session->set_flashdata("message","Your Bid is Invalid. Your new Maxbid =".$newprice);
 				}
 			}
+			// Calculate Winner
+			if($newprice<=$current_maxbid){
+				$newprice = $price;
+				if($bidding_type == 'auto')
+				{
+					
+					$this->bidding_m->setJoinBidding($user_id,$product_id,$newprice,'auto',0);
+				}
+				else{//$bidding_type == manunal
+					$this->bidding_m->setJoinBidding($user_id,$product_id,$newprice,'maunal',0);
+				}
+
+				$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
+				if($price+$bid_increment<=$current_maxbid)
+				{
+					$this->bidding_m->setCurrentPrice($product_id,$price+$bid_increment);
+					$this->bidding_m->setJoinBiddingPrice($oldWinner,$product_id,$price+$bid_increment);
+				
+				}
+				else{//		$price+$bid_increment>Current Maxbid{
+					$this->bidding_m->setCurrentPrice($product_id,$current_maxbid);
+					$this->bidding_m->setJoinBiddingPrice($oldWinner,$product_id,$current_maxbid);
+				
+
+				}
+			}
+
+			else//$newprice>$current_maxbid
+			{
+				if($bidding_type == 'auto')
+				{
+					$this->bidding_m->setCurrentPrice($product_id,$current_maxbid+$bid_increment);
+					$this->bidding_m->setCurrentMaxBid($product_id,$newprice);	
+					$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price+$bid_increment,'auto',1);
+				}
+				else// manual
+				{
+					$this->bidding_m->setCurrentPrice($product_id,$newprice);
+					$this->bidding_m->setCurrentMaxBid($product_id,$newprice);
+					$this->bidding_m->setJoinBidding($user_id,$product_id,$newprice,'manual',1);
+				}
+
+				$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
+				if($oldWinner != null){
+					//$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,0);
+					$this->bidding_m->setJoinBiddingPriceStatus($oldWinner,$product_id,$current_maxbid,0);
+					//$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
+					$this->notifyBidLosingEmail($oldWinner,$product_id);
+				}
+				$this->bidding_m->setCurrentWinCust($product_id,$user_id);
+				
+			}
+
+
+
+
+// 			if($bidding_type == 'auto'){
+				
+// 				
+// 				$maxbid = $newprice;
+// z
+// 				if($maxbid <= $current_price || $maxbid < $current_price + $bid_increment){
+// 					$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'auto');
+// 					return FALSE;
+// 				}
+// 				else if($current_maxbid==0){
+// 					if($maxbid >= $current_price + $bid_increment){
+// 						$this->bidding_m->setCurrentPrice($product_id,$current_price+$bid_increment);
+// 						$this->bidding_m->setCurrentMaxBid($product_id,$maxbid);
+// 						$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
+// 						if($oldWinner != null){
+// 							//$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,0);
+// 							$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,$current_price,'manual',0);
+// 							//$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
+// 							$this->notifyBidLosingEmail($oldWinner,$product_id);
+// 						}
+// 						$this->bidding_m->setCurrentWinCust($product_id,$user_id);
+// 						$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price+$bid_increment,'auto',1);
+// 					}
+// 					// else if($maxbid > $current_price){
+// 					// 	$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price,'manual',0);
+						
+// 					// 	$this->notifyBidLosingEmail($user_id,$product_id);
+// 					// }/////////Unuse
+// 				}
+
+// 				else if($maxbid > $current_maxbid){///win
+// 					$this->bidding_m->setCurrentPrice($product_id,$maxbid);
+// 					$this->bidding_m->setCurrentMaxBid($product_id,$maxbid);
+// 					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
+// 					if($oldWinner != null){
+// 						//$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
+// 						$this->bidding_m->setJoinBidding($oldWinner,$product_id,$current_maxbid,'manual',0);
+// 						//$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
+// 						$this->notifyBidLosingEmail($oldWinner,$product_id);
+// 					}
+// 					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
+// 					$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'auto',1);
+
+// 				}
+// 				else if($maxbid <= $current_maxbid){
+// 					$this->bidding_m->setCurrentPrice($product_id,$maxbid);
+// 					$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'manual',0);
+// 					$this->notifyBidLosingEmail($user_id,$product_id);
+// 				}
+// 				// else if($maxbid == $current_maxbid){
+// 				// 	$this->bidding_m->setCurrentPrice($product_id,$maxbid);
+// 				// 	$this->bidding_m->setJoinBidding($user_id,$product_id,$maxbid,'manual',0);
+// 				// 	$this->notifyBidLosingEmail($user_id,$product_id);
+// 				// }
+
+// 			}
+// 			else if($bidding_type == 'manual'){
+// 				if($price <= $current_maxbid){
+// 					if($current_maxbid >= $price + $bid_increment){
+// 						$newprice = $price + $bid_increment;
+// 					}
+// 					else{
+// 						$newprice = $price;
+// 					}
+// 					$this->bidding_m->setCurrentPrice($product_id,$newprice);
+// 				}
+// 				else if{// price > maxbid
+// 					$this->bidding_m->setCurrentPrice($product_id,$price);
+// 					$this->bidding_m->setCurrentMaxBid($product_id,0);///////////////////??
+// 					$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
+// 					if($oldWinner != null){
+// 						//$this->bidding_m->setJoinBiddingType($oldWinner,$product_id,'manual');
+// 						$this->bidding_m->updateJoinBidding($oldWinner,$product_id,$current_maxbid,'manual',0){
+// 						//$this->bidding_m->setJoinBiddingStatus($oldWinner,$product_id,0);
+// 						$this->notifyBidLosingEmail($oldWinner,$product_id);
+// 					}
+// 					$this->bidding_m->setJoinBidding($user_id,$product_id,$price,'manual',1);
+// 					$this->bidding_m->setCurrentWinCust($product_id,$user_id);
+// 				}
+// 			}
 			return TRUE;
 		}
 
@@ -192,9 +241,13 @@
 
 		function initializeStepBidding($product_id){
 			$session_data = $this->session->userdata('logged_in');
-			$current_price = $this->bidding_m->getCurrentPrice($product_id);
-			$bid_increment = $this->bidding_m->getBidIncrement($product_id);
-			$this->bidding($session_data['user_id'],$product_id,$current_price+$bid_increment,'manual');
+			$isBid = $this->bidding_m->isJoinBidding($session_data['user_id'],$product_id);
+			if(!$isBid)
+			{
+				$current_price = $this->bidding_m->getCurrentPrice($product_id);
+				$bid_increment = $this->bidding_m->getBidIncrement($product_id);
+				$this->bidding($session_data['user_id'],$product_id,$current_price+$bid_increment,'manual');
+			}
 			redirect('watchlist_c');
 		}
 

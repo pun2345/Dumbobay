@@ -55,27 +55,38 @@ class Login_c extends CI_Controller {
     //echo $result['User_ID'];
     if($result){
       if($result['User_ID']!=0)
-      {
-          //echo $result->User_ID."";
-          //echo $result->Username."";
-        //echo $this->member_m->checkActivated($result['User_ID']);
-        if($this->member_m->checkActivated($result['User_ID'])==1)
-        { 
+        {
+            //echo $result->User_ID."";
+            //echo $result->Username."";
+          //echo $this->member_m->checkActivated($result['User_ID']);
+          if($result['Type']!=1){
+          if($this->member_m->checkActivated($result['User_ID'])==1)
+          { 
+            $sess_array = array(
+                'user_id' => $result['User_ID'],
+                'username' => $result['Username'],
+                'type' => $result['Type']
+              );
+            $this->session->set_userdata('logged_in', $sess_array);      
+            return TRUE;
+          }else{
+            $this->session->set_flashdata("message",'Please Activate your account first.');
+            if($this->session->flashdata("beforePay")){
+              $this->session->keep_flashdata("beforePay");
+            }
+            redirect("login_c");
+           //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
+           return false;
+          }
+        }
+        else{
           $sess_array = array(
-              'user_id' => $result['User_ID'],
-              'username' => $result['Username'],
-              'type' => $result['Type']
-            );
+                'user_id' => $result['User_ID'],
+                'username' => $result['Username'],
+                'type' => $result['Type']
+              );
           $this->session->set_userdata('logged_in', $sess_array);      
           return TRUE;
-        }else{
-          $this->session->set_flashdata("message",'Please Activate your account first.');
-          if($this->session->flashdata("beforePay")){
-            $this->session->keep_flashdata("beforePay");
-          }
-          redirect("login_c");
-         //$this->form_validation->set_message('check_database', 'Please Activate your account first.');
-         return false;
         }
       }
       else

@@ -93,6 +93,7 @@ include 'HTMLHeader.html';
                     if($row->Bidding_Status==1 && $row->Bid_Type=='auto') $maxbid=$row->Current_Max_Bid;
                     else $maxbid = '-';
 
+                    
                     echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px'.$highlight.'">
                     <div class="row">
                       <div class="col-md-3 centered" style="padding-top:10px">';
@@ -117,6 +118,7 @@ include 'HTMLHeader.html';
                             <strong>Current bid: </strong>'.$row->Current_Price.' baht
                             
                             <br><strong>Your bidding type: </strong>'.$row->Bid_Type.
+                            '<br><strong>Your Current bid: </strong>'.$row->Bid_Price.
                             '<br><strong>Your max bid: </strong>'.$maxbid.
                             '<br><strong>Bid Increment: </strong>'.$row->Bid_Increment.'
                           </div>
