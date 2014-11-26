@@ -91,7 +91,8 @@ include 'HTMLHeader.html';
                     }
 
                     if($row->Bidding_Status==1 && $row->Bid_Type=='auto') $maxbid=$row->Current_Max_Bid;
-                    else $maxbid = '-';
+                    elseif($row->Bidding_Status==0 && $row->Bid_Type=='auto') $maxbid =$row->Bid_Price;
+                    else $maxbid='-';
 
                     
                     echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px'.$highlight.'">
@@ -220,7 +221,8 @@ include 'HTMLHeader.html';
       function validateForm() {
         var maxbid = document.forms["maxbid-form"]["maxbid"].value;
 
-
+        //return true;
+        console.Log(validateDigit(maxbid));
         if (!validateDigit(maxbid)||maxbid==""||maxbid==null) {
           alert("Max bid is invalid.");
           return false;
