@@ -152,7 +152,7 @@ function losing_Bid($id,$product_id){
     $config['mailtype']     = 'text';
     $config['validation']   = TRUE;
 
-    echo "losing";
+    //echo "losing";
     $CI->email->initialize($config);	
 	$CI->email->from('Dumbobay@Dumbobay.com');
 	

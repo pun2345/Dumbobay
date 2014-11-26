@@ -63,14 +63,16 @@ Class bidding_m extends CI_Model
 		}
 		function setJoinBidding($user_id,$product_id,$price,$type,$status){
 			if($this->bidding_m->checkExistBidding($user_id,$product_id)){
-				echo "exist <br>";
+				//echo "exist <br>";
+
 				return $this->bidding_m->updateJoinBidding($user_id,$product_id,$price,$type,$status);
 			}else{
 				$data = array(
 					'User_ID' => $user_id,
 					'Product_ID' => $product_id,
 					'Bid_Price' => $price,
-					'Bid_Type' => $type
+					'Bid_Type' => $type,
+					'Status' => $status
 				);
 				$this->db->trans_start();
 				$this->db->insert('join_bidding', $data);
@@ -96,6 +98,7 @@ Class bidding_m extends CI_Model
 				);
 				$this->db->trans_start();
 				$this->db->where('User_ID', $user_id);
+				$this->db->where('Product_ID', $product_id);
 				$this->db->update('join_bidding', $data);
 				$complete = $this->db->affected_rows();
 				$this->db->trans_complete();
@@ -161,12 +164,11 @@ Class bidding_m extends CI_Model
 		}
 		function setJoinBiddingPriceStatus($user_id,$product_id,$price,$status){
 			$data = array(
-				'Bid_Type' => $price,
+				'Bid_Price' => $price,
 				'Status' => $status
 			);
 			$this->db->trans_start();
-			$this->db->where('User_ID', $user_id);
-			$this->db->where('Product_ID', $product_id);
+			$this->db->where('User_ID', $user_id)->where('Product_ID', $product_id);
 			$this->db->update('join_bidding', $data);
 			$complete = $this->db->affected_rows();
 			$this->db->trans_complete();

@@ -33,8 +33,10 @@
 				}
 			}
 			// Calculate Winner
-			if($newprice<=$current_maxbid){
-				$newprice = $price;
+			if($newprice<=$current_maxbid)
+			{
+				//echo "Loser";
+				//$newprice = $price;
 				if($bidding_type == 'auto')
 				{
 					
@@ -45,7 +47,7 @@
 				}
 
 				$oldWinner = $this->bidding_m->getCurrentWinCust($product_id);
-				if($price+$bid_increment<=$current_maxbid)
+				if($newprice+$bid_increment<=$current_maxbid)
 				{
 					$this->bidding_m->setCurrentPrice($product_id,$price+$bid_increment);
 					$this->bidding_m->setJoinBiddingPrice($oldWinner,$product_id,$price+$bid_increment);
@@ -61,14 +63,17 @@
 
 			else//$newprice>$current_maxbid
 			{
+				//echo "Winer";
 				if($bidding_type == 'auto')
 				{
+					//echo "1";
 					$this->bidding_m->setCurrentPrice($product_id,$current_maxbid+$bid_increment);
 					$this->bidding_m->setCurrentMaxBid($product_id,$newprice);	
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$current_price+$bid_increment,'auto',1);
 				}
 				else// manual
 				{
+					//echo "2";
 					$this->bidding_m->setCurrentPrice($product_id,$newprice);
 					$this->bidding_m->setCurrentMaxBid($product_id,$newprice);
 					$this->bidding_m->setJoinBidding($user_id,$product_id,$newprice,'manual',1);
