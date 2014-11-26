@@ -114,12 +114,13 @@ class Product_c extends CI_Controller {
     $this->form_validation->set_rules('Delivery_Confirmation', 'Delivery_Confirmation', 'trim|max_length[250]');
     $this->form_validation->set_rules('Tax', 'Tax', 'trim|max_length[250]');  
     $this->form_validation->set_rules('Quantity', 'Quantity', 'trim'); 
-    $this->form_validation->set_rules('End_Date', 'End_Date', 'trim'); 
+    $this->form_validation->set_rules('End_Date', 'End_Date', 'trim|callback_check_end_date'); 
 
     $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
     if($this->form_validation->run() == FALSE)
     {
+
       $this->load->view('add_product.html',$data);
     // $this->load->view('footer.html');
     }
@@ -165,6 +166,9 @@ class Product_c extends CI_Controller {
       }
       if($type == 2){ // bidding
         $end_datetime = $this->input->post('End_Date');
+        if($end_datetime==null){
+          $this->form_validation->set_message("end date required");
+        }
 
         $status = 0;
         $current_price = $price;
@@ -213,6 +217,30 @@ class Product_c extends CI_Controller {
         redirect('product_c/newProduct');
       }
     }
+  }
+  function check_end_date(){
+    $type = $this->input->post('type');
+    if($type == 2){ // bidding
+        $end_datetime = $this->input->post('End_Date');
+        if($end_datetime==null){
+          $this->form_validation->set_message("check_end_date","End date is required");
+          return FALSE;
+        }
+      }
+      return true;
+
+  }
+  function check_quantity(){
+    $type = $this->input->post('type');
+    if($type == 1){ // bidding
+        $end_datetime = $this->input->post('End_Date');
+        if($end_datetime==null){
+          $this->form_validation->set_message("check_quantity","Quantity is required");
+          return FALSE;
+        }
+      }
+      return true;
+
   }
   // function editDirectProduct($product_id){
   //   $session_data = $this->session->userdata('logged_in');

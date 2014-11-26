@@ -54,8 +54,7 @@
         include 'seller_menu.html'; 
       }
      ?> 
-
-
+         
     <div id="myheaderwrap">
       <div class="container">
         <div class="row centered">
@@ -75,7 +74,8 @@
               </div><!-- row -->
             </div><!-- container -->
           </div>
-          <div class="row col-md-10 col-md-offset-1">            
+          <div class="row col-md-10 col-md-offset-1">
+            <?php echo validation_errors() ?>
             <?php echo form_open_multipart("product_c/newProduct"," class='form-horizontal' id='newProduct-form' name='newProduct-form' onsubmit='return validateForm()'");?>
               <fieldset>
                 <legend></legend>
@@ -155,7 +155,7 @@
                 </div> -->
 
                 <div class="form-group" id="quantity">
-                  <label for="inputQuantity" class="col-md-2 control-label">Quantity</label>
+                  <label for="Quantity" class="col-md-2 control-label">Quantity</label>
                   <div class="col-md-10">
                     
                     <input type="text" class="form-control" id="Quantity" name ="Quantity" placeholder="1">
@@ -345,9 +345,6 @@
       }
 
       if (!validateDigit(returnFee)) {
-        if(returnFee==null){
-
-        }else{
         alert("Your refund fee is invalid");
         return false;
       }
