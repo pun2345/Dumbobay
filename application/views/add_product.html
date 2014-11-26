@@ -158,7 +158,7 @@
                   <label for="Quantity" class="col-md-2 control-label">Quantity</label>
                   <div class="col-md-10">
                     
-                    <input type="text" class="form-control" id="Quantity" name ="Quantity" placeholder="1">
+                    <input type="text" class="form-control" id="Quantity" name ="Quantity" value="1">
                     
                   </div>
                 </div>
@@ -209,7 +209,7 @@
                 <div class="form-group">
                   <label for="Return_Fee" class="col-md-2 control-label">Refund Fee</label>
                   <div class="col-md-10">
-                    <input class="form-control" rows="3" name="Return_Fee" id="Return_Fee" ></input>           
+                    <input class="form-control" rows="3" name="Return_Fee" id="Return_Fee" value="0"></input>           
                   </div>
                 </div>
 
@@ -231,7 +231,7 @@
                 <div class="form-group">
                   <label for="Delivery_Comfirmation" class="col-md-2 control-label">Shipping comfirmation</label>
                   <div class="col-md-10" style="padding-top:10px">
-                    <input type="text" class="form-control" id="Delivery_Confirmation" placeholder="Shipping comfirmation">
+                    <input type="text" class="form-control" id="Delivery_Confirmation"name="Delivery_Confirmation" placeholder="Shipping comfirmation">
                   </div>
                 </div>
 
@@ -245,7 +245,7 @@
                 <div class="form-group">
                   <label for="Additional_Info" class="col-md-2 control-label">Additional Information</label>
                   <div class="col-md-10" style="padding-top:10px">
-                    <input type="text" class="form-control" id="Additional_Info" placeholder="Additional Information">
+                    <input type="text" class="form-control" id="Additional_Info" name="Additional_Info" placeholder="Additional Information">
                   </div>
                 </div>
 
@@ -328,10 +328,10 @@
       //   return false;
       // }
 
-      // if (quantity != null && !validateDigit(quantity)) {
-      //   alert("Your quantity is invalid.");
-      //   return false;
-      // }
+      if (quantity != null && !validateDigit(quantity)) {
+        alert("Your quantity is invalid.");
+        return false;
+      }
 
 
       if (!validateDigit(price)) {
@@ -348,7 +348,7 @@
         alert("Your refund fee is invalid");
         return false;
       }
-      }
+  
       if (!validateProductDetail(model)) {
         alert("Product model is too long. It cannot exceed 250 characters");
         return false;
