@@ -93,6 +93,7 @@ Class product_m extends CI_Model
 			'Size'=> $size,
 			'Property' => $property,
 			'Defect' => $defect,
+			//'End_Date'=>$end_datetime,
 			'Quality' => $quality,
 			'Payment' => $payment,
 			'Return_Product' => $return_product,

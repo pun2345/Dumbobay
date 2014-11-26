@@ -83,21 +83,27 @@ include 'HTMLHeader.html';
                   if($row->Bidding_Status==0) $status='In Auction';
                   else if($row->Bidding_Status==1) {
                     $status='First Place in Auction';
-                        $highlight =';background-color:#F7F2E0"'; // highlight yellow if 1st place
+                        $highlight =';background-color:#CBFFC0"'; // highlight yellow if 1st place
                       } else if($row->Bidding_Status==2) $status='Auction Closed';
                       else if($row->Bidding_Status==3) {
                         $status='Won the Auction';
-                      $highlight =';background-color:#E0F8F1"'; // highlight green if won the auction
+                      $highlight =';background-color:#89FF6F"'; // highlight green if won the auction
                     }
 
                     if($row->Bidding_Status==1 && $row->Bid_Type=='auto') $maxbid=$row->Current_Max_Bid;
                     else $maxbid = '-';
 
+                    
                     echo '<li class="watchlist" style="border-bottom:solid #c9c9c9 1px; padding-bottom: 30px'.$highlight.'">
                     <div class="row">
-                      <div class="col-md-3 centered" style="padding-top:10px">
-                        <img src="assets/img/iphone6.jpg" width="185" height="104">
-                      </div>
+                      <div class="col-md-3 centered" style="padding-top:10px">';
+                        $image_properties = array(
+                        'src' => "assets/img/".$row->Image,
+                        'width' =>'185',
+                        'height' => '104');
+                        echo img($image_properties);
+                        echo//<img src="assets/img/iphone6.jpg" width="185" height="104">
+                      '</div>
                       <div class="col-md-4">
                         <h3>'.$row->Name.'</h3>
                         <h4><strong>Status: </strong>'.$status.'</h4>
@@ -112,6 +118,7 @@ include 'HTMLHeader.html';
                             <strong>Current bid: </strong>'.$row->Current_Price.' baht
                             
                             <br><strong>Your bidding type: </strong>'.$row->Bid_Type.
+                            '<br><strong>Your Current bid: </strong>'.$row->Bid_Price.
                             '<br><strong>Your max bid: </strong>'.$maxbid.
                             '<br><strong>Bid Increment: </strong>'.$row->Bid_Increment.'
                           </div>

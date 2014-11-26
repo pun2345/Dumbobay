@@ -89,12 +89,12 @@
 									echo "<hr>";
 									echo "<div class=\"row\">";
 										echo "<div class=\"col-lg-4 centered productimg\">";
-										echo '<img src="'.$row->Image.'">';
+										echo img("assets/img/".$row->Image);
 										echo "</div>";
 										echo "<div class=\"col-lg-4\">";
 											echo "<b>".$row->Name."</b><br>";
 											echo "Price: ".$row->Price." Baht<br>";
-											echo "Amount: ".$row->Quantity." ea<br>";
+											//echo "Amount: ".$row->Quantity." ea<br>";
 											echo "<a href= \"product_c/viewProductDetail/".$row->Product_ID."\" >More info..</a>";
 										echo "</div>";
 										echo "<div class=\"col-lg-4 productbutton\">";
@@ -134,7 +134,7 @@
 									echo "<hr>";
 									echo "<div class=\"row\">";
 										echo "<div class=\"col-lg-4 centered productimg\">";
-										echo '<img src="'.$row->Image.'">';
+										echo img("assets/img/".$row->Image);
 										echo "</div>";
 										echo "<div class=\"col-lg-5\">";
 											echo "<b>".$row->Name."</b><br>";
@@ -144,7 +144,7 @@
 										echo "</div>";
 										echo "<div class=\"col-lg-3 centered auctionbutton\">";
 											echo "<p>Time left: <a id=\"time".$x."\">  00:00:00:00:00  </a></p>";
-											if($row->Status==0) echo "<a href=\"product_c/joinStepBidding/".$row->Product_ID."\"><button type=\"button\" class=\"btn btn-default\">Step Bid</button></a>";
+											if($row->Status==0) echo "<a href=\"product_c/joinStepBidding/".$row->Product_ID."\"><button type=\"button\" class=\"btn btn-default\">Join Bid</button></a>";
 										echo "</div>";
 									echo "</div>";
 									$x++;
