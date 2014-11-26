@@ -110,11 +110,11 @@ class Product_c extends CI_Controller {
     $this->form_validation->set_rules('Return_Product', 'Return_Product', 'trim|max_length[250]');
     $this->form_validation->set_rules('Return_Fee', 'Return_Fee', 'trim');      
     $this->form_validation->set_rules('Packaging', 'Packaging', 'trim|max_length[250]');
-    $this->form_validation->set_rules('Delevery_Fee', 'Delivery_Fee', 'trim|max_length[250]');      
-    $this->form_validation->set_rules('Delivry_Confirmation', 'Delivry_Confirmation', 'trim|max_length[250]');
+    $this->form_validation->set_rules('Delivery_Fee', 'Delivery_Fee', 'trim|max_length[250]');      
+    $this->form_validation->set_rules('Delivery_Confirmation', 'Delivery_Confirmation', 'trim|max_length[250]');
     $this->form_validation->set_rules('Tax', 'Tax', 'trim|max_length[250]');  
     $this->form_validation->set_rules('Quantity', 'Quantity', 'trim'); 
-    $this->form_validation->set_rules('End_Datetime', 'End_Datetime', 'trim'); 
+    $this->form_validation->set_rules('End_Date', 'End_Date', 'trim'); 
 
     $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
@@ -158,7 +158,7 @@ class Product_c extends CI_Controller {
       $return_fee = $this->input->post('Return_Fee');      
       $packaging = $this->input->post('Packaging');
       $delevery_fee = $this->input->post('Delivery_Fee');      
-      $delivry_confirmation = $this->input->post('Delivry_Confirmation');
+      $delivery_confirmation = $this->input->post('Delivery_Confirmation');
       $tax = $this->input->post('Tax');
       if($type == 1){ // direct product
         $quantity = $this->input->post('Quantity');
@@ -189,13 +189,13 @@ class Product_c extends CI_Controller {
         $product_id=$this->product_m->newDirectProduct($name,$image,$brand,
           $model,$price,$additional_info,$capacity,$size,$property,
           $defect,$quality,$payment,$return_product,$return_fee,
-          $packaging,$delevery_fee,$delivry_confirmation,$tax,$quantity,$data['user_id']);
+          $packaging,$delevery_fee,$delivery_confirmation,$tax,$quantity,$data['user_id']);
       }
       if($type == 2){ // bidding
         $product_id=$this->product_m->newBiddingProduct($name,$image,$brand,
           $model,$price,$additional_info,$capacity,$size,$property,
           $defect,$quality,$payment,$return_product,$return_fee,
-          $packaging,$delevery_fee,$delivry_confirmation,$tax,$end_datetime,
+          $packaging,$delevery_fee,$delivery_confirmation,$tax,$end_datetime,
           $status,$current_price,$current_max_bid,$current_win_cust_id,
           $bit_increment,$data['user_id']);
       }

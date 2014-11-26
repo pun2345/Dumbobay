@@ -24,15 +24,18 @@
           document.getElementById("update").innerHTML = "Price";
       }
     </script>
-
     <script type="text/javascript">
       function quantity(){
-        var x = document.getElementById("quantity").innerHTML;
-        document.getElementById("form1").innerHTML = x;
+        // var x = document.getElementById("quantity").innerHTML;
+        // document.getElementById("form1").innerHTML = x;
+        $("#expDate").hide();
+        $("#quantity").show();
       }
       function expDate(){
-        var x = document.getElementById("expDate").innerHTML;
-        document.getElementById("form1").innerHTML = x;
+        // var x = document.getElementById("expDate").innerHTML;
+        // document.getElementById("form1").innerHTML = x;
+        $("#expDate").show();
+        $("#quantity").hide();
       }
     </script>
 
@@ -72,42 +75,10 @@
               </div><!-- row -->
             </div><!-- container -->
           </div>
-          <div class="row col-md-10 col-md-offset-1">
-            <?php echo validation_errors(); ?>
-            <?php echo $this->session->flashdata("message"); ?>
+          <div class="row col-md-10 col-md-offset-1">            
             <?php echo form_open_multipart("product_c/newProduct"," class='form-horizontal' id='newProduct-form' name='newProduct-form' onsubmit='return validateForm()'");?>
               <fieldset>
                 <legend></legend>
-                <div class="form-group">
-                  <label for="inputName" class="col-md-2 control-label">Product name</label>
-                  <div class="col-md-10">
-                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Product name">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label id="image" class="col-md-2 control-label">Product image</label>
-                  <div class="col-md-10">
-                    <input type="file" class="form-control" name = "Image" id="Image">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="inputBrand" class="col-md-2 control-label">Product Brand</label>
-                  <div class="col-md-10">
-                    
-                    <input type="text" class="form-control" id="Brand" name ="Brand" placeholder="Product Brand">
-                    
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="condition" class="col-md-2 control-label">Product condition</label>
-                  <div class="col-md-10">
-                    <textarea class="form-control" rows="3" name="Quality" id="Quality" placeholder="Product condition"></textarea>
-                    
-                  </div>
-                </div>
 
                 <div class="form-group">
                   <label class="col-md-2 control-label">Sale method</label>
@@ -127,20 +98,51 @@
                   </div>
                   
                 </div>
-
-                <div class="form-group" id="form1">
-                  <label for="End_Date" class="col-md-2 control-label">Expiration Date</label>
+                <div class="form-group">
+                  <label for="Name" class="col-md-2 control-label">Product name</label>
                   <div class="col-md-10">
-                    <input type="date" id="End_Date" name = "End_Date" class="form-control" placeholder="Exp date">
+                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Product name">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label id="Image" class="col-md-2 control-label">Product image</label>
+                  <div class="col-md-10">
+                    <input type="file" class="form-control" name = "Image" id="Image">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="Brand" class="col-md-2 control-label">Product Brand</label>
+                  <div class="col-md-10">
+                    
+                    <input type="text" class="form-control" id="Brand" name ="Brand" placeholder="Product Brand">
                     
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <label for="Model" class="col-md-2 control-label">Product Model</label>
+                  <div class="col-md-10">
+                    
+                    <input type="text" class="form-control" id="Model" name ="Model" placeholder="Product Brand">
+                    
+                  </div>
+                </div>
+<!-- 
+                <div class="form-group" >
+                  <label for="End_Date" class="col-md-2 control-label">End Bidding Date</label>
+                  <div class="col-md-10">
+                    <input type="date" id="End_Date" name = "End_Date" class="form-control" placeholder="End Bidding Date">
+                    
+                  </div>
+                </div> -->
+
 
                 <div class="form-group" id="expDate">
-                  <label for="Endd_Date" class="col-md-2 control-label">Expirational Date</label>
+                  <label for="End_Date" class="col-md-2 control-label">End Bidding Date</label>
                   <div class="col-md-10">
-                    <input type="date" id="Endd_Date" name = "Endd_Date" class="form-control" placeholder="Expp date">
+                    <input type="date" id="End_Date" name = "End_Date" class="form-control" placeholder="End Bidding Date">
                     
                   </div>
                 </div>
@@ -169,9 +171,53 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="Capacity" class="col-md-2 control-label">Capacity</label>
+                  <div class="col-md-10">
+                    <input class="form-control" rows="3" name="Capacity" id="Capacity" placeholder="Capacity"></input>           
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="Size" class="col-md-2 control-label">Size</label>
+                  <div class="col-md-10">
+                    <input class="form-control" rows="3" name="Size" id="Size" placeholder="Size"></input>           
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="Property" class="col-md-2 control-label">Property</label>
+                  <div class="col-md-10">
+                    <input class="form-control" rows="3" name="Property" id="Property" placeholder="Property"></input>           
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="Defect" class="col-md-2 control-label">Defect</label>
+                  <div class="col-md-10">
+                    <input class="form-control" rows="3" name="Defect" id="Defect" placeholder="Defect"></input>           
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="Quality" class="col-md-2 control-label">Quality</label>
+                  <div class="col-md-10">
+                    <input class="form-control" rows="3" name="Quality" id="Quality" placeholder="Quality"></input>           
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="Return_Product" class="col-md-2 control-label">Refund Policy</label>
+                  <div class="col-md-10">
+                    <input class="form-control" rows="3" name="Return_Product" id="Return_Product" placeholder="Product condition"></input>           
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="Return_Fee" class="col-md-2 control-label">Refund Fee</label>
+                  <div class="col-md-10">
+                    <input class="form-control" rows="3" name="Return_Fee" id="Return_Fee" ></input>           
+                  </div>
+                </div>
+
+                
+                <div class="form-group">
                   <label for="package" class="col-md-2 control-label">Product packaging</label>
                   <div class="col-md-10">
-                    <textarea class="form-control" rows="3" id="Packaging" placeholder="Product packaging"></textarea>
+                    <input class="form-control" rows="3" id="Packaging" name = "Packaging" placeholder="packaging"></input>
                     
                   </div>
                 </div>
@@ -179,7 +225,7 @@
                 <div class="form-group">
                   <label for="Delivery_Fee" class="col-md-2 control-label">Shipping fee</label>
                   <div class="col-md-10">
-                    <input type="text" class="form-control" id="Delivery_Fee" placeholder="Shipping fee">
+                    <input type="text" class="form-control" id="Delivery_Fee" name = "Delivery_Fee" placeholder="Shipping fee">
                   </div>
                 </div>
                 <div class="form-group">
@@ -188,23 +234,21 @@
                     <input type="text" class="form-control" id="Delivery_Confirmation" placeholder="Shipping comfirmation">
                   </div>
                 </div>
-                
-                <div class="form-group">
-                  <label for="Refund_Product" class="col-md-2 control-label">Refund policy</label>
-                  <div class="col-md-10">
-                    <textarea class="form-control" rows="3" id="Refund_Product" placeholder="Refund policy"></textarea>
-                    
-                  </div>
-                </div>
 
                 <div class="form-group">
                   <label for="fee" class="col-md-2 control-label">Other fee</label>
                   <div class="col-md-10">
-                    <textarea class="form-control" rows="3" id="Tax" placeholder="Other fee"></textarea>
+                    <input class="form-control" rows="3" id="Tax" name = "Tax" placeholder="Other fee"></input>
                     
                   </div>
                 </div>
-                
+                <div class="form-group">
+                  <label for="Additional_Info" class="col-md-2 control-label">Additional Information</label>
+                  <div class="col-md-10" style="padding-top:10px">
+                    <input type="text" class="form-control" id="Additional_Info" placeholder="Additional Information">
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <div class="col-md-10 col-md-offset-2">
                     <button type="submit" class="btn btn-success">Submit</button>
@@ -249,26 +293,29 @@
       
       var productName = document.forms["newProduct-form"]["Name"].value;
 
-      var Brand = document.forms["newProduct-form"]["Brand"].value;
-
-      var productQuality = document.forms["newProduct-form"]["Quality"].value;
-
       var enddate = document.forms["newProduct-form"]["End_Date"].value;
 
       var quantity = document.forms["newProduct-form"]["Quantity"].value;
 
       var price = document.forms["newProduct-form"]["Price"].value;
 
-      var packaging = document.forms["newProduct-form"]["Packaging"].value;
-
       var deliveryFee = document.forms["newProduct-form"]["Delivery_Fee"].value;
 
-      var deliveryConfirmation = document.forms["newProduct-form"]["Delivery_Confirmation"].value;
+      var returnFee = document.forms["newProduct-form"]["Return_Fee"].value;
 
-      var refundProduct = document.forms["newProduct-form"]["Refund_Product"].value;
+      var model = document.forms["newProduct-form"]["Model"].value;
+      var capacity = document.forms["newProduct-form"]["Capacity"].value;
+      var size = document.forms["newProduct-form"]["Size"].value;
+      var property = document.forms["newProduct-form"]["Property"].value;
+      var defect = document.forms["newProduct-form"]["Defect"].value;
+      var quality = document.forms["newProduct-form"]["Quality"].value;
+      var returnProduct = document.forms["newProduct-form"]["Return_Product"].value;
+      var packaging = document.forms["newProduct-form"]["Packaging"].value;
+      var deliveryConfirmation = document.forms["newProduct-form"]["Delivery_Confirmation"].value;
+      var brand = document.forms["newProduct-form"]["Brand"].value;
 
       var tax = document.forms["newProduct-form"]["Tax"].value;
-
+      var add = document.forms["newProduct-form"]["Additional_Info"].value;
       var message ="";
 
       if (!validateProductName(productName)) {
@@ -276,63 +323,94 @@
         return false;
       }
 
-      if (!validateProductDetail(prodiuctProperty)) {
-        alert("Product property is too long. Product name cannot exceed 250 characters");
-        return false;
-      }
-
-      if (!validateProductDetail(productQuality)) {
-        alert("Product condition is too long. Product name cannot exceed 250 characters");
-        return false;
-      }
-
-      // if (!validateExpiredDate(enddate)) {
+      // if (enddate != null && !validateExpiredDate(enddate)) {
       //   alert("Your Date is invalid.");
       //   return false;
       // }
 
-      // if (!validateDigit(quantity)) {
+      // if (quantity != null && !validateDigit(quantity)) {
       //   alert("Your quantity is invalid.");
       //   return false;
       // }
+
 
       if (!validateDigit(price)) {
         alert("Your price is invalid.");
         return false;
       }
 
-      if (!validateProductDetail(packaging)) {
-        alert("Your packaging detail is too long. Product name cannot exceed 250 characters");
+      if (!validateProductDetail(deliveryFee)) {
+        alert("Your delivery fee detail is too long. It cannot exceed 250 charactersd.");
         return false;
       }
 
-      if (!validateDigit(deliveryFee)) {
-        alert("Your delivery fee is invalid.");
+      if (!validateDigit(returnFee)) {
+        if(returnFee==null){
+
+        }else{
+        alert("Your refund fee is invalid");
         return false;
       }
+      }
+      if (!validateProductDetail(model)) {
+        alert("Product model is too long. It cannot exceed 250 characters");
+        return false;
+      }
+      if (!validateProductDetail(capacity)) {
+        alert("Product capacity is too long. It cannot exceed 250 characters");
+        return false;
+      }
+      if (!validateProductDetail(size)) {
+        alert("Product size is too long. It cannot exceed 250 characters");
+        return false;
+      }
+      if (!validateProductDetail(property)) {
+        alert("Product property is too long. It cannot exceed 250 characters");
+        return false;
+      }
+      if (!validateProductDetail(defect)) {
+        alert("Product defect is too long. It cannot exceed 250 characters");
+        return false;
+      }
+
+      if (!validateProductDetail(quality)) {
+        alert("Product quality is too long. It cannot exceed 250 characters");
+        return false;
+      }
+      if (!validateProductDetail(returnProduct)) {
+        alert("Product refund policy is too long. It cannot exceed 250 characters");
+        return false;
+      }
+      if (!validateProductDetail(packaging)) {
+        alert("Your packaging detail is too long. It cannot exceed 250 characters");
+        return false;
+      }
+
 
       if (!validateProductDetail(deliveryConfirmation)) {
-        alert("Your delivery confirmation detail is too long. Product name cannot exceed 250 characters");
+        alert("Your delivery confirmation detail is too long. It cannot exceed 250 characters");
         return false;
       }
-
-      if (!validateProductDetail(refundProduct)) {
-        alert("Your refund policy is too long. Product name cannot exceed 250 characters");
+      if (!validateProductDetail(brand)) {
+        alert("Your brand detail is too long. It cannot exceed 250 characters");
         return false;
       }
 
       if (!validateProductDetail(tax)) {
-        alert("Your other fee detail is too long. Product name cannot exceed 250 characters");
+        alert("Your other fee detail is too long. It cannot exceed 250 characters");
+        return false;
+      }
+      if (!validateProductDetail(add)) {
+        alert("Your Additional information detail is too long. It cannot exceed 250 characters");
         return false;
       }
       
     }
-
   </script>
   
      <script>
     $(document).ready(function(){
-      $("#expDate").hide();
+      //$("#expDate").hide();
       $("#quantity").hide();
     });
     </script>
