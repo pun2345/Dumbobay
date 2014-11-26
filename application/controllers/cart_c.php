@@ -108,7 +108,7 @@ class Cart_c extends CI_Controller {
       return true;
     } else{
       $this->session->set_flashdata("message","Please Login!");
-      redirect('home_c');
+      redirect('login_c');
     }
   }
 

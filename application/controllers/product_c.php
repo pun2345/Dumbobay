@@ -406,6 +406,7 @@ class Product_c extends CI_Controller {
     }
   } 
   function joinStepBidding($product_id){
+    $this->isLogin();
     redirect("bidding_c/initializeStepBidding/".$product_id);
   }
   
@@ -416,7 +417,7 @@ class Product_c extends CI_Controller {
       return true;
     } else{
       $this->session->set_flashdata("message","Please Login!");
-      redirect('home_c');
+      redirect('login_c');
     }
   }
 

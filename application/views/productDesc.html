@@ -58,7 +58,7 @@
             <h1><?php echo $product->Name; ?></h1><?php if($product->Type==2) echo '<h3> Time left: <a id="time1">00:00:00</a></h3>'; ?>
             <!-- detail of each type (2 type)-->
             <?php
-              
+              //print_r($product);
               if($product->Type==1){
                 echo '<br><strong>Price: </strong>'.$product->Price. ' Baht';
                 echo '<br><strong>Quantity: </strong>'.$product->Quantity. ' ea';
@@ -81,8 +81,8 @@
                 echo '<br><strong>Return fee: </strong>'.$product->Return_Fee.'</p>';
             } else if($product->Type==2) {
                 $status="";
-              if($product->Product_Status==0) $status='Auction open';
-              else if($product->Product_Status==1) $status='Auction closed';
+              if($product->Status==0) $status='Auction open';
+              else if($product->Status==1) $status='Auction closed';
            
                 echo '<a id="time">'.$product->End_Date.'</a>';
                 echo '<p><strong>Auction status: </strong>'.$status;
