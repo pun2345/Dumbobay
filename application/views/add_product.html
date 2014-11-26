@@ -93,10 +93,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="inputProperty" class="col-md-2 control-label">Product property</label>
+                  <label for="inputBrand" class="col-md-2 control-label">Product Brand</label>
                   <div class="col-md-10">
                     
-                    <textarea class="form-control" rows="3" id="Property" placeholder="Product property"></textarea>
+                    <input type="text" class="form-control" id="Brand" name ="Brand" placeholder="Product Brand">
                     
                   </div>
                 </div>
@@ -104,7 +104,7 @@
                 <div class="form-group">
                   <label for="condition" class="col-md-2 control-label">Product condition</label>
                   <div class="col-md-10">
-                    <textarea class="form-control" rows="3" id="Quality" placeholder="Product condition"></textarea>
+                    <textarea class="form-control" rows="3" name="Quality" id="Quality" placeholder="Product condition"></textarea>
                     
                   </div>
                 </div>
@@ -131,24 +131,33 @@
                 <div class="form-group" id="form1">
                   <label for="End_Date" class="col-md-2 control-label">Expiration Date</label>
                   <div class="col-md-10">
-                    <input type="text" id="End_Date" name = "End_Date" class="form-control" placeholder="Exp date">
+                    <input type="date" id="End_Date" name = "End_Date" class="form-control" placeholder="Exp date">
                     
                   </div>
                 </div>
 
 
                 <div class="form-group" id="expDate">
-                  <label for="End_Date" class="col-md-2 control-label">Expiration Date</label>
+                  <label for="Endd_Date" class="col-md-2 control-label">Expirational Date</label>
                   <div class="col-md-10">
-                    <input type="text" id="End_Date" name = "End_Date" class="form-control" placeholder="Exp date">
+                    <input type="date" id="Endd_Date" name = "Endd_Date" class="form-control" placeholder="Expp date">
                     
                   </div>
                 </div>
 
+                <!-- <div class="form-group" id="quantity">
+                  <label for="inputQuantity" class="col-md-2 control-label">Quantity</label>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" id="Quantity" name ="Quantity" placeholder="1">
+                  </div>
+                </div> -->
+
                 <div class="form-group" id="quantity">
                   <label for="inputQuantity" class="col-md-2 control-label">Quantity</label>
                   <div class="col-md-10">
-                    <input type="text" class="form-control" id="Quantity" name ="Quantity" placeholder="Quantity">
+                    
+                    <input type="text" class="form-control" id="Quantity" name ="Quantity" placeholder="1">
+                    
                   </div>
                 </div>
 
@@ -240,7 +249,7 @@
       
       var productName = document.forms["newProduct-form"]["Name"].value;
 
-      var prodiuctProperty = document.forms["newProduct-form"]["Property"].value;
+      var Brand = document.forms["newProduct-form"]["Brand"].value;
 
       var productQuality = document.forms["newProduct-form"]["Quality"].value;
 

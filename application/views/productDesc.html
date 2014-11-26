@@ -61,9 +61,9 @@
               //print_r($product);
               if($product->Type==1){
                 echo '<br><strong>Price: </strong>'.$product->Price. ' Baht';
-                echo '<br><strong>Quantity: </strong>'.$product->Quantity. ' ea';
+                //echo '<br><strong>Quantity: </strong>'.$product->Quantity. ' ea';
                 echo '<br><strong>Announcement date: </strong>'.$product->Datetime;
-                echo '<br><strong>Seller: </strong>';
+                echo '<br><strong>Seller: '.$seller_name.'</strong>';
                 echo '<br><br><h3>Details</h3>';
                 echo '<br><strong>Brand: </strong>'.$product->Brand;
                 echo '<br><strong>Model: </strong>'.$product->Model;
