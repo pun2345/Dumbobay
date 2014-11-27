@@ -111,14 +111,17 @@
       		$data['user_id'] = $session_data['user_id'];
       		$data['type'] = $session_data['type'];
       		$data['username'] = $session_data['username'];
+      		$data['noEdit'] = 1;
 			$data['member'] = $this->member_m->getMemberDetail($data['user_id']);
 			$this->load->view('profile.html',$data);
 		    
 		}
-		function memberDetail2($user_id){      
+		function memberDetail2($user_id){     
+			$session_data = $this->session->userdata('logged_in'); 
       		$data['user_id'] = $user_id;
       		$data['type'] = $session_data['type'];
       		$data['username'] = $session_data['username'];
+      		$data['noEdit'] = 0;
 			$data['member'] = $this->member_m->getMemberDetail($data['user_id']);
 			$this->load->view('profile.html',$data);
 		    

@@ -69,9 +69,10 @@
 				<div class="col-md-10 col-md-offset-1">
 					<div class="row">
 						<!--<img src="assets/img/products.png" id="back" style="cursor:pointer">-->
+						
 						<div class="col-lg-6">
-							<a href=<?php echo site_url('member_c/editProfile'); ?>>
-								<button type="button" class="btn btn-default" style="margin-top:-30px;margin-bottom:20px">Edit Profile</button>
+							<a href=<?php  echo site_url('member_c/editProfile'); ?>>
+								<?php if($noEdit==1) echo '<button type="button" class="btn btn-default" style="margin-top:-30px;margin-bottom:20px">Edit Profile</button>'?>
 							</a>
 						</div>
 						<div class="col-lg-6">
@@ -118,6 +119,14 @@
 						</div>
 						<div class="col-md-9">
 							<p><?php echo $member->Telephone; ?></p>
+						</div>
+					</div>
+					<div class="row profilecontent">
+						<div class="col-md-3" align="right">
+							<label class="control-label">Score:</label>								
+						</div>
+						<div class="col-md-9">
+							<p><?php echo $member->Feedback_Score.'/5'; ?></p>
 						</div>
 					</div>
 				</div>

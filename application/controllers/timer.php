@@ -17,7 +17,7 @@ class Timer extends CI_Controller {
 		//echo "!23";
 		$query = $this->product_m->getEndBiddingProduct();
 		foreach ($query->result() as $row){
-			//echo $row->product_id;
+			echo $row->product_id;
 			$query1 = $this->bidding_m->getJoinBidding($row->product_id);
 			$this->bidding_m->setBidProductStatus($row->product_id,1);//auction closed
 			//echo "===============";

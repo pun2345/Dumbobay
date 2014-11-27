@@ -154,7 +154,8 @@ class Product_c extends CI_Controller {
       $defect = $this->input->post('Defect');
       $quality = $this->input->post('Quality');
       //$end_datetime = $this->input->post('End_Date');        
-      $payment = $this->input->post('Payment');
+      // $payment = $this->input->post('Payment');
+      $payment = "credit card";
       $return_product = $this->input->post('Return_Product');
       $return_fee = $this->input->post('Return_Fee');      
       $packaging = $this->input->post('Packaging');

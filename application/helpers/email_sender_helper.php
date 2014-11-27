@@ -204,7 +204,7 @@ function win_Bid($id,$product_id,$t_id){
 	$subject = "Win Bid: ".$product_data->Name;
 	$CI->email->subject($subject);
 	
-	$text = "To ".$user_data->Name."\r\n You win the auction of ".$product_data->Name.".\r\nPlease proceed the payment.".
+	$text = "To ".$user_data->Username."\r\n You win the auction of ".$product_data->Name.".\r\nPlease proceed the payment.".
 	"Follow the link: <a href=\"Localhost/Dumbobay/index.php/payment_c/payBid/".$t_id."\">"."Localhost/Dumbobay/index.php/payment_c/payBid/".$t_id.".</a>."
 	."\r\nFrom Dumbobay";
 	$CI->email->message($text);

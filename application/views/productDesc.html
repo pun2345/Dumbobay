@@ -63,7 +63,7 @@
                 echo '<br><strong>Price: </strong>'.$product->Price. ' Baht';
                 //echo '<br><strong>Quantity: </strong>'.$product->Quantity. ' ea';
                 echo '<br><strong>Announcement date: </strong>'.$product->Datetime;
-                echo '<br><strong>Seller: '.$seller_name.'</strong>';
+                echo '<br><strong>Seller: </strong> <a href="'.site_url("member_c/memberDetail2").'/'.$product->Seller_ID.'">'.$seller_name.'<a>';  
                 echo '<br><br><h3>Details</h3>';
                 echo '<br><strong>Brand: </strong>'.$product->Brand;
                 echo '<br><strong>Model: </strong>'.$product->Model;
@@ -91,7 +91,8 @@
                 echo '<br><strong>Bid Increment: </strong>'.$product->Bid_Increment. 'Baht';
                 echo '<br><strong>End of auction date: </strong>'.$product->End_Date;
                 echo '<br><strong>Auction start date: </strong>'.$product->Datetime;
-                echo '<br><strong>Seller: </strong>'.$seller_name;
+
+                echo '<br><strong>Seller: </strong> <a href="'.site_url("member_c/memberDetail2").'/'.$product->Seller_ID.'">'.$seller_name.'<a>';  
                 echo '<br><br><h3>Details</h3>';
                 echo '<br><strong>Brand: </strong>'.$product->Brand;
                 echo '<br><strong>Model: </strong>'.$product->Model;
